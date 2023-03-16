@@ -1,27 +1,55 @@
+'use client'
+import Image, { StaticImageData } from 'next/image'
 import React from 'react'
-
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-    text: string
-    className?: string
+  text: string
+  className?: string
+  disabled?: boolean
+  outlined?: boolean
+  icon?: StaticImageData
 }
 
-const styles = `
-    bg-blue-500
-    hover:bg-blue-700
-    text-white
-    font-bold
-    py-2
-    px-4
-    rounded
+const baseStyles = `
+    font-bold-700
+    text-[16px]
+    line-[24px]
+    rounded-[16px]
+    h-[48px]
+    disabled:opacity-50
+    disabled:cursor-not-allowed
+    flex
+    items-center
+    justify-center
 `
 
-export const Button = ({className, text, ...props}: ButtonProps) => {
+const filledStyles = `
+    text-pWhite
+    bg-pPink
+    hover:bg-pDarkPink
+    disabled:hover:bg-pPink
+`
+const outlinedStyles = `
+    text-pPink
+    bg-transparent
+    border-2
+    border-pPink
+    hover:bg-pPink
+    hover:bg-opacity-20
+    disabled:hover:bg-transparent
+`
+
+
+export const Button = ({ className, text, outlined, icon, ...props }: ButtonProps) => {
+  const buttonStyles = outlined ? outlinedStyles : filledStyles
   return (
-      <button
-        className={`${styles} ${className}`}
+    <button
+        className={` ${baseStyles} ${buttonStyles} ${className}`}
         {...props}
-      >
-          {text}
+    >
+      <>
+        {icon && <Image src={icon.src} alt='upload' width='24' height='24' className='mr-[12px]'/>}
+      {text}
+      </>
       </button>
   )
 }
