@@ -1,57 +1,34 @@
 'use client'
-import Image, { StaticImageData } from 'next/image'
 import { ChangeEvent, useState } from 'react'
-interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
+import Image, { StaticImageData } from 'next/image'
+import { icons } from '@/lib/icons'
+interface SelectProps extends React.HTMLAttributes<HTMLSelectElement> {
     className?: string
     disabled?: boolean
     icon?: StaticImageData
     error?: string
-    type?: string
-    label?: string
     name: string
     required?: boolean
+    options: string[]
 }
 
-const labelBaseStyles = `
-    bg-pWhite 
-    text-[12px]
-    text-bold-700
-    px-2 
-    absolute 
-    left-4 
-    z-10
-    -top-[9px] 
-`
-
-const labelDisabledStyles = `
-    text-pLightGray
-`
-
-const labelNoFocusStyles = `
-    text-pDarkGray
-`
-const labelOnFocusStyles = `
-    text-pDark
-`
-
-export const Input = ({
+export const Select = ({
     className,
-    type,
     icon,
     name,
     error,
     required,
-    label,
     disabled,
     onChange,
+    options,
     ...props
-}: InputProps) => {
+}: SelectProps) => {
     const [value, setValue] = useState<string>('')
     const [focused, setFocused] = useState<boolean>(false)
     const [inputError, setError] = useState<string>(error || '')
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
         setValue(e.target.value)
         onChange && onChange(e)
     }
@@ -73,37 +50,40 @@ export const Input = ({
         setPasswordVisible(!passwordVisible)
     }
 
-    const labelStyles = focused ? labelOnFocusStyles : labelNoFocusStyles
     return (
         <div className={`relative ${className}`} >
-            {label && <label
-                htmlFor={name}
-                className={`${labelBaseStyles} ${labelStyles} ${disabled && labelDisabledStyles}`}
-            >
-                {label}
-            </label>}
-            <input
+            <select
                 value={value}
                 id={name}
                 required={required}
                 disabled={disabled}
-                type={passwordVisible ? 'text' : type}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                onChange={handleChange}
+                onChange={handleSelect}
                 style={{
-                    borderColor: inputError ? '#D41F57' : !disabled ? '#807896' : '#EBEAF1'
+                    borderColor: inputError ? '#D41F57' : !disabled ? '#807896' : '#EBEAF1',
+                    paddingRight: '45px',
                 }}
                 {...props}
-            />
-            {icon && <Image
-                src={icon.src}
+            >
+                <option value=''>{`Select ${name}`}</option>
+                {options.map((option, index) => {
+                    return <option key={index} value={option}>{option}</option>
+                })
+                }
+
+            </select>
+            <Image
+                src={icons.arrow}
                 alt='upload'
                 width='24'
                 height='24'
-                className='absolute right-4 top-3 cursor-pointer z-10'
+                className='absolute right-4 top-3 cursor-pointer z-10 ml-12 pointer-events-none'
                 onClick={handlePasswordVisibility}
-            />}
+                style={{
+                    opacity: disabled ? 0.4 : 1,
+                }}
+            />
             {inputError && <p className='text-pDarkPink text-[12px] text-bold-700 absolute'>{inputError}</p>}
         </div>
     )

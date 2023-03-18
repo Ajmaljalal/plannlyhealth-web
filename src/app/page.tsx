@@ -1,5 +1,6 @@
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
+import { Select } from "@/components/select";
 import { icons } from "@/lib/icons";
 export default function Home() {
   return (
@@ -14,6 +15,11 @@ export default function Home() {
         <Input name="email" placeholder="example@company.com" label="Work Email" type="email" className="mr-4" required />
         <Input name='password' placeholder="Password" type="password" className="mr-4" icon={icons.upload} />
         <Input name='email ' placeholder="email" disabled className="w-[268px]" label="Email" />
+      </div>
+      <div className="p-8 m-8 flex">
+        <Select name='products' placeholder="Select a product" className="mr-4" required options={['One', 'two', 'three', 'four']} />
+        <Select name='state' placeholder="Select you state" className="mr-4" options={['One', 'two', 'three', 'four']} />
+        <Select name='program' placeholder="Select a product" disabled options={['One', 'two', 'three', 'four']} />
       </div>
     </>
   )

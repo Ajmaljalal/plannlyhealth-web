@@ -88,6 +88,39 @@
 
     }
 
+    select {
+        background-color: white;
+        font-size: '16px';
+        line-height: '24px';
+        font-weight: '500';
+        border: 1px solid #807896;
+        color: #807896;
+        border-radius: 8px;
+        height: 48px;
+        padding: 0 24px;
+        position: relative;
+        outline: none;
+        appearance: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    select:focus {
+        border: 1px solid #180D37;
+        color: #180D37;
+    }
+
+    select:disabled {
+        border: 1px solid #b6b6b6;
+        color: #b6b6b6;
+        cursor: not-allowed;
+    }
+
+    select:disabled::placeholder {
+        color: #b6b6b6;
+
+    }
+
     input:-webkit-autofill,
     textarea:-webkit-autofill,
     select:-webkit-autofill {
