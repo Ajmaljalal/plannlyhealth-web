@@ -1,3 +1,112 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    h1 {
+        font-size: '38px';
+        line-height: '46px';
+        font-weight: '900';
+    }
+
+    h2 {
+        font-size: '24px';
+        line-height: '28px';
+        font-weight: '700';
+    }
+
+    h3 {
+        font-size: '18px';
+        line-height: '24px';
+        font-weight: '900';
+    }
+
+    h4 {
+        font-size: '16px';
+        line-height: '24px';
+        font-weight: '700';
+    }
+
+    h5 {
+        font-size: '14px';
+        line-height: '24px';
+        font-weight: '700';
+    }
+
+    h6 {
+        font-size: '12px';
+        line-height: '14px';
+        font-weight: '700';
+    }
+
+    p {
+        font-size: '16px';
+        line-height: '24px';
+        font-weight: '500';
+    }
+
+    .caption {
+        font-size: '14px';
+        line-height: '20px';
+        font-weight: '500';
+    }
+
+    .small-caption {
+        font-size: '12px';
+        line-height: '14px';
+        font-weight: '700';
+    }
+
+    input {
+        background-color: white;
+        font-size: '16px';
+        line-height: '24px';
+        font-weight: '500';
+        border: 1px solid #807896;
+        color: #807896;
+        border-radius: 8px;
+        height: 48px;
+        padding: 0 24px;
+        position: relative;
+        outline: none;
+        width: 100%;
+    }
+
+    input:focus {
+        border: 1px solid #180D37;
+        color: #180D37;
+    }
+
+    input:disabled {
+        border: 1px solid #b6b6b6;
+        color: #b6b6b6;
+        cursor: not-allowed;
+    }
+
+    input:disabled::placeholder {
+        color: #b6b6b6;
+
+    }
+
+    input:-webkit-autofill,
+    textarea:-webkit-autofill,
+    select:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    }
+
+    button {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        border-radius: 16px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    button:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}
