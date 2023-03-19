@@ -2,11 +2,13 @@
 import { icons } from "@/lib/icons"
 import Image from "next/image"
 import { useState } from "react"
+import { Button } from "./button"
 import { Container } from "./container"
 
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
-  trigger: React.ReactNode
+  triggerButton: React.ReactNode
+  ctaButton?: React.ReactNode
 }
 
 const modalContainerStyles = `
@@ -23,7 +25,7 @@ const modalContainerStyles = `
     opaque
 `
 
-export const Modal = ({ trigger, children }: ModalProps) => {
+export const Modal = ({ triggerButton, ctaButton, children }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleTrigger = () => {
@@ -33,7 +35,7 @@ export const Modal = ({ trigger, children }: ModalProps) => {
   return (
     <>
       <div onClick={handleTrigger}>
-        {trigger}
+        {triggerButton}
       </div>
       {isOpen ?
         <>
@@ -49,8 +51,11 @@ export const Modal = ({ trigger, children }: ModalProps) => {
                     className="pointer-events-none"
                   />
                 </div>
-                <div className="mt-12 flex-auto">
-                  {children}
+
+                {children}
+                <div className="flex justify-content">
+                  {ctaButton}
+                  <Button text='Cancel' onClick={handleTrigger} className="w-1/2 ml-4" outlined />
                 </div>
               </div>
             </Container>

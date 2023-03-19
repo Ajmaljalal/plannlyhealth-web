@@ -28,7 +28,12 @@ export default function Home() {
           <Input type="radio" name="radio" className="ml-4" />
         </div>
         <div className="mb-12 flex">
-          <Modal trigger={<Button text='Open Modal' />} ><h1>Modal opened</h1></Modal>
+          <Modal
+            triggerButton={<Button text='Open Modal' />}
+            ctaButton={<Button text='Submit' className="w-1/2" />}
+          >
+            <h1>Modal opened</h1>
+          </Modal>
         </div>
       </Container>
     </div>
