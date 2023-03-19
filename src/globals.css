@@ -4,7 +4,15 @@
 
 @layer base {
     html {
-        background: #ebeaf1
+        height: 100vh;
+        width: 100vw;
+    }
+
+    body {
+        background: #ebeaf1;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
     }
 
     h1 {
