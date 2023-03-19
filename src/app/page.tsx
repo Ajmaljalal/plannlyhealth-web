@@ -20,6 +20,8 @@ export default function Home() {
         <Select name='products' placeholder="Select a product" className="mr-4" required options={['One', 'two', 'three', 'four']} />
         <Select name='state' placeholder="Select you state" className="mr-4" options={['One', 'two', 'three', 'four']} />
         <Select name='program' placeholder="Select a product" disabled options={['One', 'two', 'three', 'four']} />
+        <Input type="checkbox" name="radio" className="ml-4" />
+        <Input type="radio" name="radio" className="ml-4" />
       </div>
     </>
   )

@@ -88,6 +88,24 @@
 
     }
 
+    input[type="checkbox"] {
+        accent-color: #EF3770;
+        -ms-transform: scale(1.3);
+        /* IE 9 */
+        -webkit-transform: scale(1.3);
+        /* Chrome, Safari, Opera */
+        transform: scale(1.3);
+    }
+
+    input[type="radio"] {
+        accent-color: #EF3770;
+        -ms-transform: scale(1.3);
+        /* IE 9 */
+        -webkit-transform: scale(1.3);
+        /* Chrome, Safari, Opera */
+        transform: scale(1.3);
+    }
+
     select {
         background-color: white;
         font-size: '16px';
