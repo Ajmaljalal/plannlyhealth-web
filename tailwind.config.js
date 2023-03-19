@@ -12,6 +12,7 @@ module.exports = {
       pDarkPink: '#D41F57',
       pWhite: '#FFFFFF',
       pLightGray: '#b6b6b6',
+      pBackground:'#ebeaf1',
       pDarkGray: '#807896',
       pSun: '#FEB840',
       pPurple: '#C124EB',

@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+    html {
+        background: #ebeaf1
+    }
+
     h1 {
         font-size: '38px';
         line-height: '46px';
