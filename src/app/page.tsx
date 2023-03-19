@@ -1,6 +1,7 @@
 import { Button } from "@/components/button";
 import { Container } from "@/components/container";
 import { Input } from "@/components/input";
+import { Modal } from "@/components/modal";
 import { Select } from "@/components/select";
 import { icons } from "@/lib/icons";
 export default function Home() {
@@ -25,6 +26,9 @@ export default function Home() {
           <Select name='program' placeholder="Select a product" disabled options={['One', 'two', 'three', 'four']} />
           <Input type="checkbox" name="radio" className="ml-4" />
           <Input type="radio" name="radio" className="ml-4" />
+        </div>
+        <div className="mb-12 flex">
+          <Modal trigger={<Button text='Open Modal' />} ><h1>Modal opened</h1></Modal>
         </div>
       </Container>
     </div>

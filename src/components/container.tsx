@@ -9,6 +9,7 @@ const styles = `
     bg-pWhite
     rounded-[16px]
     text-black
+    relative
 `
 
 export const Container = ({ children, className, ...props }: ContainerProps) => {
