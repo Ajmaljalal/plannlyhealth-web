@@ -33,7 +33,7 @@ export const NavItem = ({ text, href, icon }: NavItemProps) => {
     const isActive = pathname === href
     return (
         <Link href={href} className={`${navItemStyles} ${isActive ? 'bg-pPink' : ''}`}>
-            <Image src={icon.src} alt={`${text} icon`} width='24' height='24' className='mr-[10px]' />
+            <Image src={icon} alt={`${text} icon`} width='24' height='24' className='mr-[10px]' />
             {text}
         </Link>
     )

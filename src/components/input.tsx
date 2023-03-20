@@ -97,7 +97,7 @@ export const Input = ({
                 {...props}
             />
             {icon && <Image
-                src={icon.src}
+                src={icon}
                 alt='upload'
                 width='24'
                 height='24'

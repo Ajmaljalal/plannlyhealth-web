@@ -44,7 +44,7 @@ export const Modal = ({ triggerButton, ctaButton, children }: ModalProps) => {
               <div className="w-[578px]">
                 <div onClick={handleTrigger} className="absolute top-5 right-5 cursor-pointer w-[24px] h-[24px]">
                   <Image
-                    src={icons.close.src}
+                    src={icons.close}
                     width={24}
                     height={24}
                     alt='close modal'
