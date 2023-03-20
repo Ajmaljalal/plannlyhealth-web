@@ -24,7 +24,7 @@ const navItemStyles = `
     hover:bg-pDarkGray
     my-[9px]
     cursor-pointer
-    leading-tight
+    leading-[1.2]
     focus:bg-pPink
 `
 

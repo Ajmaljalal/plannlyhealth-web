@@ -21,6 +21,12 @@ module.exports = {
       pBlue: '#5DB2E1',
       pGreen: '#16C470',
     },
+    fontWeight: {
+      normal: '400',
+      medium: '500',
+      bold: '700',
+      extrabold: '900',
+    },
     extend: {
       fontFamily: {
         primary: ['var(--lato-font)', ...fontFamily.sans],
