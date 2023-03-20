@@ -5,7 +5,7 @@ import MyBenefitsIcon from '../../public/icons/left-nav/balance.svg'
 import MarketPlaceIcon from '../../public/icons/left-nav/marketplace.svg'
 import DashboardIcon from '../../public/icons/left-nav/dashboard.svg'
 import OnBoardingIcon from '../../public/icons/left-nav/onboarding.svg'
-import SettingsIcon from '../../public/icons/left-nav/settings.svg'
+// import SettingsIcon from '../../public/icons/left-nav/settings.svg'
 import SurveyIcon from '../../public/icons/left-nav/survey.svg'
 import Bank_AccIcon from '../../public/icons/left-nav/bank_acc.svg'
 import ClaimsIcon from '../../public/icons/left-nav/claims.svg'
@@ -25,7 +25,7 @@ export const icons = {
     marketPlace: MarketPlaceIcon,
     dashboard: DashboardIcon,
     onBoarding: OnBoardingIcon,
-    settings: SettingsIcon,
+    // settings: SettingsIcon,
     survey: SurveyIcon,
     bankAcc: Bank_AccIcon,
     claims: ClaimsIcon,
