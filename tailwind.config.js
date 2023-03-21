@@ -9,6 +9,7 @@ module.exports = {
     colors: {
       transparent: "transparent",
       pDark: '#180D37',
+      pLight: '#f2f4f7',
       pPink: '#EF3770',
       pDarkPink: '#D41F57',
       pWhite: '#FFFFFF',

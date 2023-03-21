@@ -22,7 +22,7 @@ const menuItemsWrapperStyles = `
   rounded-[12px] 
   border 
   border-[0.5px]
-  border-pBackground
+  border-pLight
   shadow-xl 
   shadow-black
   bg-pWhite 
@@ -34,9 +34,12 @@ const menuItemStyles = `
   px-4
   py-2
   text-sm
-  hover:bg-pBackground
+  hover:bg-pLight
   first:rounded-t-[12px] 
   last:rounded-b-[12px]
+  border-b
+  border-pLight
+  last:border-none
 `
 
 

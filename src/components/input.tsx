@@ -10,6 +10,7 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
     label?: string
     name: string
     required?: boolean
+    value: string | number
 }
 
 const labelBaseStyles = `
@@ -44,15 +45,16 @@ export const Input = ({
     label,
     disabled,
     onChange,
+    value,
     ...props
 }: InputProps) => {
-    const [value, setValue] = useState<string>('')
+    const [inputValue, setInputValue] = useState<string | number>(value)
     const [focused, setFocused] = useState<boolean>(false)
     const [inputError, setError] = useState<string>(error || '')
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value)
+        setInputValue(e.target.value)
         onChange && onChange(e)
     }
 
@@ -83,7 +85,7 @@ export const Input = ({
                 {label}
             </label>}
             <input
-                value={value}
+                value={inputValue}
                 id={name}
                 required={required}
                 disabled={disabled}

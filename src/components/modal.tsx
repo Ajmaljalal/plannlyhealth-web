@@ -1,7 +1,6 @@
 "use client"
 import { icons } from "@/lib/icons"
 import Image from "next/image"
-import { useState } from "react"
 import { Button } from "./button"
 import { Container } from "./container"
 
@@ -33,7 +32,7 @@ export const Modal = ({ isOpen, onClose, ctaButton, children }: ModalProps) => {
         <div className={modalContainerStyles}>
           <Container>
             <div className="w-[578px]">
-              <div onClick={onClose} className="absolute top-5 right-5 cursor-pointer w-[24px] h-[24px]">
+              <div onClick={onClose} className="absolute top-7 right-5 cursor-pointer w-[24px] h-[24px]">
                 <Image
                   src={icons.close}
                   width={24}
