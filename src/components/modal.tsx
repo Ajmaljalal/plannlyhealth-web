@@ -7,8 +7,9 @@ import { Container } from "./container"
 
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
-  triggerButton: React.ReactNode
   ctaButton?: React.ReactNode
+  isOpen: boolean
+  onClose: () => void
 }
 
 const modalContainerStyles = `
@@ -25,43 +26,31 @@ const modalContainerStyles = `
     opaque
 `
 
-export const Modal = ({ triggerButton, ctaButton, children }: ModalProps) => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const handleTrigger = () => {
-    setIsOpen(!isOpen)
-  }
-
+export const Modal = ({ isOpen, onClose, ctaButton, children }: ModalProps) => {
   return (
-    <>
-      <div onClick={handleTrigger}>
-        {triggerButton}
-      </div>
-      {isOpen ?
-        <>
-          <div className={modalContainerStyles}>
-            <Container>
-              <div className="w-[578px]">
-                <div onClick={handleTrigger} className="absolute top-5 right-5 cursor-pointer w-[24px] h-[24px]">
-                  <Image
-                    src={icons.close}
-                    width={24}
-                    height={24}
-                    alt='close modal'
-                    className="pointer-events-none"
-                  />
-                </div>
-
-                {children}
-                <div className="flex justify-content">
-                  {ctaButton}
-                  <Button text='Cancel' onClick={handleTrigger} className="w-1/2 ml-4" outlined />
-                </div>
+    isOpen ?
+      <>
+        <div className={modalContainerStyles}>
+          <Container>
+            <div className="w-[578px]">
+              <div onClick={onClose} className="absolute top-5 right-5 cursor-pointer w-[24px] h-[24px]">
+                <Image
+                  src={icons.close}
+                  width={24}
+                  height={24}
+                  alt='close modal'
+                  className="pointer-events-none"
+                />
               </div>
-            </Container>
-          </div>
-        </> : null
-      }
-    </>
+
+              {children}
+              <div className="flex justify-content">
+                {ctaButton}
+                <Button text='Cancel' onClick={onClose} className="w-1/2 ml-4" outlined />
+              </div>
+            </div>
+          </Container>
+        </div>
+      </> : null
   )
 }

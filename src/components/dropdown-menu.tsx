@@ -7,7 +7,7 @@ interface DropdownMenuProps {
   menuItems:
   {
     element: React.ReactNode | string
-    onClick?: () => void
+    onClick: () => void
   }[]
 
 }
@@ -77,10 +77,9 @@ export const DropdownMenu = ({ triggerBtn, menuItems }: DropdownMenuProps) => {
                 className={menuItemStyles}
                 role="menuitem"
                 onClick={() => {
-                  item.onClick
+                  item.onClick()
                   handleToggle()
-                }
-                }
+                }}
               >
                 {item.element}
               </span>
