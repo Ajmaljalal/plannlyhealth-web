@@ -1,7 +1,7 @@
 
 
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-    children: React.ReactNode
+  children: React.ReactNode
 }
 
 const styles = `
@@ -13,12 +13,12 @@ const styles = `
 `
 
 export const Container = ({ children, className, ...props }: ContainerProps) => {
-    return (
-        <div
-            className={`${styles} ${className}`}
-            {...props}
-        >
-            {children}
-        </div>
-    )
+  return (
+    <div
+      className={`${styles} ${className}`}
+      {...props}
+    >
+      {children}
+    </div>
+  )
 }

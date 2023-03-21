@@ -1,9 +1,9 @@
-import React from 'react'
+import BenefitProgramsContainer from '@/containers/benefit-programs'
 
 const BenefitPrograms = () => {
-    return (
-        <div>BenefitPrograms</div>
-    )
+  return (
+    <BenefitProgramsContainer />
+  )
 }
 
 export default BenefitPrograms

@@ -10,7 +10,7 @@ export const metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='w-full h-full flex'>
+    <div className='w-full h-full flex overflow-hidden'>
       <div className='hidden lg:flex flex-col min-w-[240px] h-screen bg-pDark px-[32px] p-[24px]'>
         <Image src={logo} alt='plannly logo' />
         <div className='w-full mt-[16px]'>
@@ -19,7 +19,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
         <div className='w-full h-[1px] mt-[4px] bg-pDarkGray' />
       </div>
-      <div style={{ minWidth: 'calc(100% - 240px)' }}>
+      <div className='overflow-auto' style={{ minWidth: 'calc(100% - 240px)' }}>
         <Header />
         <div className='lg:p-[32px]'>
           {children}

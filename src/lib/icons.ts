@@ -1,6 +1,11 @@
+
+// shared
 import UploadIcon from '../../public/icons/shared/upload.svg'
 import ArrowIcon from '../../public/icons/shared/arrow-down.svg'
 import CloseIcon from '../../public/icons/shared/close.svg'
+import ThreeDots from '../../public/icons/shared/dots.svg'
+
+// left nav
 import MyBenefitsIcon from '../../public/icons/left-nav/balance.svg'
 import MarketPlaceIcon from '../../public/icons/left-nav/marketplace.svg'
 import DashboardIcon from '../../public/icons/left-nav/dashboard.svg'
@@ -16,6 +21,15 @@ import SubscriptionIcon from '../../public/icons/left-nav/subscription.svg'
 import CardIcon from '../../public/icons/left-nav/payments.svg'
 import AccountIcon from '../../public/icons/left-nav/account.svg'
 import UsersIcon from '../../public/icons/left-nav/users.svg'
+
+// programs
+import HealthWellnessIcon from '../../public/icons/programs/healthWellness.svg'
+import FamilyCare from '../../public/icons/programs/familyCare.svg'
+import LearnDevelop from '../../public/icons/programs/learnDevelop.svg'
+import RecogAnniv from '../../public/icons/programs/recogAnniv.svg'
+import StudentLoans from '../../public/icons/programs/studentLoans.svg'
+import WFH from '../../public/icons/programs/WFH.svg'
+
 
 export const icons = {
     upload: UploadIcon,
@@ -36,4 +50,14 @@ export const icons = {
     card: CardIcon,
     account: AccountIcon,
     users: UsersIcon,
+    // programs
+    healthWellness: HealthWellnessIcon,
+    familyCare: FamilyCare,
+    learnDevelop: LearnDevelop,
+    recogAnniv: RecogAnniv,
+    studentLoans: StudentLoans,
+    wfh: WFH,
+
+    // shared
+    threeDots: ThreeDots,
 }
