@@ -1,20 +1,23 @@
 import { Container } from '@/components/container'
 import { Divider } from '@/components/divider'
+import { Program } from '@/lib/types/programs'
 import React from 'react'
 import { ActiveProgramTile } from './active-program-tile'
 
-const programs = [
+const programs: Program[] = [
   {
     budget: 100,
     name: 'Health & Wellness',
-    frequency: 'Monthly',
+    frequency: 'monthly',
     description: 'Gym Memberships, Spa/Massages, Physical Therapy ',
+    access: 'limited',
   },
   {
     budget: 150,
     name: 'Work-From-Home',
-    frequency: 'Monthly',
+    frequency: 'monthly',
     description: 'Computers, Equipment & Supplies',
+    access: 'unlimited',
   },
 ]
 

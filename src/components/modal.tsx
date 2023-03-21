@@ -13,7 +13,7 @@ interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const modalContainerStyles = `
     justify-center 
-    items-center 
+    pt-[150px]
     flex 
     overflow-x-hidden 
     overflow-y-auto 
@@ -30,23 +30,20 @@ export const Modal = ({ isOpen, onClose, ctaButton, children }: ModalProps) => {
     isOpen ?
       <>
         <div className={modalContainerStyles}>
-          <Container>
-            <div className="w-[578px]">
-              <div onClick={onClose} className="absolute top-7 right-5 cursor-pointer w-[24px] h-[24px]">
-                <Image
-                  src={icons.close}
-                  width={24}
-                  height={24}
-                  alt='close modal'
-                  className="pointer-events-none"
-                />
-              </div>
-
-              {children}
-              <div className="flex justify-content">
-                {ctaButton}
-                <Button text='Cancel' onClick={onClose} className="w-1/2 ml-4" outlined />
-              </div>
+          <Container className="w-[578px] h-fit">
+            <div onClick={onClose} className="absolute top-7 right-5 cursor-pointer w-[24px] h-[24px]">
+              <Image
+                src={icons.close}
+                width={24}
+                height={24}
+                alt='close modal'
+                className="pointer-events-none"
+              />
+            </div>
+            {children}
+            <div className="flex justify-content">
+              {ctaButton}
+              <Button text='Cancel' onClick={onClose} className="w-1/2 ml-4" outlined />
             </div>
           </Container>
         </div>
