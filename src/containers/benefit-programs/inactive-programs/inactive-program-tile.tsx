@@ -3,7 +3,7 @@ import { Container } from '@/components/container'
 import { icons } from '@/lib/icons'
 import { Program } from '@/lib/types/programs'
 import Image from 'next/image'
-import React from 'react'
+import { InActiveProgramActivateModal } from './inactive-program-activate-modal'
 
 
 const containerStyles = `text-pDarkGray min-w-[286px] min-h-[215px] border-2 border-pBackground rounded-[24px]`
@@ -31,7 +31,7 @@ export const InActiveProgramTile = ({ program }: InActiveProgramTileProps) => {
         <p>Approved categories:</p>
         <p className='font-bold'>{program.description}</p>
       </div>
-      <Button text='Activate' className='w-full md:w-1/2' />
+      <InActiveProgramActivateModal program={program} />
     </Container>
   )
 }
