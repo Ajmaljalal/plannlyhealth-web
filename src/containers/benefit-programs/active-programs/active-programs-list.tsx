@@ -14,7 +14,7 @@ const programs: Program[] = [
   },
   {
     budget: 150,
-    name: 'Work-From-Home',
+    name: 'Work From Home',
     frequency: 'monthly',
     description: 'Computers, Equipment & Supplies',
     access: 'unlimited',

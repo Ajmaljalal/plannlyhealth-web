@@ -1,6 +1,5 @@
-import { Button } from '@/components/button'
 import { Container } from '@/components/container'
-import { icons } from '@/lib/icons'
+import { programIcons } from '@/lib/icons'
 import { Program } from '@/lib/types/programs'
 import Image from 'next/image'
 import { InActiveProgramActivateModal } from './inactive-program-activate-modal'
@@ -18,7 +17,7 @@ export const InActiveProgramTile = ({ program }: InActiveProgramTileProps) => {
       <div className='flex justify-between'>
         <div className='flex items-center'>
           <Image
-            src={icons.healthWellness}
+            src={programIcons.inactive[program.name]}
             alt='Health & Wellness'
             width={32}
             height={32}

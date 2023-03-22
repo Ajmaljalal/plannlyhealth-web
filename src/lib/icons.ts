@@ -24,17 +24,57 @@ import UsersIcon from '../../public/icons/left-nav/users.svg'
 
 // programs
 import HealthWellnessIcon from '../../public/icons/programs/healthWellness.svg'
+import HealthWellnessGray from '../../public/icons/programs/healthWellness-g.svg'
 import FamilyCare from '../../public/icons/programs/familyCare.svg'
+import FamilyCareGray from '../../public/icons/programs/familyCare-g.svg'
 import LearnDevelop from '../../public/icons/programs/learnDevelop.svg'
+import LearnDevelopGray from '../../public/icons/programs/learnDevelop-g.svg'
 import RecogAnniv from '../../public/icons/programs/recogAnniv.svg'
+import RecogAnnivGray from '../../public/icons/programs/recogAnniv-g.svg'
 import StudentLoans from '../../public/icons/programs/studentLoans.svg'
+import StudentLoansGray from '../../public/icons/programs/studentLoans-g.svg'
 import WFH from '../../public/icons/programs/WFH.svg'
+import WFHGray from '../../public/icons/programs/WFH-g.svg'
+import CommuterTransportation from '../../public/icons/programs/commuterTransportation.svg'
+import CommuterTransportationGray from '../../public/icons/programs/commuterTransportation-g.svg'
+import FoodGroceries from '../../public/icons/programs/foodGroceries.svg'
+import FoodGroceriesGray from '../../public/icons/programs/foodGroceries-g.svg'
+import Donations from '../../public/icons/programs/donations.svg'
+import DonationsGray from '../../public/icons/programs/donations-g.svg'
 
+
+
+interface StringMap { [key: string]: string }
+interface ProgramIcons { [key: string]: StringMap }
+export const programIcons: ProgramIcons = {
+    // programs
+    active: {
+        'Health & Wellness': HealthWellnessIcon,
+        'Family Care': FamilyCare,
+        'Food & Groceries': FoodGroceries,
+        'Recognition & Anniversaries': RecogAnniv,
+        'Work From Home': WFH,
+        'Student Loans': StudentLoans,
+        'Learning & Development': LearnDevelop,
+        'Commuter & Transportation': CommuterTransportation,
+        'Give / Donation': Donations,
+
+    },
+    inactive: {
+        'Health & Wellness': HealthWellnessGray,
+        'Family Care': FamilyCareGray,
+        'Food & Groceries': FoodGroceriesGray,
+        'Recognition & Anniversaries': RecogAnnivGray,
+        'Work From Home': WFHGray,
+        'Student Loans': StudentLoansGray,
+        'Learning & Development': LearnDevelopGray,
+        'Commuter & Transportation': CommuterTransportationGray,
+        'Give / Donation': DonationsGray,
+    },
+}
 
 export const icons = {
-    upload: UploadIcon,
-    arrow: ArrowIcon,
-    close: CloseIcon,
+    // left nav
     myBenefits: MyBenefitsIcon,
     marketPlace: MarketPlaceIcon,
     dashboard: DashboardIcon,
@@ -50,14 +90,10 @@ export const icons = {
     card: CardIcon,
     account: AccountIcon,
     users: UsersIcon,
-    // programs
-    healthWellness: HealthWellnessIcon,
-    familyCare: FamilyCare,
-    learnDevelop: LearnDevelop,
-    recogAnniv: RecogAnniv,
-    studentLoans: StudentLoans,
-    wfh: WFH,
 
     // shared
     threeDots: ThreeDots,
+    upload: UploadIcon,
+    arrow: ArrowIcon,
+    close: CloseIcon,
 }

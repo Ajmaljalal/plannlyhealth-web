@@ -27,9 +27,9 @@ const modalInputTitleStyles = `
 `
 
 export const InActiveProgramActivateModal = ({ program }: InActiveProgramActivateModalProps) => {
-  const [budgetValue, setBudgetValue] = useState<number | string>(100)
-  const [frequencyValue, setFrequencyValue] = useState<string>('monthly')
-  const [accessValue, setAccessValue] = useState<string>('unlimited')
+  const [budgetValue, setBudgetValue] = useState<number | string>(program.budget)
+  const [frequencyValue, setFrequencyValue] = useState<string>(program.frequency)
+  const [accessValue, setAccessValue] = useState<string>(program.access)
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleOpen = () => {
@@ -65,9 +65,6 @@ export const InActiveProgramActivateModal = ({ program }: InActiveProgramActivat
 
   const handleCancel = () => {
     console.log('cancel')
-    setAccessValue('')
-    setBudgetValue('')
-    setFrequencyValue('')
     toggleOpen()
   }
 

@@ -1,5 +1,5 @@
 import { Container } from '@/components/container'
-import { icons } from '@/lib/icons'
+import { programIcons } from '@/lib/icons'
 import { Program } from '@/lib/types/programs'
 import Image from 'next/image'
 import React from 'react'
@@ -19,7 +19,7 @@ export const ActiveProgramTile = ({ program }: ActiveProgramTileProps) => {
       <div className='flex justify-between'>
         <div className='flex items-center'>
           <Image
-            src={icons.healthWellness}
+            src={programIcons.active[program.name]}
             alt='Health & Wellness'
             width={32}
             height={32}
