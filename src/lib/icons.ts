@@ -4,6 +4,11 @@ import UploadIcon from '../../public/icons/shared/upload.svg'
 import ArrowIcon from '../../public/icons/shared/arrow-down.svg'
 import CloseIcon from '../../public/icons/shared/close.svg'
 import ThreeDots from '../../public/icons/shared/dots.svg'
+import Calendar from '../../public/icons/shared/calendar.svg'
+import ArrowLeft from '../../public/icons/shared/arrow-left.svg'
+import Trash from '../../public/icons/shared/trash.svg'
+import Edit from '../../public/icons/shared/edit.svg'
+import EditFill from '../../public/icons/shared/edit-fill.svg'
 
 // left nav
 import MyBenefitsIcon from '../../public/icons/left-nav/balance.svg'
@@ -96,4 +101,9 @@ export const icons = {
     upload: UploadIcon,
     arrow: ArrowIcon,
     close: CloseIcon,
+    calendar: Calendar,
+    arrowLeft: ArrowLeft,
+    trash: Trash,
+    edit: Edit,
+    editFill: EditFill,
 }

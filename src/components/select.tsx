@@ -10,6 +10,7 @@ interface SelectProps extends React.HTMLAttributes<HTMLSelectElement> {
     name: string
     required?: boolean
     options: string[]
+    value: string
 }
 
 export const Select = ({
@@ -21,9 +22,10 @@ export const Select = ({
     disabled,
     onChange,
     options,
+    value,
     ...props
 }: SelectProps) => {
-    const [value, setValue] = useState<string>('')
+    const [selectedValue, setValue] = useState<string>(value)
     const [focused, setFocused] = useState<boolean>(false)
     const [inputError, setError] = useState<string>(error || '')
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
@@ -53,7 +55,7 @@ export const Select = ({
     return (
         <div className={`relative ${className}`} >
             <select
-                value={value}
+                value={selectedValue}
                 id={name}
                 required={required}
                 disabled={disabled}
