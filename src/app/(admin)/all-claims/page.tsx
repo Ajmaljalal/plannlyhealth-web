@@ -1,9 +1,9 @@
-import React from 'react'
+import { AllClaimsContainer } from '@/containers/all-claims'
 
 const AllClaims = () => {
-    return (
-        <div>AllClaims</div>
-    )
+  return (
+    <AllClaimsContainer />
+  )
 }
 
 export default AllClaims
