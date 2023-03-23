@@ -7,7 +7,7 @@ interface TableHeadProps {
 export const TableHead = ({ headers }: TableHeadProps) => {
   return (
     <thead>
-      <tr className='border'>
+      <tr className='border bg-pLight hover:bg-pLight'>
         {headers.map((header: string, index: number) => (
           <th key={index}>{header}</th>
         ))}
