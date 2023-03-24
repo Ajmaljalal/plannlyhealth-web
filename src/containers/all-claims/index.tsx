@@ -9,7 +9,8 @@ import { Filters } from './filters'
 import Link from 'next/link'
 
 
-const tableHeaders = ['User', 'Vendor', 'Program', 'Requested', 'Reimbursed', 'Status', 'Date', '']
+const tableHeaders = ['User', 'Vendor', 'Program', 'Requested', 'Reimbursed', 'Status', 'Date']
+const rowStyle = 'table-row cursor-pointer border-t border-pLight hover:bg-[#f2f4f780]'
 
 export const AllClaimsContainer = () => {
 
@@ -22,7 +23,7 @@ export const AllClaimsContainer = () => {
       const isDeclined = claim.status === 'Declined'
       const textColor = isApproved ? 'text-pGreen' : isRequested ? 'text-pDarkGray' : isDeclined ? 'text-pRed' : 'text-pDark'
       return (
-        <Link key={claim.id} href={`/all-claims/${claim.id}`} className='table-row'>
+        <Link key={claim.id} href={`/all-claims/${claim.id}`} className={rowStyle}>
           <td>{claim.user}</td>
           <td>{claim.vendor}</td>
           <td>{claim.program}</td>
@@ -30,7 +31,6 @@ export const AllClaimsContainer = () => {
           <td>{claim.reimbursed}</td>
           <td className={textColor}>{claim.status}</td>
           <td>{claim.date}</td>
-          <td>...</td>
         </Link>
       )
     })
