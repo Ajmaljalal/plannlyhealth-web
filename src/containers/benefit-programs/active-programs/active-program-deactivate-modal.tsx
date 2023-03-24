@@ -8,7 +8,7 @@ interface ActiveProgramDeactivateModalProps {
   programId?: string
   companyId?: string
   programName?: string
-  onClose: () => void
+  onClose: (text: string) => void
 }
 
 export const ActiveProgramDeactivateModal = ({ isOpen, onClose, programId, programName, companyId }: ActiveProgramDeactivateModalProps) => {
@@ -16,7 +16,7 @@ export const ActiveProgramDeactivateModal = ({ isOpen, onClose, programId, progr
   const handleDeactivate = () => {
     // TODO: deactivate program
     console.log('deactivate program', programId, companyId)
-    onClose()
+    onClose('')
   }
 
   const ctaButton = <Button text='Yes' className='w-full' onClick={handleDeactivate} />
