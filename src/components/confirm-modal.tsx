@@ -7,7 +7,7 @@ interface ModalProps {
   title: React.ReactNode
   ctaButton?: React.ReactNode
   isOpen: boolean
-  onClose: () => void
+  onClose: (arg?: any) => void
 }
 
 const modalContentStyles = `
