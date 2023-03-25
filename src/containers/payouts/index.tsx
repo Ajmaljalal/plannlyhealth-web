@@ -5,7 +5,7 @@ import { Table } from '@/components/table/table'
 import { ProcessPaymentsButton } from './process-payments-button'
 import { calculatePayouts } from '@/lib/helpers'
 import { data } from './data'
-import { Filters } from './filters'
+import { FiltersAndButtons } from './filters-and-buttons'
 import { PayoutCheckbox } from './payout-checkbox'
 
 
@@ -47,7 +47,7 @@ export const PayoutsContainer = () => {
 
   return (
     <MainContainer>
-      <Filters />
+      <FiltersAndButtons />
       <Container>
         <div className='flex justify-between mb-[24px]'>
           {renderStatistic()}

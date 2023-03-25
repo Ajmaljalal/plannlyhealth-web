@@ -1,6 +1,7 @@
 'use client'
 import { Button } from '@/components/button'
 import { downloadCsv } from '@/lib/helpers/download-csv'
+import { icons } from '@/lib/icons'
 
 const claims = [
   {
@@ -45,7 +46,13 @@ export const ActionButtons = () => {
   return (
     <div className='w-1/2 flex gap-2 justify-end'>
       {/* <Button text='Approve All' className='w-[260px]' /> */}
-      <Button text='Export List as CSV' className='w-[260px]' outlined onClick={() => downloadCsv(claims, 'claims')} />
+      <Button
+        text='Export List as CSV'
+        className='w-[260px] border-none hover:bg-transparent p-0 pr-1 w-fit'
+        icon={icons.download}
+        outlined
+        onClick={() => downloadCsv(claims, 'claims')}
+      />
     </div>
   )
 }

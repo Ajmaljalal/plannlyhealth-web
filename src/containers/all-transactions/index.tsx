@@ -37,7 +37,7 @@ export const AllTransactionsContainer = () => {
     <MainContainer>
       <Filters />
       <Container>
-        <div className='flex justify-between mb-[24px]'>
+        <div className='flex justify-between mb-[20px]'>
           <ActionButtons />
         </div>
         <Table>

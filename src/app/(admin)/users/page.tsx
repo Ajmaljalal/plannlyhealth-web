@@ -1,9 +1,9 @@
-import React from 'react'
+import { UsersContainer } from '@/containers/users'
 
 const Users = () => {
-    return (
-        <div>Users</div>
-    )
+  return (
+    <UsersContainer />
+  )
 }
 
 export default Users

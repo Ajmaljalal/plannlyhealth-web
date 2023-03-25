@@ -23,6 +23,24 @@ export const calculatePayouts = (payouts: any) => {
   return { approved, notYetProcessed }
 }
 
+export const calculateUsersStatus = (users: any) => {
+  let active = 0
+  let deactivated = 0
+  let invited = 0
+  users && users.forEach((user: any) => {
+    if (user.status === 'Active') {
+      active += 1
+    }
+    if (user.status === 'Deactivated') {
+      deactivated += 1
+    }
+    if (user.status === 'Invited') {
+      invited += 1
+    }
+  })
+  return { active, deactivated, invited }
+}
+
 export const getFormattedDate = (date: string) => {
   const dateObj = new Date(date)
   return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}`
