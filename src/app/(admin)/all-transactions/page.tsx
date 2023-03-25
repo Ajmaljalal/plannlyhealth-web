@@ -1,9 +1,11 @@
+
+import { AllTransactionsContainer } from '@/containers/all-transactions'
 import React from 'react'
 
 const AllTransactions = () => {
-    return (
-        <div>AllTransactions</div>
-    )
+  return (
+    <AllTransactionsContainer />
+  )
 }
 
 export default AllTransactions
