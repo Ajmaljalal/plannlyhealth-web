@@ -9,6 +9,7 @@ import ArrowLeft from '../../public/icons/shared/arrow-left.svg'
 import Trash from '../../public/icons/shared/trash.svg'
 import Edit from '../../public/icons/shared/edit.svg'
 import EditFill from '../../public/icons/shared/edit-fill.svg'
+import Download from '../../public/icons/shared/download.svg'
 
 // left nav
 import MyBenefitsIcon from '../../public/icons/left-nav/balance.svg'
@@ -106,4 +107,5 @@ export const icons = {
     trash: Trash,
     edit: Edit,
     editFill: EditFill,
+    download: Download,
 }

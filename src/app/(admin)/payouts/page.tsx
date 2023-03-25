@@ -1,9 +1,10 @@
+import { PayoutsContainer } from '@/containers/payouts'
 import React from 'react'
 
 const Payouts = () => {
-    return (
-        <div>Payouts</div>
-    )
+  return (
+    <PayoutsContainer />
+  )
 }
 
 export default Payouts
