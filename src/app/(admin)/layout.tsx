@@ -19,7 +19,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
         <div className='w-full h-[1px] mt-[4px] bg-pDarkGray' />
       </div>
-      <div className='overflow-auto' style={{ minWidth: 'calc(100% - 240px)' }}>
+      <div className='overflow-auto w-[calc(100%)]'>
+        {/* <div className='overflow-auto' style={{ minWidth: 'calc(100% - 240px)' }}> */}
         <Header />
         <div className='lg:p-[32px]'>
           {children}

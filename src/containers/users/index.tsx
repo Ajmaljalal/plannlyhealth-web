@@ -27,7 +27,7 @@ export const UsersContainer = () => {
           <td className='w-1/3'>{user.email}</td>
           <td className={textColor}>{user.status}</td>
           <td>{user.role}</td>
-          <td className='w-[24px]'><ThreeDotsButton /></td>
+          <td className='w-[24px]'><ThreeDotsButton user={user} /></td>
         </tr>
       )
     })

@@ -8,7 +8,7 @@ interface DropdownMenuProps {
   menuItems:
   {
     element: React.ReactNode | string
-    onClick: () => void
+    onClick: (text?: any) => void
   }[]
 
 }
