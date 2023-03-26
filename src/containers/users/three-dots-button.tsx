@@ -36,8 +36,7 @@ export const ThreeDotsButton = ({ user }: ThreeDotsButtonProps) => {
 
 
   const moveToUserDetails = () => {
-    // TODO: Add user id
-    router.push(`/users/123456789`)
+    router.push(`/users/${user.id}`)
 
   }
 
