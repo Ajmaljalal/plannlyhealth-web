@@ -5,11 +5,12 @@ import { Table } from '@/components/table/table'
 import { ExportAsCSVButton } from './export-list-button'
 import { calculateUsersStatus } from '@/lib/helpers'
 import { data } from './data'
-import { Filters } from './filters'
+import { FiltersAndButtons } from './filters-and-buttons'
+import { ThreeDotsButton } from './three-dots-button'
 
 
 const tableHeaders = ['Name', 'Email', 'Status', 'Role', '']
-const rowStyle = 'table-row cursor-pointer border-t border-pLight hover:bg-[#f2f4f780]'
+const rowStyle = 'table-row cursor-pointer border-t border-pLight hover:bg-transparent'
 
 export const UsersContainer = () => {
 
@@ -26,7 +27,7 @@ export const UsersContainer = () => {
           <td className='w-1/3'>{user.email}</td>
           <td className={textColor}>{user.status}</td>
           <td>{user.role}</td>
-          <td>...</td>
+          <td className='w-[24px]'><ThreeDotsButton /></td>
         </tr>
       )
     })
@@ -53,13 +54,13 @@ export const UsersContainer = () => {
 
   return (
     <MainContainer>
-      <Filters />
+      <FiltersAndButtons />
       <Container>
         <div className='flex justify-between mb-[20px]'>
           {renderStatistic()}
           <ExportAsCSVButton />
         </div>
-        <Table>
+        <Table className='overflow-visible'>
           <TableHead headers={tableHeaders} />
           <tbody>
             {renderClaims()}

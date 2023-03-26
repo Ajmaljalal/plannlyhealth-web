@@ -19,7 +19,7 @@ const statuses = [
   { value: 'Deactivated', label: 'Deactivated' },
 ];
 
-export const Filters = () => {
+export const FiltersAndButtons = () => {
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState('')
   const [role, setRole] = useState('all')
@@ -64,7 +64,7 @@ export const Filters = () => {
         onChange={filterUsersByRole}
         placeholder='Role'
       />
-      <Button text='Add New' className='w-[180px]' />
+      <Button text='Add Users' className='w-[180px]' />
     </div>
   )
 }
