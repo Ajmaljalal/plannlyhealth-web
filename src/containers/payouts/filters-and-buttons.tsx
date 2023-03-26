@@ -3,7 +3,7 @@ import DateRangeSelector from '@/components/date-picker'
 import Dropdown from '@/components/searchable-select'
 import { getFormattedDate } from '@/lib/helpers'
 import { useState } from 'react'
-import { DownloadAsCSVButton } from './export-list-button'
+import { ExportAsCSVButton } from './export-list-button'
 // import { data } from './data'
 
 const users = [
@@ -13,7 +13,7 @@ const users = [
   { value: 'Kausar', label: 'kausar' },
 ];
 
-export const Filters = () => {
+export const FiltersAndButtons = () => {
   const [user, setUser] = useState('all')
 
   const filterTransactionsByDate = (dates: any) => {
@@ -54,7 +54,7 @@ export const Filters = () => {
           placeholder='User'
         />
       </div>
-      <DownloadAsCSVButton />
+      <ExportAsCSVButton />
     </div>
   )
 }
