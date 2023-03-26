@@ -3,16 +3,23 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { DropdownMenu } from '@/components/dropdown-menu'
 import { icons } from '@/lib/icons'
+import { ConfirmModal } from './confirm-modal'
 
 
 const styles = `flex items-center rounded-[4px] hover:bg-pLight w-[24px] h-[24px] py-[4px] cursor-pointer`
 
-export const ThreeDotsButton = () => {
-  const [editModalOpen, setEditModalOpen] = useState(false)
-  const [deactivateModalOpen, setDeactivateModalOpen] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+interface ThreeDotsButtonProps {
+  user: any
+}
 
-  const handleToggle = (isNowOpen: boolean) => {
+export const ThreeDotsButton = ({ user }: ThreeDotsButtonProps) => {
+  const [editModalOpen, setEditModalOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false)
+  const [title, setTitle] = useState('null')
+
+
+  const toggleDropdown = (isNowOpen: boolean) => {
     if (isOpen) {
       setIsOpen(isNowOpen)
       return
@@ -20,21 +27,53 @@ export const ThreeDotsButton = () => {
     setIsOpen(isNowOpen)
   }
 
+  const toggleConfirmationModal = (text: string) => {
+    setConfirmationModalOpen(!confirmationModalOpen)
+    setTitle(text)
+  }
+
 
   const toggleEditModal = () => {
     setEditModalOpen(!editModalOpen)
   }
 
-  const toggleDeactivateModal = () => {
-    setDeactivateModalOpen(!deactivateModalOpen)
+  const handleActivate = () => {
+    console.log('Approve', user)
+    // TODO: Add approve user functionality
+    toggleConfirmationModal('null')
+  }
+
+  const handleDeactivate = () => {
+    console.log('Decline', user)
+    // TODO: Add decline user functionality
+    toggleConfirmationModal('null')
+  }
+
+  const handleResendInvite = () => {
+    console.log('Delete', user)
+    // TODO: Add delete user functionality
+    toggleConfirmationModal('null')
+  }
+
+  const handleResendPasswordReset = () => {
+    console.log('Delete', user)
+    // TODO: Add delete user functionality
+    toggleConfirmationModal('null')
+  }
+
+  const confirmActions: any = {
+    'Send Password Reset': handleResendPasswordReset,
+    'Send Invite': handleResendInvite,
+    'Activate': handleActivate,
+    'Deactivate': handleDeactivate
   }
 
   return (
     <div className={styles}>
-      <Image src={icons.threeDots} alt='three dots menu' onClick={() => handleToggle(isOpen ? false : true)} />
+      <Image src={icons.threeDots} alt='three dots menu' onClick={() => toggleDropdown(isOpen ? false : true)} />
       <DropdownMenu
         isOpen={isOpen}
-        onClose={handleToggle}
+        onClose={toggleDropdown}
         width='w-[180px]'
         menuItems={[
           {
@@ -43,23 +82,24 @@ export const ThreeDotsButton = () => {
           },
           {
             element: 'Edit',
-            onClick: toggleDeactivateModal
+            onClick: toggleEditModal
           },
           {
             element: 'Resend Invite',
-            onClick: toggleDeactivateModal
+            onClick: () => toggleConfirmationModal('Send Invite')
           },
           {
             element: 'Send Password Reset',
-            onClick: toggleDeactivateModal
+            onClick: () => toggleConfirmationModal('Send Password Reset')
           },
           {
             element: 'Deactivate',
-            onClick: toggleDeactivateModal
+            onClick: () => toggleConfirmationModal('Deactivate')
           },
         ]}
       />
       {/* TODO: render modals here */}
+      <ConfirmModal isOpen={confirmationModalOpen} onClose={toggleConfirmationModal} title={title} onConfirm={confirmActions[title]} />
     </div>
   )
 }
