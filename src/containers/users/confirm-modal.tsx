@@ -5,18 +5,18 @@ interface ConfirmModalProps {
   isOpen: boolean
   onClose: (text: string) => void
   title: string
+  userName: string
   onConfirm: () => void
 }
 
-export const ConfirmModal = ({ isOpen, title, onClose, onConfirm }: ConfirmModalProps) => {
+export const ConfirmModal = ({ isOpen, title, onClose, userName, onConfirm }: ConfirmModalProps) => {
 
   const texts: any = {
-    'Send Password Reset': 'Are you sure you want to send a password reset to the user?',
-    'Send Invite': 'Are you sure you want to send an invite to the user?',
-    'Activate': 'Are you sure you want to activate this user?',
-    'Deactivate': 'Are you sure you want to deactivate this user?'
+    'Send Password Reset': `Are you sure you want to send a password reset to ${userName}?`,
+    'Send Invite': `Are you sure you want to send an invite to ${userName}?`,
+    'Activate': `Are you sure you want to activate ${userName}'s account?`,
+    'Deactivate': `Are you sure you want to deactivate ${userName}'s account?`
   }
-
 
   const ctaButton = <Button text='Yes' className='w-full' onClick={onConfirm} />
   const text = title ? texts[title] : 'Are you sure you want to do this?'

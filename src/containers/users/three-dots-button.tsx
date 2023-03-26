@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { DropdownMenu } from '@/components/dropdown-menu'
 import { icons } from '@/lib/icons'
 import { ConfirmModal } from './confirm-modal'
+import { useRouter } from 'next/navigation'
 
 
 const styles = `flex items-center rounded-[4px] hover:bg-pLight w-[24px] h-[24px] py-[4px] cursor-pointer`
@@ -13,6 +14,7 @@ interface ThreeDotsButtonProps {
 }
 
 export const ThreeDotsButton = ({ user }: ThreeDotsButtonProps) => {
+  const router = useRouter()
   const [editModalOpen, setEditModalOpen] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false)
@@ -33,8 +35,10 @@ export const ThreeDotsButton = ({ user }: ThreeDotsButtonProps) => {
   }
 
 
-  const toggleEditModal = () => {
-    setEditModalOpen(!editModalOpen)
+  const moveToUserDetails = () => {
+    // TODO: Add user id
+    router.push(`/users/123456789`)
+
   }
 
   const handleActivate = () => {
@@ -78,11 +82,11 @@ export const ThreeDotsButton = ({ user }: ThreeDotsButtonProps) => {
         menuItems={[
           {
             element: 'Account Details',
-            onClick: toggleEditModal
+            onClick: moveToUserDetails
           },
           {
             element: 'Edit',
-            onClick: toggleEditModal
+            onClick: moveToUserDetails
           },
           {
             element: 'Resend Invite',
@@ -99,7 +103,14 @@ export const ThreeDotsButton = ({ user }: ThreeDotsButtonProps) => {
         ]}
       />
       {/* TODO: render modals here */}
-      <ConfirmModal isOpen={confirmationModalOpen} onClose={toggleConfirmationModal} title={title} onConfirm={confirmActions[title]} />
+      <ConfirmModal
+        isOpen={confirmationModalOpen}
+        onClose={toggleConfirmationModal}
+        title={title}
+        onConfirm={confirmActions[title]}
+        // TODO: add user name
+        userName={`user.name`}
+      />
     </div>
   )
 }
