@@ -45,3 +45,16 @@ export const getFormattedDate = (date: string) => {
   const dateObj = new Date(date)
   return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}`
 }
+
+export const phonePattern = "[0-9]{3}-[0-9]{3}-[0-9]{4}"
+
+export const sampleCSVContent = [{
+  Birthday: "06/01/1972",
+  Department: "Marketing",
+  First_name: "John",
+  Last_name: "Dow",
+  Title: "Marketing Specialist",
+  Phone: "9999999999",
+  Address: "Scottsdale AZ USA",
+  email: "test@test.com",
+}]

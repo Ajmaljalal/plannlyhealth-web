@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/button'
-import { downloadCsv } from '@/lib/helpers/download-csv'
+import { downloadCsv } from '@/lib/helpers/csv-helpers'
 import { icons } from '@/lib/icons'
 
 const transactions = [

@@ -5,6 +5,7 @@ import { DropdownMenu } from '@/components/dropdown-menu'
 import { icons } from '@/lib/icons'
 import { ConfirmModal } from './confirm-modal'
 import { useRouter } from 'next/navigation'
+import { UserAddEditModal } from './add-edit-modal'
 
 
 const styles = `flex items-center rounded-[4px] hover:bg-pLight w-[24px] h-[24px] py-[4px] cursor-pointer`
@@ -32,6 +33,10 @@ export const ThreeDotsButton = ({ user }: ThreeDotsButtonProps) => {
   const toggleConfirmationModal = (text: string) => {
     setConfirmationModalOpen(!confirmationModalOpen)
     setTitle(text)
+  }
+
+  const toggleEditModal = () => {
+    setEditModalOpen(!editModalOpen)
   }
 
 
@@ -85,7 +90,7 @@ export const ThreeDotsButton = ({ user }: ThreeDotsButtonProps) => {
           },
           {
             element: 'Edit',
-            onClick: moveToUserDetails
+            onClick: toggleEditModal
           },
           {
             element: 'Resend Invite',
@@ -110,6 +115,7 @@ export const ThreeDotsButton = ({ user }: ThreeDotsButtonProps) => {
         // TODO: add user name
         userName={`user.name`}
       />
+      <UserAddEditModal isOpen={editModalOpen} onClose={toggleEditModal} user={user} />
     </div>
   )
 }
