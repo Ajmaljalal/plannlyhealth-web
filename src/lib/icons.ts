@@ -10,6 +10,8 @@ import Trash from '../../public/icons/shared/trash.svg'
 import Edit from '../../public/icons/shared/edit.svg'
 import EditFill from '../../public/icons/shared/edit-fill.svg'
 import Download from '../../public/icons/shared/download.svg'
+import Add from '../../public/icons/shared/plus.svg'
+import UploadBlack from '../../public/icons/shared/upload-black.svg'
 
 // left nav
 import MyBenefitsIcon from '../../public/icons/left-nav/balance.svg'
@@ -108,4 +110,6 @@ export const icons = {
     edit: Edit,
     editFill: EditFill,
     download: Download,
+    add: Add,
+    uploadBlack: UploadBlack,
 }

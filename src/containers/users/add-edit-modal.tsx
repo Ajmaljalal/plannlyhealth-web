@@ -23,8 +23,8 @@ interface User {
 interface UserEditModalProps {
   isOpen: boolean
   onClose: () => void
-  user: User
-  type?: 'create' | 'edit'
+  user?: User
+  type?: 'add' | 'edit'
 }
 
 const modalContentStyles = `
@@ -38,18 +38,18 @@ const roles = [
   { value: 'Standard', label: 'Standard' },
 ];
 
-export const UserEditModal = ({ isOpen, onClose, user, type }: UserEditModalProps) => {
+export const UserAddEditModal = ({ isOpen, onClose, user, type }: UserEditModalProps) => {
   const [userData, setUserData] = useState<User>({
-    email: user.email || '',
-    firstName: user.firstName || '',
-    lastName: user.lastName || '',
-    role: user.role || '',
-    phone: user.phone || '',
-    address: user.address || '',
-    department: user.department || '',
-    title: user.title || '',
-    birthDate: user.birthDate || '',
-    workStartDate: user.workStartDate || '',
+    email: user?.email || '',
+    firstName: user?.firstName || '',
+    lastName: user?.lastName || '',
+    role: user?.role || '',
+    phone: user?.phone || '',
+    address: user?.address || '',
+    department: user?.department || '',
+    title: user?.title || '',
+    birthDate: user?.birthDate || '',
+    workStartDate: user?.workStartDate || '',
   })
 
 
@@ -74,16 +74,16 @@ export const UserEditModal = ({ isOpen, onClose, user, type }: UserEditModalProp
   const handleCancel = () => {
     console.log('cancel')
     setUserData({
-      email: user.email || '',
-      firstName: user.firstName || '',
-      lastName: user.lastName || '',
-      role: user.role || '',
-      phone: user.phone || '',
-      address: user.address || '',
-      department: user.department || '',
-      title: user.title || '',
-      birthDate: user.birthDate || '',
-      workStartDate: user.workStartDate || '',
+      email: user?.email || '',
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      role: user?.role || '',
+      phone: user?.phone || '',
+      address: user?.address || '',
+      department: user?.department || '',
+      title: user?.title || '',
+      birthDate: user?.birthDate || '',
+      workStartDate: user?.workStartDate || '',
     })
     onClose()
   }
@@ -96,7 +96,7 @@ export const UserEditModal = ({ isOpen, onClose, user, type }: UserEditModalProp
     !userData.address
 
   const ctaButton = <Button text='Save' className='w-1/2' onClick={handleSave} disabled={isDisabled} />
-  const titleText = type === 'create' ? 'Create User' : 'Edit User'
+  const titleText = type === 'add' ? 'Add User' : 'Edit User'
 
   return (
     <Modal

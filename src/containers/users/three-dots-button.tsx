@@ -5,7 +5,7 @@ import { DropdownMenu } from '@/components/dropdown-menu'
 import { icons } from '@/lib/icons'
 import { ConfirmModal } from './confirm-modal'
 import { useRouter } from 'next/navigation'
-import { UserEditModal } from './add-edit-modal'
+import { UserAddEditModal } from './add-edit-modal'
 
 
 const styles = `flex items-center rounded-[4px] hover:bg-pLight w-[24px] h-[24px] py-[4px] cursor-pointer`
@@ -115,7 +115,7 @@ export const ThreeDotsButton = ({ user }: ThreeDotsButtonProps) => {
         // TODO: add user name
         userName={`user.name`}
       />
-      <UserEditModal isOpen={editModalOpen} onClose={toggleEditModal} user={user} />
+      <UserAddEditModal isOpen={editModalOpen} onClose={toggleEditModal} user={user} />
     </div>
   )
 }

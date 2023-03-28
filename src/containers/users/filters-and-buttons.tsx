@@ -1,9 +1,8 @@
 'use client'
-import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import Dropdown from '@/components/searchable-select'
 import { useState } from 'react'
-// import { data } from './data'
+import { AddUsersButton } from './add-users-button'
 
 const roles = [
   { value: 'all', label: 'All Roles' },
@@ -64,7 +63,7 @@ export const FiltersAndButtons = () => {
         onChange={filterUsersByRole}
         placeholder='Role'
       />
-      <Button text='Add Users' className='w-[180px]' />
+      <AddUsersButton />
     </div>
   )
 }

@@ -30,7 +30,7 @@ export const ConfirmationModal = ({ isOpen, onClose, ctaButton, text, title }: M
     isOpen ?
       <>
         <div className={modalContentStyles}>
-          <Container className="w-[308px] h-[262px] flex flex-col items-stretch gap-5 rounded-[24px]">
+          <Container className="w-[308px] h-fit flex flex-col items-stretch gap-5 rounded-[24px]">
             <h2 className="text-center">{title}</h2>
             <p className="text-center text-pDarkGray caption">{text}</p>
             <div>
