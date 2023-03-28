@@ -14,6 +14,7 @@ interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
 const modalContainerStyles = `
     justify-center 
     pt-[150px]
+    pb-[150px]
     flex 
     overflow-x-hidden 
     overflow-y-auto 

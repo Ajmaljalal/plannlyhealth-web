@@ -45,3 +45,5 @@ export const getFormattedDate = (date: string) => {
   const dateObj = new Date(date)
   return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}`
 }
+
+export const phonePattern = "[0-9]{3}-[0-9]{3}-[0-9]{4}"
