@@ -36,7 +36,7 @@ const renderPaymentMethod = (paymentMethod: any) => {
   return (
     <div className={paymentMethodWrapper}>
       <p className='font-bold'>{maskAccountNumber(paymentMethod.accountNumber)}</p>
-      {!paymentMethod.isPrimary && <Button text='Set As The Primary' outlined className='p-0 border-0 hover:bg-transparent h-auto' />}
+      {!paymentMethod.isPrimary && <Button text='Set As The Primary' outlined className='border-none hover:bg-transparent p-0 pr-1 w-fit' />}
       {paymentMethod.isPrimary && <span className='text-pWhite bg-pDark rounded-[16px] text-[14px] px-3 py-1'>Primary</span>}
     </div>
   )
