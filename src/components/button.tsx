@@ -33,7 +33,7 @@ export const Button = ({ className, text, outlined, icon, ...props }: ButtonProp
       {...props}
     >
       <>
-        {icon && <Image src={icon} alt='upload' className='mr-[12px]' />}
+        {icon && <Image src={icon} alt={text} className='mr-[12px]' />}
         {text}
       </>
     </button>
