@@ -18,7 +18,7 @@ import MyBenefitsIcon from '../../public/icons/left-nav/balance.svg'
 import MarketPlaceIcon from '../../public/icons/left-nav/marketplace.svg'
 import DashboardIcon from '../../public/icons/left-nav/dashboard.svg'
 import OnBoardingIcon from '../../public/icons/left-nav/onboarding.svg'
-// import SettingsIcon from '../../public/icons/left-nav/settings.svg'
+import SettingsIcon from '../../public/icons/left-nav/settings.svg'
 import SurveyIcon from '../../public/icons/left-nav/survey.svg'
 import Bank_AccIcon from '../../public/icons/left-nav/bank_acc.svg'
 import ClaimsIcon from '../../public/icons/left-nav/claims.svg'
@@ -54,62 +54,64 @@ import DonationsGray from '../../public/icons/programs/donations-g.svg'
 
 interface StringMap { [key: string]: string }
 interface ProgramIcons { [key: string]: StringMap }
-export const programIcons: ProgramIcons = {
-    // programs
-    active: {
-        'Health & Wellness': HealthWellnessIcon,
-        'Family Care': FamilyCare,
-        'Food & Groceries': FoodGroceries,
-        'Recognition & Anniversaries': RecogAnniv,
-        'Work From Home': WFH,
-        'Student Loans': StudentLoans,
-        'Learning & Development': LearnDevelop,
-        'Commuter & Transportation': CommuterTransportation,
-        'Give / Donation': Donations,
 
-    },
-    inactive: {
-        'Health & Wellness': HealthWellnessGray,
-        'Family Care': FamilyCareGray,
-        'Food & Groceries': FoodGroceriesGray,
-        'Recognition & Anniversaries': RecogAnnivGray,
-        'Work From Home': WFHGray,
-        'Student Loans': StudentLoansGray,
-        'Learning & Development': LearnDevelopGray,
-        'Commuter & Transportation': CommuterTransportationGray,
-        'Give / Donation': DonationsGray,
-    },
+
+export const programIcons: ProgramIcons = {
+  // programs
+  active: {
+    'Health & Wellness': HealthWellnessIcon,
+    'Family Care': FamilyCare,
+    'Food & Groceries': FoodGroceries,
+    'Recognition & Anniversaries': RecogAnniv,
+    'Work From Home': WFH,
+    'Student Loans': StudentLoans,
+    'Learning & Development': LearnDevelop,
+    'Commuter & Transportation': CommuterTransportation,
+    'Give / Donation': Donations,
+
+  },
+  inactive: {
+    'Health & Wellness': HealthWellnessGray,
+    'Family Care': FamilyCareGray,
+    'Food & Groceries': FoodGroceriesGray,
+    'Recognition & Anniversaries': RecogAnnivGray,
+    'Work From Home': WFHGray,
+    'Student Loans': StudentLoansGray,
+    'Learning & Development': LearnDevelopGray,
+    'Commuter & Transportation': CommuterTransportationGray,
+    'Give / Donation': DonationsGray,
+  },
 }
 
 export const icons = {
-    // left nav
-    myBenefits: MyBenefitsIcon,
-    marketPlace: MarketPlaceIcon,
-    dashboard: DashboardIcon,
-    onBoarding: OnBoardingIcon,
-    // settings: SettingsIcon,
-    survey: SurveyIcon,
-    bankAcc: Bank_AccIcon,
-    claims: ClaimsIcon,
-    payouts: PayoutsIcon,
-    policy: PolicyIcon,
-    programs: ProgramsIcon,
-    subscription: SubscriptionIcon,
-    card: CardIcon,
-    account: AccountIcon,
-    users: UsersIcon,
+  // left nav
+  myBenefits: MyBenefitsIcon,
+  marketPlace: MarketPlaceIcon,
+  dashboard: DashboardIcon,
+  onBoarding: OnBoardingIcon,
+  settings: SettingsIcon,
+  survey: SurveyIcon,
+  bankAcc: Bank_AccIcon,
+  claims: ClaimsIcon,
+  payouts: PayoutsIcon,
+  policy: PolicyIcon,
+  programs: ProgramsIcon,
+  subscription: SubscriptionIcon,
+  card: CardIcon,
+  account: AccountIcon,
+  users: UsersIcon,
 
-    // shared
-    threeDots: ThreeDots,
-    upload: UploadIcon,
-    arrow: ArrowIcon,
-    close: CloseIcon,
-    calendar: Calendar,
-    arrowLeft: ArrowLeft,
-    trash: Trash,
-    edit: Edit,
-    editFill: EditFill,
-    download: Download,
-    add: Add,
-    uploadBlack: UploadBlack,
+  // shared
+  threeDots: ThreeDots,
+  upload: UploadIcon,
+  arrow: ArrowIcon,
+  close: CloseIcon,
+  calendar: Calendar,
+  arrowLeft: ArrowLeft,
+  trash: Trash,
+  edit: Edit,
+  editFill: EditFill,
+  download: Download,
+  add: Add,
+  uploadBlack: UploadBlack,
 }

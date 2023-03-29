@@ -13,7 +13,12 @@ const AdminNav = () => {
       <NavItem text='Payouts' href='/payouts' icon={icons.payouts} />
       <NavItem text='Users' href='/users' icon={icons.users} />
       <NavItem text='Bank Account' href='/bank-account' icon={icons.bankAcc} />
-      {/* <NavItem text='Settings' href='/settings' icon={icons.settings} /> */}
+      <NavItem text='Subscription' href='/subscription' icon={icons.subscription} />
+      <NavItem text='Back Office' href='/back-office' icon={icons.users} />
+      <NavItem text='Companies' href='/companies' icon={icons.onBoarding} />
+      <NavItem text='Card Categories' href='/card-categories' icon={icons.claims} />
+      <NavItem text='Notifications' href='/notifications' icon={icons.survey} />
+      <NavItem text='Settings' href='/settings' icon={icons.settings} />
     </div>
   )
 }
