@@ -116,7 +116,7 @@ export const BankAccountContainer = () => {
                     <h3 className='mb-3'>{account.bankName}</h3>
                     <p>{renderBankAccountNumber(account.accountNumber)}</p>
                   </div>
-                  {account.isPrimary && <p className='text-pWhite bg-pDark rounded-[16px] text-[14px] px-3 py-1 '>Primary</p>}
+                  {account.isPrimary && <p className='text-pWhite bg-pDark rounded-[16px] text-[14px] px-3 py-1'>Primary</p>}
                 </div>
               )
             })}
