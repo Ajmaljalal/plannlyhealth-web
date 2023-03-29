@@ -28,7 +28,7 @@ import SubscriptionIcon from '../../public/icons/left-nav/subscription.svg'
 import CardIcon from '../../public/icons/left-nav/payments.svg'
 import AccountIcon from '../../public/icons/left-nav/account.svg'
 import UsersIcon from '../../public/icons/left-nav/users.svg'
-import SettingsIcon from '../../public/icons/left-nav/settings.svg'
+import Settings from '../../public/icons/left-nav/settings.svg'
 
 // programs
 import HealthWellnessIcon from '../../public/icons/programs/healthWellness.svg'
@@ -89,7 +89,7 @@ export const icons = {
   marketPlace: MarketPlaceIcon,
   dashboard: DashboardIcon,
   onBoarding: OnBoardingIcon,
-  settings: SettingsIcon,
+  settings: Settings,
   survey: SurveyIcon,
   bankAcc: Bank_AccIcon,
   claims: ClaimsIcon,
