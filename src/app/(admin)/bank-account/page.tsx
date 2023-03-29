@@ -1,9 +1,10 @@
+import { BankAccountContainer } from '@/containers/bank-account'
 import React from 'react'
 
 const BankAccount = () => {
-    return (
-        <div>BankAccount</div>
-    )
+  return (
+    <BankAccountContainer />
+  )
 }
 
 export default BankAccount
