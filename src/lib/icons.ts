@@ -28,7 +28,7 @@ import SubscriptionIcon from '../../public/icons/left-nav/subscription.svg'
 import CardIcon from '../../public/icons/left-nav/payments.svg'
 import AccountIcon from '../../public/icons/left-nav/account.svg'
 import UsersIcon from '../../public/icons/left-nav/users.svg'
-import Settings from '../../public/icons/left-nav/settings.svg'
+import Settings from '../../public/icons/left-nav/configs.svg'
 
 // programs
 import HealthWellnessIcon from '../../public/icons/programs/healthWellness.svg'
