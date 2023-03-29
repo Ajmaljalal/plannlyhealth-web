@@ -1,9 +1,10 @@
+import { SettingsContainer } from '@/containers/settings'
 import React from 'react'
 
 const Settings = () => {
-    return (
-        <div>Settings</div>
-    )
+  return (
+    <SettingsContainer />
+  )
 }
 
 export default Settings
