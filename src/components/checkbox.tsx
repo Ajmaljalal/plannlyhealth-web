@@ -1,7 +1,7 @@
-interface RadioButtonProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface CheckBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
-  value: string
-  currentValue?: string
+  value: string | number
+  currentValue?: string | number
   isChecked?: boolean
 }
 
@@ -24,11 +24,18 @@ const labelStyles = `
   pl-[16px]
 `
 
-export const CheckBox = ({ label, name, value, currentValue, onChange, ...props }: RadioButtonProps) => {
+export const CheckBox = ({ label, name, value, currentValue, ...props }: CheckBoxProps) => {
   const isChecked = currentValue === value
-
   return <div className={wrapperStyles}>
-    <input type='checkbox' name={name} id={value} value={value} className={checkboxStyles} checked={isChecked} {...props} onChange={onChange} />
-    {label && <label htmlFor={value} className={labelStyles}>{label}</label>}
+    <input
+      type='checkbox'
+      name={name}
+      id={value.toString()}
+      value={value}
+      className={checkboxStyles}
+      checked={isChecked}
+      {...props}
+    />
+    {label && <label htmlFor={value.toString()} className={labelStyles}>{label}</label>}
   </div>
 }

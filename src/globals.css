@@ -121,6 +121,37 @@
     transform: scale(1.3);
   }
 
+  textarea {
+    background-color: white;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 500;
+    border: 1px solid #ebeaf1;
+    color: #807896;
+    border-radius: 8px;
+    height: 48px;
+    padding: 0 24px;
+    position: relative;
+    outline: none;
+    width: 100%;
+  }
+
+  textarea:focus {
+    border: 1px solid #180D37;
+    color: #180D37;
+  }
+
+  textarea:disabled {
+    border: 1px solid #ebeaf1;
+    color: #ebeaf1;
+    cursor: not-allowed;
+  }
+
+  textarea:disabled::placeholder {
+    color: #b6b6b6;
+
+  }
+
   select {
     background-color: white;
     font-size: 16px;

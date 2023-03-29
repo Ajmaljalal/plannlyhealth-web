@@ -12,6 +12,7 @@ import EditFill from '../../public/icons/shared/edit-fill.svg'
 import Download from '../../public/icons/shared/download.svg'
 import Add from '../../public/icons/shared/plus.svg'
 import UploadBlack from '../../public/icons/shared/upload-black.svg'
+import uploadImage from '../../public/icons/shared/pic.svg'
 
 // left nav
 import MyBenefitsIcon from '../../public/icons/left-nav/balance.svg'
@@ -114,4 +115,5 @@ export const icons = {
   download: Download,
   add: Add,
   uploadBlack: UploadBlack,
+  uploadImage: uploadImage,
 }
