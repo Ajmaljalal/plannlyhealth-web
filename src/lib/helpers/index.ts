@@ -46,6 +46,27 @@ export const getFormattedDate = (date: string) => {
   return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}`
 }
 
+export const formatAmount = (amount: number) => {
+  // separate amount with dot every 3 digits in thousands and add comma for thousands
+  // add two decimal places for cents as well at the end if not present
+  let formattedAmount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  if (!formattedAmount.includes('.')) {
+    formattedAmount = `${formattedAmount}.00`
+  }
+  return formattedAmount
+}
+
+export const formatAmountWithCurrency = (amount: number, currency: string) => {
+  const formattedAmount = formatAmount(amount)
+  return `${currency}${formattedAmount}`
+}
+
+export const maskAccountNumber = (accountNumber: any) => {
+  const asteriskedAccountNumber = accountNumber.replace(/.(?=.{4})/g, '*')
+  const spacedAccountNumber = asteriskedAccountNumber.replace(/(.{4})/g, '$1 ')
+  return spacedAccountNumber
+}
+
 export const phonePattern = "[0-9]{3}-[0-9]{3}-[0-9]{4}"
 
 export const sampleCSVContent = [{

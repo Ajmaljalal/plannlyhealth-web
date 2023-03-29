@@ -11,6 +11,7 @@ import Edit from '../../public/icons/shared/edit.svg'
 import EditFill from '../../public/icons/shared/edit-fill.svg'
 import Download from '../../public/icons/shared/download.svg'
 import Add from '../../public/icons/shared/plus.svg'
+import AddWhite from '../../public/icons/shared/plus-white.svg'
 import UploadBlack from '../../public/icons/shared/upload-black.svg'
 import uploadImage from '../../public/icons/shared/pic.svg'
 
@@ -114,6 +115,7 @@ export const icons = {
   editFill: EditFill,
   download: Download,
   add: Add,
+  addWhite: AddWhite,
   uploadBlack: UploadBlack,
   uploadImage: uploadImage,
 }
