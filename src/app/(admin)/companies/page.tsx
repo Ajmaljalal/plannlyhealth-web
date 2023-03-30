@@ -1,8 +1,9 @@
+import { CompaniesContainer } from '@/containers/companies'
 import React from 'react'
 
 const Companies = () => {
   return (
-    <div>Companies</div>
+    <CompaniesContainer />
   )
 }
 
