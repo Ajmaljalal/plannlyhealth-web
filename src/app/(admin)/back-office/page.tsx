@@ -1,8 +1,8 @@
-import React from 'react'
+import { UsersContainer } from '@/containers/back-office'
 
 const BackOffice = () => {
   return (
-    <div>BackOffice</div>
+    <UsersContainer />
   )
 }
 
