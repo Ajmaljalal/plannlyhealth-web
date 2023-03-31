@@ -18,7 +18,7 @@ const modalContentStyles = `
     overflow-y-auto 
     fixed 
     inset-0 
-    z-50 
+    z-100000 
     outline-none 
     focus:outline-none
     opaque
@@ -29,7 +29,7 @@ export const ConfirmationModal = ({ isOpen, onClose, ctaButton, text, title }: M
   return (
     isOpen ?
       <>
-        <div className={modalContentStyles}>
+        <div className={modalContentStyles} style={{ zIndex: 100000 }}>
           <Container className="w-[308px] h-fit flex flex-col items-stretch gap-5 rounded-[24px]">
             <h2 className="text-center">{title}</h2>
             <p className="text-center text-pDarkGray caption">{text}</p>

@@ -1,8 +1,9 @@
+import { CardCategoriesContainer } from '@/containers/card-categories'
 import React from 'react'
 
 const CardCategories = () => {
   return (
-    <div>CardCategories</div>
+    <CardCategoriesContainer />
   )
 }
 

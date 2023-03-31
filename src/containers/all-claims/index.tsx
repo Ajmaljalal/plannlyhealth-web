@@ -23,6 +23,8 @@ export const AllClaimsContainer = () => {
       const isDeclined = claim.status === 'Declined'
       const textColor = isApproved ? 'text-pGreen' : isRequested ? 'text-pDarkGray' : isDeclined ? 'text-pRed' : 'text-pDark'
       return (
+
+        // TODO: fix the link: it throws invalidDOMNesting warning because td is not allowed inside a
         <Link key={claim.id} href={`/all-claims/${claim.id}`} className={rowStyle}>
           <td>{claim.user}</td>
           <td>{claim.vendor}</td>
