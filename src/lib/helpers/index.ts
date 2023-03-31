@@ -79,3 +79,15 @@ export const sampleCSVContent = [{
   Address: "Scottsdale AZ USA",
   email: "test@test.com",
 }]
+
+export const benefitPrograms = [
+  { value: 'Health & Wellness', label: 'Health & Wellness' },
+  { value: 'Family Care', label: 'Family Care' },
+  { value: 'Food & Groceries', label: 'Food & Groceries' },
+  { value: 'Recognition & Anniversaries', label: 'Recognition & Anniversaries' },
+  { value: 'Give/Donation', label: 'Give/Donation' },
+  { value: 'Student Loans', label: 'Student Loans' },
+  { value: 'Work From Home', label: 'Work From Home' },
+  { value: 'Learning & Development', label: 'Learning & Development' },
+  { value: 'Commuter & Transportation', label: 'Commuter & Transportation' },
+];

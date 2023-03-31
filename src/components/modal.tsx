@@ -30,7 +30,7 @@ export const Modal = ({ isOpen, onClose, ctaButton, children }: ModalProps) => {
   return (
     isOpen ?
       <>
-        <div className={modalContainerStyles}>
+        <div className={modalContainerStyles} style={{ zIndex: 10000 }}>
           <Container className="w-[578px] h-fit">
             <div onClick={onClose} className="absolute top-7 right-5 cursor-pointer w-[24px] h-[24px]">
               <Image

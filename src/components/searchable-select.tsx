@@ -89,7 +89,7 @@ const Dropdown = ({ isSearchable = false, onChange, className, placeholder, opti
   return (
     <div className={`h-[48px] pt-[0.5px] flex-1 ${className}`}>
       <Select
-        value={selectedOption}
+        value={options.find((option: any) => option.value === selectedOption)}
         instanceId={options[0].value}
         onChange={handleChange}
         options={options}
