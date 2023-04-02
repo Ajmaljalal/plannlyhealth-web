@@ -75,9 +75,10 @@ interface DropdownProps extends React.HTMLAttributes<HTMLSelectElement> {
   onChange: (e: any) => void;
   isSearchable?: boolean;
   className?: string;
+  disabled?: boolean;
 }
 
-const Dropdown = ({ isSearchable = false, onChange, className, placeholder, options, value }: DropdownProps) => {
+const Dropdown = ({ isSearchable = false, disabled = false, onChange, className, placeholder, options, value }: DropdownProps) => {
   const [selectedOption, setSelectedOption] = useState(value);
 
   const handleChange = (option: any) => {
@@ -96,6 +97,7 @@ const Dropdown = ({ isSearchable = false, onChange, className, placeholder, opti
         styles={customStyles}
         placeholder={placeholder}
         isSearchable={isSearchable}
+        isDisabled={disabled}
         components={{
           DropdownIndicator: () => {
             return (
