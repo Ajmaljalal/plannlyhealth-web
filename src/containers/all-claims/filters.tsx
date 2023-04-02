@@ -91,7 +91,6 @@ export const Filters = () => {
         onChange={filterClaimsByStatus}
         placeholder='Status'
       />
-      {/* <Input name='date' value='' type='date' className='border border-transparent flex-1' placeholder='Date' />  */}
       <DateRangeSelector onChange={filterClaimsByDate} />
     </div>
   )

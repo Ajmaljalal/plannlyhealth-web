@@ -1,8 +1,9 @@
+import { NotificationsContainer } from '@/containers/notifications'
 import React from 'react'
 
 const Notifications = () => {
   return (
-    <div>Notifications</div>
+    <NotificationsContainer />
   )
 }
 
