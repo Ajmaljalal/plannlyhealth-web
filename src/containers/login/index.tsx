@@ -2,7 +2,7 @@
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { icons } from "@/lib/icons";
-import { signIn, signOut } from "@/lib/services/auth";
+// import { signIn, signOut } from "@/lib/services/auth";
 
 import Image from "next/image";
 
@@ -10,12 +10,12 @@ const LoginContainer = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    await signOut()
+    // await signOut()
     const { email, password } = event.target.elements;
     console.log(email, password)
     try {
-      const user = await signIn(email.value, password.value)
-      console.log(user)
+      // const user = await signIn(email.value, password.value)
+      // console.log(user)
     } catch (error: any) {
       console.log(error)
     }
