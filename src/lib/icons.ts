@@ -14,6 +14,7 @@ import Add from '../../public/icons/shared/plus.svg'
 import AddWhite from '../../public/icons/shared/plus-white.svg'
 import UploadBlack from '../../public/icons/shared/upload-black.svg'
 import uploadImage from '../../public/icons/shared/pic.svg'
+import loginHero from '../../public/logos/login-hero.svg'
 
 // left nav
 import MyBenefitsIcon from '../../public/icons/left-nav/balance.svg'
@@ -118,4 +119,5 @@ export const icons = {
   addWhite: AddWhite,
   uploadBlack: UploadBlack,
   uploadImage: uploadImage,
+  loginHero: loginHero,
 }
