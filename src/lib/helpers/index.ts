@@ -1,3 +1,4 @@
+import CryptoJS from 'crypto-js';
 export const calculateApprovedAndRequestedClaims = (claims: any) => {
   let approved = 0
   let requested = 0
@@ -91,3 +92,31 @@ export const benefitPrograms = [
   { value: 'Learning & Development', label: 'Learning & Development' },
   { value: 'Commuter & Transportation', label: 'Commuter & Transportation' },
 ];
+
+export const setSessionIdToCookie = (sessionId: string) => {
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 30); // set expiration to 30 days from now
+  document.cookie = ''
+  document.cookie = `sessionId=${sessionId}; Secure; SameSite=strict; HttpOnly path=/; Expires=${expirationDate.toUTCString()}`;
+}
+
+export const getSessionIdFromCookie = () => {
+  const sessionIdFromCookie = document.cookie.split(';').find((c: any) => c.trim().startsWith('sessionId='));
+  return sessionIdFromCookie ? sessionIdFromCookie.split('=')[1] : null;
+}
+
+export const removeSessionIdFromCookie = () => {
+  document.cookie = 'sessionId=; Secure; SameSite=strict; HttpOnly path=/ Expires=Thu, 01 Jan 1970 00:00:00 UTC';
+
+}
+
+export const encryptData = (data: string) => {
+  const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), process.env.NEXT_PUBLIC_PLANNLY_ENCRYPT_KEY as string).toString();
+  return encryptedData;
+}
+
+export const decryptData = (data: string) => {
+  if (!data) return null;
+  const decryptedData = CryptoJS.AES.decrypt(data, process.env.NEXT_PUBLIC_PLANNLY_ENCRYPT_KEY as string).toString(CryptoJS.enc.Utf8);
+  return JSON.parse(decryptedData);
+}

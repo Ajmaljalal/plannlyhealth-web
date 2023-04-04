@@ -6,7 +6,8 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   className?: string
   disabled?: boolean
   outlined?: boolean
-  icon?: StaticImageData
+  icon?: StaticImageData,
+  children?: React.ReactNode
 }
 
 const filledStyles = `
@@ -25,7 +26,7 @@ const outlinedStyles = `
     disabled:hover:bg-transparent
 `
 
-export const Button = ({ className, text, outlined, icon, ...props }: ButtonProps) => {
+export const Button = ({ className, children, text, outlined, icon, ...props }: ButtonProps) => {
   const buttonStyles = outlined ? outlinedStyles : filledStyles
   return (
     <button
@@ -33,6 +34,7 @@ export const Button = ({ className, text, outlined, icon, ...props }: ButtonProp
       {...props}
     >
       <>
+        {children}
         {icon && <Image src={icon} alt={text} className='mr-[12px]' />}
         {text}
       </>
