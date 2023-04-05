@@ -1,4 +1,5 @@
 'use client'
+import { icons } from '@/lib/icons'
 import Image, { StaticImageData } from 'next/image'
 import { ChangeEvent, useState } from 'react'
 interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
@@ -84,6 +85,7 @@ export const Input = ({
   }
 
   const labelStyles = focused ? labelOnFocusStyles : labelNoFocusStyles
+  const passwordHidSeeIcon = passwordVisible ? icons.see : icons.hide
   return (
     <div className={`relative ${className}`} >
       {label && <label
@@ -107,7 +109,7 @@ export const Input = ({
         {...props}
       />
       {icon && <Image
-        src={icon}
+        src={type === 'password' ? passwordHidSeeIcon : icon}
         alt='upload'
         width='24'
         height='24'

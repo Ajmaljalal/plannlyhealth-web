@@ -5,9 +5,9 @@ import { usePathname } from 'next/navigation';
 import React from 'react'
 
 interface NavItemProps {
-    text: string;
-    href: string;
-    icon: StaticImageData;
+  text: string;
+  href: string;
+  icon: StaticImageData;
 }
 
 const navItemStyles = `
@@ -29,12 +29,12 @@ const navItemStyles = `
 `
 
 export const NavItem = ({ text, href, icon }: NavItemProps) => {
-    const pathname = usePathname()
-    const isActive = pathname === href
-    return (
-        <Link href={href} className={`${navItemStyles} ${isActive ? 'bg-pPink' : ''}`}>
-            <Image src={icon} alt={`${text} icon`} width='24' height='24' className='mr-[10px]' />
-            {text}
-        </Link>
-    )
+  const pathname = usePathname()
+  const isActive = pathname === href
+  return (
+    <Link href={href} className={`${navItemStyles} ${isActive ? 'bg-pPink' : ''}`}>
+      <Image src={icon} alt={`${text} icon`} width='24' height='24' className='mr-[10px]' />
+      {text}
+    </Link>
+  )
 }

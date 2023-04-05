@@ -15,6 +15,9 @@ import AddWhite from '../../public/icons/shared/plus-white.svg'
 import UploadBlack from '../../public/icons/shared/upload-black.svg'
 import uploadImage from '../../public/icons/shared/pic.svg'
 import loginHero from '../../public/logos/login-hero.svg'
+import logout from '../../public/icons/shared/logout.png'
+import see from '../../public/icons/shared/see.svg'
+import hide from '../../public/icons/shared/hide.svg'
 
 // left nav
 import MyBenefitsIcon from '../../public/icons/left-nav/balance.svg'
@@ -120,4 +123,7 @@ export const icons = {
   uploadBlack: UploadBlack,
   uploadImage: uploadImage,
   loginHero: loginHero,
+  logout: logout,
+  see: see,
+  hide: hide,
 }

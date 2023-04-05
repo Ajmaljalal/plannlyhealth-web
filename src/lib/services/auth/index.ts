@@ -40,3 +40,21 @@ export const signUp = async (email: string, password: string) => {
     return error;
   }
 }
+
+export const forgotPassword = async (email: string) => {
+  try {
+    const result = await axios.post(`${API_URL}/auth/forgot-password`, { email });
+    return result.data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export const resetPassword = async ({ code, password, email }: any) => {
+  try {
+    const result = await axios.post(`${API_URL}/auth/reset-password`, { email, password, code });
+    return result.data;
+  } catch (error) {
+    return error;
+  }
+}
