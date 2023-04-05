@@ -15,7 +15,7 @@ export const HeaderTitle = () => {
   // ex: /all-claims/1234 => All Claims
   // ex: /all-claims => All Claims
 
-  const title = pathname
+  const title = pathname && pathname
     .split('/')
     .filter((path) => path !== '')
     // filter out the section of the path that has a number in it based on regex
