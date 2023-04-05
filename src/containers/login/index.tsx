@@ -42,7 +42,7 @@ const LoginContainer = () => {
             <h4 className="text-center text-pPink">Forgot password?</h4>
           </Link>
           <LoadingButton isLoading={isLoading} text="Log In" className="w-full" />
-          <p className="text-center">Don't have an account yet? <span className="text-pPink font-bold cursor-pointer">Sign Up</span></p>
+          <p className="text-center">Do not have an account yet? <span className="text-pPink font-bold cursor-pointer">Sign Up</span></p>
         </form>
       </div>
     </div>

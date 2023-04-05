@@ -39,7 +39,7 @@ const ForgotPasswordContainer = () => {
       </div>
       <div className="w-full lg:w-1/2 h-full flex flex-col items-center justify-center bg-pWhite gap-6 px-[24px]">
         <h2>Forgot password?</h2>
-        <p>Enter your work email and we'll send you instructions</p>
+        <p>Enter your work email and we will send you instructions</p>
         <form className="w-full lg:w-[400px] flex flex-col gap-7" onSubmit={handleSubmit}>
           <Input label="Work Email" name='email' value='' placeholder="example@company.com" required />
           <LoadingButton isLoading={isLoading} text="Submit" className="w-full" />
