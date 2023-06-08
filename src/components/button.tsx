@@ -11,10 +11,10 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 const filledStyles = `
-    text-pWhite
-    bg-pPink
-    hover:bg-pDarkPink
-    disabled:hover:bg-pPink
+    text-darkgrey
+    bg-lightgrey
+    rounded-[32px]
+    disabled:hover:bg-lightgrey
 `
 const outlinedStyles = `
     text-pPink

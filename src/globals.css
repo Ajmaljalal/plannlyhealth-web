@@ -9,13 +9,21 @@
   }
 
   body {
-    background: #ebeaf1;
+    background: #fff;
     overflow: hidden;
     height: 100%;
     width: 100%;
     box-sizing: border-box;
     letter-spacing: 0.4px;
     color: #180d37
+  }
+
+  .custom-bg {
+    background-image: url('/icons/authentication/female-employee-illustration.svg'), url('/icons/authentication/jargon-icons-illustration.svg');
+    background-position: bottom right, top left;
+    background-size: auto;
+    /* Add more background-position values if needed */
+    background-repeat: no-repeat;
   }
 
   h1 {

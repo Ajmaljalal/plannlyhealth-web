@@ -58,6 +58,12 @@ import DonationsGray from '../../public/icons/programs/donations-g.svg'
 
 
 
+////////////// New Icons //////////////
+import GoogleIcon from '../../public/icons/authentication/google-icon.svg'
+import MicrosoftIcon from '../../public/icons/authentication/microsoft-icon.svg'
+
+
+
 interface StringMap { [key: string]: string }
 interface ProgramIcons { [key: string]: StringMap }
 
@@ -126,4 +132,8 @@ export const icons = {
   logout: logout,
   see: see,
   hide: hide,
+
+  // new icons
+  googleIcon: GoogleIcon,
+  microsoftIcon: MicrosoftIcon,
 }

@@ -1,30 +1,32 @@
 const { fontFamily } = require('tailwindcss/defaultTheme')
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-   mode: 'jit',
+  mode: 'jit',
   content: [
     "./src/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     colors: {
       transparent: "transparent",
-      pDark: '#180D37',
-      pLight: '#f2f4f7',
-      pPink: '#EF3770',
-      pDarkPink: '#D41F57',
-      pWhite: '#FFFFFF',
-      pLightGray: '#b6b6b6',
-      pBackground:'#ebeaf1',
-      pDarkGray: '#807896',
-      pSun: '#FEB840',
-      pPurple: '#C124EB',
-      pRed: '#FE3D51',
-      pBlue: '#5DB2E1',
-      pGreen: '#16C470',
+      primary: '#5F369D',
+      primaryDark: '#290568',
+      grey: '#f2f4f7',
+      lightgrey: '#EDEDF0',
+      darkgrey: '#5D5574',
+      background: '#FFFFFF',
+      dark: '#160523',
+      green: '#42C76F',
+      lightgreen: '#E0F4E7',
+      red: '#F03771',
+      lightred: '#FDE7EE',
+      ligthpink: '#EF3770',
+      pink: '#D41F57',
+      white: '#FFFFFF',
     },
     fontWeight: {
       normal: '400',
       medium: '500',
+      semibold: '600',
       bold: '700',
       extrabold: '900',
     },

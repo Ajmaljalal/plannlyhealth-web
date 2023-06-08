@@ -1,12 +1,12 @@
 'use client'
-import { Input } from "@/components/input";
 import { LoadingButton } from "@/components/loading-button";
 import { icons } from "@/lib/icons";
 import { signIn } from "@/lib/services/auth";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+
+
 
 const LoginContainer = () => {
   const router = useRouter()
@@ -29,21 +29,19 @@ const LoginContainer = () => {
   };
 
   return (
-    <div className="flex w-full h-full">
-      <div className="w-1/2 h-full hidden lg:block">
-        <Image src={icons.loginHero} alt='plannly logo' className='w-full h-full object-cover' priority />
-      </div>
-      <div className="w-full lg:w-1/2 h-full flex flex-col items-center justify-center bg-pWhite gap-12 px-[24px]">
-        <h2>Log In</h2>
-        <form className="w-full lg:w-[400px] flex flex-col gap-7" onSubmit={handleSubmit}>
-          <Input label="Work Email" name='email' value='' placeholder="example@company.com" required />
-          <Input label="Password" name='password' value='' placeholder="Password" type="password" required icon={icons.see} />
-          <Link href='/forgot-password'>
-            <h4 className="text-center text-pPink">Forgot password?</h4>
-          </Link>
-          <LoadingButton isLoading={isLoading} text="Log In" className="w-full" />
-          <p className="text-center">Do not have an account yet? <span className="text-pPink font-bold cursor-pointer">Sign Up</span></p>
-        </form>
+    <div className="
+      flex 
+      w-full 
+      h-full 
+      justify-center 
+      custom-bg
+      ">
+      <div className="w-[360px] h-full flex flex-col items-center justify-center px-[24px]">
+        <img src="/logos/logo-white.svg" alt="Plannly" className="mb-[112px] mr-[27px]" />
+        <h2 className="text-[32px] text-simibold mb-[12px]">Welcome to Plannly!</h2>
+        <p className="text-darkgrey mb-[32px]">Login to continue</p>
+        <LoadingButton isLoading={isLoading} text="Continue with Microsoft" className="w-full mb-[16px]" icon={icons.microsoftIcon} />
+        <LoadingButton isLoading={isLoading} text="Continue with Google" className="w-full" icon={icons.googleIcon} />
       </div>
     </div>
   )
