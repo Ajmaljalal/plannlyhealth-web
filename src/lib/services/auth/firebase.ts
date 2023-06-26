@@ -8,7 +8,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, } from "firebase/auth";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCp104F9JhgzriRjXuCTksPVpOXc-URwJg",
-  authDomain: "plannly-6c19a.firebaseapp.com",
+  authDomain: "app.plannlyhealth.com",
   projectId: "plannly-6c19a",
   storageBucket: "plannly-6c19a.appspot.com",
   messagingSenderId: "240416965034",
