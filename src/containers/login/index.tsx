@@ -1,7 +1,6 @@
 'use client'
 import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
-import { signIn } from "@/lib/services/auth";
 import { signInWithGoogle } from "@/lib/services/auth/firebase";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
