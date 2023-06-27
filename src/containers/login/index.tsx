@@ -20,7 +20,7 @@ const LoginContainer = () => {
     if (session?.data?.user?.name) {
       return (
         <div className="w-[360px] h-full flex flex-col items-center justify-center px-[24px]">
-          <img src="/logos/logo-white.svg" alt="Plannly" className="mb-[90px] mr-[27px]" />
+          <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
           <h2 className="text-[32px] text-simibold mb-[12px]">User Does Not Exist!</h2>
           <p className="text-darkgrey mb-[32px]">Please contact support for help!</p>
         </div>
@@ -33,7 +33,7 @@ const LoginContainer = () => {
     if (!session?.data?.user?.name) {
       return (
         <div className="w-[440px] h-full flex flex-col items-center justify-center px-[8px]">
-          <img src="/logos/logo-white.svg" alt="Plannly" className="mb-[112px] mr-[27px]" />
+          <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
           <h2 className="text-[32px] text-simibold mb-[12px]">Welcome to Plannly Health!</h2>
           <p className="text-darkgrey mb-[32px]">Login to continue</p>
           <Button text="Continue with Google" className="w-full mb-[16px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
