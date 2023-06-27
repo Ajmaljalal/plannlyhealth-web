@@ -32,7 +32,7 @@ const LoginContainer = () => {
   const renderForm = () => {
     if (!session?.data?.user?.name) {
       return (
-        <div className="w-[360px] h-full flex flex-col items-center justify-center px-[24px]">
+        <div className="w-[440px] h-full flex flex-col items-center justify-center px-[8px]">
           <img src="/logos/logo-white.svg" alt="Plannly" className="mb-[112px] mr-[27px]" />
           <h2 className="text-[32px] text-simibold mb-[12px]">Welcome to Plannly Health!</h2>
           <p className="text-darkgrey mb-[32px]">Login to continue</p>
