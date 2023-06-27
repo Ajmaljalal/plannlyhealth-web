@@ -1,34 +1,23 @@
 'use client'
 import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
-import { signInWithGoogle } from "@/lib/services/auth/firebase";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useSession, signIn } from "next-auth/react"
 
 
 
 
 const LoginContainer = () => {
-  const router = useRouter()
-  const [signInDone, setSignInDone] = useState(false)
-  const [signInError, setSignInError] = useState('')
+  const session = useSession();
 
   const handleGoogleSignIn = async (event: any) => {
     try {
-      const user = await signInWithGoogle()
-      if (user) {
-        console.log(user)
-        setSignInDone(true)
-        setSignInError(`User with email ${user?.user?.email} does not exists`)
-      }
+      await signIn('google')
     } catch (error: any) {
-      console.log(error)
-      setSignInDone(true)
     }
   };
 
   const renderSignInError = () => {
-    if (signInError && signInDone) {
+    if (session?.data?.user?.name) {
       return (
         <div className="w-[360px] h-full flex flex-col items-center justify-center px-[24px]">
           <img src="/logos/logo-white.svg" alt="Plannly" className="mb-[90px] mr-[27px]" />
@@ -41,7 +30,7 @@ const LoginContainer = () => {
 
 
   const renderForm = () => {
-    if (!signInDone) {
+    if (!session?.data?.user?.name) {
       return (
         <div className="w-[360px] h-full flex flex-col items-center justify-center px-[24px]">
           <img src="/logos/logo-white.svg" alt="Plannly" className="mb-[112px] mr-[27px]" />

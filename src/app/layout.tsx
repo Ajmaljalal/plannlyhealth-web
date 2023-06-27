@@ -1,5 +1,7 @@
 import '../globals.css'
 import { Lato } from '@next/font/google';
+import NextAuthSessionProvider from './providers/sessionProvider';
+import { signOut } from "next-auth/react"
 
 const lato = Lato({
   weight: ["400", "700", "900"],
@@ -11,10 +13,13 @@ export const metadata = {
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
+
   return (
     <html lang="en">
       <body className={`${lato.className} text-pDark`}>
-        {children}
+        <NextAuthSessionProvider>
+          {children}
+        </NextAuthSessionProvider>
       </body>
     </html >
   )

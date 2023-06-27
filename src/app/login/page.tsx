@@ -6,7 +6,6 @@ import React from 'react'
 
 const Login = () => {
 
-  const firebaseAuth = auth
   return (
     <LoginContainer />
   )
