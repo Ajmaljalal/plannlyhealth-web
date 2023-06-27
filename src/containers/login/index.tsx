@@ -34,10 +34,10 @@ const LoginContainer = () => {
       return (
         <div className="w-[360px] h-full flex flex-col items-center justify-center px-[24px]">
           <img src="/logos/logo-white.svg" alt="Plannly" className="mb-[112px] mr-[27px]" />
-          <h2 className="text-[32px] text-simibold mb-[12px]">Welcome to Plannly!</h2>
+          <h2 className="text-[32px] text-simibold mb-[12px]">Welcome to Plannly Health!</h2>
           <p className="text-darkgrey mb-[32px]">Login to continue</p>
-          <Button text="Continue with Google" className="w-full" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
-          <Button text="Continue with Microsoft" className="w-full mb-[16px]" icon={icons.microsoftIcon} onClick={() => console.log('clicked')} />
+          <Button text="Continue with Google" className="w-full mb-[16px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
+          <Button text="Continue with Microsoft" className="w-full" icon={icons.microsoftIcon} onClick={() => console.log('clicked')} />
         </div>
       )
     }
