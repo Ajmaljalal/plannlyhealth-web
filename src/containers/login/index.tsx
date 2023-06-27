@@ -37,7 +37,7 @@ const LoginContainer = () => {
           <h2 className="text-[32px] text-simibold mb-[12px]">Welcome to Plannly Health!</h2>
           <p className="text-darkgrey mb-[32px]">Login to continue</p>
           <Button text="Continue with Google" className="w-full mb-[16px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
-          <Button text="Continue with Microsoft" className="w-full" icon={icons.microsoftIcon} onClick={() => console.log('clicked')} />
+          {/* <Button text="Continue with Microsoft" className="w-full" icon={icons.microsoftIcon} onClick={() => console.log('clicked')} /> */}
         </div>
       )
     }
