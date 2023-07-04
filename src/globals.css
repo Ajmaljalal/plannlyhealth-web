@@ -21,6 +21,7 @@
   .custom-bg {
     background-image: url('/icons/authentication/female-employee-illustration.svg'), url('/icons/authentication/jargon-icons-illustration.svg');
     background-position: bottom right, top left;
+    background-size: contain;
     background-size: auto;
     /* Add more background-position values if needed */
     background-repeat: no-repeat;

@@ -1,32 +1,49 @@
 'use client'
-import { LoadingButton } from "@/components/loading-button";
+import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
-import { signIn } from "@/lib/services/auth";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useSession, signIn } from "next-auth/react"
 
 
 
 
 const LoginContainer = () => {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
+  const session = useSession();
 
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    setIsLoading(true)
-    const { email, password } = event.target.elements;
+  const handleGoogleSignIn = async (event: any) => {
     try {
-      const user = await signIn(email.value, password.value)
-      if (user && user.id) {
-        router.push('/dashboard')
-        setIsLoading(false)
-      }
+      await signIn('google')
     } catch (error: any) {
-      console.log(error)
-      setIsLoading(false)
     }
   };
+
+  const renderSignInError = () => {
+    if (session?.data?.user?.name) {
+      return (
+        <div className="w-[360px] h-full flex flex-col items-center px-[24px] text-center">
+          <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
+          <h2 className="text-[32px] text-simibold mb-[12px]">User Does Not Exist!</h2>
+          <p className="text-darkgrey mb-[32px]">Please contact support for help!</p>
+        </div>
+      )
+    }
+  }
+
+
+  const renderForm = () => {
+    if (!session?.data?.user?.name) {
+      return (
+        <div className="w-[440px] h-full flex flex-col items-center px-[8px] text-center">
+          <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
+          <h2 className="text-[32px] text-simibold mb-[12px] text-center">Welcome to Plannly Health!</h2>
+          <p className="text-darkgrey mb-[32px]">Login to continue</p>
+          <Button text="Continue with Google" className="w-full mb-[16px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
+          {/* <Button text="Continue with Microsoft" className="w-full" icon={icons.microsoftIcon} onClick={() => console.log('clicked')} /> */}
+        </div>
+      )
+    }
+  }
+
+
 
   return (
     <div className="
@@ -34,15 +51,10 @@ const LoginContainer = () => {
       w-full 
       h-full 
       justify-center 
-      custom-bg
+      xl:custom-bg
       ">
-      <div className="w-[360px] h-full flex flex-col items-center justify-center px-[24px]">
-        <img src="/logos/logo-white.svg" alt="Plannly" className="mb-[112px] mr-[27px]" />
-        <h2 className="text-[32px] text-simibold mb-[12px]">Welcome to Plannly!</h2>
-        <p className="text-darkgrey mb-[32px]">Login to continue</p>
-        <LoadingButton isLoading={isLoading} text="Continue with Microsoft" className="w-full mb-[16px]" icon={icons.microsoftIcon} />
-        <LoadingButton isLoading={isLoading} text="Continue with Google" className="w-full" icon={icons.googleIcon} />
-      </div>
+      {renderSignInError()}
+      {renderForm()}
     </div>
   )
 }

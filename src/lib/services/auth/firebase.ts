@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -8,7 +8,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCp104F9JhgzriRjXuCTksPVpOXc-URwJg",
-  authDomain: "plannly-6c19a.firebaseapp.com",
+  authDomain: "app.plannlyhealth.com",
   projectId: "plannly-6c19a",
   storageBucket: "plannly-6c19a.appspot.com",
   messagingSenderId: "240416965034",
@@ -17,10 +17,17 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 
 
 export const auth = getAuth(app);
 
-export default function () { }
+export const signInWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+  return await signInWithPopup(auth, provider);
+}
+
+export default app;
+
 
