@@ -9,21 +9,13 @@
   }
 
   body {
-    background: #fff;
+    background: #FAFAFC;
     overflow: hidden;
     height: 100%;
     width: 100%;
     box-sizing: border-box;
     letter-spacing: 0.4px;
-    color: #180d37
-  }
-
-  .custom-bg {
-    background-image: url('/icons/authentication/female-employee-illustration.svg'), url('/icons/authentication/jargon-icons-illustration.svg');
-    background-position: bottom right, top left;
-    background-size: contain;
-    background-size: auto;
-    background-repeat: no-repeat;
+    color: #160523
   }
 
   h1 {
@@ -95,6 +87,14 @@
     font-size: 12px;
     line-height: 14px;
     font-weight: 500;
+  }
+
+  .custom-bg {
+    background-image: url('/icons/authentication/female-employee-illustration.svg'), url('/icons/authentication/jargon-icons-illustration.svg');
+    background-position: bottom right, top left;
+    background-size: contain;
+    background-size: auto;
+    background-repeat: no-repeat;
   }
 
   input {
