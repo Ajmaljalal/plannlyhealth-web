@@ -23,56 +23,72 @@
     background-position: bottom right, top left;
     background-size: contain;
     background-size: auto;
-    /* Add more background-position values if needed */
     background-repeat: no-repeat;
   }
 
   h1 {
-    font-size: 38px;
-    line-height: 46px;
-    font-weight: 700;
+    font-size: 32px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
   }
 
   h2 {
-    font-size: 24px;
-    line-height: 1.2;
-    font-weight: 700;
+    font-size: 28px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
   }
 
   h3 {
-    font-size: 18px;
-    line-height: 1;
+    font-size: 24px;
+    font-family: Lato;
+    font-style: normal;
     font-weight: 700;
+    line-height: 38px;
   }
 
   h4 {
+    font-size: 20px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+  }
+
+  .text-big {
     font-size: 16px;
-    line-height: 1;
-    font-weight: 700;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
   }
 
-  h5 {
+  .text-medium {
     font-size: 14px;
-    line-height: 1;
-    font-weight: 700;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
 
-  h6 {
-    font-size: 12px;
-    line-height: 14px;
-    font-weight: 700;
+  .text-small {
+    font-size: 13px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
   }
+
 
   p {
-    font-size: 16px;
-    line-height: 1.5;
-    font-weight: 400;
-  }
-
-  .caption {
     font-size: 14px;
-    line-height: 20px;
-    font-weight: 500;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
   }
 
   .small-caption {
