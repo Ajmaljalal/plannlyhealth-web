@@ -1,6 +1,6 @@
 import '../globals.css'
 import { Lato } from '@next/font/google';
-import NextAuthSessionProvider from './providers/sessionProvider';
+import NextAuthSessionProvider from '../lib/providers/sessionProvider';
 
 const lato = Lato({
   weight: ["400", "700", "900"],

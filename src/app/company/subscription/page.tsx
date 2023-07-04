@@ -1,4 +1,4 @@
-import { SubscriptionContainer } from '@/containers/subscription'
+import { SubscriptionContainer } from '@/containers/company/subscription'
 import React from 'react'
 
 const Subscription = () => {

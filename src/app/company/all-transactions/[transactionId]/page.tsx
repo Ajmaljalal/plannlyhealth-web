@@ -1,4 +1,4 @@
-import { TransactionDetailsContainer } from "@/containers/all-transactions/details"
+import { TransactionDetailsContainer } from "@/containers/company/all-transactions/details"
 
 
 const ClaimDetails = () => {

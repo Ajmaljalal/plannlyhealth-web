@@ -1,4 +1,4 @@
-import { SettingsContainer } from '@/containers/settings'
+import { SettingsContainer } from '@/containers/company/settings'
 import React from 'react'
 
 const Settings = () => {

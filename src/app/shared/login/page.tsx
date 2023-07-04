@@ -1,5 +1,5 @@
 'use client'
-import LoginContainer from '@/containers/login'
+import LoginContainer from '@/containers/shared/login'
 import auth from '@/lib/services/auth/firebase'
 
 import React from 'react'

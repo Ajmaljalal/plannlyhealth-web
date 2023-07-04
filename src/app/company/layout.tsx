@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import logo from '../../../public/logos/logo.svg'
-import AdminNav from '@/containers/left-nav/admin';
-import { Header } from '@/containers/header';
+import AdminNav from '@/containers/shared/left-nav/admin';
+import { Header } from '@/containers/shared/header';
 import { SignOut } from '@/components/signout';
 import { Divider } from '@/components/divider';
 

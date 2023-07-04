@@ -6,12 +6,11 @@ import { icons } from "@/lib/icons";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 export default function Home() {
-  return redirect("/login");
-  // return (
-  //   <div className="flex justify-center align-center">
-  //     <Container className="w-full">
-  //       <Link href="/dashboard">Go to dashboard</Link>
-  //     </Container>
-  //   </div>
-  // )
+  return (
+    <div className="flex justify-center align-center">
+      <Container className="w-full">
+        <Link href="/dashboard">Go to dashboard</Link>
+      </Container>
+    </div>
+  )
 }

@@ -1,4 +1,4 @@
-import ForgotPasswordContainer from '@/containers/forgot-password'
+import ForgotPasswordContainer from '@/containers/shared/forgot-password'
 import React from 'react'
 
 const ForgotPassword = () => {

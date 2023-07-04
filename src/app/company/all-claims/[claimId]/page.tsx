@@ -1,4 +1,4 @@
-import { ClaimDetailsContainer } from '@/containers/all-claims/details'
+import { ClaimDetailsContainer } from '@/containers/company/all-claims/details'
 import { redirect } from 'next/navigation'
 
 const ClaimDetails = () => {

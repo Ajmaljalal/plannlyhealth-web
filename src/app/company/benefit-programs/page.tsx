@@ -1,4 +1,4 @@
-import BenefitProgramsContainer from '@/containers/benefit-programs'
+import BenefitProgramsContainer from '@/containers/company/benefit-programs'
 
 const BenefitPrograms = () => {
   return (

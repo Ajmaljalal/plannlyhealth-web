@@ -1,4 +1,4 @@
-import { CompaniesContainer } from '@/containers/companies'
+import { CompaniesContainer } from '@/containers/broker/companies'
 import React from 'react'
 
 const Companies = () => {

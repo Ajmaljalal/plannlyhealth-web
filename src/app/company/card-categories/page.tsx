@@ -1,4 +1,4 @@
-import { CardCategoriesContainer } from '@/containers/card-categories'
+import { CardCategoriesContainer } from '@/containers/company/card-categories'
 import React from 'react'
 
 const CardCategories = () => {

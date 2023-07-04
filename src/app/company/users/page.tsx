@@ -1,4 +1,4 @@
-import { UsersContainer } from '@/containers/users'
+import { UsersContainer } from '@/containers/company/users'
 
 const Users = () => {
   return (
