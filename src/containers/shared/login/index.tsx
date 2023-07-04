@@ -34,10 +34,10 @@ const LoginContainer = () => {
       return (
         <div className="w-[440px] h-full flex flex-col items-center px-[8px] text-center">
           <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
-          <h2 className="text-[32px] text-simibold mb-[12px] text-center">Welcome to Plannly Health!</h2>
-          <p className="text-darkgrey mb-[32px]">Login to continue</p>
-          <Button text="Continue with Google" className="w-full mb-[16px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
-          {/* <Button text="Continue with Microsoft" className="w-full" icon={icons.microsoftIcon} onClick={() => console.log('clicked')} /> */}
+          <h1 className="mb-[12px] text-center">Welcome Back!</h1>
+          <p className="text-darkgrey mb-[32px]">Login to Plannly Health to continue</p>
+          <Button text="Continue with Google" className="mb-[16px] w-[300px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
+          {/* <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={() => console.log('clicked')} /> */}
         </div>
       )
     }
@@ -52,6 +52,7 @@ const LoginContainer = () => {
       h-full 
       justify-center 
       xl:custom-bg
+      bg-basic_white
       ">
       {renderSignInError()}
       {renderForm()}

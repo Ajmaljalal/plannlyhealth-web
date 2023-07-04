@@ -5,37 +5,49 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   text: string
   className?: string
   disabled?: boolean
-  outlined?: boolean
+  isPrimary?: boolean
+  isSmallBtn?: boolean
   icon?: StaticImageData,
-  children?: React.ReactNode
 }
 
-const filledStyles = `
-    text-darkgrey
-    bg-lightgrey
+const genralStyles = `
+    flex
+    items-center
+    justify-center
+    height-[40px]
     rounded-[32px]
-    disabled:hover:bg-lightgrey
 `
-const outlinedStyles = `
-    text-pPink
-    bg-transparent
-    border-2
-    border-pPink
-    hover:bg-pPink
-    hover:bg-opacity-20
-    disabled:hover:bg-transparent
+const bigBtn = `
+    px-[24px]
+    py-[10px]
+`
+const smallBtn = `
+    px-[16px]
+    py-[8px]
 `
 
-export const Button = ({ className, children, text, outlined, icon, ...props }: ButtonProps) => {
-  const buttonStyles = outlined ? outlinedStyles : filledStyles
+const primary = `
+    text-basic_white
+    bg-brand_voilet
+    disabled:hover:bg-lightgrey
+    disabled:opacity-25
+`
+const secondary = `
+    text-basic_grey_1
+    bg-basic_grey_4
+    disabled:hover:bg-lightgrey
+`
+
+export const Button = ({ className, text, isPrimary, isSmallBtn, icon, ...props }: ButtonProps) => {
+  const buttonStyles = isPrimary ? `${genralStyles} ${primary}` : `${genralStyles} ${secondary}`
+  const buttonSize = isSmallBtn ? `${smallBtn}` : `${bigBtn}`
   return (
     <button
-      className={`${buttonStyles} ${className}`}
+      className={`${buttonStyles} ${buttonSize} ${className}`}
       {...props}
     >
       <>
-        {children}
-        {icon && <Image src={icon} alt={text} className='mr-[12px]' />}
+        {icon && <Image src={icon} alt={text} className='mr-[10px]' />}
         {text}
       </>
     </button>

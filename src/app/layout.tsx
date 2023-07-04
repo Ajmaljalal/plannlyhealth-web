@@ -14,7 +14,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <html lang="en">
-      <body className={`${lato.className} text-pDark`}>
+      <body className={`${lato.className} text-basic_black`}>
         <NextAuthSessionProvider>
           {children}
         </NextAuthSessionProvider>

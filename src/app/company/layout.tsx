@@ -4,7 +4,6 @@ import AdminNav from '@/containers/shared/left-nav/admin';
 import { Header } from '@/containers/shared/header';
 import { SignOut } from '@/components/signout';
 import { Divider } from '@/components/divider';
-import { headers } from 'next/headers';
 
 export const metadata = {
   title: 'Plannly | wellbeing simplified',
@@ -12,38 +11,27 @@ export const metadata = {
 }
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-  const headersList = headers();
-  const domain = headersList.get('referer') || "";
-  if (domain.toString().includes('onboarding')) {
-    return (
-      <div className='w-full h-full px-[50px] py-[30px] flex overflow-hidden'>
-        <div className='overflow-auto w-[calc(100%)]'>
+  return (
+    <div className='w-full h-full flex overflow-hidden'>
+      <div className='hidden lg:flex flex-col min-w-[240px] h-screen bg-pDark px-[32px] p-[24px]'>
+        <Image src={logo} alt='plannly logo' />
+        <div className='w-full mt-[16px]'>
+          <p className='text-pWhite mb-[16px] font-bold'>Admin</p>
+          <AdminNav />
+        </div>
+        <Divider />
+        <SignOut />
+      </div>
+      <div className='overflow-auto w-[calc(100%)]'>
+        {/* <div className='overflow-auto' style={{ minWidth: 'calc(100% - 240px)' }}> */}
+        <Header />
+        <div className='lg:p-[32px]'>
           {children}
         </div>
       </div>
-    )
-  } else {
-    return (
-      <div className='w-full h-full flex overflow-hidden'>
-        <div className='hidden lg:flex flex-col min-w-[240px] h-screen bg-pDark px-[32px] p-[24px]'>
-          <Image src={logo} alt='plannly logo' />
-          <div className='w-full mt-[16px]'>
-            <p className='text-pWhite mb-[16px] font-bold'>Admin</p>
-            <AdminNav />
-          </div>
-          <Divider />
-          <SignOut />
-        </div>
-        <div className='overflow-auto w-[calc(100%)]'>
-          {/* <div className='overflow-auto' style={{ minWidth: 'calc(100% - 240px)' }}> */}
-          <Header />
-          <div className='lg:p-[32px]'>
-            {children}
-          </div>
-        </div>
-      </div>
-    )
-  }
+    </div>
+  )
+
 }
 
 export default RootLayout
