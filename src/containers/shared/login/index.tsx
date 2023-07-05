@@ -21,8 +21,8 @@ const LoginContainer = () => {
       return (
         <div className="w-[360px] h-full flex flex-col items-center px-[24px] text-center">
           <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
-          <h2 className="text-[32px] text-simibold mb-[12px]">User Does Not Exist!</h2>
-          <p className="text-darkgrey mb-[32px]">Please contact support for help!</p>
+          <h1 className="text-[32px] text-simibold mb-[12px]">User Does Not Exist!</h1>
+          <p className="text-basic_grey_1 mb-[32px]">Please contact support for help!</p>
         </div>
       )
     }
@@ -35,7 +35,7 @@ const LoginContainer = () => {
         <div className="w-[440px] h-full flex flex-col items-center px-[8px] text-center">
           <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
           <h1 className="mb-[12px] text-center">Welcome Back!</h1>
-          <p className="text-darkgrey mb-[32px]">Login to Plannly Health to continue</p>
+          <p className="text-basic_grey_1 mb-[32px]">Login to Plannly Health to continue</p>
           <Button text="Continue with Google" className="mb-[16px] w-[300px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
           {/* <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={() => console.log('clicked')} /> */}
         </div>
