@@ -1,6 +1,7 @@
 'use client'
 import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
+import { signInWithMicrosoft } from "@/lib/services/auth";
 import { useSession, signIn } from "next-auth/react"
 
 
@@ -13,6 +14,15 @@ const LoginContainer = () => {
     try {
       await signIn('google')
     } catch (error: any) {
+    }
+  };
+
+  const handleMicrosoftSignIn = async (event: any) => {
+    try {
+      const result = await signIn('azure-ad')
+      console.log('result', result)
+    } catch (error: any) {
+      console.log('error', error)
     }
   };
 
@@ -37,7 +47,7 @@ const LoginContainer = () => {
           <h1 className="mb-[12px] text-center">Welcome Back!</h1>
           <p className="text-basic_grey_1 mb-[32px]">Login to Plannly Health to continue</p>
           <Button text="Continue with Google" className="mb-[16px] w-[300px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
-          {/* <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={() => console.log('clicked')} /> */}
+          <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={handleMicrosoftSignIn} />
         </div>
       )
     }

@@ -1,5 +1,9 @@
 import { decryptData, getSessionIdFromCookie, removeSessionIdFromCookie, setSessionIdToCookie } from "@/lib/helpers";
+import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import axios from "axios";
+import * as Msal from 'msal';
+
+import AWS from 'aws-sdk';
 
 const API_URL = `${process.env.NEXT_PUBLIC_PLANNLY_API_DEV}`;
 
@@ -57,4 +61,58 @@ export const resetPassword = async ({ code, password, email }: any) => {
   } catch (error) {
     return error;
   }
+}
+
+
+
+
+// MSAL authentication part
+
+export const signInWithMicrosoft = async () => {
+  const msalConfig: any = {
+    auth: {
+      clientId: "85f79225-11a1-4c57-81a4-af3039164978",
+      authority: "https://login.microsoftonline.com/common",
+      redirectUri: "http://localhost:3000",
+    },
+    cache: {
+      cacheLocation: "sessionStorage",
+      storeAuthStateInCookie: false,
+    }
+  };
+
+  const myMSALObj = new Msal.UserAgentApplication(msalConfig);
+
+  const loginRequest = {
+    scopes: ["openid", "profile", "User.Read"],
+  };
+
+  myMSALObj.loginPopup(loginRequest)
+    .then((loginResponse) => {
+      //Login Success callback code here
+      const idToken = loginResponse.idToken.rawIdToken;
+
+      // AWS Cognito federated sign in
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+
+        IdentityPoolId: 'us-west-2:f74108fa-e811-4490-baac-6a031d933cde', // your identity pool id here
+        Logins: {
+          'login.microsoftonline.com': idToken
+        }
+      });
+
+      //@ts-ignore
+      AWS.config.credentials.get(function (err: any) {
+        if (err) {
+          console.log('Error:', err);
+          return;
+        }
+
+        // AWS resources access here.
+        //@ts-ignore
+        console.log('AWS Access Key:', AWS.config.credentials.accessKeyId);
+      });
+    }).catch(function (error) {
+      console.log(error);
+    });
 }
