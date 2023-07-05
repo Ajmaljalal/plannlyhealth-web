@@ -1,7 +1,7 @@
 'use client';
 import { useState } from "react";
 
-const stepItemGeneralStyles = "flex items-center justify-center px-[16px] py-[8px] text-big rounded-[32px] cursor-pointer";
+const stepItemGeneralStyles = "flex items-center justify-center px-[16px] h-[40px] py-[8px] text-big rounded-[32px] cursor-pointer";
 const stepItemCurrentStyles = "text-basic_white bg-brand_dark_blue";
 const stepItemOtherStyles = "text-basic_grey_1 bg-basic_grey_4";
 
