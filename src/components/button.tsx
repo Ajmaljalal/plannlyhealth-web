@@ -5,6 +5,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   text: string
   className?: string
   disabled?: boolean
+  outlined?: boolean
   isPrimary?: boolean
   isSmallBtn?: boolean
   icon?: StaticImageData,
