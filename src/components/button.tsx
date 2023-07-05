@@ -17,6 +17,9 @@ const genralStyles = `
     justify-center
     height-[40px]
     rounded-[32px]
+    text-small
+    font-bold
+    tracking-wider
 `
 const bigBtn = `
     px-[24px]
