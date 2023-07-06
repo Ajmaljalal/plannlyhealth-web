@@ -49,7 +49,7 @@ export const ActionButtons = () => {
       <Button
         text='Export List as CSV'
         className='w-[260px] border-none hover:bg-transparent p-0 pr-1 w-fit'
-        icon={icons.download}
+        icon={icons.add}
         outlined
         onClick={() => downloadCsv(claims, 'claims')}
       />

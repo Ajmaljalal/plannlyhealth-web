@@ -34,7 +34,7 @@ export const Modal = ({ isOpen, onClose, ctaButton, children }: ModalProps) => {
           <Container className="w-[578px] h-fit">
             <div onClick={onClose} className="absolute top-7 right-5 cursor-pointer w-[24px] h-[24px]">
               <Image
-                src={icons.close}
+                src={icons.add}
                 width={24}
                 height={24}
                 alt='close modal'

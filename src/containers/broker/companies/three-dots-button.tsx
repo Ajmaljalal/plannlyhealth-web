@@ -44,7 +44,7 @@ export const ThreeDotsButton = ({ company }: ThreeDotsButtonProps) => {
 
   return (
     <div className={styles}>
-      <Image src={icons.threeDots} alt='three dots menu' onClick={() => toggleDropdown(isOpen ? false : true)} />
+      <Image src={icons.add} alt='three dots menu' onClick={() => toggleDropdown(isOpen ? false : true)} />
       <DropdownMenu
         isOpen={isOpen}
         onClose={toggleDropdown}

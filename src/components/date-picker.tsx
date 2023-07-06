@@ -33,7 +33,7 @@ const DateRangeSelector = ({ onChange }: DateSelectorProps) => {
           placeholderText="Filter by date"
           className="w-full px-4 py-2 rounded-lg pr-12 outline-none focus:outline-none"
         />
-        <Image className="absolute w-6 h-6 text-gray-400 top-1/2 right-3 transform -translate-y-1/2" src={icons.calendar} alt='date picker' />
+        <Image className="absolute w-6 h-6 text-gray-400 top-1/2 right-3 transform -translate-y-1/2" src={icons.add} alt='date picker' />
       </div>
     </div>
   );
