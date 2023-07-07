@@ -186,9 +186,12 @@ const BenefitsMap = () => {
   return (
     <div className="flex flex-col justify-between items-end w-full h-full relative overflow-hidden">
       {benefits.length ? renderBenefits() : renderNullState()}
-      <div className="absolute bottom-0 bg-basic_grey_5 w-full h-[100px] flex justify-end">
-        <Button className="w-[200px] max-h-[40px] text-basic_grey_1" text="Continue" isPrimary onClick={() => console.log('conitune')} />
-      </div>
+      {
+        benefits.length ? <div className="absolute bottom-0 bg-basic_grey_5 w-full h-[100px] flex justify-end">
+          <Button className="w-[200px] max-h-[40px] text-basic_grey_1" text="Continue" isPrimary onClick={() => console.log('conitune')} />
+        </div> : null
+
+      }
       <BenefitAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={handleAddBenefit} />
     </div>
 
