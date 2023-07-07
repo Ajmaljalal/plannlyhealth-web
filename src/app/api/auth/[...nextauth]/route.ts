@@ -9,9 +9,9 @@ const authOptions = {
       clientSecret: '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',
     }),
     AzureADProvider({
-      clientId: process.env.AZURE_AD_CLIENT_ID as string,
-      clientSecret: process.env.AZURE_AD_CLIENT_SECRET as string,
-      tenantId: process.env.AZURE_AD_TENANT_ID as string,
+      clientId: process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_ID as string,
+      clientSecret: process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_SECRET as string,
+      tenantId: process.env.NEXT_PUBLIC_AZURE_AD_TENANT_ID as string,
 
     }),
   ],

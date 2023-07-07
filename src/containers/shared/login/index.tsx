@@ -19,7 +19,7 @@ const LoginContainer = () => {
 
   const handleMicrosoftSignIn = async (event: any) => {
     try {
-      const result = await signIn('azure-ad')
+      const result = await signIn('azure-ad-b2c')
       console.log('result', result)
     } catch (error: any) {
       console.log('error', error)
