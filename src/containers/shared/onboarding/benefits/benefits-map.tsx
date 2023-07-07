@@ -2,7 +2,7 @@ import { Button } from "@/components/button";
 import Hero from "../hero";
 import { icons } from "@/lib/icons";
 import { FileUpload } from "@/components/file-upload";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TabButton from "./tab-button";
 import BenefitCard from "./benefit-card";
 
@@ -23,7 +23,7 @@ const testBenefits: any = [
     title: 'Health Insurance',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam. Nunc eget augue nec massa volutpat aliquam.',
     icon: icons.add,
-    isPrimary: false,
+    isPrimary: true,
     howToEnroll: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam. Nunc eget augue nec massa volutpat aliquam.',
     howToEnrollLink: 'https://www.google.com',
     howToEnrollLinkText: 'Learn More',
@@ -35,7 +35,7 @@ const testBenefits: any = [
     title: 'Health Insurance',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam. Nunc eget augue nec massa volutpat aliquam.',
     icon: icons.add,
-    isPrimary: false,
+    isPrimary: true,
     howToEnroll: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam. Nunc eget augue nec massa volutpat aliquam.',
     howToEnrollLink: 'https://www.google.com',
     howToEnrollLinkText: 'Learn More',
@@ -47,7 +47,7 @@ const testBenefits: any = [
     title: 'Health Insurance',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam. Nunc eget augue nec massa volutpat aliquam.',
     icon: icons.add,
-    isPrimary: false,
+    isPrimary: true,
     howToEnroll: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam. Nunc eget augue nec massa volutpat aliquam.',
     howToEnrollLink: 'https://www.google.com',
     howToEnrollLinkText: 'Learn More',
@@ -156,17 +156,29 @@ const testBenefits: any = [
 
 
 const BenefitsMap = () => {
-  const [benefits, setBenefits] = useState<any>([])
+  const [primaryBenefits, setPrimaryBenefits] = useState<any>([])
+  const [voluntaryBenefits, setVoluntaryBenefits] = useState<any>([])
   const [activeTab, setActiveTab] = useState<any>('primary')
 
+  useEffect(() => {
+    // filter benefits based on active tab
+    const filterPrimaryBenefits = testBenefits.filter((benefit: any) => benefit.isPrimary)
+    const filteredVoluntryBenefits = testBenefits.filter((benefit: any) => !benefit.isPrimary)
+    setPrimaryBenefits(filterPrimaryBenefits)
+    setVoluntaryBenefits(filteredVoluntryBenefits)
+  }, [activeTab])
+
+
   const handleAddBenefit = () => {
-    setBenefits([...benefits, ...testBenefits])
+    // setBenefits([...benefits, ...testBenefits])
   }
 
   const handleUploadBenefit = (file: any) => {
     console.log(file)
-    setBenefits([...benefits, ...testBenefits])
+    // setBenefits([...benefits, ...testBenefits])
   }
+
+  const benefits = activeTab === 'primary' ? primaryBenefits : voluntaryBenefits
 
   const renderBenefits = () => {
     return (
@@ -176,7 +188,7 @@ const BenefitsMap = () => {
           <TabButton text="Primary" isActive={activeTab === 'primary'} onClick={() => setActiveTab('primary')} />
           <TabButton text="Voluntry" isActive={activeTab === 'voluntry'} onClick={() => setActiveTab('voluntry')} />
         </div>
-        <div className="my-[32px] flex flex-wrap justify-between max-w-[1440px] overflow-x-scroll">
+        <div className="my-[32px] flex flex-wrap justify-between max-h-[75%] max-w-[1440px] overflow-x-scroll">
           {
             benefits.map((benefit: any) => {
               return <BenefitCard key={benefit.title} benefit={benefit} />
