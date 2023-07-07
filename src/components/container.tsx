@@ -5,9 +5,7 @@ interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const styles = `
-    p-[24px]
-    bg-pWhite
-    rounded-[16px]
+    bg-basic_white
     text-black
     relative
 `

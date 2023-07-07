@@ -56,12 +56,8 @@ const HorizontalLine = () => {
 
 
 
-const OnboardingHeader = () => {
-  const [currentStep, setCurrentStep] = useState(1);
+const OnboardingHeader = ({ currentStep, handleStepChange }: { currentStep: number, handleStepChange: (step: number) => void }) => {
 
-  const handleStepChange = (step: number) => {
-    setCurrentStep(step);
-  }
   return (
     <div className="w-full lg:max-w-[1440px] flex justify-between items-center">
       <OnboardingHeaderStep step={1} onStepChange={handleStepChange} currentStep={currentStep} />

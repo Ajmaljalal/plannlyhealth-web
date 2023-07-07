@@ -23,6 +23,7 @@ module.exports = {
       basic_grey_3: '#A9A4B7',
       basic_grey_4: '#EDEDF0',
       basic_grey_5: '#FAFAFC',
+      basic_grey_10: '#E9E9EE',
       basic_light: '#FEFDFD',
       basic_white: '#FFFFFF',
       system_error: '#FE3E51',
