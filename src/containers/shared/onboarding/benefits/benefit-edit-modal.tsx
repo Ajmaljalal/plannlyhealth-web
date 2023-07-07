@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Modal } from '@/components/modal'
-import { Divider } from '@/components/divider'
 import { Input } from '@/components/input'
-import { RadioButton } from '@/components/radio'
 import { Button } from '@/components/button'
 import { TextArea } from '@/components/textarea'
 
@@ -12,18 +10,14 @@ const modalContentStyles = `
   flex-col 
   gap-4
 `
-const modalInputsWrapperStyles = `
-  flex 
-  gap-7 
-  h-fit
-`
-const modalInputTitleStyles = `
-  mb-[6px]
-`
-
-const frequencyOptions = ['Monthly', 'Quarterly', 'Yearly'];
 
 export const BenefitDetailsModal = ({ isOpen, onClose, benefit }: { isOpen: boolean, onClose: () => void, benefit: any }) => {
+  const [currentBenefit, setCurrentBenefit] = useState<any>(benefit)
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target
+    setCurrentBenefit({ ...currentBenefit, [name]: value })
+  }
 
   const handleSave = async () => {
     onClose()
@@ -41,27 +35,39 @@ export const BenefitDetailsModal = ({ isOpen, onClose, benefit }: { isOpen: bool
         <Input
           name="title"
           label="Title"
-          value={benefit.title}
+          value={currentBenefit.title}
           placeholder='Title'
+          onChange={handleInputChange}
         />
         <Input
-          name="link"
+          name="howToEnrollLink"
           label="Link"
-          value={benefit.howToEnrollLink}
+          value={currentBenefit.howToEnrollLink}
           placeholder='Link'
+          onChange={handleInputChange}
         />
         <TextArea
           name="description"
           label="Description"
-          value={benefit.description}
+          value={currentBenefit.description}
           placeholder='Description'
+          onChange={handleInputChange}
         />
         <TextArea
           name="eligibility"
           label="Eligibility"
-          value={benefit.eligibility}
+          value={currentBenefit.eligibility}
           placeholder='Eligibility'
+          onChange={handleInputChange}
         />
+        <TextArea
+          name="howToEnroll"
+          label="How to Enroll"
+          value={currentBenefit.howToEnroll}
+          placeholder='How to Enroll'
+          onChange={handleInputChange}
+        />
+
         <div>
         </div>
       </div>

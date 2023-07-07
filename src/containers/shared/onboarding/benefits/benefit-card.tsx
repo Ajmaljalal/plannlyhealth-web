@@ -3,7 +3,7 @@ import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
 import Image from "next/image";
 import { useState } from "react";
-import { BenefitDetailsModal } from "./benefit-details-modal";
+import { BenefitDetailsModal } from "./benefit-edit-modal";
 
 const BenefitCard = ({ benefit }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -42,7 +42,7 @@ const BenefitCard = ({ benefit }: any) => {
   return (
     <div className={style}>
       <Image src='/illustrations/test-benefit.png' width={105} height={105} alt={""} style={{ borderRadius: '24px', height: '105px' }} />
-      <div className="">
+      <div className="w-full">
         <h4>{currentBenefit.title}</h4>
         <p className="mt-[4px] mb-[24px]">{currentBenefit.description}</p>
         <div className="flex items-center justify-between flex-wrap">
