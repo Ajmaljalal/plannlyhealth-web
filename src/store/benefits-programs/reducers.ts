@@ -4,11 +4,10 @@ import {
   setPrograms,
   updatePrograms,
 } from './actions';
-import { BenefitsProgram } from '@/lib/types/benefit-programs';
 
 type programsState = {
-  allPrograms: BenefitsProgram[] | null;
-  currentProgram: BenefitsProgram | null;
+  allPrograms: any[] | null;
+  currentProgram: any | null;
 };
 
 const initialState: programsState = {
@@ -26,7 +25,7 @@ export const programsReducer = createReducer(initialState, builder => {
     })
     .addCase(updatePrograms, (state, action) => {
       // update all programs with onew from action.payload
-      const newPrograms: BenefitsProgram [] = state.allPrograms?.map(program => {
+      const newPrograms: any[] = state.allPrograms?.map(program => {
         if (program.id === action.payload.id) {
           return action.payload;
         }
@@ -34,5 +33,5 @@ export const programsReducer = createReducer(initialState, builder => {
       }) || [];
       state.allPrograms = newPrograms;
     });
-    
+
 });
