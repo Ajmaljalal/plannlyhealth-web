@@ -26,13 +26,13 @@ const BenefitCard = ({ benefit }: any) => {
     )
   }
 
-  const generalStyle = `flex gap-4 w-1/2 max-w-[650px] min-h-[160px] border-2 rounded-[32px] p-[16px] mb-[24px]`
+  const generalStyle = `flex gap-4 w-1/2 max-w-[650px] min-h-[160px] max-h-[191px] border-2 rounded-[32px] p-[16px] mb-[24px]`
   const bgColor = currentBenefit.isActive ? 'bg-basic_grey_4' : 'transparent'
   const borderColor = currentBenefit.isActive ? 'bg_basic_grey_4 border-basic_grey_4' : 'border-basic_grey_4'
   const textColor = currentBenefit.isActive ? 'text-basic_black' : 'text-basic_grey_2'
   const borderStyle = currentBenefit.isActive ? '' : 'border-2 border-dashed'
   const style = `${generalStyle} ${bgColor} ${borderColor} ${textColor} ${borderStyle}`
-  const buttonStyle = currentBenefit.isActive ? 'bg-system_success' : 'bg-brand_dark_blue'
+  const buttonStyle = currentBenefit.isActive ? 'bg-system_success' : ''
   const eligibilityIcon = currentBenefit.isActive ? icons.howTo : icons.howToLight
   const howToEnrollIcon = currentBenefit.isActive ? icons.question : icons.questionLight
   const detailsIcon = currentBenefit.isActive ? icons.details : icons.detailsLight
@@ -51,7 +51,7 @@ const BenefitCard = ({ benefit }: any) => {
             {renderIconButton({ image: howToEnrollIcon, text: 'How to Enroll', onClick: toggleModal })}
             {renderIconButton({ image: detailsIcon, text: 'Details', onClick: toggleModal })}
           </div>
-          <Button className={`text-basic_white h-[32px] text-small ml-[40px] ${buttonStyle}`} text={addBtnText} isSmallBtn icon={addBtnIcon} onClick={setBenenfitToActive} />
+          <Button className={`text-basic_white h-[32px] text-small ${buttonStyle}`} text={addBtnText} isSmallBtn isPrimary icon={addBtnIcon} onClick={setBenenfitToActive} />
         </div>
       </div>
       <BenefitDetailsModal isOpen={isModalOpen} onClose={toggleModal} benefit={currentBenefit} />

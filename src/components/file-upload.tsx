@@ -29,7 +29,6 @@ export const FileUpload = ({
         onClick={() => inputRef.current.click()}
         text={text}
         isPrimary
-        isSmallBtn
         className="w-[200px]"
       />
     </div>

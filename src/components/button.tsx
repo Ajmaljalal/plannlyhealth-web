@@ -28,6 +28,7 @@ const bigBtn = `
 const smallBtn = `
     px-[16px]
     py-[8px]
+    h-[32px]
 `
 
 const primary = `
@@ -35,11 +36,13 @@ const primary = `
     bg-brand_voilet
     disabled:hover:bg-lightgrey
     disabled:opacity-25
+    hover:bg-brand_voilet_light
 `
 const secondary = `
     text-basic_grey_1
     bg-basic_grey_4
     disabled:hover:bg-lightgrey
+    hover:bg-secondary_btn_hover
 `
 
 export const Button = ({ className, text, isPrimary, isSmallBtn, icon, ...props }: ButtonProps) => {

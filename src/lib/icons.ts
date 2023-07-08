@@ -18,6 +18,13 @@ import GoogleIcon from '../../public/icons/authentication/google-icon.svg'
 import MicrosoftIcon from '../../public/icons/authentication/microsoft-icon.svg'
 
 
+///////////// Integration Icons /////////////
+import insperityIcon from '../../public/icons/integrations/insperity.png'
+import paylocityIcon from '../../public/icons/integrations/paylocity.png'
+import saplingIcon from '../../public/icons/integrations/sapling.svg'
+import waveIcon from '../../public/icons/integrations/wave.svg'
+import accuPayIcon from '../../public/icons/integrations/accupay.svg'
+import aholaIcon from '../../public/icons/integrations/ahola.svg'
 
 interface StringMap { [key: string]: string }
 interface ProgramIcons { [key: string]: StringMap }
@@ -51,4 +58,14 @@ export const icons = {
   // new icons
   googleIcon: GoogleIcon,
   microsoftIcon: MicrosoftIcon,
+
+
+  // integrations
+  insperityIcon: insperityIcon,
+  paylocityIcon: paylocityIcon,
+  saplingIcon: saplingIcon,
+  waveIcon: waveIcon,
+  accuPayIcon: accuPayIcon,
+  aholaIcon: aholaIcon,
+
 }

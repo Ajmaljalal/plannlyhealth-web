@@ -28,6 +28,8 @@ module.exports = {
       basic_white: '#FFFFFF',
       system_error: '#FE3E51',
       system_success: '#42C76F',
+      secondary_btn_hover: '#DEDEDE',
+      primary_btn_hover: ''
     },
     fontWeight: {
       normal: '400',

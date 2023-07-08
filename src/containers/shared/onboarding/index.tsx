@@ -3,10 +3,12 @@ import OnboardingHeader from "./header";
 import CompanyDetails from "./company-details";
 import BenefitsMap from "./benefits/benefits-map";
 import { useState } from "react";
+import Integrations from "./integrations";
 
 const stepContent: any = {
   1: <CompanyDetails />,
   2: <BenefitsMap />,
+  3: <Integrations />,
 }
 
 const Oboarding = () => {
