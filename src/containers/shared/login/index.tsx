@@ -3,6 +3,7 @@ import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
 import { signInWithMicrosoft } from "@/lib/services/auth";
 import { useSession, signIn } from "next-auth/react"
+import { redirect } from "next/navigation";
 
 
 
@@ -19,8 +20,11 @@ const LoginContainer = () => {
 
   const handleMicrosoftSignIn = async (event: any) => {
     try {
-      const result = await signIn('azure-ad-b2c')
+      // const result = await signIn('azure-ad')
+      const result = await signInWithMicrosoft()
       console.log('result', result)
+      redirect('/')
+
     } catch (error: any) {
       console.log('error', error)
     }
