@@ -1,14 +1,16 @@
 'use client';
 import OnboardingHeader from "./header";
-import CompanyDetails from "./company-details";
-import BenefitsMap from "./benefits/benefits-map";
+import CompanyDetails from "./company-details/company-details";
+import BenefitsMap from "./benefits";
 import { useState } from "react";
 import Integrations from "./integrations";
+import EmployeesList from "./employees-upload";
 
 const stepContent: any = {
   1: <CompanyDetails />,
   2: <BenefitsMap />,
   3: <Integrations />,
+  4: <EmployeesList />,
 }
 
 const Oboarding = () => {

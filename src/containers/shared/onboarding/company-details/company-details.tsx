@@ -1,5 +1,5 @@
 import { Input } from "@/components/input";
-import Hero from "./hero";
+import Hero from "../hero";
 import { CheckBox } from "@/components/checkbox";
 import { Button } from "@/components/button";
 

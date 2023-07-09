@@ -6,18 +6,22 @@ type FileUploadProps = {
   acceptedFileTypes: string
   multiple?: boolean
   onChange: (file: any) => void
+  isSmallBtn?: boolean
+  className?: string
 }
 
 export const FileUpload = ({
   acceptedFileTypes,
   onChange,
   text,
+  className,
+  isSmallBtn = false,
   multiple = false
-
 }: FileUploadProps) => {
   const inputRef: any = useRef(null);
+  const height = isSmallBtn ? 'h-[32px]' : 'min-h-[40px]'
   return (
-    <div className='h-[40px] flex'>
+    <div className={`flex ${height}`}>
       <input
         type='file'
         multiple={multiple}
@@ -29,7 +33,8 @@ export const FileUpload = ({
         onClick={() => inputRef.current.click()}
         text={text}
         isPrimary
-        className="w-[200px]"
+        className={className}
+        isSmallBtn={isSmallBtn}
       />
     </div>
   );

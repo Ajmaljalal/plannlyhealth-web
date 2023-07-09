@@ -182,6 +182,7 @@ const BenefitsMap = () => {
             onChange={(file) => handleUploadBenefit(file[0])}
             acceptedFileTypes='application/pdf, .docx'
             text='Upload PDF'
+            className="w-[200px]"
           />
           <Button className="w-[200px] text-basic_grey_1" text="Add Benefit" icon={icons.add} onClick={toggleModal} />
         </div>

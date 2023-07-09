@@ -12,6 +12,8 @@ import details from '../../public/icons/shared/details.svg'
 import detailsLight from '../../public/icons/shared/details-light.svg'
 import checkWhite from '../../public/icons/shared/check-white.svg'
 import close from '../../public/icons/shared/close.svg'
+import edit from '../../public/icons/shared/edit.svg'
+import detete from '../../public/icons/shared/delete.svg'
 
 ////////////// New Icons //////////////
 import GoogleIcon from '../../public/icons/authentication/google-icon.svg'
@@ -42,7 +44,6 @@ export const icons = {
 
   add: Add,
   addLight: AddLight,
-
   see: see,
   hide: hide,
   howTo: howTo,
@@ -53,6 +54,8 @@ export const icons = {
   detailsLight: detailsLight,
   checkWhite: checkWhite,
   close: close,
+  edit: edit,
+  delete: detete,
 
 
   // new icons
