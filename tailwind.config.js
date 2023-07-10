@@ -28,8 +28,18 @@ module.exports = {
       basic_white: '#FFFFFF',
       system_error: '#FE3E51',
       system_success: '#42C76F',
+      system_success_light: '#E0F4E7',
       secondary_btn_hover: '#DEDEDE',
-      primary_btn_hover: ''
+      primary_btn_hover: '',
+      pink: '#F03771',
+      pink_light: '#FDE7EE',
+      purple: '#C301EE',
+      purple_light: '#FBE7FD',
+      blue: '#0601EE',
+      blue_light: '#E7EAFD',
+      orange: '#FF9139',
+      orange_light: '#F5E9D6',
+
     },
     fontWeight: {
       normal: '400',

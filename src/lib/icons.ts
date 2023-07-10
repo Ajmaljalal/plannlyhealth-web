@@ -14,6 +14,13 @@ import checkWhite from '../../public/icons/shared/check-white.svg'
 import close from '../../public/icons/shared/close.svg'
 import edit from '../../public/icons/shared/edit.svg'
 import detete from '../../public/icons/shared/delete.svg'
+import admin from '../../public/icons/shared/admin.svg'
+import superAdmin from '../../public/icons/shared/super-admin.svg'
+import standard from '../../public/icons/shared/standard.svg'
+import owner from '../../public/icons/shared/owner.svg'
+import broker from '../../public/icons/shared/broker.svg'
+import it from '../../public/icons/shared/it.svg'
+import finance from '../../public/icons/shared/finance.svg'
 
 ////////////// New Icons //////////////
 import GoogleIcon from '../../public/icons/authentication/google-icon.svg'
@@ -41,7 +48,6 @@ export const icons = {
   // left nav
 
   // shared
-
   add: Add,
   addLight: AddLight,
   see: see,
@@ -56,6 +62,13 @@ export const icons = {
   close: close,
   edit: edit,
   delete: detete,
+  admin: admin,
+  superAdmin: superAdmin,
+  standard: standard,
+  owner: owner,
+  broker: broker,
+  it: it,
+  finance: finance,
 
 
   // new icons

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Table } from "@/components/table/table";
 import { TableHead } from "@/components/table/table-head";
 import Employee from "./employee-row";
+import { EmployeeAddModal } from "./add-employee-modal";
 
 
 const tableHeaders = ['Name', 'Job Title', 'Email', 'Role', '']
@@ -26,7 +27,7 @@ const employees: any = [
     last_name: 'Doe',
     job_title: 'Aminstrator',
     email: 'flipp@test.com',
-    role: 'Admin',
+    role: 'Standard',
   },
   {
     id: 3,
@@ -34,7 +35,7 @@ const employees: any = [
     last_name: 'Doe',
     job_title: 'Software Engineer',
     email: 'john@user.com',
-    role: 'Admin',
+    role: 'Owner',
   },
   {
     id: 4,
@@ -42,7 +43,7 @@ const employees: any = [
     last_name: 'Doe',
     job_title: 'Aminstrator',
     email: 'flipp@test.com',
-    role: 'Admin',
+    role: 'Super Admin',
   },
   {
     id: 5,
@@ -50,7 +51,7 @@ const employees: any = [
     last_name: 'Doe',
     job_title: 'Software Engineer',
     email: 'john@user.com',
-    role: 'Admin',
+    role: 'Finance',
   },
   {
     id: 6,
@@ -58,7 +59,7 @@ const employees: any = [
     last_name: 'Doe',
     job_title: 'Aminstrator',
     email: 'flipp@test.com',
-    role: 'Admin',
+    role: 'Broker',
   },
   {
     id: 7,
@@ -66,7 +67,7 @@ const employees: any = [
     last_name: 'Doe',
     job_title: 'Software Engineer',
     email: 'john@user.com',
-    role: 'Admin',
+    role: 'IT',
   },
   {
     id: 8,
@@ -82,7 +83,7 @@ const employees: any = [
     last_name: 'Doe',
     job_title: 'Software Engineer',
     email: 'john@user.com',
-    role: 'Admin',
+    role: 'Owner',
   },
   {
     id: 10,
@@ -90,7 +91,7 @@ const employees: any = [
     last_name: 'Doe',
     job_title: 'Aminstrator',
     email: 'flipp@test.com',
-    role: 'Admin',
+    role: 'Standard',
   },
 
 ]
@@ -99,7 +100,7 @@ const employees: any = [
 
 const EmployeesList = () => {
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
-  const [selectedEmployee, setSelectedEmployee] = useState<any>([])
+  const [selectedEmployees, setSelectedEmployees] = useState<any>([])
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -107,17 +108,33 @@ const EmployeesList = () => {
 
 
   const handleAddEmployee = (newEmployee: any) => {
+    setSelectedEmployees([newEmployee, ...selectedEmployees])
     console.log(newEmployee)
+  }
+
+  const handleEditEmployee = (updatedEmployee: any) => {
+    const updatedEmployees = selectedEmployees.map((employee: any) => {
+      if (employee.id === updatedEmployee.id) {
+        return updatedEmployee
+      }
+      return employee
+    })
+    setSelectedEmployees(updatedEmployees)
+  }
+
+  const handleDeleteEmployee = (employeeId: number) => {
+    const updatedEmployees = selectedEmployees.filter((employee: any) => employee.id !== employeeId)
+    setSelectedEmployees(updatedEmployees)
   }
 
   const handleUploadEmployees = (file: any) => {
     console.log(file)
-    setSelectedEmployee(employees)
+    setSelectedEmployees([...selectedEmployees, ...employees])
   }
 
   const renderEmpoyees = () => {
-    return selectedEmployee?.map((employee: any) => {
-      return <Employee key={employee.id} employee={employee} />
+    return selectedEmployees?.map((employee: any) => {
+      return <Employee key={employee.id} employee={employee} onUpdateEmployee={handleEditEmployee} onDeleteEmployee={handleDeleteEmployee} />
     })
   }
 
@@ -136,7 +153,7 @@ const EmployeesList = () => {
             />
           </div>
         </div>
-        <Table className='pb-[20px] overflow-scroll mt-[16px]'>
+        <Table className='overflow-scroll mt-[16px]'>
           <TableHead headers={tableHeaders} />
           <tbody>
             {renderEmpoyees()}
@@ -165,13 +182,14 @@ const EmployeesList = () => {
 
   return (
     <div className="flex flex-col justify-between items-end w-full h-full relative overflow-hidden">
-      {selectedEmployee?.length ? renderUsersTable() : renderNullState()}
+      {selectedEmployees?.length ? renderUsersTable() : renderNullState()}
       {
-        selectedEmployee?.length ? <div className="absolute bottom-0 bg-basic_grey_5 w-full h-[100px] flex justify-end pt-[20px]">
+        selectedEmployees?.length ? <div className="absolute bottom-0 bg-basic_grey_5 w-full h-[100px] flex justify-end pt-[20px]">
           <Button className="w-[200px] max-h-[40px] mr-[24px]" text="Save for Later" onClick={() => console.log('conitune')} />
           <Button className="w-[200px] max-h-[40px]" text="Launch" isPrimary onClick={() => console.log('conitune')} />
         </div> : null
       }
+      <EmployeeAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={(employee) => handleAddEmployee(employee)} />
     </div>
   )
 }
