@@ -101,7 +101,7 @@ const Dropdown = ({ isSearchable = false, disabled = false, onChange, className,
         components={{
           DropdownIndicator: () => {
             return (
-              <Image src={icons.arrow} alt='arrow down' />
+              <Image src={icons.add} alt='arrow down' />
             );
           }
         }}

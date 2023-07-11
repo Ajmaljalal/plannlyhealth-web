@@ -33,7 +33,7 @@ export const SignOut = () => {
   }
   return (
     <p className={`${signOutBtnStyles}`} onClick={handleSignOut}>
-      <Image src={icons.logout} alt='logout button' width='24' height='24' className='mr-[10px]' />
+      <Image src={icons.add} alt='logout button' width='24' height='24' className='mr-[10px]' />
       Log Out
     </p>
   )

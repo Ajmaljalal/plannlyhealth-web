@@ -7,7 +7,7 @@ interface TableProps {
 
 export const Table = ({ children, className }: TableProps) => {
   return (
-    <div className={`border-2 border-pBackground rounded-[16px] overflow-hidden ${className}`}>
+    <div className={`border border-basic_grey_4 rounded-[32px] bg-basic_white overflow-hidden ${className}`}>
       <table className="table-auto">
         {children}
       </table>

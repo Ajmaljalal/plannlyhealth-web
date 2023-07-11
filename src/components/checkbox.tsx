@@ -1,41 +1,46 @@
-interface CheckBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string
-  value: string | number
-  currentValue?: string | number
-  isChecked?: boolean
+// Define an interface for CheckBox properties
+interface ICheckBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string; // Optional label for the checkbox
+  checked: boolean; // Current value of the checkbox
 }
 
-const wrapperStyles = `
+// Style for the checkbox wrapper
+const wrapperStyle = `
   flex 
   items-center 
   cursor-pointer 
   h-fit
-`
-const checkboxStyles = `
+`;
+
+// Style for the checkbox
+const checkboxStyle = `
   w-fit
   h-fit
   cursor-pointer
-`
+  ml-[5px]
+`;
 
-const labelStyles = `
-  text-pDark
+// Style for the label
+const labelStyle = `
+  text-basic_grey_1
   font-medium
   cursor-pointer
-  pl-[16px]
-`
+  pl-[12px]
+`;
 
-export const CheckBox = ({ label, name, value, currentValue, ...props }: CheckBoxProps) => {
-  const isChecked = currentValue === value
-  return <div className={wrapperStyles}>
-    <input
-      type='checkbox'
-      name={name}
-      id={value.toString()}
-      value={value}
-      className={checkboxStyles}
-      checked={isChecked}
-      {...props}
-    />
-    {label && <label htmlFor={value.toString()} className={labelStyles}>{label}</label>}
-  </div>
-}
+// Define CheckBox Component
+export const CheckBox = ({ label, name, checked, ...props }: ICheckBoxProps) => {
+  return (
+    <div className={wrapperStyle}>
+      <input
+        type="checkbox"
+        name={name}
+        id={name}
+        className={checkboxStyle}
+        checked={checked} // Use checked attribute here
+        {...props}
+      />
+      {label && <label htmlFor={name} className={labelStyle}>{label}</label>}
+    </div>
+  );
+};

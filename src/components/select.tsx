@@ -76,7 +76,7 @@ export const Select = ({
 
             </select>
             <Image
-                src={icons.arrow}
+                src={icons.add}
                 alt='upload'
                 width='24'
                 height='24'

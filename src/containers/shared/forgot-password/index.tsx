@@ -35,7 +35,7 @@ const ForgotPasswordContainer = () => {
   return (
     <div className="flex w-full h-full">
       <div className="w-1/2 h-full hidden lg:block">
-        <Image src={icons.loginHero} alt='plannly logo' className='w-full h-full object-cover' priority />
+        <Image src={icons.add} alt='plannly logo' className='w-full h-full object-cover' priority />
       </div>
       <div className="w-full lg:w-1/2 h-full flex flex-col items-center justify-center bg-pWhite gap-6 px-[24px]">
         <h2>Forgot password?</h2>
