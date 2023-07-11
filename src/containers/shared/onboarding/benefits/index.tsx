@@ -2,10 +2,12 @@ import { Button } from "@/components/button";
 import Hero from "../hero";
 import { icons } from "@/lib/icons";
 import { FileUpload } from "@/components/file-upload";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TabButton from "../../../../components/tab-button";
 import BenefitCard from "./benefit-card";
 import { BenefitAddModal } from "./benefit-add-modal";
+import { useDispatch, useSelector } from "@/store/store";
+import { benefitsSelector, setBenefits, setStep } from "@/store/company";
 
 const testBenefits: any = [
   {
@@ -16,7 +18,7 @@ const testBenefits: any = [
     howToEnroll: 'Please contact our HR department or visit our website for information on how to enroll.',
     howToEnrollLink: 'https://www.google.com',
     howToEnrollLinkText: 'Learn More',
-    isActive: true,
+    isActive: false,
     logo: '/images/health-insurance.svg',
     eligibility: 'All full-time employees are eligible to enroll.',
     integration: null
@@ -115,12 +117,12 @@ const testBenefits: any = [
 ]
 
 
-const filterPrimaryBenefits = testBenefits.filter((benefit: any) => benefit.isPrimary)
-const filteredVoluntryBenefits = testBenefits.filter((benefit: any) => !benefit.isPrimary)
-
 const BenefitsMap = () => {
-  const [primaryBenefits, setPrimaryBenefits] = useState<any>([])
-  const [voluntaryBenefits, setVoluntaryBenefits] = useState<any>([])
+  const dispatch = useDispatch()
+  const allBenefits = useSelector(benefitsSelector)
+  const primaryBenefits = allBenefits.filter((benefit: any) => benefit.isPrimary)
+  const voluntaryBenefits = allBenefits.filter((benefit: any) => !benefit.isPrimary)
+
   const [activeTab, setActiveTab] = useState<any>('primary')
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
 
@@ -130,20 +132,13 @@ const BenefitsMap = () => {
 
 
   const handleAddBenefit = (newBenefit: any) => {
-    // add newBenefit to primaryBenefits or voluntaryBenefits
-    if (activeTab === 'primary') {
-      setPrimaryBenefits([...primaryBenefits, newBenefit])
-    }
-    else {
-      setVoluntaryBenefits([...voluntaryBenefits, newBenefit])
-    }
-
+    newBenefit = activeTab === 'primary' ? { ...newBenefit, isPrimary: true } : { ...newBenefit, isPrimary: false }
+    dispatch(setBenefits([...allBenefits, newBenefit]))
   }
 
   const handleUploadBenefit = (file: any) => {
     console.log(file)
-    setPrimaryBenefits([...primaryBenefits, ...filterPrimaryBenefits])
-    setVoluntaryBenefits([...voluntaryBenefits, ...filteredVoluntryBenefits])
+    dispatch(setBenefits([...allBenefits, ...testBenefits]))
   }
 
   const benefits = activeTab === 'primary' ? primaryBenefits : voluntaryBenefits
@@ -158,9 +153,7 @@ const BenefitsMap = () => {
             <TabButton text="Primary" count={primaryBenefits.length} isActive={activeTab === 'primary'} onClick={() => setActiveTab('primary')} />
             <TabButton text="Voluntry" count={voluntaryBenefits.length} isActive={activeTab === 'voluntry'} onClick={() => setActiveTab('voluntry')} />
           </div>
-          <div className="flex justify-center items-center mt-[16px]">
-            <Button className="" text={addBenefitBtnText} isPrimary icon={icons.addLight} onClick={toggleModal} />
-          </div>
+          <Button className="max-h-[40px]" text={addBenefitBtnText} isPrimary icon={icons.addLight} onClick={toggleModal} />
         </div>
         <div className="mt-[32px] pb-[300px] flex flex-wrap justify-between max-h-[60%] max-w-[1440px] overflow-x-scroll">
           {
@@ -193,12 +186,11 @@ const BenefitsMap = () => {
 
   return (
     <div className="flex flex-col justify-between items-end w-full h-full relative overflow-hidden">
-      {benefits.length ? renderBenefits() : renderNullState()}
+      {allBenefits.length ? renderBenefits() : renderNullState()}
       {
         benefits.length ? <div className="absolute bottom-0 bg-basic_grey_5 w-full h-[100px] flex justify-end">
-          <Button className="w-[200px] max-h-[40px] text-basic_grey_1" text="Continue" isPrimary onClick={() => console.log('conitune')} />
+          <Button className="w-[200px] max-h-[40px]" text="Continue" isPrimary onClick={() => dispatch(setStep(3))} />
         </div> : null
-
       }
       <BenefitAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={handleAddBenefit} />
     </div>
