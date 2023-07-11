@@ -21,6 +21,16 @@ import owner from '../../public/icons/shared/owner.svg'
 import broker from '../../public/icons/shared/broker.svg'
 import it from '../../public/icons/shared/it.svg'
 import finance from '../../public/icons/shared/finance.svg'
+import notifications from '../../public/icons/shared/notifications.svg'
+import lightMode from '../../public/icons/shared/light-mode.svg'
+
+
+
+////////////// dashboard //////////////
+import workloadLight from '../../public/icons/dashboard/workload-light.svg'
+import stressLight from '../../public/icons/dashboard/stress-light.svg'
+import burnoutLight from '../../public/icons/dashboard/burnout-light.svg'
+import turnoverLight from '../../public/icons/dashboard/turnover-light.svg'
 
 
 ////////////// Left Nav //////////////
@@ -91,6 +101,8 @@ export const icons = {
   broker: broker,
   it: it,
   finance: finance,
+  notifications: notifications,
+  lightMode: lightMode,
 
 
   // new icons
@@ -126,6 +138,12 @@ export const icons = {
   reportsLight: reportsLight,
   logout: logout,
   logoutLight: logoutLight,
+
+  // dashboard
+  workloadLight: workloadLight,
+  stressLight: stressLight,
+  burnoutLight: burnoutLight,
+  turnoverLight: turnoverLight,
 
 
 }
