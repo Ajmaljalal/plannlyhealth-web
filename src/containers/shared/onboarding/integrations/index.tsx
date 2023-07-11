@@ -20,6 +20,7 @@ const Integrations = () => {
   const [activeTab, setActiveTab] = useState<any>('primary')
 
   const benefits = activeTab === 'primary' ? primaryBenefits : voluntaryBenefits
+
   const renderIntegrations = () => {
     return (
       <div className="flex flex-col items-strech gap-4 w-full pt-[50px]">
@@ -40,14 +41,29 @@ const Integrations = () => {
       </div>
     )
   }
+
+  const renderNullState = () => {
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <h2 className="text-center">You have not selected any benefits yet</h2>
+        <p className="text-center">Please select your benefits in the previous step</p>
+      </div>
+    )
+  }
+
+
+  const isNullState = benefits?.length === 0
+
+  if (isNullState) {
+    return renderNullState()
+  }
+
   return (
     <div className="flex flex-col justify-between items-end w-full h-full relative overflow-hidden">
-      {renderIntegrations()}
+      {!isNullState ? renderIntegrations() : null}
       <div className="absolute bottom-0 bg-basic_grey_5 w-full h-[100px] flex justify-end gap-4">
-        <Button className="w-[200px] max-h-[40px]" text="Skip" onClick={() => dispatch(setStep(4))} />
-        {
-          benefits?.length && <Button className="w-[200px] max-h-[40px]" isPrimary text="Continue" onClick={() => dispatch(setStep(4))} />
-        }
+        {!isNullState ? <Button className="w-[200px] max-h-[40px]" text="Skip" onClick={() => dispatch(setStep(4))} /> : null}
+        {!isNullState ? <Button className="w-[200px] max-h-[40px]" isPrimary text="Continue" onClick={() => dispatch(setStep(4))} /> : null}
       </div>
     </div>
   );
