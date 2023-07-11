@@ -7,6 +7,9 @@ import { Table } from "@/components/table/table";
 import { TableHead } from "@/components/table/table-head";
 import Employee from "./employee-row";
 import { EmployeeAddModal } from "./add-employee-modal";
+import { useDispatch } from "react-redux";
+import { employeesSelector, setEmployees } from "@/store/company";
+import { useSelector } from "@/store/store";
 
 
 const tableHeaders = ['Name', 'Job Title', 'Email', 'Role', '']
@@ -99,8 +102,9 @@ const employees: any = [
 
 
 const EmployeesList = () => {
+  const dispatch = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
-  const [selectedEmployees, setSelectedEmployees] = useState<any>([])
+  const selectedEmployees = useSelector(employeesSelector)
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -108,7 +112,7 @@ const EmployeesList = () => {
 
 
   const handleAddEmployee = (newEmployee: any) => {
-    setSelectedEmployees([newEmployee, ...selectedEmployees])
+    dispatch(setEmployees([newEmployee, ...selectedEmployees]))
     console.log(newEmployee)
   }
 
@@ -119,17 +123,17 @@ const EmployeesList = () => {
       }
       return employee
     })
-    setSelectedEmployees(updatedEmployees)
+    dispatch(setEmployees(updatedEmployees))
   }
 
   const handleDeleteEmployee = (employeeId: number) => {
     const updatedEmployees = selectedEmployees.filter((employee: any) => employee.id !== employeeId)
-    setSelectedEmployees(updatedEmployees)
+    dispatch(setEmployees(updatedEmployees))
   }
 
   const handleUploadEmployees = (file: any) => {
     console.log(file)
-    setSelectedEmployees([...selectedEmployees, ...employees])
+    dispatch(setEmployees(employees))
   }
 
   const renderEmpoyees = () => {
