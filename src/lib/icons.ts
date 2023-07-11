@@ -22,6 +22,28 @@ import broker from '../../public/icons/shared/broker.svg'
 import it from '../../public/icons/shared/it.svg'
 import finance from '../../public/icons/shared/finance.svg'
 
+
+////////////// Left Nav //////////////
+import dashboard from '../../public/icons/left-nav/dashboard.svg'
+import dashboardLight from '../../public/icons/left-nav/dashboard-white.svg'
+import employees from '../../public/icons/left-nav/employees.svg'
+import employeesLight from '../../public/icons/left-nav/employees-white.svg'
+import benefits from '../../public/icons/left-nav/benefits.svg'
+import benefitsLight from '../../public/icons/left-nav/benefits-white.svg'
+import assessments from '../../public/icons/left-nav/assessments.svg'
+import assessmentsLight from '../../public/icons/left-nav/assessments-white.svg'
+import integrations from '../../public/icons/left-nav/integrations.svg'
+import integrationsLight from '../../public/icons/left-nav/integrations-white.svg'
+import settings from '../../public/icons/left-nav/settings.svg'
+import settingsLight from '../../public/icons/left-nav/settings-white.svg'
+import incentives from '../../public/icons/left-nav/incentives.svg'
+import incentivesLight from '../../public/icons/left-nav/incentives-white.svg'
+import reports from '../../public/icons/left-nav/reports.svg'
+import reportsLight from '../../public/icons/left-nav/reports-white.svg'
+import logout from '../../public/icons/left-nav/logout.svg'
+import logoutLight from '../../public/icons/left-nav/logout-white.svg'
+
+
 ////////////// New Icons //////////////
 import GoogleIcon from '../../public/icons/authentication/google-icon.svg'
 import MicrosoftIcon from '../../public/icons/authentication/microsoft-icon.svg'
@@ -83,5 +105,27 @@ export const icons = {
   waveIcon: waveIcon,
   accuPayIcon: accuPayIcon,
   aholaIcon: aholaIcon,
+
+
+  // left nav
+  dashboard: dashboard,
+  dashboardLight: dashboardLight,
+  employees: employees,
+  employeesLight: employeesLight,
+  benefits: benefits,
+  benefitsLight: benefitsLight,
+  assessments: assessments,
+  assessmentsLight: assessmentsLight,
+  integrations: integrations,
+  integrationsLight: integrationsLight,
+  settings: settings,
+  settingsLight: settingsLight,
+  incentives: incentives,
+  incentivesLight: incentivesLight,
+  reports: reports,
+  reportsLight: reportsLight,
+  logout: logout,
+  logoutLight: logoutLight,
+
 
 }
