@@ -16,23 +16,25 @@ const navItemStyles = `
     justify-start
     w-full
     h-[40px]
-    text-pWhite
     text-[14px]
     font-bold-700
-    p-[10px]
-    rounded-[8px]
-    hover:bg-pDarkGray
+    py-[10px]
+    px-[12px]
+    rounded-[10px]
+    hover:bg-brand_voilet
+    hover:text-basic_white
     my-[9px]
     cursor-pointer
     leading-[1.2]
-    focus:bg-pPink
+    focus:bg-brand_voilet
+    focus:text-basic_white
 `
 
 export const NavItem = ({ text, href, icon }: NavItemProps) => {
   const pathname = usePathname()
   const isActive = pathname === href
   return (
-    <Link href={href} className={`${navItemStyles} ${isActive ? 'bg-pPink' : ''}`}>
+    <Link href={href} className={`${navItemStyles} ${isActive ? 'bg-brand_voilet' : ''}`}>
       <Image src={icon} alt={`${text} icon`} width='24' height='24' className='mr-[10px]' />
       {text}
     </Link>

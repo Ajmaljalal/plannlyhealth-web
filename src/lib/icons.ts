@@ -21,6 +21,38 @@ import owner from '../../public/icons/shared/owner.svg'
 import broker from '../../public/icons/shared/broker.svg'
 import it from '../../public/icons/shared/it.svg'
 import finance from '../../public/icons/shared/finance.svg'
+import notifications from '../../public/icons/shared/notifications.svg'
+import lightMode from '../../public/icons/shared/light-mode.svg'
+
+
+
+////////////// dashboard //////////////
+import workloadLight from '../../public/icons/dashboard/workload-light.svg'
+import stressLight from '../../public/icons/dashboard/stress-light.svg'
+import burnoutLight from '../../public/icons/dashboard/burnout-light.svg'
+import turnoverLight from '../../public/icons/dashboard/turnover-light.svg'
+
+
+////////////// Left Nav //////////////
+import dashboard from '../../public/icons/left-nav/dashboard.svg'
+import dashboardLight from '../../public/icons/left-nav/dashboard-white.svg'
+import employees from '../../public/icons/left-nav/employees.svg'
+import employeesLight from '../../public/icons/left-nav/employees-white.svg'
+import benefits from '../../public/icons/left-nav/benefits.svg'
+import benefitsLight from '../../public/icons/left-nav/benefits-white.svg'
+import assessments from '../../public/icons/left-nav/assessments.svg'
+import assessmentsLight from '../../public/icons/left-nav/assessments-white.svg'
+import integrations from '../../public/icons/left-nav/integrations.svg'
+import integrationsLight from '../../public/icons/left-nav/integrations-white.svg'
+import settings from '../../public/icons/left-nav/settings.svg'
+import settingsLight from '../../public/icons/left-nav/settings-white.svg'
+import incentives from '../../public/icons/left-nav/incentives.svg'
+import incentivesLight from '../../public/icons/left-nav/incentives-white.svg'
+import reports from '../../public/icons/left-nav/reports.svg'
+import reportsLight from '../../public/icons/left-nav/reports-white.svg'
+import logout from '../../public/icons/left-nav/logout.svg'
+import logoutLight from '../../public/icons/left-nav/logout-white.svg'
+
 
 ////////////// New Icons //////////////
 import GoogleIcon from '../../public/icons/authentication/google-icon.svg'
@@ -69,6 +101,8 @@ export const icons = {
   broker: broker,
   it: it,
   finance: finance,
+  notifications: notifications,
+  lightMode: lightMode,
 
 
   // new icons
@@ -83,5 +117,33 @@ export const icons = {
   waveIcon: waveIcon,
   accuPayIcon: accuPayIcon,
   aholaIcon: aholaIcon,
+
+
+  // left nav
+  dashboard: dashboard,
+  dashboardLight: dashboardLight,
+  employees: employees,
+  employeesLight: employeesLight,
+  benefits: benefits,
+  benefitsLight: benefitsLight,
+  assessments: assessments,
+  assessmentsLight: assessmentsLight,
+  integrations: integrations,
+  integrationsLight: integrationsLight,
+  settings: settings,
+  settingsLight: settingsLight,
+  incentives: incentives,
+  incentivesLight: incentivesLight,
+  reports: reports,
+  reportsLight: reportsLight,
+  logout: logout,
+  logoutLight: logoutLight,
+
+  // dashboard
+  workloadLight: workloadLight,
+  stressLight: stressLight,
+  burnoutLight: burnoutLight,
+  turnoverLight: turnoverLight,
+
 
 }
