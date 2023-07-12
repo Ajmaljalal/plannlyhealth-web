@@ -1,15 +1,28 @@
 'use client'
 import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
-import { signInWithMicrosoft } from "@/lib/services/auth";
+import { loginRequest, signInWithMicrosoft } from "@/lib/services/auth";
 import { useSession, signIn } from "next-auth/react"
-import { redirect } from "next/navigation";
+import { useMsal } from '@azure/msal-react';
+import { useEffect, useState } from "react";
+
 
 
 
 
 const LoginContainer = () => {
   const session = useSession();
+  const { instance } = useMsal();
+  const [userName, setUserName] = useState("");
+
+  const activeAccount = instance.getActiveAccount();
+  useEffect(() => {
+    if (activeAccount) {
+      setUserName(activeAccount.username);
+    } else {
+      setUserName("");
+    }
+  }, [activeAccount]);
 
   const handleGoogleSignIn = async (event: any) => {
     try {
@@ -18,20 +31,26 @@ const LoginContainer = () => {
     }
   };
 
-  const handleMicrosoftSignIn = async (event: any) => {
-    try {
-      // const result = await signIn('azure-ad')
-      const result = await signInWithMicrosoft()
-      console.log('result', result)
-      redirect('/')
+  // const handleMicrosoftSignIn = async (event: any) => {
+  //   try {
+  //     // const result = await signIn('azure-ad')
+  //     const result = await signInWithMicrosoft()
+  //     console.log('result', result)
+  //     redirect('/')
 
-    } catch (error: any) {
-      console.log('error', error)
-    }
-  };
+  //   } catch (error: any) {
+  //     console.log('error', error)
+  //   }
+  // };
+
+
+
+  const handleLogin = async () => {
+    await instance.loginRedirect(loginRequest);
+  }
 
   const renderSignInError = () => {
-    if (session?.data?.user?.name) {
+    if (session?.data?.user?.name || userName) {
       return (
         <div className="w-[360px] h-full flex flex-col items-center px-[24px] text-center">
           <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
@@ -39,21 +58,25 @@ const LoginContainer = () => {
           <p className="text-basic_grey_1 mb-[32px]">Please contact support for help!</p>
         </div>
       )
+    } else {
+      return null
     }
   }
 
 
   const renderForm = () => {
-    if (!session?.data?.user?.name) {
+    if (!session?.data?.user?.name && !userName) {
       return (
         <div className="w-[440px] h-full flex flex-col items-center px-[8px] text-center">
           <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
           <h1 className="mb-[12px] text-center">Welcome Back!</h1>
           <p className="text-basic_grey_1 mb-[32px]">Login to Plannly Health to continue</p>
           <Button text="Continue with Google" className="mb-[16px] w-[300px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
-          <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={handleMicrosoftSignIn} />
+          <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={handleLogin} />
         </div>
       )
+    } else {
+      return null
     }
   }
 

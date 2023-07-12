@@ -1,7 +1,8 @@
 import { decryptData, getSessionIdFromCookie, removeSessionIdFromCookie, setSessionIdToCookie } from "@/lib/helpers";
-import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
+// import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import axios from "axios";
-import * as Msal from 'msal';
+// import * as Msal from 'msal';
+import { Configuration, RedirectRequest } from "@azure/msal-browser";
 
 import AWS from 'aws-sdk';
 
@@ -68,51 +69,78 @@ export const resetPassword = async ({ code, password, email }: any) => {
 
 // MSAL authentication part
 
+// export const signInWithMicrosoft = async () => {
+//   const msalConfig: any = {
+//     auth: {
+//       clientId: process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_ID,
+//       authority: "https://login.microsoftonline.com/common",
+//       redirectUri: "http://localhost:3000/api/auth/callback/azure-ad",
+//     },
+//     cache: {
+//       cacheLocation: "sessionStorage",
+//       storeAuthStateInCookie: false,
+//     }
+//   };
+
+//   const myMSALObj = new Msal.UserAgentApplication(msalConfig);
+
+//   const loginRequest = {
+//     scopes: ["openid", "profile", "User.Read"],
+//   };
+
+//   myMSALObj.loginPopup(loginRequest)
+//     .then((loginResponse: any) => {
+//       //Login Success callback code here
+//       const idToken = loginResponse.idToken.rawIdToken;
+
+//       // AWS Cognito federated sign in
+//       // AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+
+//       //   IdentityPoolId: 'us-west-2:f74108fa-e811-4490-baac-6a031d933cde', // your identity pool id here
+//       //   Logins: {
+//       //     'login.microsoftonline.com': idToken
+//       //   }
+//       // });
+
+//       //@ts-ignore
+//       // AWS.config.credentials.get(function (err: any) {
+//       //   if (err) {
+//       //     console.log('Error:', err);
+//       //     return;
+//       //   }
+
+//       // AWS resources access here.
+//       //@ts-ignore
+//       console.log('token:', idToken);
+//       // });
+//     }).catch(function (error: any) {
+//       console.log(error);
+//     });
+// }
+
+
+
+
+
+// Config object to be passed to Msal on creation
+export const msalConfig: Configuration = {
+  auth: {
+    clientId: process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_ID as string,
+    authority: `https://login.microsoftonline.com/common`,
+    redirectUri: "/",
+    postLogoutRedirectUri: "/"
+  }
+};
+
+// Add here scopes for id token to be used at MS Identity Platform endpoints.
+export const loginRequest: RedirectRequest = {
+  scopes: ["User.Read"]
+};
+
+// Add here the endpoints for MS Graph API services you would like to use.
+export const graphConfig = {
+  graphMeEndpoint: "https://graph.microsoft-ppe.com/v1.0/me"
+};
+
 export const signInWithMicrosoft = async () => {
-  const msalConfig: any = {
-    auth: {
-      clientId: process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_ID,
-      authority: "https://login.microsoftonline.com/common",
-      redirectUri: "http://localhost:3000/api/auth/callback/azure-ad",
-    },
-    cache: {
-      cacheLocation: "sessionStorage",
-      storeAuthStateInCookie: false,
-    }
-  };
-
-  const myMSALObj = new Msal.UserAgentApplication(msalConfig);
-
-  const loginRequest = {
-    scopes: ["openid", "profile", "User.Read"],
-  };
-
-  myMSALObj.loginPopup(loginRequest)
-    .then((loginResponse: any) => {
-      //Login Success callback code here
-      const idToken = loginResponse.idToken.rawIdToken;
-
-      // AWS Cognito federated sign in
-      // AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-
-      //   IdentityPoolId: 'us-west-2:f74108fa-e811-4490-baac-6a031d933cde', // your identity pool id here
-      //   Logins: {
-      //     'login.microsoftonline.com': idToken
-      //   }
-      // });
-
-      //@ts-ignore
-      // AWS.config.credentials.get(function (err: any) {
-      //   if (err) {
-      //     console.log('Error:', err);
-      //     return;
-      //   }
-
-      // AWS resources access here.
-      //@ts-ignore
-      console.log('token:', idToken);
-      // });
-    }).catch(function (error: any) {
-      console.log(error);
-    });
 }
