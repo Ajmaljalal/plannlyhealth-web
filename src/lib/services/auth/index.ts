@@ -125,9 +125,9 @@ export const resetPassword = async ({ code, password, email }: any) => {
 // Config object to be passed to Msal on creation
 export const msalConfig: Configuration = {
   auth: {
-    clientId: process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_ID as string,
+    clientId: 'fd07f02f-e5a8-4e82-8cb4-b29c9d062d25',
     authority: `https://login.microsoftonline.com/common`,
-    redirectUri: process.env.NEXT_PUBLIC_AZURE_AD_REDIRECT_URI as string,
+    redirectUri: 'https://event-detection-technology-git-authentication-plannly-dev.vercel.app/',
     postLogoutRedirectUri: "/"
   }
 };
