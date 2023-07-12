@@ -127,7 +127,7 @@ export const msalConfig: Configuration = {
   auth: {
     clientId: process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_ID as string,
     authority: `https://login.microsoftonline.com/common`,
-    redirectUri: "/",
+    redirectUri: process.env.NEXT_PUBLIC_AZURE_AD_REDIRECT_URI as string,
     postLogoutRedirectUri: "/"
   }
 };
