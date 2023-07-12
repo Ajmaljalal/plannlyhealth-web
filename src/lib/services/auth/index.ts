@@ -127,7 +127,7 @@ export const msalConfig: Configuration = {
   auth: {
     clientId: 'fd07f02f-e5a8-4e82-8cb4-b29c9d062d25',
     authority: `https://login.microsoftonline.com/common`,
-    redirectUri: 'https://app.plannlyhealth.com/',
+    redirectUri: 'https://app.plannlyhealth.com',
     postLogoutRedirectUri: "/"
   }
 };
