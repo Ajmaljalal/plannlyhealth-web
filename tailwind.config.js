@@ -26,6 +26,8 @@ module.exports = {
       basic_grey_10: '#E9E9EE',
       basic_light: '#FEFDFD',
       basic_white: '#FFFFFF',
+      basic_yellow: '#FFB92E',
+      basic_orange: '#ff9139',
       system_error: '#FE3E51',
       system_success: '#42C76F',
       system_success_light: '#E0F4E7',
@@ -37,7 +39,6 @@ module.exports = {
       purple_light: '#FBE7FD',
       blue: '#0601EE',
       blue_light: '#E7EAFD',
-      orange: '#FF9139',
       orange_light: '#F5E9D6',
 
     },

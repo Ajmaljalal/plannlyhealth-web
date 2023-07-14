@@ -34,7 +34,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
             A
           </div>
         </div>
-        <div className='lg:p-[32px] lg:pt-[0px]'>
+        <div className='lg:p-[32px] lg:pt-[0px] max-w-[1600px] mx-auto'>
           {children}
         </div>
       </div>

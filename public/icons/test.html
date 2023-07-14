@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+    <circle id="donut-segment1" class="donut-segment" cx="21" cy="21" r="10" fill="transparent" stroke="#d2d3d4"
+        stroke-width="3"></circle>
+    <circle id="donut-segment2" class="donut-segment" cx="21" cy="21" r="10" fill="transparent" stroke="#ce4b99"
+        stroke-width="4"></circle>
+    <circle id="donut-segment3" class="donut-segment" cx="21" cy="21" r="10" fill="transparent" stroke="#377bbc"
+        stroke-width="3"></circle>
+    <circle id="donut-segment4" class="donut-segment" cx="21" cy="21" r="10" fill="transparent" stroke="#b1c94e"
+        stroke-width="2"></circle>
+    <circle id="donut-segment5" class="donut-segment" cx="21" cy="21" r="10" fill="transparent" stroke="#b1f34f"
+        stroke-width="2"></circle>
+</svg>
+
+<script>
+    // Values for each segment
+    var segmentValues = [15, 30, 20, 30, 5];
+
+    var oldCircumference = 2 * Math.PI * 15.91549430918954;
+    var newCircumference = 2 * Math.PI * 10;
+
+    var cumulativeValues = 0;
+    for (var i = 0; i < segmentValues.length; i++) {
+        var segment = document.getElementById('donut-segment' + (i + 1));
+        var value = segmentValues[i];
+
+        var adjustedValue = (value / oldCircumference) * newCircumference;
+        var dasharray = adjustedValue + ' ' + (newCircumference - adjustedValue);
+        segment.setAttribute('stroke-dasharray', dasharray);
+
+        var dashoffset = -cumulativeValues;
+        segment.setAttribute('stroke-dashoffset', dashoffset);
+
+        cumulativeValues += adjustedValue;
+    }
+</script>
+
+
+
+<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+    <circle id="donut-segment1" class="donut-segment" cx="21" cy="21" fill="transparent" stroke="#d2d3d4"
+        stroke-width="3"></circle>
+    <circle id="donut-segment2" class="donut-segment" cx="21" cy="21" fill="transparent" stroke="#ce4b99"
+        stroke-width="4"></circle>
+    <circle id="donut-segment3" class="donut-segment" cx="21" cy="21" fill="transparent" stroke="#377bbc"
+        stroke-width="3"></circle>
+    <circle id="donut-segment4" class="donut-segment" cx="21" cy="21" fill="transparent" stroke="#b1c94e"
+        stroke-width="2"></circle>
+    <circle id="donut-segment5" class="donut-segment" cx="21" cy="21" fill="transparent" stroke="#b1f34f"
+        stroke-width="2"></circle>
+</svg>
+
+<script>
+    // Values for each segment
+    var segmentValues = [10, 30, 20, 30, 10];
+    // Stroke widths for each segment
+    var segmentStrokeWidths = [3, 4, 3, 2, 2];
+
+    var cumulativeValues = 0;
+    var maxStrokeWidth = Math.max.apply(null, segmentStrokeWidths); // get max stroke width
+    var currentRadius = 15.91549430918954; // base radius
+    var overlapFix = 0.5;
+
+    for (var i = 0; i < segmentValues.length; i++) {
+        var segment = document.getElementById('donut-segment' + (i + 1));
+        var value = segmentValues[i] - (i < segmentValues.length - 1 ? overlapFix : 0); // subtract overlap fix from every segment except the last one
+        var strokeWidth = segmentStrokeWidths[i];
+
+        var dasharray = value + ' ' + (100 - value);
+        segment.setAttribute('stroke-dasharray', dasharray);
+
+        var dashoffset = -(cumulativeValues + (i > 0 ? overlapFix : 0)); // add overlap fix to every segment except the first one
+        segment.setAttribute('stroke-dashoffset', dashoffset);
+
+        // Update radius to simulate outside stroke alignment
+        var adjustedRadius = currentRadius + (maxStrokeWidth - strokeWidth) / 2;
+        segment.setAttribute('r', adjustedRadius);
+
+        cumulativeValues += segmentValues[i];
+    }
+</script> -->
