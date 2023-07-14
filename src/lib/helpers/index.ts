@@ -44,7 +44,16 @@ export const calculateUsersStatus = (users: any) => {
 
 export const getFormattedDate = (date: string) => {
   const dateObj = new Date(date)
-  return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}`
+  return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}` // returns 7/13/2023
+}
+
+export const formatDate = (dateString: string) => {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  return `${day} ${month}, ${year}`; // returns 13 Jul, 2023
 }
 
 export const formatAmount = (amount: number) => {
@@ -120,3 +129,42 @@ export const decryptData = (data: string) => {
   const decryptedData = CryptoJS.AES.decrypt(data, process.env.NEXT_PUBLIC_PLANNLY_ENCRYPT_KEY as string).toString(CryptoJS.enc.Utf8);
   return JSON.parse(decryptedData);
 }
+
+export const calculateWidthTailwindClass = (inputNumber: number) => {
+  let widthClasses: any = {
+    'w-1/2': 50,
+    'w-1/3': 33.333333,
+    'w-2/3': 66.666667,
+    'w-1/4': 25,
+    'w-2/4': 50,
+    'w-3/4': 75,
+    'w-1/5': 20,
+    'w-2/5': 40,
+    'w-3/5': 60,
+    'w-4/5': 80,
+    'w-1/6': 16.666667,
+    'w-2/6': 33.333333,
+    'w-3/6': 50,
+    'w-4/6': 66.666667,
+    'w-5/6': 83.333333,
+    'w-1/12': 8.333333,
+    'w-2/12': 16.666667,
+    'w-3/12': 25,
+    'w-4/12': 33.333333,
+    'w-5/12': 41.666667,
+    'w-6/12': 50,
+    'w-7/12': 58.333333,
+    'w-8/12': 66.666667,
+    'w-9/12': 75,
+    'w-10/12': 83.333333,
+    'w-11/12': 91.666667,
+    'w-full': 100
+  };
+
+  let closestClass = Object.keys(widthClasses).reduce((prev, curr) =>
+    Math.abs(widthClasses[curr] - inputNumber) < Math.abs(widthClasses[prev] - inputNumber) ? curr : prev
+  );
+
+  return closestClass;
+}
+

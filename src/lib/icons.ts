@@ -23,6 +23,8 @@ import it from '../../public/icons/shared/it.svg'
 import finance from '../../public/icons/shared/finance.svg'
 import notifications from '../../public/icons/shared/notifications.svg'
 import lightMode from '../../public/icons/shared/light-mode.svg'
+import increase from '../../public/icons/shared/increase.svg'
+import decrease from '../../public/icons/shared/decrease.svg'
 
 
 
@@ -103,6 +105,8 @@ export const icons = {
   finance: finance,
   notifications: notifications,
   lightMode: lightMode,
+  increase: increase,
+  decrease: decrease,
 
 
   // new icons
