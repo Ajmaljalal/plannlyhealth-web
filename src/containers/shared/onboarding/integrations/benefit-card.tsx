@@ -3,7 +3,7 @@ import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
 import Image from "next/image";
 import { useState } from "react";
-import { IntegrationsModal } from "./integrations-modal";
+import { IntegrationsModal } from "../../../../components/integrations-modal";
 import { useDispatch } from "@/store/store";
 import { removeIntegration, setIntegration } from "@/store/company";
 
@@ -21,12 +21,11 @@ const BenefitCard = ({ benefit }: any) => {
     dispatch(removeIntegration(benefit))
   }
 
-
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
   }
 
-  const generalStyle = `flex gap-4 w-1/2 max-w-[650px] min-h-[160px] border-2 rounded-[32px] p-[16px] mb-[24px]`
+  const generalStyle = `flex gap-4 w-full min-h-[160px] border-2 rounded-[32px] p-[16px]`
   const bgColor = benefit.integration ? 'bg-basic_grey_4' : 'transparent'
   const borderColor = benefit.integration ? 'bg_basic_grey_4 border-basic_grey_4' : 'border-basic_grey_4'
   const textColor = benefit.integration ? 'text-basic_black' : 'text-basic_grey_2'

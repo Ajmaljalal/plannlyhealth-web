@@ -1,6 +1,6 @@
 import { useState } from "react"
 import BenefitCard from "./benefit-card"
-import TabButton from "@/components/tab-button"
+import TabButton from "@/components/tabs/tab-button"
 import { Button } from "@/components/button"
 import { useDispatch, useSelector } from "@/store/store"
 import { benefitsSelector, setStep } from "@/store/company"

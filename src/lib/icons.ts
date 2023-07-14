@@ -13,7 +13,8 @@ import detailsLight from '../../public/icons/shared/details-light.svg'
 import checkWhite from '../../public/icons/shared/check-white.svg'
 import close from '../../public/icons/shared/close.svg'
 import edit from '../../public/icons/shared/edit.svg'
-import detete from '../../public/icons/shared/delete.svg'
+import deleteFlat from '../../public/icons/shared/delete-flat.svg'
+import deleteIcon from '../../public/icons/shared/delete.svg'
 import admin from '../../public/icons/shared/admin.svg'
 import superAdmin from '../../public/icons/shared/super-admin.svg'
 import standard from '../../public/icons/shared/standard.svg'
@@ -95,7 +96,8 @@ export const icons = {
   checkWhite: checkWhite,
   close: close,
   edit: edit,
-  delete: detete,
+  delete: deleteIcon,
+  deleteFlat: deleteFlat,
   admin: admin,
   superAdmin: superAdmin,
   standard: standard,

@@ -43,8 +43,8 @@ function CircularProgressBar({ value, colors }: any) {
         strokeLinecap='round'
       />
       <text x="50%" y="45%" textAnchor="middle" fill="black" dy=".3em" fontSize="6" fontWeight='bold'>{value}%</text>
-      <text x="50%" y="60%" textAnchor="middle" fill="black" dy=".3em" font-size="2.5" letterSpacing={0.1} color='#5D5574'>Risk of Human</text>
-      <text x="50%" y="70%" textAnchor="middle" fill="black" dy=".3em" font-size="2.5" letterSpacing={0.1} color='#5D5574'>Errors</text>
+      <text x="50%" y="60%" textAnchor="middle" fill="black" dy=".3em" fontSize="2.5" letterSpacing={0.1} color='#5D5574'>Risk of Human</text>
+      <text x="50%" y="70%" textAnchor="middle" fill="black" dy=".3em" fontSize="2.5" letterSpacing={0.1} color='#5D5574'>Errors</text>
     </svg>
   );
 }

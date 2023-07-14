@@ -1,9 +1,7 @@
+import BenefitsContainer from "@/containers/company/benefits";
+
 const Benefits = () => {
-  return (
-    <div>
-      <h1>Benefits</h1>
-    </div>
-  );
+  return <BenefitsContainer />;
 }
 
 export default Benefits;
