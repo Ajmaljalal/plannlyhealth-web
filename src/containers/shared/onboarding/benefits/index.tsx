@@ -3,13 +3,13 @@ import Hero from "../hero";
 import { icons } from "@/lib/icons";
 import { FileUpload } from "@/components/file-upload";
 import { useState } from "react";
-import TabButton from "../../../../components/tab-button";
-import BenefitCard from "./benefit-card";
+import TabButton from "../../../../components/tabs/tab-button";
+import BenefitCard from "../../../../components/onboarding-benefit-card";
 import { BenefitAddModal } from "./benefit-add-modal";
 import { useDispatch, useSelector } from "@/store/store";
 import { benefitsSelector, setBenefits, setStep } from "@/store/company";
 
-const testBenefits: any = [
+export const testBenefits: any = [
   {
     title: 'Retirement Plans',
     description: 'Secure your future with our comprehensive retirement plans. We offer various options that will help you grow your retirement savings for a financially stable retirement.',
@@ -114,6 +114,7 @@ const testBenefits: any = [
     eligibility: 'All full-time employees are eligible to enroll.',
     integration: null
   },
+
 ]
 
 
@@ -149,7 +150,7 @@ const BenefitsMap = () => {
       <div className="flex flex-col items-strech gap-4 w-full pt-[50px]">
         <h2>Add Benefits to Proceed</h2>
         <div className="flex justify-between items-center">
-          <div className="flex justify-center items-center min-h-[40px] max-h-[40px] border border-2 border-basic_grey_10 bg-basic_white rounded-[24px] w-[320px]">
+          <div className="flex justify-center items-center min-h-[40px] max-h-[40px] border border-2 border-basic_grey_10 bg-basic_white rounded-[24px] w-fit px-[2px]">
             <TabButton text="Primary" count={primaryBenefits.length} isActive={activeTab === 'primary'} onClick={() => setActiveTab('primary')} />
             <TabButton text="Voluntry" count={voluntaryBenefits.length} isActive={activeTab === 'voluntry'} onClick={() => setActiveTab('voluntry')} />
           </div>

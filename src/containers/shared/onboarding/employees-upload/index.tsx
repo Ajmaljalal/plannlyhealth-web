@@ -1,3 +1,4 @@
+'use client';
 import { Button } from "@/components/button";
 import Hero from "../hero";
 import { icons } from "@/lib/icons";
@@ -10,6 +11,7 @@ import { EmployeeAddModal } from "./add-employee-modal";
 import { useDispatch } from "react-redux";
 import { employeesSelector, setEmployees } from "@/store/company";
 import { useSelector } from "@/store/store";
+import { useRouter } from "next/navigation";
 
 
 const tableHeaders = ['Name', 'Job Title', 'Email', 'Role', '']
@@ -102,6 +104,7 @@ const employees: any = [
 
 
 const EmployeesList = () => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
   const selectedEmployees = useSelector(employeesSelector)
@@ -134,6 +137,10 @@ const EmployeesList = () => {
   const handleUploadEmployees = (file: any) => {
     console.log(file)
     dispatch(setEmployees(employees))
+  }
+
+  const handleMoveToNextStep = () => {
+    router.push('/company/dashboard')
   }
 
   const renderEmpoyees = () => {
@@ -189,8 +196,8 @@ const EmployeesList = () => {
       {selectedEmployees?.length ? renderUsersTable() : renderNullState()}
       {
         selectedEmployees?.length ? <div className="absolute bottom-0 bg-basic_grey_5 w-full h-[100px] flex justify-end pt-[20px]">
-          <Button className="w-[200px] max-h-[40px] mr-[24px]" text="Save for Later" onClick={() => console.log('conitune')} />
-          <Button className="w-[200px] max-h-[40px]" text="Launch" isPrimary onClick={() => console.log('conitune')} />
+          <Button className="w-[200px] max-h-[40px] mr-[24px]" text="Save for Later" onClick={handleMoveToNextStep} />
+          <Button className="w-[200px] max-h-[40px]" text="Launch" isPrimary onClick={handleMoveToNextStep} />
         </div> : null
       }
       <EmployeeAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={(employee) => handleAddEmployee(employee)} />

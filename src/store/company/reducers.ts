@@ -7,6 +7,7 @@ import {
   removeIntegration,
   setEmployees,
   toggleBenefitActivation,
+  updateBenefit,
 } from './actions';
 
 type CompanyOnboardingState = {
@@ -58,6 +59,15 @@ export const companyOnboardingReducer = createReducer(initialState, builder => {
       const updatedBenefits: any = state.benefits.map((benefit: any) => {
         if (benefit.title === action.payload.title) {
           benefit.integration = null;
+        }
+        return benefit;
+      });
+      state.benefits = updatedBenefits;
+    })
+    .addCase(updateBenefit, (state, action) => {
+      const updatedBenefits: any = state.benefits.map((benefit: any) => {
+        if (benefit.title === action.payload.title) {
+          benefit = action.payload;
         }
         return benefit;
       });
