@@ -107,6 +107,7 @@ const ReportsContainer = () => {
   }
 
   const renderReports = () => {
+    if (!reports.length) return renderNullState()
     const rowStyle = 'cursor-pointer border-t hover:bg-transparent h-[60px] text-small text-basic_grey_1'
     return (
       <Table className='overflow-scroll mt-[48px]'>
@@ -117,7 +118,13 @@ const ReportsContainer = () => {
               <td className="pl-[32px]">{report.tite}</td>
               <td className="">{report.type}</td>
               <td className="">{formatDate(report.date)}</td>
-              <td className="">{report.department}</td>
+              <td className="">
+                <div className="flex items-center justify-end">
+                  <Button text="View" className="mr-[16px]" isSmallBtn />
+                  <Button text='Copy Link' className='mr-[16px]' isSmallBtn />
+                  <Button text="Download PDF" className="mr-[16px]" isSmallBtn isPrimary />
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -151,7 +158,6 @@ const ReportsContainer = () => {
         </div>
         <Button text="Generate Report" isPrimary className="w-[250px]" />
       </div>
-      {/* {renderNullState()} */}
       {renderReports()}
     </div>
   );
