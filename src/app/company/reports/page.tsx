@@ -1,9 +1,7 @@
+import ReportsContainer from "@/containers/company/reports/page";
+
 const Reports = () => {
-  return (
-    <div>
-      <h1>Reports</h1>
-    </div>
-  );
+  return <ReportsContainer />
 }
 
 export default Reports;
