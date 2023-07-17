@@ -21,7 +21,7 @@ const navItemStyles = `
     py-[10px]
     px-[12px]
     rounded-[10px]
-    hover:bg-brand_voilet
+    hover:bg-brand_voilet/[0.5]
     hover:text-basic_white
     my-[9px]
     cursor-pointer
