@@ -72,8 +72,6 @@ export const EmployeeAddModal = ({ isOpen, onClose, onSave }: { isOpen: boolean,
           placeholder='Role'
           onChange={handleInputChange}
         />
-        <div>
-        </div>
       </div>
     </Modal>
   );

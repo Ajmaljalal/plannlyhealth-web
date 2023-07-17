@@ -47,7 +47,7 @@ const roleColors: any = {
 
 
 const rowStyle = 'cursor-pointer border-t border-pLight hover:bg-transparent max-h-[54px] text-small text-basic_grey_1'
-const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmployee }: { employee: any, onUpdateEmployee: (updatedEmployee: any) => void, onDeleteEmployee: (id: any) => void, onActivateEmployee: (id: any) => void }) => {
+const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmployee, onClick }: { onClick?: () => void, employee: any, onUpdateEmployee: (updatedEmployee: any) => void, onDeleteEmployee: (id: any) => void, onActivateEmployee?: (id: any) => void }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const userName = employee.first_name + ' ' + employee.last_name
   const roleStyle = roleColors[employee.role.toLowerCase()]
@@ -67,7 +67,7 @@ const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmpl
   }
 
   const handleActivateEmployee = () => {
-    onActivateEmployee(employee.id)
+    onActivateEmployee && onActivateEmployee(employee.id)
   }
 
   const renderActionBtns = () => {
@@ -87,10 +87,10 @@ const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmpl
 
   return (
     <tr key={employee.id} className={rowStyle}>
-      <td className="pl-[32px]">{userName}</td>
-      <td className=''>{employee.job_title}</td>
-      <td className=''>{employee.email}</td>
-      <td className="">
+      <td className="pl-[32px]" onClick={onClick}>{userName}</td>
+      <td className='' onClick={onClick}>{employee.job_title}</td>
+      <td className='' onClick={onClick}>{employee.email}</td>
+      <td className="" onClick={onClick}>
         <span className={roleClass}>
           <Image src={roleIcons[employee.role.toLowerCase()]} width={24} height={24} alt="admin icon" className="inline-block mr-[5px]" />
           {employee.role}
