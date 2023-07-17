@@ -2,6 +2,7 @@ import { icons } from "@/lib/icons";
 import Image from "next/image";
 import { EmployeeEditModal } from "./edit-employee-modal";
 import { useState } from "react";
+import { Button } from "@/components/button";
 
 const roleIcons: any = {
   admin: icons.admin,
@@ -46,7 +47,7 @@ const roleColors: any = {
 
 
 const rowStyle = 'cursor-pointer border-t border-pLight hover:bg-transparent max-h-[54px] text-small text-basic_grey_1'
-const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee }: { employee: any, onUpdateEmployee: (updatedEmployee: any) => void, onDeleteEmployee: (id: any) => void }) => {
+const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmployee }: { employee: any, onUpdateEmployee: (updatedEmployee: any) => void, onDeleteEmployee: (id: any) => void, onActivateEmployee: (id: any) => void }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const userName = employee.first_name + ' ' + employee.last_name
   const roleStyle = roleColors[employee.role.toLowerCase()]
@@ -65,6 +66,25 @@ const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee }: { employee: 
     onDeleteEmployee(employee.id)
   }
 
+  const handleActivateEmployee = () => {
+    onActivateEmployee(employee.id)
+  }
+
+  const renderActionBtns = () => {
+    if (employee.inactive) {
+      return (
+        <Button text="Activate" isSmallBtn isPrimary icon={icons.addLight} onClick={handleActivateEmployee} />
+      )
+    } else {
+      return (
+        <>
+          <Image src={icons.edit} width={30} height={30} alt="edit icon" className="cursor-pointer" onClick={toggleEditModal} />
+          <Image src={icons.delete} width={30} height={30} alt="edit icon" className="cursor-pointer" onClick={handleDeleteEmployee} />
+        </>
+      )
+    }
+  }
+
   return (
     <tr key={employee.id} className={rowStyle}>
       <td className="pl-[32px]">{userName}</td>
@@ -76,10 +96,11 @@ const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee }: { employee: 
           {employee.role}
         </span>
       </td>
-      <td className='w-[100%] h-[100%] flex items-center justify-end gap-2 self-auto pr-[32px] mt-auto'>
-        <Image src={icons.edit} width={30} height={30} alt="edit icon" className="cursor-pointer" onClick={toggleEditModal} />
-        <Image src={icons.delete} width={30} height={30} alt="edit icon" className="cursor-pointer" onClick={handleDeleteEmployee} />
-      </td>
+      {
+        <td className='w-[100%] h-[100%] flex items-center justify-end gap-2 self-auto pr-[32px] mt-auto'>
+          {renderActionBtns()}
+        </td>
+      }
       <EmployeeEditModal isOpen={isEditModalOpen} employee={employee} onClose={toggleEditModal} onSave={handleUpdateEmployee} />
     </tr>
   );
