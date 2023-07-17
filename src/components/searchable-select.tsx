@@ -7,15 +7,16 @@ import Image from 'next/image';
 const customStyles = {
   control: (provided: any, state: any) => ({
     ...provided,
-    border: state.isFocused ? '1px solid #807896' : '1px solid #807896',
-    borderRadius: '8px',
+    border: state.isFocused ? '1px solid #807896' : 'none',
+    borderRadius: '10px',
     boxShadow: 'none',
     '&:hover': {
       border: state.isFocused ? 'border' : 'border',
     },
     padding: '0 24px',
     cursor: 'pointer',
-    height: '48px'
+    height: '42px',
+    fontSize: '13px',
   }),
   valueContainer: (provided: any) => ({
     ...provided,
@@ -101,7 +102,7 @@ const Dropdown = ({ isSearchable = false, disabled = false, onChange, className,
         components={{
           DropdownIndicator: () => {
             return (
-              <Image src={icons.add} alt='arrow down' />
+              <Image src={icons.arrowDown} alt='arrow down' />
             );
           }
         }}

@@ -63,7 +63,7 @@ export const Input = ({
   const passwordHidSeeIcon = passwordVisible ? icons.hide : icons.see
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative flex items-center h-[42px] ${className}`}>
       {label && <label htmlFor={name} className={labelStyles}>{label}</label>}
       <input
         value={inputValue}

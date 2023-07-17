@@ -46,12 +46,12 @@ const roleColors: any = {
 
 
 
-const rowStyle = 'cursor-pointer border-t border-pLight hover:bg-transparent max-h-[54px] text-small text-basic_grey_1'
+const rowStyle = 'cursor-pointer border-t border-pLight hover:bg-transparent h-[60px] text-small text-basic_grey_1'
 const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmployee, onClick }: { onClick?: () => void, employee: any, onUpdateEmployee: (updatedEmployee: any) => void, onDeleteEmployee: (id: any) => void, onActivateEmployee?: (id: any) => void }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const userName = employee.first_name + ' ' + employee.last_name
   const roleStyle = roleColors[employee.role.toLowerCase()]
-  const roleClass = `${roleStyle.bg} ${roleStyle.text} px-[12px] py-[4px] rounded-[24px] flex items-center w-fit h-[100%] text-small`
+  const roleClass = `${roleStyle.bg} ${roleStyle.text} px-[12px] py-[4px] rounded-[24px] flex items-center w-fit h-[32px] text-small`
 
   const toggleEditModal = () => {
     setIsEditModalOpen(!isEditModalOpen)
@@ -97,7 +97,7 @@ const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmpl
         </span>
       </td>
       {
-        <td className='w-[100%] h-[100%] flex items-center justify-end gap-2 self-auto pr-[32px] mt-auto'>
+        <td className='w-[100%] h-[100%] flex items-center justify-end gap-2 self-auto pr-[32px] pt-[15px]'>
           {renderActionBtns()}
         </td>
       }
