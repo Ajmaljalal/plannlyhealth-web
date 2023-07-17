@@ -21,8 +21,8 @@ const DateRangeSelector = ({ onChange }: DateSelectorProps) => {
   };
 
   return (
-    <div className="flex-1 mt-[0.5px]">
-      <div className="relative">
+    <div className="flex-1 rounded-[10px]">
+      <div className="relative w-[100%] bg-basic_white ">
         <DatePicker
           selected={startDate}
           onChange={handleDateChange}
@@ -30,8 +30,8 @@ const DateRangeSelector = ({ onChange }: DateSelectorProps) => {
           endDate={endDate}
           selectsRange
           dateFormat={'MM.dd.yyyy'}
-          placeholderText="Filter by date"
-          className="w-full px-4 py-2 rounded-lg pr-12 outline-none focus:outline-none"
+          placeholderText="Date Range"
+          className="w-full px-4 py-2 rounded-[10px] pr-12 outline-none focus:outline-none bg-basic_white border-none"
         />
         <Image className="absolute w-6 h-6 text-gray-400 top-1/2 right-3 transform -translate-y-1/2" src={icons.add} alt='date picker' />
       </div>

@@ -27,6 +27,7 @@ import lightMode from '../../public/icons/shared/light-mode.svg'
 import increase from '../../public/icons/shared/increase.svg'
 import decrease from '../../public/icons/shared/decrease.svg'
 import arrowBackBg from '../../public/icons/shared/arrow-back-bg.svg'
+import arrowDown from '../../public/icons/shared/arrow-down.svg'
 
 
 
@@ -111,9 +112,10 @@ export const icons = {
   increase: increase,
   decrease: decrease,
   arrowBackBg: arrowBackBg,
+  arrowDown: arrowDown,
 
 
-  // new icons
+  // social icons
   googleIcon: GoogleIcon,
   microsoftIcon: MicrosoftIcon,
 
