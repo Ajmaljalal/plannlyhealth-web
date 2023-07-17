@@ -26,6 +26,7 @@ import notifications from '../../public/icons/shared/notifications.svg'
 import lightMode from '../../public/icons/shared/light-mode.svg'
 import increase from '../../public/icons/shared/increase.svg'
 import decrease from '../../public/icons/shared/decrease.svg'
+import arrowBackBg from '../../public/icons/shared/arrow-back-bg.svg'
 
 
 
@@ -109,6 +110,7 @@ export const icons = {
   lightMode: lightMode,
   increase: increase,
   decrease: decrease,
+  arrowBackBg: arrowBackBg,
 
 
   // new icons

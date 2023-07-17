@@ -2,7 +2,7 @@ import TabButton from "./tab-button";
 
 type TabProps = {
   text: string,
-  count: number,
+  count?: number,
   isActive: boolean,
   onClick: () => void
 };

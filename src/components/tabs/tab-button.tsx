@@ -8,7 +8,7 @@ const TabButton = ({ text, count, isActive, onClick }: any) => {
   return (
     <div className={style} onClick={onClick}>
       {text}
-      <span className={`ml-2 h-[20px] w-[20px] rounded-[50%] bg-basic_grey_4 flex items-center justify-center ${iconStyle}`}>{count}</span>
+      {count ? <span className={`ml-2 h-[20px] w-[20px] rounded-[50%] bg-basic_grey_4 flex items-center justify-center ${iconStyle}`}>{count}</span> : null}
     </div >
   )
 }
