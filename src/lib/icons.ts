@@ -71,6 +71,11 @@ import saplingIcon from '../../public/icons/integrations/sapling.svg'
 import waveIcon from '../../public/icons/integrations/wave.svg'
 import accuPayIcon from '../../public/icons/integrations/accupay.svg'
 import aholaIcon from '../../public/icons/integrations/ahola.svg'
+import bamboohrIcon from '../../public/icons/integrations/bamboohr.svg'
+import gustoIcon from '../../public/icons/integrations/gusto.png'
+import justworksIcon from '../../public/icons/integrations/justworks.svg'
+import namelyIcon from '../../public/icons/integrations/namely.svg'
+import humaansIcon from '../../public/icons/integrations/humaans.svg'
 
 interface StringMap { [key: string]: string }
 interface ProgramIcons { [key: string]: StringMap }
@@ -127,6 +132,12 @@ export const icons = {
   waveIcon: waveIcon,
   accuPayIcon: accuPayIcon,
   aholaIcon: aholaIcon,
+  bamboohrIcon: bamboohrIcon,
+  gustoIcon: gustoIcon,
+  justworksIcon: justworksIcon,
+  namelyIcon: namelyIcon,
+  humaansIcon: humaansIcon,
+
 
 
   // left nav

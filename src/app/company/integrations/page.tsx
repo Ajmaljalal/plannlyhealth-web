@@ -1,9 +1,7 @@
+import IntegrationsContainer from "@/containers/company/integrations";
+
 const Integrations = () => {
-  return (
-    <div>
-      <h1>Integrations</h1>
-    </div>
-  );
+  return <IntegrationsContainer />;
 }
 
 export default Integrations;

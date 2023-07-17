@@ -8,6 +8,7 @@ import {
   setEmployees,
   toggleBenefitActivation,
   updateBenefit,
+  addIntegrations
 } from './actions';
 
 type CompanyOnboardingState = {
@@ -75,5 +76,9 @@ export const companyOnboardingReducer = createReducer(initialState, builder => {
     })
     .addCase(setEmployees, (state, action) => {
       state.employees = action.payload;
-    });
+    })
+    .addCase(addIntegrations, (state, action) => {
+      state.integrations = action.payload;
+    }
+    );
 });
