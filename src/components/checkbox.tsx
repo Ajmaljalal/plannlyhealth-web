@@ -10,6 +10,7 @@ const wrapperStyle = `
   items-center 
   cursor-pointer 
   h-fit
+  mt-[10px]
 `;
 
 // Style for the checkbox
@@ -26,6 +27,7 @@ const labelStyle = `
   font-medium
   cursor-pointer
   pl-[12px]
+  text-[13px]
 `;
 
 // Define CheckBox Component

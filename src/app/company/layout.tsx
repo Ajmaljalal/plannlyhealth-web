@@ -15,8 +15,8 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className='w-full h-screen p-[16px] flex overflow-hidden bg-basic_white'>
-      <div className='hidden lg:flex flex-col min-w-[244px] h-full bg-basic_black text-basic_white px-[32px] p-[24px] rounded-[32px]'>
-        <Image src={logo} alt='plannly logo' />
+      <div className='hidden lg:flex flex-col min-w-[200px] h-full bg-basic_black text-basic_white px-[32px] py-[24px] px-[20px] rounded-[32px]'>
+        <Image src={logo} alt='plannly logo' className='mt-[16px]' />
         <div className='w-full mt-[16px]'>
           <Navbar />
         </div>
