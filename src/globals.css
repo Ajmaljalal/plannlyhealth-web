@@ -97,13 +97,13 @@
 
   input {
     background-color: #EDEDF0;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 150%;
     font-weight: 500;
     border: 1px solid #ebeaf1;
     color: #160523;
     border-radius: 8px;
-    height: 48px;
+    height: 42px;
     padding: 10px 14px;
     position: relative;
     outline: none;
@@ -117,12 +117,12 @@
 
   input:disabled {
     border: 1px solid #ebeaf1;
-    color: #b6b6b6;
+    color: #71688d;
     cursor: not-allowed;
   }
 
   input:disabled::placeholder {
-    color: #b6b6b6;
+    color: #71688d;
   }
 
   input::placeholder {

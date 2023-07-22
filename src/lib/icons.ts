@@ -28,6 +28,8 @@ import increase from '../../public/icons/shared/increase.svg'
 import decrease from '../../public/icons/shared/decrease.svg'
 import arrowBackBg from '../../public/icons/shared/arrow-back-bg.svg'
 import arrowDown from '../../public/icons/shared/arrow-down.svg'
+import editPencil from '../../public/icons/shared/edit-pencil.svg'
+import goldenStar from '../../public/icons/shared/golden-star.svg'
 
 
 
@@ -118,6 +120,8 @@ export const icons = {
   decrease: decrease,
   arrowBackBg: arrowBackBg,
   arrowDown: arrowDown,
+  editPencil: editPencil,
+  goldenStar: goldenStar,
 
 
   // social icons

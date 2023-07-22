@@ -19,7 +19,7 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
 }
 
 const baseLabelStyles = 'text-small text-extrabold px-4 text-basic_grey_3'
-const disabledLabelStyles = 'text-pLightGray'
+const disabledLabelStyles = 'text-basic_grey_2'
 const onFocusLabelStyles = 'text-pDark'
 const onBlurLabelStyles = 'text-pDarkGray'
 
@@ -63,7 +63,7 @@ export const Input = ({
   const passwordHidSeeIcon = passwordVisible ? icons.hide : icons.see
 
   return (
-    <div className={`relative flex items-center h-[42px] ${className}`}>
+    <div className={`relative items-center h-[42px] my-[10px] ${className}`}>
       {label && <label htmlFor={name} className={labelStyles}>{label}</label>}
       <input
         value={inputValue}

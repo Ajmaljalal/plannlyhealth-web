@@ -47,7 +47,7 @@ export const Modal = ({ isOpen, onClose, ctaButton, children, size = 'small' }: 
               />
             </div>
             {children}
-            <div className="flex gap-4 justify-end mt-[24px]">
+            <div className="flex gap-4 justify-end mt-[48px]">
               <Button text='Cancel' onClick={onClose} className="w-[160px]" />
               {ctaButton}
             </div>
