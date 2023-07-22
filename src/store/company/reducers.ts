@@ -8,7 +8,10 @@ import {
   setEmployees,
   toggleBenefitActivation,
   updateBenefit,
-  addIntegrations
+  addIntegrations,
+  setUserProfile,
+  setCompanyPlan,
+  setCompanyPaymentMethod
 } from './actions';
 
 type CompanyOnboardingState = {
@@ -17,6 +20,9 @@ type CompanyOnboardingState = {
   benefits: [];
   integrations: [];
   employees: [];
+  userProfile: {};
+  companyPlan: {};
+  companyPaymentMethod: {};
 };
 
 const initialState: CompanyOnboardingState = {
@@ -25,6 +31,9 @@ const initialState: CompanyOnboardingState = {
   benefits: [],
   integrations: [],
   employees: [],
+  userProfile: {},
+  companyPlan: {},
+  companyPaymentMethod: {}
 };
 
 export const companyOnboardingReducer = createReducer(initialState, builder => {
@@ -79,6 +88,14 @@ export const companyOnboardingReducer = createReducer(initialState, builder => {
     })
     .addCase(addIntegrations, (state, action) => {
       state.integrations = action.payload;
-    }
-    );
+    })
+    .addCase(setUserProfile, (state, action) => {
+      state.userProfile = action.payload;
+    })
+    .addCase(setCompanyPaymentMethod, (state, action) => {
+      state.companyPaymentMethod = action.payload;
+    })
+    .addCase(setCompanyPlan, (state, action) => {
+      state.companyPlan = action.payload;
+    });
 });

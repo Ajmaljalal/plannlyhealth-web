@@ -10,6 +10,9 @@ export const selectEmployees = (state: RootState) => state.company_onboarding.em
 export const selectPrimaryBenefits = (state: RootState) => state.company_onboarding.benefits.filter((benefit: any) => benefit.isPrimary);
 export const selectVoluntaryBenefits = (state: RootState) => state.company_onboarding.benefits.filter((benefit: any) => !benefit.isPrimary);
 
+export const selectCompanyPaymentMethod = (state: RootState) => state.company_onboarding.companyPaymentMethod;
+export const selectCompanyPlan = (state: RootState) => state.company_onboarding.companyPlan;
+
 
 export const currentStepSelector = createSelector(selectOnboardintStep, state => state);
 export const companyDetailsSelector = createSelector(selectCompanyDetails, state => state);
@@ -18,3 +21,5 @@ export const primaryBenefitsSelector = createSelector(selectPrimaryBenefits, sta
 export const voluntaryBenefitsSelector = createSelector(selectVoluntaryBenefits, state => state);
 export const integrationsSelector = createSelector(selectIntegrations, state => state);
 export const employeesSelector = createSelector(selectEmployees, state => state);
+export const companyPaymentMethodSelector = createSelector(selectCompanyPaymentMethod, state => state);
+export const companyPlanSelector = createSelector(selectCompanyPlan, state => state);
