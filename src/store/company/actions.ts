@@ -8,3 +8,6 @@ export const toggleBenefitActivation = createAction<any>('onboarding/toggleBenef
 export const removeIntegration = createAction<any>('onboarding/removeIntegration')
 export const updateBenefit = createAction<any>('onboarding/updateBenefit')
 export const addIntegrations = createAction<any>('onboarding/addIntegrations')
+export const setUserProfile = createAction<any>('onboarding/setUserProfile')
+export const setCompanyPlan = createAction<any>('onboarding/setCompanyPlan')
+export const setCompanyPaymentMethod = createAction<any>('onboarding/setCompanyPaymentMethod')

@@ -31,7 +31,7 @@ const modalContainerStyles = `
 `
 
 export const Modal = ({ isOpen, onClose, ctaButton, children, size = 'small' }: ModalProps) => {
-  const modalSize = size === 'small' ? 'w-[578px]' : size === 'medium' ? 'w-[70px]' : 'w-[840px]'
+  const modalSize = size === 'small' ? 'w-[420px]' : size === 'medium' ? 'w-[600px]' : 'w-[840px]'
   return (
     isOpen ?
       <>
