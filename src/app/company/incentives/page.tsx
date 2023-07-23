@@ -1,9 +1,7 @@
+import IncentivesContainer from "@/containers/company/incentives";
+
 const Incentives = () => {
-  return (
-    <div>
-      <h1>Incentives</h1>
-    </div>
-  );
+  return <IncentivesContainer />;
 }
 
 export default Incentives;
