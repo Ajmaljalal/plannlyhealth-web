@@ -5,7 +5,7 @@ import { icons } from '@/lib/icons'
 import Image from 'next/image'
 import React from 'react'
 
-const ptoIncentive = [
+const ptoIncentivesData = [
   {
     id: 1,
     name: '2 days of paid time off (PTO)',
@@ -20,7 +20,7 @@ const ptoIncentive = [
   }
 ]
 
-const cashIncentive = [
+const cashIncentivesData = [
   {
     id: 1,
     name: '$100 Wellness Stipend',
@@ -39,7 +39,7 @@ const cashIncentive = [
   }
 ]
 
-const giftIncentives = [
+const giftIncentivesData = [
   {
     id: 1,
     name: 'Apple Watch Series 8',
@@ -71,28 +71,67 @@ const giftIncentives = [
 ]
 
 const IncentivesContainer = () => {
-  const handleIncentiveActivation = (e: any) => {
+  const [ptoIncentives, setPtoIncentive] = React.useState(ptoIncentivesData)
+  const [cashIncentive, setCashIncentive] = React.useState(cashIncentivesData)
+  const [giftIncentives, setGiftIncentives] = React.useState(giftIncentivesData)
+
+  const handlePTOIncentiveActivation = (incentiveToUpdate: any) => (e: any) => {
+    const { checked } = e.target;
+    const updatedIncentive = { ...incentiveToUpdate, isAvailable: checked };
+    const updatedIncentives = ptoIncentives.map((incentive) => {
+      if (incentive.id === updatedIncentive.id) {
+        return updatedIncentive;
+      }
+      return incentive;
+    });
+    setPtoIncentive(updatedIncentives);
+  };
+
+  const handleCashIncentiveActivation = (e: any, incentiveToUpdate: any) => {
     const { checked } = e.target
-    console.log('checked: ', checked)
+    const updatedIncentive = { ...incentiveToUpdate, isAvailable: checked }
+    const updatedIncentives = cashIncentive.map((incentive) => {
+      if (incentive.id === updatedIncentive.id) {
+        return updatedIncentive
+      }
+      return incentive
+    }
+    )
+    setCashIncentive(updatedIncentives)
   }
+
+  const handleGiftIncentiveActivation = (e: any, incentiveToUpdate: any) => {
+    const { checked } = e.target
+    const updatedIncentive = { ...incentiveToUpdate, isAvailable: checked }
+    const updatedIncentives = giftIncentives.map((incentive) => {
+      if (incentive.id === updatedIncentive.id) {
+        return updatedIncentive
+      }
+      return incentive
+    }
+    )
+    setGiftIncentives(updatedIncentives)
+
+  }
+
 
   const renderPtoIncentives = () => {
     return (
       <>
         <div className='flex justify-between items-center mb-[20px]'>
-          <h4 className='font-normal'>Paid Time Off (PTO)</h4>
-          <Button className='' onClick={() => { }} text='Add PTO' isPrimary isSmallBtn icon={icons.addLight} />
+          <h5 className='text-basic_grey_2 ml-[30px]'>Paid Time Off (PTO)</h5>
+          {/* <Button className='' onClick={() => { }} text='Add PTO' isPrimary isSmallBtn icon={icons.addLight} /> */}
         </div>
         <div className='flex gap-4'>
-          {ptoIncentive.map((incentive) => {
+          {ptoIncentives.map((incentive) => {
             return (
-              <div key={incentive.id} className='relative flex flex-1 gap-4 w-full lg:w-1/2 h-[152px] rounded-[32px] bg-brand_voilet_hue p-[16px]'>
+              <div key={incentive.name} className='relative flex flex-1 gap-4 w-full lg:w-1/2 h-[152px] rounded-[32px] bg-brand_voilet_hue p-[16px]'>
                 <Image src={incentive.icon} width={120} height={120} alt='PTO Incentive' />
                 <div className='flex-1'>
                   <h4 className='font-normal mt-[5px]'>{incentive.name}</h4>
                   <div className='flex gap-2 justify-end absolute bottom-5 right-[60px]'>
                     <p>Available</p>
-                    <Toggle handleIncentiveActivation={handleIncentiveActivation} value={incentive.isAvailable} />
+                    <Toggle id={incentive.name} handleIncentiveActivation={handlePTOIncentiveActivation(incentive)} value={incentive.isAvailable} />
                   </div>
                 </div>
               </div>
@@ -107,8 +146,8 @@ const IncentivesContainer = () => {
     return (
       <>
         <div className='flex justify-between items-center mb-[20px]'>
-          <h4 className='font-normal'>Cash Allowances</h4>
-          <Button className='' onClick={() => { }} text='Add More' isPrimary isSmallBtn icon={icons.addLight} />
+          <h5 className='text-basic_grey_2 ml-[30px]'>Cash Allowances</h5>
+          {/* <Button className='' onClick={() => { }} text='Add More' isPrimary isSmallBtn icon={icons.addLight} /> */}
         </div>
         <div className='flex gap-4'>
           {
@@ -120,7 +159,7 @@ const IncentivesContainer = () => {
                     <h4 className='font-normal mt-[5px]'>{incentive.name}</h4>
                     <div className='flex gap-2 justify-end absolute bottom-5 right-[60px]'>
                       <p>Available</p>
-                      <Toggle handleIncentiveActivation={handleIncentiveActivation} value={incentive.isAvailable} />
+                      <Toggle id={incentive.name} handleIncentiveActivation={(e) => handleCashIncentiveActivation(e, incentive)} value={incentive.isAvailable} />
                     </div>
                   </div>
                 </div>
@@ -136,8 +175,8 @@ const IncentivesContainer = () => {
     return (
       <div className=''>
         <div className='flex justify-between items-center mb-[20px]'>
-          <h4 className='font-normal'>Gifts</h4>
-          <Button className='' onClick={() => { }} text='Add More' isPrimary isSmallBtn icon={icons.addLight} />
+          <h5 className='text-basic_grey_2 ml-[30px]'>Gifts</h5>
+          {/* <Button className='' onClick={() => { }} text='Add More' isPrimary isSmallBtn icon={icons.addLight} /> */}
         </div>
         <div className='flex flex-col flex-wrap gap-4 bg-brand_voilet_hue rounded-[32px]'>
           {
@@ -152,7 +191,7 @@ const IncentivesContainer = () => {
                     <p className='text-small text-basic_grey_1'>{incentive.description}</p>
                     <div className='flex gap-2 justify-end absolute bottom-5 right-[60px]'>
                       <p>Available</p>
-                      <Toggle handleIncentiveActivation={handleIncentiveActivation} value={incentive.isAvailable} />
+                      <Toggle id={incentive.name} handleIncentiveActivation={(e) => handleGiftIncentiveActivation(e, incentive)} value={incentive.isAvailable} />
                     </div>
                   </div>
                 </div>

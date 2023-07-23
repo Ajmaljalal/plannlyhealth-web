@@ -21,6 +21,7 @@ const navItemStyles = `
     py-[10px]
     px-[12px]
     rounded-[10px]
+    text-basic_grey_3
     hover:bg-brand_voilet/[0.5]
     hover:text-basic_white
     my-[9px]
@@ -34,7 +35,7 @@ export const NavItem = ({ text, href, icon }: NavItemProps) => {
   const pathname = usePathname()
   const isActive = pathname === href
   return (
-    <Link href={href} className={`${navItemStyles} ${isActive ? 'bg-brand_voilet' : ''}`}>
+    <Link href={href} className={`${navItemStyles} ${isActive ? 'bg-brand_voilet text-basic_white' : ''}`}>
       <Image src={icon} alt={`${text} icon`} width='24' height='24' className='mr-[10px]' />
       {text}
     </Link>

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logo from '../../../public/logos/logo.svg'
+import logo from '../../../public/logos/logo-white-full-v2.svg'
 import Navbar from '@/containers/shared/left-nav/company';
 import { SignOut } from '@/components/signout';
 import { Divider } from '@/components/divider';
@@ -15,9 +15,9 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className='w-full h-screen p-[16px] flex bg-basic_white'>
-      <div className='hidden lg:flex flex-col min-w-[200px] h-full bg-basic_black text-basic_white px-[32px] py-[24px] px-[20px] rounded-[32px]'>
-        <Image src={logo} alt='plannly logo' className='mt-[16px]' />
-        <div className='w-full mt-[16px]'>
+      <div className='hidden lg:flex flex-col min-w-[200px] h-full bg-basic_black text-basic_white px-[16px] py-[24px] rounded-[32px]'>
+        <Image src={logo} width={150} height={53} alt='plannly logo' className='ml-[-6px] mt-[6px] w-[140px] h-[50px]' />
+        <div className='w-full mt-[30px]'>
           <Navbar />
         </div>
         <div className='align-end mt-auto'>
