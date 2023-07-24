@@ -30,6 +30,9 @@ import arrowBackBg from '../../public/icons/shared/arrow-back-bg.svg'
 import arrowDown from '../../public/icons/shared/arrow-down.svg'
 import editPencil from '../../public/icons/shared/edit-pencil.svg'
 import goldenStar from '../../public/icons/shared/golden-star.svg'
+import checkCircleGreen from '../../public/icons/shared/check-circle-green.svg'
+import closeCircleRed from '../../public/icons/shared/close-circle-red.svg'
+import progressCircleOrange from '../../public/icons/shared/progress-circle-orange.svg'
 
 
 
@@ -122,6 +125,9 @@ export const icons = {
   arrowDown: arrowDown,
   editPencil: editPencil,
   goldenStar: goldenStar,
+  checkCircleGreen: checkCircleGreen,
+  closeCircleRed: closeCircleRed,
+  progressCircleOrange: progressCircleOrange,
 
 
   // social icons

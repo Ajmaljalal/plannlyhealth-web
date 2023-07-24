@@ -1,9 +1,7 @@
+import AssessmentsContainer from "@/containers/company/assessments";
+
 const Assessments = () => {
-  return (
-    <div>
-      <h1>Assessments</h1>
-    </div>
-  );
+  return <AssessmentsContainer />;
 }
 
 export default Assessments;
