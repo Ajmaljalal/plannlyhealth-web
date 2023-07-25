@@ -1,9 +1,8 @@
+import RewardsContainer from '@/containers/employee/rewards'
 import React from 'react'
 
 const Rewards = () => {
-  return (
-    <div>Rewards</div>
-  )
+  return <RewardsContainer />
 }
 
 export default Rewards

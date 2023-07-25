@@ -33,6 +33,7 @@ import goldenStar from '../../public/icons/shared/golden-star.svg'
 import checkCircleGreen from '../../public/icons/shared/check-circle-green.svg'
 import closeCircleRed from '../../public/icons/shared/close-circle-red.svg'
 import progressCircleOrange from '../../public/icons/shared/progress-circle-orange.svg'
+import lottery from '../../public/icons/shared/lottery.png'
 
 
 
@@ -146,6 +147,7 @@ export const icons = {
   checkCircleGreen: checkCircleGreen,
   closeCircleRed: closeCircleRed,
   progressCircleOrange: progressCircleOrange,
+  lottery: lottery,
 
 
   // social icons
