@@ -10,12 +10,13 @@ const signOutBtnStyles = `
     justify-start
     w-full
     h-[40px]
-    text-pWhite
+    text-basic_grey_3
     text-[14px]
     font-bold-700
     p-[10px]
     rounded-[8px]
-    hover:bg-pDarkGray
+    hover:bg-brand_voilet
+    hover:text-basic_white
     cursor-pointer
     leading-[1.2]
     focus:bg-pPink

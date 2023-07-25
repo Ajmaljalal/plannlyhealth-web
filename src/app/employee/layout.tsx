@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import logo from '../../../public/logos/logo-white-full-v2.svg'
-import Navbar from '@/containers/company/left-nav/company';
+import Navbar from '@/containers/employee/left-nav/employee';
 import { SignOut } from '@/components/signout';
-import { Divider } from '@/components/divider';
-import { NavItem } from '@/components/left-nav/nav-item';
 import { icons } from '@/lib/icons';
 
 export const metadata = {
@@ -21,8 +19,6 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
           <Navbar />
         </div>
         <div className='align-end mt-auto'>
-          <Divider />
-          <NavItem href='/company/settings' text='Settings' icon={icons.settingsLight} />
           <SignOut />
         </div>
       </div>

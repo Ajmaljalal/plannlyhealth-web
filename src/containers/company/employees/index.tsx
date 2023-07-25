@@ -8,9 +8,9 @@ import { TableHead } from "@/components/table/table-head";
 import { useDispatch } from "react-redux";
 import { employeesSelector, setEmployees } from "@/store/company";
 import { useSelector } from "@/store/store";
-import Employee from "@/containers/shared/onboarding/employees-upload/employee-row";
-import Hero from "@/containers/shared/onboarding/hero";
-import { EmployeeAddModal } from "@/containers/shared/onboarding/employees-upload/add-employee-modal";
+import Employee from "@/containers/onboarding/company/employees-upload/employee-row";
+import Hero from "@/containers/onboarding/company/hero";
+import { EmployeeAddModal } from "@/containers/onboarding/company/employees-upload/add-employee-modal";
 import Tabs from "@/components/tabs/tabs";
 import { useRouter } from "next/navigation";
 

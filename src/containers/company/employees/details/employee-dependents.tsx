@@ -1,7 +1,7 @@
 'use client';
 import { Table } from "@/components/table/table";
 import { TableHead } from "@/components/table/table-head";
-import Hero from "@/containers/shared/onboarding/hero";
+import Hero from "@/containers/onboarding/company/hero";
 import Dependent from "./dependent";
 
 const tableHeaders = ['Name', 'Relation', 'Date of Birth', '']

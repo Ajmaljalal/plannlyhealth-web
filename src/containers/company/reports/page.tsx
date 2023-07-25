@@ -4,7 +4,7 @@ import { Input } from "@/components/input";
 import Dropdown from "@/components/searchable-select";
 import { Table } from "@/components/table/table";
 import { TableHead } from "@/components/table/table-head";
-import Hero from "@/containers/shared/onboarding/hero";
+import Hero from "@/containers/onboarding/company/hero";
 import { formatDate } from "@/lib/helpers";
 import { useState } from "react";
 
