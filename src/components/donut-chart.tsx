@@ -11,15 +11,15 @@ const DonutChart = ({ segments }: { segments: any[] }) => {
     const maxStrokeWidth = 7;
     const minStrokeWidth = 4;
 
-    const segmentValues = segments?.map(segment => segment.value);
-    const maxSegmentValue = Math.max(...segmentValues);
-    const minSegmentValue = Math.min(...segmentValues);
+    const totalSegmentValues = segments?.reduce((sum, segment) => sum + segment.value, 0);
+    const maxSegmentValue = Math.max(...segments.map(segment => segment.value));
+    const minSegmentValue = Math.min(...segments.map(segment => segment.value));
 
     segments?.forEach((segment, i) => {
       const segmentEl: any = segmentsRef.current[i];
 
-      const adjustedValue = (segment.value / 100) * circumference;
-      const dasharray = `${adjustedValue} ${circumference}`;
+      const normalizedValue = (segment.value / totalSegmentValues) * circumference;
+      const dasharray = `${normalizedValue} ${circumference}`;
       segmentEl?.setAttribute('stroke-dasharray', dasharray);
 
       const dashoffset = -cumulativeValues;
@@ -30,7 +30,7 @@ const DonutChart = ({ segments }: { segments: any[] }) => {
 
       segmentEl?.setAttribute('stroke', segment.color);
 
-      cumulativeValues += adjustedValue;
+      cumulativeValues += normalizedValue;
     });
   }, [segments]);
 
