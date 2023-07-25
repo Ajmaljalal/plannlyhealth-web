@@ -22,7 +22,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
         </div>
         <div className='align-end mt-auto'>
           <Divider />
-          <NavItem href='/company/settings' text='Settings' icon={icons.settingsLight} />
+          <NavItem href='/company/settings' text='Settings' icon={icons.settings} iconLight={icons.settingsLight} />
           <SignOut />
         </div>
       </div>

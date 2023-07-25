@@ -8,6 +8,7 @@ interface NavItemProps {
   text: string;
   href: string;
   icon: StaticImageData;
+  iconLight: StaticImageData;
 }
 
 const navItemStyles = `
@@ -31,12 +32,13 @@ const navItemStyles = `
     focus:text-basic_white
 `
 
-export const NavItem = ({ text, href, icon }: NavItemProps) => {
+export const NavItem = ({ text, href, icon, iconLight }: NavItemProps) => {
   const pathname = usePathname()
   const isActive = pathname === href
+  const currentIcon = isActive ? iconLight : icon
   return (
     <Link href={href} className={`${navItemStyles} ${isActive ? 'bg-brand_voilet text-basic_white' : ''}`}>
-      <Image src={icon} alt={`${text} icon`} width='24' height='24' className='mr-[10px]' />
+      <Image src={currentIcon} alt={`${text} icon`} width='24' height='24' className='mr-[10px]' />
       {text}
     </Link>
   )

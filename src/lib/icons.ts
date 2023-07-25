@@ -82,6 +82,24 @@ import justworksIcon from '../../public/icons/integrations/justworks.svg'
 import namelyIcon from '../../public/icons/integrations/namely.svg'
 import humaansIcon from '../../public/icons/integrations/humaans.svg'
 
+
+/////////////// Employee Icons ///////////////
+import calendarDarkBlue from '../../public/icons/employee/calendar-dark-blue.svg'
+import calendarInProgressVoilet from '../../public/icons/employee/calendar-in-progress-voilet.svg'
+import card from '../../public/icons/employee/card.svg'
+import cardLight from '../../public/icons/employee/card-light.svg'
+import checkDarkBlue from '../../public/icons/employee/check-dark-blue.svg'
+import earnedMoney from '../../public/icons/employee/earned-money.svg'
+import pendingRed from '../../public/icons/employee/pending-red.svg'
+import profile from '../../public/icons/employee/profile.svg'
+import profileLight from '../../public/icons/employee/profile-light.svg'
+import rewards from '../../public/icons/employee/rewards.svg'
+import rewardsLight from '../../public/icons/employee/rewards-light.svg'
+import shipedVoilet from '../../public/icons/employee/shiped-voilet.svg'
+import spentMoney from '../../public/icons/employee/spent-money.svg'
+import todo from '../../public/icons/employee/todo.svg'
+import todoLight from '../../public/icons/employee/todo-light.svg'
+
 interface StringMap { [key: string]: string }
 interface ProgramIcons { [key: string]: StringMap }
 
@@ -175,6 +193,24 @@ export const icons = {
   stressLight: stressLight,
   burnoutLight: burnoutLight,
   turnoverLight: turnoverLight,
+
+
+  // employee
+  calendarDarkBlue: calendarDarkBlue,
+  calendarInProgressVoilet: calendarInProgressVoilet,
+  card: card,
+  cardLight: cardLight,
+  checkDarkBlue: checkDarkBlue,
+  earnedMoney: earnedMoney,
+  pendingRed: pendingRed,
+  profile: profile,
+  profileLight: profileLight,
+  rewardsLight: rewardsLight,
+  shipedVoilet: shipedVoilet,
+  spentMoney: spentMoney,
+  rewards: rewards,
+  todo: todo,
+  todoLight: todoLight,
 
 
 }
