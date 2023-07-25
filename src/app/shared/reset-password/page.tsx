@@ -1,4 +1,4 @@
-import { ResetPasswordContainer } from '@/containers/shared/reset-password'
+import { ResetPasswordContainer } from '@/containers/auth/reset-password'
 
 const ResetPassword = ({ }) => {
   return (

@@ -2,13 +2,13 @@
 import { Button } from "@/components/button";
 import FileUpload from "@/components/file-upload";
 import Tabs from "@/components/tabs/tabs";
-import { BenefitAddModal } from "@/containers/shared/onboarding/benefits/benefit-add-modal";
-import Hero from "@/containers/shared/onboarding/hero";
+import { BenefitAddModal } from "@/containers/onboarding/company/benefits/benefit-add-modal";
+import Hero from "@/containers/onboarding/company/hero";
 import { icons } from "@/lib/icons";
 import { useState } from "react";
 import { useDispatch, useSelector } from "@/store/store";
 import { benefitsSelector, setBenefits } from "@/store/company";
-import { testBenefits } from "@/containers/shared/onboarding/benefits";
+import { testBenefits } from "@/containers/onboarding/company/benefits";
 import BenefitCard from "@/components/company-benefit-card";
 
 const BenefitsContainer = () => {

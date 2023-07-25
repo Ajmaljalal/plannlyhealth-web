@@ -1,4 +1,4 @@
-import Onboarding from "@/containers/shared/onboarding";
+import Onboarding from "@/containers/onboarding/company";
 
 const OnboardingPage = () => {
   return (
