@@ -64,7 +64,7 @@ const SectionsTab = () => {
       const growthText = isGrowing ? `${growthPercentage}%  Increase` : `${growthPercentage}%  Decrease`;
       const growthIcon = isGrowing ? icons.increase : icons.decrease;
       const activeTabClass = activeTab === tab.title ? 'bg-gradient-to-br from-brand_dark_blue to-brand_voilet_lighter text-basic_white' : '';
-      const tabItemClass = `h-[154px] flex-1 rounded-[32px] bg-basic_grey_5 text-basic_black px-[32px] py-[24px] cursor-pointer ${activeTabClass}`;
+      const tabItemClass = `min-w-[230px] h-[154px] flex-1 rounded-[32px] bg-basic_grey_5 text-basic_black px-[32px] py-[24px] cursor-pointer ${activeTabClass}`;
 
       return (
         <div className={tabItemClass} key={tab.title} onClick={() => handleTabClick(tab.title)}>
@@ -87,7 +87,7 @@ const SectionsTab = () => {
   }
   return (
     <div className="">
-      <div className="flex justify-between gap-4">
+      <div className="flex justify-between gap-4 flex-wrap">
         {renderTabs()}
       </div>
       {renderTabContent()}

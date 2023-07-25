@@ -5,6 +5,76 @@ import { Tab } from '@/lib/types/general'
 import Image from 'next/image'
 import { icons } from '@/lib/icons'
 import Tile from '@/components/tile'
+import ProgressChart from '@/components/progress-chart'
+import ProgressChartDouble from '@/components/progress-chart-double'
+
+const questionOne = {
+  question: 'Rate your overall health.',
+  options: [
+    {
+      title: 'Great',
+      percentage: 52,
+      color: 'bg-brand_dark_blue',
+    },
+    {
+      title: 'Nice',
+      percentage: 28,
+      color: 'bg-brand_voilet',
+    },
+    {
+      title: 'Bad',
+      percentage: 20,
+      color: 'bg-brand_voilet_light',
+    },
+  ],
+}
+
+const questionTwo = {
+  question: 'How stressed are you?',
+  options: [
+    {
+      title: 'High',
+      percentage: 50,
+      color: 'bg-brand_dark_blue',
+    },
+    {
+      title: 'Medium',
+      percentage: 30,
+      color: 'bg-brand_voilet',
+    },
+    {
+      title: 'Low',
+      percentage: 20,
+      color: 'bg-brand_voilet_light',
+    },
+  ]
+}
+
+const questionThree = {
+  question: 'If you had the option to choose, which would you consider more beneficial?',
+  options: [
+    {
+      title: 'Tuition Reimbursement',
+      percentage: 90,
+      color: 'bg-brand_dark_blue',
+    },
+    {
+      title: 'Employee Assistance Programs (EAP)',
+      percentage: 74,
+      color: 'bg-brand_voilet',
+    },
+    {
+      title: 'Commuter Benefits',
+      percentage: 67,
+      color: 'bg-brand_voilet_light',
+    },
+    {
+      title: 'Flexible Working Arrangements',
+      percentage: 48,
+      color: 'bg-brand_voilet_lighter',
+    }
+  ],
+}
 
 const AssessmentsContainer = () => {
   const [activeTab, setActiveTab] = React.useState('onboarding')
@@ -27,6 +97,42 @@ const AssessmentsContainer = () => {
       count: 12,
     }
   ]
+
+  const renderQuestionOne = () => {
+    return (
+      <Tile>
+        <h3 className="font-medium mb-[18px]">1. {questionOne.question}</h3>
+        <div className='gap-4'>
+          {questionOne.options.map((option, index) => (
+            <ProgressChart key={index} data={option} containerClass='bg-basic_grey_3/[0.22]' graphClass={option.color} />
+          ))}
+        </div>
+      </Tile>
+    )
+  }
+
+  const renderQuestionTwo = () => {
+    return (
+      <Tile>
+        <h3 className="font-medium mb-[18px]">2. {questionTwo.question}</h3>
+        <ProgressChartDouble data={questionTwo.options} />
+      </Tile>
+    )
+  }
+
+  const renderQuestionThree = () => {
+    return (
+      <Tile>
+        <h3 className="font-medium mb-[18px]">3. {questionThree.question}</h3>
+        <div className='gap-4'>
+          {questionThree.options.map((option, index) => (
+            <ProgressChart key={index} data={option} containerClass='bg-basic_grey_3/[0.22]' graphClass={option.color} />
+          ))}
+        </div>
+      </Tile>
+    )
+  }
+
   return (
     <div>
       <h2 className='font-normal mb-[20px]'>Assessments</h2>
@@ -46,13 +152,10 @@ const AssessmentsContainer = () => {
           <p className='text-big'>12% not started</p>
         </div>
       </div>
-      <div className='flex gap-4'>
-        <Tile>
-          <h3 className="font-medium mb-[30px]">1. Rate your overall health</h3>
-        </Tile>
-        <Tile>
-          <h3 className="font-medium mb-[30px]">1. Rate your overall health</h3>
-        </Tile>
+      <div className='flex gap-4 flex-wrap'>
+        {renderQuestionOne()}
+        {renderQuestionTwo()}
+        {renderQuestionThree()}
       </div>
     </div>
   )

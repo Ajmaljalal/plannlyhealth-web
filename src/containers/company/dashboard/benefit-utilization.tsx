@@ -2,7 +2,7 @@ import ColoredDot from "@/components/colored-dot";
 import DonutChart from "@/components/donut-chart";
 
 const legenStyle = 'flex items-center gap-2 text-small';
-const containerStyle = 'flex justify-between flex-1 h-[285px] rounded-[32px] bg-basic_grey_5 px-[32px] py-[24px]';
+const containerStyle = 'min-w-[500px] flex justify-between flex-1 h-[285px] rounded-[32px] bg-basic_grey_5 px-[32px] py-[24px]';
 const BenefitUtilization = () => {
   return (
     <div className={containerStyle}>
