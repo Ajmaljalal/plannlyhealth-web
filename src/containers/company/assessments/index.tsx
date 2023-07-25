@@ -4,6 +4,7 @@ import Tabs from '@/components/tabs/tabs'
 import { Tab } from '@/lib/types/general'
 import Image from 'next/image'
 import { icons } from '@/lib/icons'
+import Tile from '@/components/tile'
 
 const AssessmentsContainer = () => {
   const [activeTab, setActiveTab] = React.useState('onboarding')
@@ -11,9 +12,6 @@ const AssessmentsContainer = () => {
   const handleTabClick = (tab: string) => {
     setActiveTab(tab)
   }
-
-
-
 
   const tabs: Tab[] = [
     {
@@ -47,6 +45,14 @@ const AssessmentsContainer = () => {
           <Image src={icons.closeCircleRed} width={24} height={24} alt='icon' />
           <p className='text-big'>12% not started</p>
         </div>
+      </div>
+      <div className='flex gap-4'>
+        <Tile>
+          <h3 className="font-medium mb-[30px]">1. Rate your overall health</h3>
+        </Tile>
+        <Tile>
+          <h3 className="font-medium mb-[30px]">1. Rate your overall health</h3>
+        </Tile>
       </div>
     </div>
   )

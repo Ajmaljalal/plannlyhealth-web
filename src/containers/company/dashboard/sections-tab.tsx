@@ -80,7 +80,7 @@ const SectionsTab = () => {
 
   const renderTabContent = () => {
     return (
-      <div className="flex justify-between items-center gap-4 mt-[30px]">
+      <div className="flex gap-4 mt-[30px]">
         {tabContent[activeTab]}
       </div>
     )
