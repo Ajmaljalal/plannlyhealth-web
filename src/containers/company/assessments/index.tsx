@@ -7,6 +7,8 @@ import { icons } from '@/lib/icons'
 import Tile from '@/components/tile'
 import ProgressChart from '@/components/progress-chart'
 import ProgressChartDouble from '@/components/progress-chart-double'
+import ColoredDot from '@/components/colored-dot'
+import DonutChart from '@/components/donut-chart'
 
 const questionOne = {
   question: 'Rate your overall health.',
@@ -133,6 +135,48 @@ const AssessmentsContainer = () => {
     )
   }
 
+  const legenStyle = 'flex items-center gap-2 text-small';
+  const benefitUtilization = () => {
+    return (
+      <Tile>
+        <h3 className="font-medium mb-[30px]">4. What benefits do you use less of all?</h3>
+        <div className='flex items-center justify-evenly'>
+          <div className="w-[224px] h-[224px]">
+            <DonutChart segments={[
+              { value: 20, title: 'Mental Health Benefits', color: '#42C76F' },
+              { value: 15, title: 'Life Insurance', color: '#161517' },
+              { value: 10, title: 'PTO Benefits', color: '#FFB92E' },
+              { value: 5, title: 'Dental Insurance', color: '#FF9139' },
+              { value: 50, title: 'Retirement Benefits', color: '#F03771' },
+            ]} />
+          </div>
+          <div className="flex flex-col gap-2">
+            <p className={legenStyle}>
+              <ColoredDot className="bg-system_error" />
+              Retirement Benefits - 50%
+            </p>
+            <p className={legenStyle}>
+              <ColoredDot className="bg-system_success" />
+              Mental Health Benefits - 20%
+            </p>
+            <p className={legenStyle}>
+              <ColoredDot className="bg-basic_black" />
+              Life Insurance - 15%
+            </p>
+            <p className={legenStyle}>
+              <ColoredDot className="bg-basic_orange" />
+              Dental Insurance - 5%
+            </p>
+            <p className={legenStyle}>
+              <ColoredDot className="bg-basic_yellow" />
+              PTO Benefits - 10%
+            </p>
+          </div>
+        </div>
+      </Tile>
+    );
+  }
+
   return (
     <div>
       <h2 className='font-normal mb-[20px]'>Assessments</h2>
@@ -141,11 +185,11 @@ const AssessmentsContainer = () => {
       <div className='mt-[37px] mb-[24px] flex gap-4'>
         <div className='px-[16px] py-[8px] bg-system_success_light rounded-[32px] flex gap-2 items-center justify-center'>
           <Image src={icons.checkCircleGreen} width={24} height={24} alt='icon' />
-          <p className='text-big'>8% completed</p>
+          <p className='text-big'>80% completed</p>
         </div>
         <div className='px-[16px] py-[8px] bg-orange_light rounded-[32px] flex gap-2 items-center justify-center'>
           <Image src={icons.progressCircleOrange} width={24} height={24} alt='icon' />
-          <p className='text-big'>80% in porgress</p>
+          <p className='text-big'>8% in porgress</p>
         </div>
         <div className='px-[16px] py-[8px] bg-system_error/[0.15] rounded-[32px] flex gap-2 items-center justify-center'>
           <Image src={icons.closeCircleRed} width={24} height={24} alt='icon' />
@@ -156,6 +200,7 @@ const AssessmentsContainer = () => {
         {renderQuestionOne()}
         {renderQuestionTwo()}
         {renderQuestionThree()}
+        {benefitUtilization()}
       </div>
     </div>
   )
