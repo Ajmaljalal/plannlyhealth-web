@@ -100,6 +100,10 @@ import shipedVoilet from '../../public/icons/employee/shiped-voilet.svg'
 import spentMoney from '../../public/icons/employee/spent-money.svg'
 import todo from '../../public/icons/employee/todo.svg'
 import todoLight from '../../public/icons/employee/todo-light.svg'
+import childBirth from '../../public/icons/employee/child-birth.svg'
+import childAdoption from '../../public/icons/employee/child-adoption.svg'
+import hDotsPurple from '../../public/icons/employee/h-dots-purple.svg'
+import heartPurple from '../../public/icons/employee/heart-purple.svg'
 
 interface StringMap { [key: string]: string }
 interface ProgramIcons { [key: string]: StringMap }
@@ -213,6 +217,8 @@ export const icons = {
   rewards: rewards,
   todo: todo,
   todoLight: todoLight,
-
-
+  childBirth: childBirth,
+  childAdoption: childAdoption,
+  hDotsPurple: hDotsPurple,
+  heartPurple: heartPurple,
 }

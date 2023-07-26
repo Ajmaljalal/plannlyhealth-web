@@ -10,6 +10,7 @@ interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean
   ctaButton?: React.ReactNode
   size?: 'small' | 'medium' | 'large'
+  cancelBtnText?: string
 }
 
 const modalContainerStyles = `
@@ -27,11 +28,13 @@ const modalContainerStyles = `
     bg-basic_black
     bg-opacity-50
     text-basic_black
+    px-[5px]
     
 `
-
-export const Modal = ({ isOpen, onClose, ctaButton, children, size = 'small' }: ModalProps) => {
-  const modalSize = size === 'small' ? 'w-[420px]' : size === 'medium' ? 'w-[600px]' : 'w-[840px]'
+export const Modal = ({ isOpen, onClose, ctaButton, children, size = 'small', cancelBtnText = 'Cancel' }: ModalProps) => {
+  const modalSize = size === 'small' ? 'max-w-[420px]' : size === 'medium' ? 'max-w-[600px]' : 'max-w-[840px]'
+  const isSmall = size === 'small'
+  const buttonContainerStyles = isSmall ? 'justify-between' : 'justify-end'
   return (
     isOpen ?
       <>
@@ -47,8 +50,8 @@ export const Modal = ({ isOpen, onClose, ctaButton, children, size = 'small' }: 
               />
             </div>
             {children}
-            <div className="flex gap-4 justify-end mt-[48px]">
-              <Button text='Cancel' onClick={onClose} className="w-[160px]" />
+            <div className={`flex flex-col md:flex-row gap-4 mt-[48px] ${buttonContainerStyles}`}>
+              <Button text={cancelBtnText} onClick={onClose} className="w-full md:w-[200px]" />
               {ctaButton}
             </div>
           </Container>
