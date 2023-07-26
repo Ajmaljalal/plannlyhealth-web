@@ -38,7 +38,7 @@ export const NavItem = ({ text, href, icon, iconLight }: NavItemProps) => {
   const currentIcon = isActive ? iconLight : icon
   return (
     <Link href={href} className={`${navItemStyles} ${isActive ? 'bg-brand_voilet text-basic_white' : ''}`}>
-      <Image src={currentIcon} alt={`${text} icon`} width='24' height='24' className='mr-[10px]' />
+      <Image src={currentIcon} alt={`${text} icon`} width='18' height='18' className='mr-[10px]' />
       {text}
     </Link>
   )

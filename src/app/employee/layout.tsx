@@ -3,6 +3,7 @@ import logo from '../../../public/logos/logo-white-full-v2.svg'
 import Navbar from '@/containers/employee/left-nav/employee';
 import { SignOut } from '@/components/signout';
 import { icons } from '@/lib/icons';
+import AssessmentAlertModal from '@/components/assessment/assessment-alert-modal';
 
 export const metadata = {
   title: 'Plannly Health',
@@ -34,6 +35,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
           {children}
         </div>
       </div>
+      <AssessmentAlertModal />
     </div>
   )
 }
