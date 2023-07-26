@@ -4,6 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 import { icons } from '@/lib/icons'
 import { calculateWidthTailwindClass } from '@/lib/helpers'
+import { useRouter } from 'next/navigation'
 
 type Question = {
   id: number
@@ -92,6 +93,7 @@ const questions = [
 
 
 function AssessmentContainer() {
+  const router = useRouter()
   const [allQuestions, setAllQuestions] = React.useState<Question[]>(questions)
   const [currentQuestion, setCurrentQuestion] = React.useState<Question>(allQuestions[0])
 
@@ -114,7 +116,11 @@ function AssessmentContainer() {
 
   const handleNextQuestion = () => {
     // get next question
-    if (currentQuestion.id === allQuestions.length) return
+    if (currentQuestion.id === allQuestions.length) {
+      // submit all questions
+      handleSubmit()
+      return
+    }
     const nextQuestion = allQuestions[currentQuestion.id]
     setCurrentQuestion(nextQuestion)
   }
@@ -127,7 +133,7 @@ function AssessmentContainer() {
   }
 
   const handleSubmit = () => {
-    // submit all questions
+    router.push('/assessment/congratulations')
   }
 
 
