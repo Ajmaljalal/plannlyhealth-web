@@ -12,7 +12,7 @@ export const testBenefits: any = [
     icon: icons.add,
     isPrimary: false,
     howToEnroll: 'Please contact our HR department or visit our website for information on how to enroll.',
-    howToEnrollLink: 'https://www.google.com',
+    howToEnrollLink: 'https://www.testbenefits.com',
     howToEnrollLinkText: 'Learn More',
     isActive: false,
     logo: '/images/health-insurance.svg',
@@ -27,7 +27,7 @@ export const testBenefits: any = [
     icon: icons.add,
     isPrimary: true,
     howToEnroll: 'Please contact our HR department or visit our website for information on how to enroll.',
-    howToEnrollLink: 'https://www.google.com',
+    howToEnrollLink: 'https://www.testbenefits.com',
     howToEnrollLinkText: 'Learn More',
     isActive: false,
     logo: '/images/health-insurance.svg',
@@ -42,7 +42,7 @@ export const testBenefits: any = [
     icon: icons.add,
     isPrimary: true,
     howToEnroll: 'Please contact our HR department or visit our website for information on how to enroll.',
-    howToEnrollLink: 'https://www.google.com',
+    howToEnrollLink: 'https://www.testbenefits.com',
     howToEnrollLinkText: 'Learn More',
     isActive: false,
     logo: '/images/health-insurance.svg',
@@ -57,7 +57,7 @@ export const testBenefits: any = [
     icon: icons.add,
     isPrimary: true,
     howToEnroll: 'Please contact our HR department or visit our website for information on how to enroll.',
-    howToEnrollLink: 'https://www.google.com',
+    howToEnrollLink: 'https://www.testbenefits.com',
     howToEnrollLinkText: 'Learn More',
     isActive: false,
     logo: '/images/health-insurance.svg',
@@ -72,7 +72,7 @@ export const testBenefits: any = [
     icon: icons.add,
     isPrimary: false,
     howToEnroll: 'Please contact your supervisor or HR department for information on how to request flexible working arrangements.',
-    howToEnrollLink: 'https://www.google.com',
+    howToEnrollLink: 'https://www.testbenefits.com',
     howToEnrollLinkText: 'Learn More',
     isActive: false,
     logo: '/images/health-insurance.svg',
@@ -87,7 +87,7 @@ export const testBenefits: any = [
     icon: icons.add,
     isPrimary: false,
     howToEnroll: 'Please contact our HR department or visit our website for information on available training programs and how to enroll.',
-    howToEnrollLink: 'https://www.google.com',
+    howToEnrollLink: 'https://www.testbenefits.com',
     howToEnrollLinkText: 'Learn More',
     isActive: false,
     logo: '/images/health-insurance.svg',
@@ -102,7 +102,7 @@ export const testBenefits: any = [
     icon: icons.add,
     isPrimary: false,
     howToEnroll: 'Please contact our HR department or visit our website for information on how to access these services.',
-    howToEnrollLink: 'https://www.google.com',
+    howToEnrollLink: 'https://www.testbenefits.com',
     howToEnrollLinkText: 'Learn More',
     isActive: false,
     logo: '/images/health-insurance.svg',
@@ -117,7 +117,7 @@ export const testBenefits: any = [
     icon: icons.add,
     isPrimary: false,
     howToEnroll: 'Please contact our HR department or visit our website for information on how to apply for tuition reimbursement.',
-    howToEnrollLink: 'https://www.google.com',
+    howToEnrollLink: 'https://www.testbenefits.com',
     howToEnrollLinkText: 'Learn More',
     isActive: false,
     logo: '/images/health-insurance.svg',
@@ -132,7 +132,7 @@ export const testBenefits: any = [
     icon: icons.add,
     isPrimary: false,
     howToEnroll: 'Please contact our HR department or visit our website for information on current wellness programs and how to participate.',
-    howToEnrollLink: 'https://www.google.com',
+    howToEnrollLink: 'https://www.testbenefits.com',
     howToEnrollLinkText: 'Learn More',
     isActive: false,
     logo: '/images/health-insurance.svg',
@@ -147,7 +147,7 @@ export const testBenefits: any = [
     icon: icons.add,
     isPrimary: false,
     howToEnroll: 'Please contact our HR department or visit our website for information on how to enroll in our commuter benefits program.',
-    howToEnrollLink: 'https://www.google.com',
+    howToEnrollLink: 'https://www.testbenefits.com',
     howToEnrollLinkText: 'Learn More',
     isActive: false,
     logo: '/images/health-insurance.svg',
@@ -193,7 +193,7 @@ const BenefitsContainer = () => {
 
   const renderBenefits = () => {
     return (
-      <div className="w-full flex justify-center md:justify-start flex-wrap gap-6">
+      <div className="w-full flex justify-center xl:justify-start flex-wrap gap-6">
         {
           benefitsToRender?.map((benefit: any) => {
             return <BenefitCard key={benefit.title} benefit={benefit} />
