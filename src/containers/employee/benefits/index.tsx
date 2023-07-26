@@ -1,13 +1,9 @@
-import { Button } from "@/components/button";
-import Hero from "../hero";
-import { icons } from "@/lib/icons";
-import { FileUpload } from "@/components/file-upload";
+'use client';
+import Tabs from "@/components/tabs/tabs";
+import Hero from "@/containers/onboarding/company/hero";
 import { useState } from "react";
-import TabButton from "../../../../components/tabs/tab-button";
-import BenefitCard from "../../../../components/onboarding-benefit-card";
-import { BenefitAddModal } from "./benefit-add-modal";
-import { useDispatch, useSelector } from "@/store/store";
-import { benefitsSelector, setBenefits, setStep } from "@/store/company";
+import BenefitCard from "@/components/employee-benefit-card";
+import { icons } from "@/lib/icons";
 
 export const testBenefits: any = [
   {
@@ -163,89 +159,67 @@ export const testBenefits: any = [
 
 ]
 
+const BenefitsContainer = () => {
+  const primaryBenefits = testBenefits.filter((benefit: any) => benefit.isPrimary)
+  const voluntaryBenefits = testBenefits.filter((benefit: any) => !benefit.isPrimary)
+  const recommendedBenefits = testBenefits.filter((benefit: any) => benefit.recommended)
+  const [activeTab, setActiveTab] = useState('primary')
 
-const BenefitsMap = () => {
-  const dispatch = useDispatch()
-  const allBenefits = useSelector(benefitsSelector)
-  const primaryBenefits = allBenefits.filter((benefit: any) => benefit.isPrimary)
-  const voluntaryBenefits = allBenefits.filter((benefit: any) => !benefit.isPrimary)
-
-  const [activeTab, setActiveTab] = useState<any>('primary')
-  const [isModalOpen, setIsModalOpen] = useState<any>(false)
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen)
+  const handleTabClick = (text: string) => {
+    setActiveTab(text.toLocaleLowerCase())
   }
 
+  const tabs = [
+    {
+      text: 'Primary',
+      count: primaryBenefits?.length || 0,
+      isActive: activeTab === 'primary',
+      onClick: () => handleTabClick('primary')
+    },
+    {
+      text: 'Voluntary',
+      count: voluntaryBenefits?.length || 0,
+      isActive: activeTab === 'voluntary',
+      onClick: () => handleTabClick('voluntary')
+    },
+  ]
 
-  const handleAddBenefit = (newBenefit: any) => {
-    newBenefit = activeTab === 'primary' ? { ...newBenefit, isPrimary: true } : { ...newBenefit, isPrimary: false }
-    dispatch(setBenefits([...allBenefits, newBenefit]))
+  const benefits: any = {
+    primary: primaryBenefits,
+    voluntary: voluntaryBenefits,
+    recommended: recommendedBenefits,
   }
-
-  const handleUploadBenefit = (file: any) => {
-    console.log(file)
-    dispatch(setBenefits([...allBenefits, ...testBenefits]))
-  }
-
-  const benefits = activeTab === 'primary' ? primaryBenefits : voluntaryBenefits
-  const addBenefitBtnText = activeTab === 'primary' ? 'Add Primary Benefit' : 'Add Voluntary Benefit'
+  const benefitsToRender = benefits[activeTab]
 
   const renderBenefits = () => {
     return (
-      <div className="flex flex-col items-strech gap-4 w-full pt-[50px]">
-        <h2>Add Benefits to Proceed</h2>
-        <div className="flex justify-between items-center">
-          <div className="flex justify-center items-center min-h-[40px] max-h-[40px] border border-2 border-basic_grey_10 bg-basic_white rounded-[24px] w-fit px-[2px]">
-            <TabButton text="Primary" count={primaryBenefits.length} isActive={activeTab === 'primary'} onClick={() => setActiveTab('primary')} />
-            <TabButton text="Voluntry" count={voluntaryBenefits.length} isActive={activeTab === 'voluntry'} onClick={() => setActiveTab('voluntry')} />
-          </div>
-          <Button className="max-h-[40px]" text={addBenefitBtnText} isPrimary icon={icons.addLight} onClick={toggleModal} />
-        </div>
-        <div className="mt-[32px] pb-[300px] flex flex-wrap justify-between max-h-[60%] max-w-[1440px] overflow-x-scroll">
-          {
-            benefits.map((benefit: any) => {
-              return <BenefitCard key={benefit.title} benefit={benefit} />
-            })
-          }
-        </div>
+      <div className="w-full flex justify-center md:justify-start flex-wrap gap-6">
+        {
+          benefitsToRender?.map((benefit: any) => {
+            return <BenefitCard key={benefit.title} benefit={benefit} />
+          })
+        }
       </div>
     )
   }
 
   const renderNullState = () => {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center">
-        <Hero image="/illustrations/upload-benefits-illustration.svg" title="Upload your benefits guide" description="Upload a PDF file of your benefits or start adding manually" />
-        <div className="flex gap-4">
-          <FileUpload
-            onChange={(file) => handleUploadBenefit(file[0])}
-            acceptedFileTypes='application/pdf, .docx'
-            text='Upload PDF'
-            className="w-[200px]"
-          />
-          <Button className="w-[200px] text-basic_grey_1" text="Add Benefit" icon={icons.add} onClick={toggleModal} />
-        </div>
+      <div className="w-full h-full flex flex-col items-center justify-center m-auto mt-[150px]">
+        <Hero image="/icons/benefits/benefits-null.svg" title="No benefits available!" description="Your organization did not specified any benefits yet!" />
       </div>
     )
   }
 
-
   return (
-    <div className="flex flex-col justify-between items-end w-full h-full relative overflow-hidden">
-      {allBenefits.length ? renderBenefits() : renderNullState()}
-      {
-        benefits.length ? <div className="absolute bottom-0 bg-basic_grey_5 w-full h-[100px] flex justify-end">
-          <Button className="w-[200px] max-h-[40px]" text="Continue" isPrimary onClick={() => dispatch(setStep(3))} />
-        </div> : null
-      }
-      <BenefitAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={handleAddBenefit} />
+    <div className="">
+      <h2 className="font-medium mb-[20px]">Benefits</h2>
+      <Tabs tabs={tabs} />
+      <div className="mt-[32px]">
+        {benefitsToRender?.length > 0 ? renderBenefits() : renderNullState()}
+      </div>
     </div>
-
-  )
-
-
-
+  );
 }
 
-export default BenefitsMap;
+export default BenefitsContainer;

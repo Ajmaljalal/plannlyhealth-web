@@ -1,9 +1,8 @@
+import BenefitsContainer from '@/containers/employee/benefits'
 import React from 'react'
 
 function Benefits() {
-  return (
-    <div>Benefits</div>
-  )
+  return <BenefitsContainer />
 }
 
 export default Benefits
