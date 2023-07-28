@@ -10,9 +10,9 @@ export const metadata = {
   description: 'Plannly Health is dedicated to mitigating the risk of human errors in hospitals, by offering a digital health solution that addresses provider stress, burnout, and critical life events or changes.',
 }
 
-const rootContainerStyles = `w-full h-screen p-[16px] flex bg-basic_white overflow-auto relative`
-const navContainerStyles = `sticky top-0 left-0 hidden lg:flex flex-col gap-8 min-w-[200px] h-full bg-basic_black text-basic_white px-[16px] py-[24px] rounded-[32px]`
-const headerStyles = `sticky top-[-16px] right-0 flex justify-end items-center gap-4 h-[65px] mt-[-16px] bg-basic_white`
+const rootContainerStyles = `w-full h-screen p-[16px] flex bg-basic_white overflow-auto`
+const navContainerStyles = `z-50 sticky top-0 left-0 hidden lg:flex flex-col gap-8 min-w-[200px] h-full bg-basic_black text-basic_white px-[16px] py-[24px] rounded-[32px]`
+const headerStyles = `w-full pr-[16px] absolute top-0 right-0 flex justify-end items-center gap-4 h-[65px] bg-basic_white`
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 
@@ -33,7 +33,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
             A
           </div>
         </div>
-        <div className='pb-[32px] lg:p-[32px] lg:pt-[0px] max-w-[1440px] h-fit mx-auto'>
+        <div className='pb-[32px] lg:p-[32px] lg:pt-[0px] max-w-[1440px] h-fit mx-auto mt-[55px]'>
           {children}
         </div>
       </div>
