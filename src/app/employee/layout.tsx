@@ -10,28 +10,30 @@ export const metadata = {
   description: 'Plannly Health is dedicated to mitigating the risk of human errors in hospitals, by offering a digital health solution that addresses provider stress, burnout, and critical life events or changes.',
 }
 
+const rootContainerStyles = `w-full h-screen p-[16px] flex bg-basic_white overflow-auto relative`
+const navContainerStyles = `sticky top-0 left-0 hidden lg:flex flex-col gap-8 min-w-[200px] h-full bg-basic_black text-basic_white px-[16px] py-[24px] rounded-[32px]`
+const headerStyles = `sticky top-[-16px] right-0 flex justify-end items-center gap-4 h-[65px] mt-[-16px] bg-basic_white`
+
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
-    <div className='w-full h-screen p-[16px] flex bg-basic_white'>
-      <div className='hidden lg:flex flex-col min-w-[200px] h-full bg-basic_black text-basic_white px-[16px] py-[24px] rounded-[32px]'>
+    <div className={rootContainerStyles}>
+      <div className={navContainerStyles}>
         <Image src={logo} width={150} height={53} alt='plannly logo' className='ml-[-6px] mt-[6px] w-[140px] h-[50px]' />
-        <div className='w-full mt-[30px]'>
-          <Navbar />
-        </div>
+        <Navbar />
         <div className='align-end mt-auto'>
           <SignOut />
         </div>
       </div>
-      <div className='overflow-hidden w-[calc(100%)]'>
-        <div className='flex justify-end items-center gap-4 h-[65px] mt-[-16px]'>
+      <div className='w-full'>
+        <div className={headerStyles}>
           <Image src={icons.notifications} alt='plannly logo' width={32} height={32} />
-          <Image src={icons.lightMode} alt='plannly logo' width={32} height={32} />
+          {/* <Image src={icons.lightMode} alt='plannly logo' width={32} height={32} /> */}
           <div className='flex justify-center items-center w-[32px] h-[32px] rounded-[50%] bg-purple big-text text-basic_white'>
             A
           </div>
         </div>
-        <div className='lg:p-[32px] lg:pt-[0px] max-w-[1440px] h-[calc(100%-40px)] mx-auto overflow-auto'>
+        <div className='pb-[32px] lg:p-[32px] lg:pt-[0px] max-w-[1440px] h-fit mx-auto'>
           {children}
         </div>
       </div>
