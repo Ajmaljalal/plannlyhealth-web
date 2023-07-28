@@ -82,7 +82,7 @@ function RewardsContainer() {
       <div >
         <h2 className='font-normal mb-[20px]'>Your Tickets</h2>
         <div className='flex gap-4 p-[16px] rounded-[32px] bg-basic_grey_5 min-w-[450px]'>
-          <Image src={icons.earnedMoney} width={75} height={0} className='rotate-90 min-w-[75px] ' alt='options' />
+          <Image src={icons.ticketCircle} width={70} height={0} className='min-w-[70px] ' alt='options' />
           <div className='flex flex-col justify-center'>
             <h3 className='font-normal'>You have <span className='font-bold mx-[10px] text-[38px]'>{userTickets.totalTickets}</span>{userTickets.title}</h3>
             <p className='text-small text-basic_grey_1'>{userTickets.description}</p>

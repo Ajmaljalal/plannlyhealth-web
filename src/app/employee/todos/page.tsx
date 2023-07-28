@@ -1,9 +1,8 @@
+import TodosContainer from '@/containers/employee/todos'
 import React from 'react'
 
 function Todos() {
-  return (
-    <div>Todos</div>
-  )
+  return <TodosContainer />
 }
 
 export default Todos

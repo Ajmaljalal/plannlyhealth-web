@@ -138,6 +138,11 @@
     transform: scale(1.3);
   }
 
+  input[type="checkbox"]:disabled {
+    accent-color: #71688d;
+    color: #71688d;
+  }
+
   input[type="radio"] {
     accent-color: #5F369D;
     -ms-transform: scale(1.3);

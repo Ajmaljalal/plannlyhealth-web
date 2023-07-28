@@ -34,6 +34,7 @@ import checkCircleGreen from '../../public/icons/shared/check-circle-green.svg'
 import closeCircleRed from '../../public/icons/shared/close-circle-red.svg'
 import progressCircleOrange from '../../public/icons/shared/progress-circle-orange.svg'
 import lottery from '../../public/icons/shared/lottery.png'
+import tick from '../../public/icons/shared/tick.svg'
 
 
 
@@ -104,6 +105,7 @@ import childBirth from '../../public/icons/employee/child-birth.svg'
 import childAdoption from '../../public/icons/employee/child-adoption.svg'
 import hDotsPurple from '../../public/icons/employee/h-dots-purple.svg'
 import heartPurple from '../../public/icons/employee/heart-purple.svg'
+import ticketCircle from '../../public/icons/employee/ticket-circle.svg'
 
 interface StringMap { [key: string]: string }
 interface ProgramIcons { [key: string]: StringMap }
@@ -152,6 +154,7 @@ export const icons = {
   closeCircleRed: closeCircleRed,
   progressCircleOrange: progressCircleOrange,
   lottery: lottery,
+  tick: tick,
 
 
   // social icons
@@ -221,4 +224,5 @@ export const icons = {
   childAdoption: childAdoption,
   hDotsPurple: hDotsPurple,
   heartPurple: heartPurple,
+  ticketCircle: ticketCircle,
 }
