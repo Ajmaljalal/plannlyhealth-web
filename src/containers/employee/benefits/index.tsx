@@ -213,8 +213,10 @@ const BenefitsContainer = () => {
 
   return (
     <div className="">
-      <h2 className="font-medium mb-[20px]">Benefits</h2>
-      <Tabs tabs={tabs} />
+      <div className='flex flex-col items-center md:items-start'>
+        <h2 className="font-medium mb-[20px]">Benefits</h2>
+        <Tabs tabs={tabs} />
+      </div>
       <div className="mt-[32px]">
         {benefitsToRender?.length > 0 ? renderBenefits() : renderNullState()}
       </div>

@@ -53,7 +53,9 @@ function RewardsContainer() {
   const renderGiftIncentives = () => {
     return (
       <div>
-        <h2 className='font-normal mb-[20px]'>Available Rewards</h2>
+        <div className='flex flex-col items-center md:items-start'>
+          <h2 className='font-normal mb-[20px]'>Available Rewards</h2>
+        </div>
         <div className='flex flex-wrap gap-4'>
           {
             healthcareSurveyLotteryOptions.map((options, index) => {
@@ -80,7 +82,9 @@ function RewardsContainer() {
   return (
     <div className='flex flex-col gap-12'>
       <div className=''>
-        <h2 className='font-normal mb-[20px]'>Your Tickets</h2>
+        <div className='flex flex-col items-center md:items-start'>
+          <h2 className='font-normal mb-[20px]'>Your Tickets</h2>
+        </div>
         <div className='flex flex-col items-center gap-4 p-[16px] rounded-[32px] bg-basic_grey_5'>
           <Image src={icons.ticketCircle} width={70} height={0} className='min-w-[70px] ' alt='options' />
           <div className='flex flex-col justify-center'>
