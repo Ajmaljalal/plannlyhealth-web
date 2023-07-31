@@ -44,7 +44,7 @@ const healthcareSurveyLotteryOptions = [
 const userTickets = {
   title: "tickets to win a reward!",
   totalTickets: 5,
-  description: "You have collected 5 tickets so far. The more tickets you earn, the higher your chances of winning exciting rewards!"
+  description: "The more tickets you earn, the higher your chances of winning exciting rewards!"
 };
 
 
@@ -53,21 +53,23 @@ function RewardsContainer() {
   const renderGiftIncentives = () => {
     return (
       <div>
-        <h2 className='font-normal mb-[20px]'>Available Rewards</h2>
+        <div className='flex flex-col items-center md:items-start'>
+          <h2 className='font-normal mb-[20px]'>Available Rewards</h2>
+        </div>
         <div className='flex flex-wrap gap-4'>
           {
             healthcareSurveyLotteryOptions.map((options, index) => {
               return (
-                <div key={options.id} className='flex flex-1 gap-4 p-[16px] rounded-[32px] bg-basic_grey_5 min-w-[450px]'>
-                  <div className='w-[75px] h-[75px] rounded-[18px] bg-basic_white p-[16px]'>
+                <div key={options.id} className='flex flex-col items-center flex-1 gap-4 p-[16px] rounded-[32px] bg-basic_grey_5 min-w-[300px]'>
+                  <div className='w-[100px] h-[100px] rounded-[18px] bg-basic_white p-[16px]'>
                     <Image src={icons.lottery} width={64} height={64} className='h-auto' alt='options' />
                   </div>
-                  <div className='flex-1'>
+                  <div className='flex flex-col items-center flex-1 justify-center'>
                     <h3 className=''>${options.price}</h3>
                     <h4 className='font-normal'>
                       {options.title}
                     </h4>
-                    <p className='text-small text-basic_grey_1'>{options.description}</p>
+                    <p className='text-small text-center text-basic_grey_1'>{options.description}</p>
                   </div>
                 </div>
               )
@@ -79,13 +81,15 @@ function RewardsContainer() {
   }
   return (
     <div className='flex flex-col gap-12'>
-      <div >
-        <h2 className='font-normal mb-[20px]'>Your Tickets</h2>
-        <div className='flex gap-4 p-[16px] rounded-[32px] bg-basic_grey_5 min-w-[450px]'>
+      <div className=''>
+        <div className='flex flex-col items-center md:items-start'>
+          <h2 className='font-normal mb-[20px]'>Your Tickets</h2>
+        </div>
+        <div className='flex flex-col items-center gap-4 p-[16px] rounded-[32px] bg-basic_grey_5'>
           <Image src={icons.ticketCircle} width={70} height={0} className='min-w-[70px] ' alt='options' />
           <div className='flex flex-col justify-center'>
-            <h3 className='font-normal'>You have <span className='font-bold mx-[10px] text-[38px]'>{userTickets.totalTickets}</span>{userTickets.title}</h3>
-            <p className='text-small text-basic_grey_1'>{userTickets.description}</p>
+            <h3 className='font-normal text-center'>You have <span className='font-bold mx-[10px] text-[38px]'>{userTickets.totalTickets}</span>{userTickets.title}</h3>
+            <p className='text-small text-center text-basic_grey_1'>{userTickets.description}</p>
           </div>
         </div>
       </div>

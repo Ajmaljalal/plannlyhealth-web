@@ -244,8 +244,10 @@ function TodosContainer() {
 
   return (
     <div>
-      <h2 className='font-normal mb-[20px]'>Todos</h2>
-      <Tabs tabs={tabs} />
+      <div className='flex flex-col items-center md:items-start'>
+        <h2 className='font-normal mb-[20px]'>Todos</h2>
+        <Tabs tabs={tabs} />
+      </div>
       <div className='mt-[32px]'>
         {renderTodos()}
       </div>
