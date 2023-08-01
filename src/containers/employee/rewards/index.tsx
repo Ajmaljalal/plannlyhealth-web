@@ -50,7 +50,7 @@ const userTickets = {
 
 
 function RewardsContainer() {
-  const renderGiftIncentives = () => {
+  const renderLotteryOptions = () => {
     return (
       <div>
         <div className='flex flex-col items-center md:items-start'>
@@ -93,7 +93,7 @@ function RewardsContainer() {
           </div>
         </div>
       </div>
-      {renderGiftIncentives()}
+      {renderLotteryOptions()}
     </div>
   )
 }
