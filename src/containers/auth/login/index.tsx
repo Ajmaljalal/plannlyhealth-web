@@ -6,10 +6,6 @@ import { useSession, signIn } from "next-auth/react"
 import { useMsal } from '@azure/msal-react';
 import { useEffect, useState } from "react";
 
-
-
-
-
 const LoginContainer = () => {
   const session = useSession();
   const { instance } = useMsal();
@@ -53,8 +49,8 @@ const LoginContainer = () => {
     if (session?.data?.user?.name || userName) {
       return (
         <div className="w-[360px] h-full flex flex-col items-center px-[24px] text-center">
-          <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
-          <h1 className="text-[32px] text-simibold mb-[12px]">User Does Not Exist!</h1>
+          <img src="/logos/logo-icon-only-v2.svg" alt="Plannly" className="mb-[32px]" width={70} height={70} />
+          <h2 className="text-normal mb-[12px]">User Does Not Exist!</h2>
           <p className="text-basic_grey_1 mb-[32px]">Please contact support for help!</p>
         </div>
       )
@@ -67,9 +63,9 @@ const LoginContainer = () => {
   const renderForm = () => {
     if (!session?.data?.user?.name && !userName) {
       return (
-        <div className="w-[440px] h-full flex flex-col items-center px-[8px] text-center">
-          <img src="/logos/ph-logo-dark.svg" alt="Plannly" className="mr-[27px]" />
-          <h1 className="mb-[12px] text-center">Welcome Back!</h1>
+        <div className="w-[440px] flex flex-col items-center px-[8px] text-center">
+          <img src="/logos/logo-icon-only-v2.svg" alt="Plannly" className="mb-[32px]" width={50} height={50} />
+          <h2 className="mb-[12px] text-center">Welcome Back!</h2>
           <p className="text-basic_grey_1 mb-[32px]">Login to Plannly Health to continue</p>
           <Button text="Continue with Google" className="mb-[16px] w-[300px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
           <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={handleLogin} />
@@ -90,6 +86,7 @@ const LoginContainer = () => {
       justify-center 
       xl:custom-bg
       bg-basic_white
+      items-center
       ">
       {renderSignInError()}
       {renderForm()}
