@@ -39,7 +39,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
       <AssessmentAlertModal />
-      <div className='lg:hidden absolute bottom-0 px-[12px] right-0 flex gap-4 items-center justify-between w-full bg-basic_black rounded-[16px]'>
+      <div className='lg:hidden absolute bottom-2 px-[12px] right-0 flex gap-4 items-center justify-between w-full bg-basic_black rounded-[16px]'>
         <NavItem href='/employee/rewards' icon={icons.rewards} text={''} iconLight={icons.rewardsLight} />
         <NavItem href='/employee/todos' icon={icons.todo} text={''} iconLight={icons.todoLight} />
         <NavItem href='/employee/benefits' icon={icons.benefits} text={''} iconLight={icons.benefitsLight} />
