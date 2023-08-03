@@ -13,7 +13,7 @@ export const metadata = {
 
 const rootContainerStyles = `w-full min-w-[320px] h-screen p-[16px] flex bg-basic_white overflow-auto`
 const navContainerStyles = `z-50 sticky top-0 left-0 hidden lg:flex flex-col gap-8 min-w-[200px] h-full bg-basic_black text-basic_white px-[16px] py-[24px] rounded-[32px]`
-const headerStyles = `w-full pr-[16px] absolute top-0 right-0 flex justify-end items-center gap-4 h-[65px] bg-basic_white`
+const headerStyles = `w-full pr-[16px] absolute top-0 right-0 flex justify-end items-center gap-4 h-[50px] lg:h-[65px] bg-basic_white`
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 
@@ -39,7 +39,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
       <AssessmentAlertModal />
-      <div className='lg:hidden absolute bottom-2 px-[12px] right-0 flex gap-4 items-center justify-between w-full bg-basic_black rounded-[16px]'>
+      <div className='lg:hidden absolute bottom-0 px-[12px] pb-3 right-0 flex gap-4 items-center justify-between w-full bg-basic_black'>
         <NavItem href='/employee/rewards' icon={icons.rewards} text={''} iconLight={icons.rewardsLight} />
         <NavItem href='/employee/todos' icon={icons.todo} text={''} iconLight={icons.todoLight} />
         <NavItem href='/employee/benefits' icon={icons.benefits} text={''} iconLight={icons.benefitsLight} />

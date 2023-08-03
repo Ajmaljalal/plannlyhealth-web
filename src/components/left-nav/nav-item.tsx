@@ -42,10 +42,8 @@ export const NavItem = ({ text, href, icon, iconLight }: NavItemProps) => {
 
   return (
     <Link href={href} className={`${navItemStyles} ${isActive ? 'bg-brand_voilet text-basic_white' : ''}`}>
-      {/* <div className="flex items-center sm:justify-start justify-center"> */}
-      <Image src={currentIcon} alt={`${text} icon`} width='18' height='18' className='' />
-      <span className="sm:block hidden">{text}</span>
-      {/* </div> */}
+      <Image src={currentIcon} alt={`${text} icon`} width={20} height={20} className='w-[20px]' />
+      <span className="hidden sm:block">{text}</span>
     </Link>
   )
 }
