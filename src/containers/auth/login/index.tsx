@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
 import { loginRequest, signInWithMicrosoft } from "@/lib/services/auth";
@@ -30,25 +30,24 @@ const LoginContainer = () => {
   // const handleMicrosoftSignIn = async (event: any) => {
   //   try {
   //     // const result = await signIn('azure-ad')
-  //     const result = await signInWithMicrosoft()
-  //     console.log('result', result)
-  //     redirect('/')
+  //     // const result = await signInWithMicrosoft()
+  //     await signIn('azure-ad')
+  //     // console.log('result', result)
 
   //   } catch (error: any) {
   //     console.log('error', error)
   //   }
   // };
 
-
-
   const handleLogin = async () => {
     await instance.loginRedirect(loginRequest);
   }
 
+  console.log('session', session)
   const renderSignInError = () => {
     if (session?.data?.user?.name || userName) {
       return (
-        <div className="w-[360px] h-full flex flex-col items-center px-[24px] text-center">
+        <div className="w-[360px] flex flex-col items-center px-[24px] text-center">
           <img src="/logos/logo-icon-only-v2.svg" alt="Plannly" className="mb-[32px]" width={70} height={70} />
           <h2 className="text-normal mb-[12px]">User Does Not Exist!</h2>
           <p className="text-basic_grey_1 mb-[32px]">Please contact support for help!</p>
@@ -58,7 +57,6 @@ const LoginContainer = () => {
       return null
     }
   }
-
 
   const renderForm = () => {
     if (!session?.data?.user?.name && !userName) {
@@ -75,8 +73,6 @@ const LoginContainer = () => {
       return null
     }
   }
-
-
 
   return (
     <div className="

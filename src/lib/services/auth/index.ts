@@ -125,16 +125,20 @@ export const resetPassword = async ({ code, password, email }: any) => {
 // Config object to be passed to Msal on creation
 export const msalConfig: Configuration = {
   auth: {
-    clientId: 'fd07f02f-e5a8-4e82-8cb4-b29c9d062d25',
+    clientId: process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_ID as string,
     authority: `https://login.microsoftonline.com/common`,
-    redirectUri: 'https://app.plannlyhealth.com',
+    redirectUri: process.env.NEXT_PUBLIC_AZURE_REDIRECT_URI as string,
     postLogoutRedirectUri: "/"
+  },
+  cache: {
+    cacheLocation: "sessionStorage",
+    storeAuthStateInCookie: false,
   }
 };
 
 // Add here scopes for id token to be used at MS Identity Platform endpoints.
 export const loginRequest: RedirectRequest = {
-  scopes: ["User.Read"]
+  scopes: ["User.Read", "profile"]
 };
 
 // Add here the endpoints for MS Graph API services you would like to use.
