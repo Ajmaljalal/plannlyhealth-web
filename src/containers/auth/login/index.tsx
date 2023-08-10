@@ -1,56 +1,52 @@
 "use client"
+import { useEffect } from "react";
 import { Button } from "@/components/button";
-import { icons } from "@/lib/icons";
-import { loginRequest, signInWithMicrosoft } from "@/lib/services/auth";
-import { useSession, signIn } from "next-auth/react"
 import { useMsal } from '@azure/msal-react';
-import { useEffect, useState } from "react";
+import { icons } from "@/lib/icons";
+import { loginRequest } from "@/lib/services/auth";
+import { useDispatch, useSelector } from "@/store/store";
+import { setUser, userProfileSelector } from "@/store/user";
+// import { useSession, signIn } from "next-auth/react"
 
-const LoginContainer = () => {
-  const session = useSession();
+const LoginContainer = async () => {
+  // const session = useSession();
   const { instance } = useMsal();
-  const [userName, setUserName] = useState("");
+  const activeAccount = instance.getActiveAccount() || undefined
+  // const token = await instance.acquireTokenSilent(
+  //   {
+  //     ...loginRequest,
+  //     account: activeAccount
+  //   }
+  // )
+  const user = useSelector(userProfileSelector);
+  const dispatch = useDispatch();
 
-  const activeAccount = instance.getActiveAccount();
   useEffect(() => {
     if (activeAccount) {
-      setUserName(activeAccount.username);
-    } else {
-      setUserName("");
+      dispatch(setUser(activeAccount))
     }
-  }, [activeAccount]);
+  }, []);
 
-  const handleGoogleSignIn = async (event: any) => {
-    try {
-      await signIn('google')
-    } catch (error: any) {
-    }
-  };
-
-  // const handleMicrosoftSignIn = async (event: any) => {
+  // const handleGoogleSignIn = async (event: any) => {
   //   try {
-  //     // const result = await signIn('azure-ad')
-  //     // const result = await signInWithMicrosoft()
-  //     await signIn('azure-ad')
-  //     // console.log('result', result)
-
+  //     await signIn('google')
   //   } catch (error: any) {
   //     console.log('error', error)
   //   }
   // };
 
-  const handleLogin = async () => {
+  const handleMicrosoftLogin = async () => {
     await instance.loginRedirect(loginRequest);
   }
 
-  console.log('session', session)
   const renderSignInError = () => {
-    if (session?.data?.user?.name || userName) {
+    if (user) {
       return (
         <div className="w-[360px] flex flex-col items-center px-[24px] text-center">
           <img src="/logos/logo-icon-only-v2.svg" alt="Plannly" className="mb-[32px]" width={70} height={70} />
           <h2 className="text-normal mb-[12px]">User Does Not Exist!</h2>
           <p className="text-basic_grey_1 mb-[32px]">Please contact support for help!</p>
+          <p>{user?.username}</p>
         </div>
       )
     } else {
@@ -59,14 +55,14 @@ const LoginContainer = () => {
   }
 
   const renderForm = () => {
-    if (!session?.data?.user?.name && !userName) {
+    if (!user) {
       return (
         <div className="w-[440px] flex flex-col items-center px-[8px] text-center">
           <img src="/logos/logo-icon-only-v2.svg" alt="Plannly" className="mb-[32px]" width={50} height={50} />
           <h2 className="mb-[12px] text-center">Welcome Back!</h2>
           <p className="text-basic_grey_1 mb-[32px]">Login to Plannly Health to continue</p>
-          <Button text="Continue with Google" className="mb-[16px] w-[300px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
-          <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={handleLogin} />
+          {/* <Button text="Continue with Google" className="mb-[16px] w-[300px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} /> */}
+          <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={handleMicrosoftLogin} />
         </div>
       )
     } else {
