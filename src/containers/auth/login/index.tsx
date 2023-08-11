@@ -1,24 +1,30 @@
 "use client"
 import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
-import { loginRequest, signInWithMicrosoft } from "@/lib/services/auth";
+// import { loginRequest } from "@/lib/services/auth";
 import { useSession, signIn } from "next-auth/react"
-import { useMsal } from '@azure/msal-react';
-import { useEffect, useState } from "react";
+// import { useMsal } from '@azure/msal-react';
+import { useEffect } from "react";
+import { useDispatch } from "@/store/store";
+import { setUser } from "@/store/user";
 
 const LoginContainer = () => {
   const session = useSession();
-  const { instance } = useMsal();
-  const [userName, setUserName] = useState("");
+  // const { instance } = useMsal();
+  const dispatch = useDispatch();
 
-  const activeAccount = instance.getActiveAccount();
+  // const activeAccount = instance.getActiveAccount();
   useEffect(() => {
-    if (activeAccount) {
-      setUserName(activeAccount.username);
-    } else {
-      setUserName("");
+    const user = session?.data?.user
+    if (user) {
+      dispatch(setUser(user));
     }
-  }, [activeAccount]);
+    // if (activeAccount) {
+    //   setUserName(activeAccount.username);
+    // } else {
+    //   setUserName("");
+    // }
+  }, [session]);
 
   const handleGoogleSignIn = async (event: any) => {
     try {
@@ -27,25 +33,12 @@ const LoginContainer = () => {
     }
   };
 
-  // const handleMicrosoftSignIn = async (event: any) => {
-  //   try {
-  //     // const result = await signIn('azure-ad')
-  //     // const result = await signInWithMicrosoft()
-  //     await signIn('azure-ad')
-  //     // console.log('result', result)
+  // const handleMicrosoftLogin = async () => {
+  //   await instance.loginRedirect(loginRequest);
+  // }
 
-  //   } catch (error: any) {
-  //     console.log('error', error)
-  //   }
-  // };
-
-  const handleLogin = async () => {
-    await instance.loginRedirect(loginRequest);
-  }
-
-  console.log('session', session)
   const renderSignInError = () => {
-    if (session?.data?.user?.name || userName) {
+    if (session?.data?.user?.name) {
       return (
         <div className="w-[360px] flex flex-col items-center px-[24px] text-center">
           <img src="/logos/logo-icon-only-v2.svg" alt="Plannly" className="mb-[32px]" width={70} height={70} />
@@ -59,14 +52,14 @@ const LoginContainer = () => {
   }
 
   const renderForm = () => {
-    if (!session?.data?.user?.name && !userName) {
+    if (!session?.data?.user?.name) {
       return (
         <div className="w-[440px] flex flex-col items-center px-[8px] text-center">
           <img src="/logos/logo-icon-only-v2.svg" alt="Plannly" className="mb-[32px]" width={50} height={50} />
           <h2 className="mb-[12px] text-center">Welcome Back!</h2>
           <p className="text-basic_grey_1 mb-[32px]">Login to Plannly Health to continue</p>
           <Button text="Continue with Google" className="mb-[16px] w-[300px]" icon={icons.googleIcon} onClick={handleGoogleSignIn} />
-          <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={handleLogin} />
+          {/* <Button text="Continue with Microsoft" className="w-[300px]" icon={icons.microsoftIcon} onClick={handleMicrosoftLogin} /> */}
         </div>
       )
     } else {
