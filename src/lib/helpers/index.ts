@@ -1,28 +1,7 @@
 import CryptoJS from 'crypto-js';
-export const calculateApprovedAndRequestedClaims = (claims: any) => {
-  let approved = 0
-  let requested = 0
-  claims.forEach((claim: any) => {
-    if (claim.status === 'Approved') {
-      approved += claim.reimbursed
-    }
-    if (claim.status === 'Requested') {
-      requested += claim.requested
-    }
-  })
-  return { approved, requested }
-}
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
-export const calculatePayouts = (payouts: any) => {
-  let approved = 0
-  let notYetProcessed = 0
-  payouts.forEach((payout: any) => {
-    approved += payout.approvedAmount
-    notYetProcessed += payout.notYetProcessedAmount
-  })
-
-  return { approved, notYetProcessed }
-}
 
 export const calculateUsersStatus = (users: any) => {
   let active = 0
@@ -166,5 +145,14 @@ export const calculateWidthTailwindClass = (inputNumber: number) => {
   );
 
   return closestClass;
+}
+
+export const checkAuth = async () => {
+  const session: any = await getServerSession();
+  if (session?.user === "authenticated") {
+    redirect("employee/rewards")
+  } else {
+    redirect("auth/login")
+  }
 }
 

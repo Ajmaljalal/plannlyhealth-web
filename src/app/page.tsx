@@ -1,14 +1,7 @@
 
-import { Container } from "@/components/container";
-import Link from "next/link";
+import { checkAuth } from "@/lib/helpers";
 
 
-export default function Home() {
-  return (
-    <div className="flex justify-center align-center h-full">
-      <Container className="w-full flex items-center justify-center">
-        <Link href="/dashboard">Loading...</Link>
-      </Container>
-    </div>
-  )
+export default async function Home() {
+  await checkAuth()
 }
