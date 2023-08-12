@@ -22,7 +22,7 @@ const client = DynamoDBDocument.from(new DynamoDB(config), {
   },
 });
 
-const authOptions: any = {
+export const authOptions: any = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
@@ -76,6 +76,9 @@ const authOptions: any = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
     updateAge: 24 * 60 * 60, // 24 hours
   },
+  pages: {
+    signIn: '/auth/login'
+  }
 }
 
 const handler = NextAuth(authOptions)
