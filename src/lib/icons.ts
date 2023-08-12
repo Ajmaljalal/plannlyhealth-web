@@ -35,6 +35,7 @@ import closeCircleRed from '../../public/icons/shared/close-circle-red.svg'
 import progressCircleOrange from '../../public/icons/shared/progress-circle-orange.svg'
 import lottery from '../../public/icons/shared/lottery.png'
 import tick from '../../public/icons/shared/tick.svg'
+import linkIcon from '../../public/icons/shared/link-icon.svg'
 
 
 
@@ -155,6 +156,7 @@ export const icons = {
   progressCircleOrange: progressCircleOrange,
   lottery: lottery,
   tick: tick,
+  linkIcon: linkIcon,
 
 
   // social icons
