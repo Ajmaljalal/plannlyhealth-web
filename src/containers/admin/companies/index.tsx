@@ -42,8 +42,8 @@ export const CompaniesContainer = ({ companies }: any) => {
       return (
         <tr key={company.id} className={rowStyle}>
           <td className='pl-[32px] w-1/3'>{company.name}</td>
-          <td className='w-1/3'>{company.email}</td>
-          <td>{company.employee_count}</td>
+          <td className='w-1/3'>{company.support_email}</td>
+          <td>{company.company_size}</td>
           {
             <td className='flex justify-end items-center mr-[32px] text-small'>
               <span onClick={() => onGotoCompanyDashboard(company)} className='hover:bg-basic_grey_2 hover:text-basic_white h-[32px] w-[190px] flex items-center justify-center gap-2 rounded-[24px] mt-[1px] bg-basic_grey_4 cursor-pointer'>

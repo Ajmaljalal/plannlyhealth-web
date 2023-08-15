@@ -9,9 +9,14 @@ const baseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/companies`
 
 async function AdminPanel() {
   const session: any = await getServerSession(authOptions)
+  let companies = null
   if (session?.user) {
-    const companyApiCall = await axios.get(baseUrl)
-    const companies = companyApiCall.data || null
+    try {
+      const companyApiCall = await axios.get(baseUrl)
+      companies = companyApiCall.data || null
+    } catch (error) {
+      console.log(error)
+    }
     return (
       <CompaniesContainer companies={companies} />
     )
