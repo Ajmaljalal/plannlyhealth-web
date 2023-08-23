@@ -40,9 +40,9 @@ export const BenefitDetailsModal = ({ isOpen, onClose, benefit }: { isOpen: bool
           onChange={handleInputChange}
         />
         <Input
-          name="howToEnrollLink"
+          name="how_to_enroll_link"
           label="Link"
-          value={currentBenefit.howToEnrollLink}
+          value={currentBenefit.how_to_enroll_link}
           placeholder='Link'
           onChange={handleInputChange}
         />
@@ -61,15 +61,12 @@ export const BenefitDetailsModal = ({ isOpen, onClose, benefit }: { isOpen: bool
           onChange={handleInputChange}
         />
         <TextArea
-          name="howToEnroll"
+          name="how_to_enroll"
           label="How to Enroll"
-          value={currentBenefit.howToEnroll}
+          value={currentBenefit.how_to_enroll}
           placeholder='How to Enroll'
           onChange={handleInputChange}
         />
-
-        <div>
-        </div>
       </div>
     </Modal>
   );

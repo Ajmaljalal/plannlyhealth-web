@@ -1,7 +1,7 @@
 'use client'
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link'
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import React from 'react'
 
 interface NavItemProps {
@@ -37,6 +37,11 @@ const navItemStyles = `
 
 export const NavItem = ({ text, href, icon, iconLight }: NavItemProps) => {
   const pathname = usePathname()
+  const params = useSearchParams()
+  const company_id = params.get('company_id')
+  if (company_id) {
+    href = href + '?company_id=' + company_id
+  }
   const isActive = pathname === href
   const currentIcon = isActive ? iconLight : icon
 

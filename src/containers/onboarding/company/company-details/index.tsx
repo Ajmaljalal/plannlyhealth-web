@@ -38,9 +38,8 @@ const CompanyDetails = () => {
     if (isEmpty) return;
     try {
       const newCompany = await axios.post(baseUrl, company);
-      console.log(newCompany);
       dispatch(setStep(2));
-      dispatch(setCompanyDetails(company));
+      dispatch(setCompanyDetails(newCompany));
     } catch (error) {
       console.log(error);
     }

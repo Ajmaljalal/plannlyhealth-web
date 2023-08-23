@@ -5,29 +5,57 @@ import Tabs from "@/components/tabs/tabs";
 import { BenefitAddModal } from "@/containers/onboarding/company/benefits/benefit-add-modal";
 import Hero from "@/containers/onboarding/company/hero";
 import { icons } from "@/lib/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "@/store/store";
-import { benefitsSelector, setBenefits } from "@/store/company";
+import { benefitsSelector, companyDetailsSelector, setBenefits, setCompanyDetails } from "@/store/company";
 import { testBenefits } from "@/containers/onboarding/company/benefits";
 import BenefitCard from "@/components/company-benefit-card";
+import axios from "axios";
+
+const baseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/benefits`
+
+const getCompany = async (companyId: string) => {
+  const company = await axios.get(`${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/companies/${companyId}`)
+  return company.data
+}
+
 
 const BenefitsContainer = () => {
+  const company: any = useSelector(companyDetailsSelector)
   const allBenefits = useSelector(benefitsSelector)
-  const primaryBenefits = allBenefits.filter((benefit: any) => benefit.isPrimary && !benefit.archived)
-  const voluntaryBenefits = allBenefits.filter((benefit: any) => !benefit.isPrimary && !benefit.archived)
-  const recommendedBenefits = allBenefits.filter((benefit: any) => !benefit.isPrimary && !benefit.archived)
+  const primaryBenefits = allBenefits.filter((benefit: any) => benefit.is_primary && !benefit.archived)
+  const voluntaryBenefits = allBenefits.filter((benefit: any) => !benefit.is_primary && !benefit.archived)
+  const recommendedBenefits = allBenefits.filter((benefit: any) => !benefit.is_primary && !benefit.archived)
   const archivedBenefits = allBenefits.filter((benefit: any) => benefit.archived)
   const dispatch = useDispatch()
   const [activeTab, setActiveTab] = useState('primary')
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
 
+  const getBenefits = async (companyId: string) => {
+    const beneiftsFromDb = await axios.get(`${baseUrl}/company/${companyId}`)
+    const { data } = beneiftsFromDb
+    dispatch(setBenefits(data))
+  }
+
+
+  useEffect(() => {
+    if (!company.id) {
+      getCompany('01b9c104-1aff-45fa-82dc-1c647ebb12d6').then((company) => {
+        dispatch(setCompanyDetails(company))
+        getBenefits(company.id)
+      })
+    }
+  }, [])
+
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
   }
 
-
-  const handleAddBenefit = (newBenefit: any) => {
-    newBenefit = activeTab === 'primary' ? { ...newBenefit, isPrimary: true } : { ...newBenefit, isPrimary: false }
+  const handleAddBenefit = async (newBenefit: any) => {
+    newBenefit = activeTab === 'primary' ? { ...newBenefit, is_primary: true } : { ...newBenefit, is_primary: false }
+    await axios.post(baseUrl, newBenefit);
+    await axios.get(`${baseUrl}/company/${company.id}`)
     dispatch(setBenefits([...allBenefits, newBenefit]))
   }
 
@@ -54,12 +82,12 @@ const BenefitsContainer = () => {
       isActive: activeTab === 'voluntary',
       onClick: () => handleTabClick('voluntary')
     },
-    {
-      text: 'Recommended',
-      count: recommendedBenefits?.length || 0,
-      isActive: activeTab === 'recommended',
-      onClick: () => handleTabClick('recommended'),
-    },
+    // {
+    //   text: 'Recommended',
+    //   count: recommendedBenefits?.length || 0,
+    //   isActive: activeTab === 'recommended',
+    //   onClick: () => handleTabClick('recommended'),
+    // },
     {
       text: 'Archived',
       count: archivedBenefits?.length || 0,

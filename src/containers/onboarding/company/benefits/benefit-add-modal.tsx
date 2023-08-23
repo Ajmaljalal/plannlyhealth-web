@@ -3,24 +3,36 @@ import { Modal } from '@/components/modal'
 import { Input } from '@/components/input'
 import { Button } from '@/components/button'
 import { TextArea } from '@/components/textarea'
+import { useSelector } from '@/store/store'
+import { companyDetailsSelector } from '@/store/company'
 
 
 const modalContentStyles = `
   flex 
   flex-col 
-  gap-4
+  gap-2
 `
 
 export const BenefitAddModal = ({ isOpen, onClose, onSave }: { isOpen: boolean, onClose: () => void, onSave: (benefit: any) => void }) => {
-  const [currentBenefit, setCurrentBenefit] = useState<any>({})
+  const company: any = useSelector(companyDetailsSelector)
+  const [currentBenefit, setCurrentBenefit] = useState<any>({
+    title: '',
+    description: '',
+    eligibility: '',
+    how_to_enroll_link: '',
+    how_to_enroll: ''
+  })
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target
     setCurrentBenefit({ ...currentBenefit, [name]: value })
   }
 
-  const handleSave = async () => {
-    if (!currentBenefit.title || !currentBenefit.description || !currentBenefit.eligibility || !currentBenefit.howToEnrollLink) return
+  const handleSave = () => {
+    if (!currentBenefit.title || !currentBenefit.description || !currentBenefit.eligibility || !currentBenefit.how_to_enroll || !currentBenefit.how_to_enroll_link) return
+    if (!company) return
+    currentBenefit.company_id = company.id
+    console.log('current benefit: ', currentBenefit)
     onSave(currentBenefit)
     setCurrentBenefit({})
     onClose()
@@ -31,11 +43,11 @@ export const BenefitAddModal = ({ isOpen, onClose, onSave }: { isOpen: boolean, 
   }
 
 
-  const isDisabled = !currentBenefit.title || !currentBenefit.description || !currentBenefit.eligibility || !currentBenefit.howToEnrollLink
+  const isDisabled = !currentBenefit.title || !currentBenefit.description || !currentBenefit.eligibility || !currentBenefit.how_to_enroll || !currentBenefit.how_to_enroll_link
   const ctaButton = <Button text='Save' isPrimary className='w-[160px]' onClick={handleSave} disabled={isDisabled} />
 
   return (
-    <Modal isOpen={isOpen} onClose={handleCancel} ctaButton={ctaButton}>
+    <Modal isOpen={isOpen} onClose={handleCancel} ctaButton={ctaButton} size='large'>
       <div className={modalContentStyles}>
         <Input
           name="title"
@@ -45,7 +57,7 @@ export const BenefitAddModal = ({ isOpen, onClose, onSave }: { isOpen: boolean, 
           onChange={handleInputChange}
         />
         <Input
-          name="howToEnrollLink"
+          name="how_to_enroll_link"
           label="Link"
           value={currentBenefit.howToEnrollLink}
           placeholder='Link'
@@ -66,14 +78,12 @@ export const BenefitAddModal = ({ isOpen, onClose, onSave }: { isOpen: boolean, 
           onChange={handleInputChange}
         />
         <TextArea
-          name="howToEnroll"
+          name="how_to_enroll"
           label="How to Enroll"
           value={currentBenefit.howToEnroll}
           placeholder='How to Enroll'
           onChange={handleInputChange}
         />
-        <div>
-        </div>
       </div>
     </Modal>
   );

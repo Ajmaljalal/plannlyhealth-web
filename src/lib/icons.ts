@@ -36,6 +36,7 @@ import progressCircleOrange from '../../public/icons/shared/progress-circle-oran
 import lottery from '../../public/icons/shared/lottery.png'
 import tick from '../../public/icons/shared/tick.svg'
 import linkIcon from '../../public/icons/shared/link-icon.svg'
+import benefitsIcon from '../../public/icons/shared/benefits.png'
 
 
 
@@ -157,6 +158,7 @@ export const icons = {
   lottery: lottery,
   tick: tick,
   linkIcon: linkIcon,
+  benefitsPlacholder: benefitsIcon,
 
 
   // social icons

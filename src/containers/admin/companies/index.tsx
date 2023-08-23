@@ -21,7 +21,7 @@ export const CompaniesContainer = ({ companies }: any) => {
   const handleOnSearch = (e: any) => {
     const value = e.target.value
     const filteredCompanies = companies?.filter((company: any) => {
-      return company.name.toLowerCase().includes(value.toLowerCase()) || company.email.toLowerCase().includes(value.toLowerCase())
+      return company.name.toLowerCase().includes(value.toLowerCase()) || company.support_email.toLowerCase().includes(value.toLowerCase())
     }) || null
     console.log('filteredCompanies', filteredCompanies)
     setSortedCompanies(filteredCompanies)
