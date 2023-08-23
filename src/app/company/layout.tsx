@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logo from '../../../public/logos/logo-white-full-v2.svg'
+import logo from '../../../public/logos/plannly-logo-white-horizontal.png'
 import Navbar from '@/containers/company/left-nav/company';
 import { SignOut } from '@/components/signout';
 import { Divider } from '@/components/divider';
@@ -20,7 +20,9 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={rootContainerStyles}>
       <div className={navContainerStyles}>
-        <Image src={logo} width={150} height={53} alt='plannly logo' className='ml-[-6px] mt-[6px] w-[140px] h-[50px]' />
+        <div className='w-full flex items-center justify-center'>
+          <Image src={logo} width={150} height={32} alt='plannly logo' className='mt-[6px]' />
+        </div>
         <Navbar />
         <div className='align-end mt-auto'>
           <Divider />
