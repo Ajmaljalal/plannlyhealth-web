@@ -1,8 +1,8 @@
 'use client'
 import { icons } from '@/lib/icons'
-import { signOut } from '@/lib/services/auth'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { signOut } from 'next-auth/react'
 
 const signOutBtnStyles = `
     flex
@@ -25,12 +25,10 @@ export const SignOut = () => {
   const router = useRouter()
 
   const handleSignOut = async () => {
-    const result: any = await signOut()
-    if (!result?.message) {
-      router.push('/login')
-    } else {
-      return
-    }
+    await signOut({
+      redirect: true,
+      callbackUrl: '/auth/login',
+    })
   }
   return (
     <p className={`${signOutBtnStyles}`} onClick={handleSignOut}>

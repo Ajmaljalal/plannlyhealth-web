@@ -32,7 +32,6 @@ const LoginContainer = () => {
   const handleGoogleSignIn = async (event: any) => {
     try {
       await signIn('google')
-      router.push('/employee/rewards')
     } catch (error: any) {
       return error
     }
