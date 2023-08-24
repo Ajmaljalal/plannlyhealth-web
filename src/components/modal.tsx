@@ -31,7 +31,7 @@ const modalContainerStyles = `
     
 `
 export const Modal = ({ isOpen, onClose, ctaButton, children, size = 'small', cancelBtnText = 'Cancel' }: ModalProps) => {
-  const modalSize = size === 'small' ? 'max-w-[420px]' : size === 'medium' ? 'max-w-[700px]' : 'max-w-[1000px]'
+  const modalSize = size === 'small' ? 'max-w-[420px]' : size === 'medium' ? 'max-w-[700px]' : 'max-w-[900px]'
   const isSmall = size === 'small'
   const buttonContainerStyles = isSmall ? 'justify-between' : 'justify-end'
   return (

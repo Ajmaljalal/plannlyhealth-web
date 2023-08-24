@@ -50,7 +50,7 @@ export const Button = ({ className, text, isPrimary, isSmallBtn, icon, ...props 
   const buttonSize = isSmallBtn ? `${smallBtn}` : `${bigBtn}`
   return (
     <button
-      className={`${buttonStyles} ${buttonSize} ${className}`}
+      className={`${buttonStyles} ${buttonSize} ${className} font-normal`}
       {...props}
     >
       <>

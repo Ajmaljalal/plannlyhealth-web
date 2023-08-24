@@ -8,6 +8,9 @@ import { useDispatch } from "@/store/store";
 import { removeIntegration, setIntegration, toggleBenefitActivation, updateBenefit } from "@/store/company";
 import { FlatIconButton } from "./flat-icon-button";
 import { BenefitDetailsModal } from "./benefit-edit-modal";
+import axios from "axios";
+
+const baseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/benefits`
 
 const BenefitCard = ({ benefit }: any) => {
   const dispatch = useDispatch()
@@ -24,19 +27,25 @@ const BenefitCard = ({ benefit }: any) => {
     dispatch(removeIntegration(benefit))
   }
 
-  const setBenenfitToActive = () => {
-    const updatedBenefit = { ...benefit, is_active: !benefit.is_active }
-    dispatch(toggleBenefitActivation(updatedBenefit))
+  const setBenenfitToActive = async () => {
+    const updatedBenefit = { ...benefit, is_active: true }
+    const result = await axios.put(`${baseUrl}/${benefit.id}`, updatedBenefit)
+    const newBenefit = result.data
+    dispatch(toggleBenefitActivation(newBenefit))
   }
 
-  const archiveBenefit = () => {
+  const archiveBenefit = async () => {
     const updatedBenefit = { ...benefit, archived: true }
-    dispatch(updateBenefit(updatedBenefit))
+    const result = await axios.put(`${baseUrl}/${benefit.id}`, updatedBenefit)
+    const newBenefit = result.data
+    dispatch(updateBenefit(newBenefit))
   }
 
-  const restoreBenefit = () => {
+  const restoreBenefit = async () => {
     const updatedBenefit = { ...benefit, archived: false }
-    dispatch(updateBenefit(updatedBenefit))
+    const result = await axios.put(`${baseUrl}/${benefit.id}`, updatedBenefit)
+    const newBenefit = result.data
+    dispatch(updateBenefit(newBenefit))
   }
 
   const toggleIntegrationsModal = () => {
@@ -57,7 +66,7 @@ const BenefitCard = ({ benefit }: any) => {
   const addBtnStyle = benefit.is_active ? 'bg-system_success' : ''
   const addBtnIcon = benefit.is_active ? icons.checkWhite : icons.addLight
   const integrationIcon = benefit.integration ? icons.checkWhite : icons.addLight
-  const addBtnText = benefit.is_active ? 'Added' : 'Add'
+  const addBtnText = benefit.is_active ? 'Active' : 'Activate'
   const integrationBtnText = benefit.integration ? 'Update Integration' : 'Add Integration'
   const eligibilityIcon = benefit.is_active ? icons.howTo : icons.howToLight
   const howToEnrollIcon = benefit.is_active ? icons.question : icons.questionLight
@@ -93,8 +102,8 @@ const BenefitCard = ({ benefit }: any) => {
         <p className="mt-[4px] mb-[24px]">{benefit.description}</p>
         <div className="flex items-center justify-between gap-4">
           <div className="flex gap-6 mr-[16px]">
-            <FlatIconButton icon={eligibilityIcon} text="Eligibility" onClick={toggleBenefitDetailsModal} />
-            <FlatIconButton icon={howToEnrollIcon} text="How to Enroll" onClick={toggleBenefitDetailsModal} />
+            {/* <FlatIconButton icon={eligibilityIcon} text="Eligibility" onClick={toggleBenefitDetailsModal} />
+            <FlatIconButton icon={howToEnrollIcon} text="How to Enroll" onClick={toggleBenefitDetailsModal} /> */}
             <FlatIconButton icon={detailsIcon} text="Details" onClick={toggleBenefitDetailsModal} />
           </div>
           <div className="flex gap-4">

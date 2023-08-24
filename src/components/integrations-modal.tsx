@@ -50,7 +50,7 @@ export const IntegrationsModal = ({
     })
   }
 
-  const ctaButton = <Button text='Save' isPrimary className='w-[160px]' onClick={handleSave} />
+  const ctaButton = <Button text='Save' isPrimary className='w-full md:w-[160px]' onClick={handleSave} />
 
   return (
     <Modal isOpen={isOpen} onClose={handleCancel} ctaButton={ctaButton} size='large'>
