@@ -114,7 +114,7 @@ const LoginContainer = () => {
       ">
       <div className="w-[360px] flex flex-col items-center px-[24px] text-center">
         <img src="/logos/logo-icon-only-v2.svg" alt="Plannly" className="mb-[32px]" width={70} height={70} />
-        <h2 className="text-normal mb-[12px]">Oops! someting didn't work.</h2>
+        <h2 className="text-normal mb-[12px]">Oops! someting did not work.</h2>
         <p className="text-basic_grey_1 mb-[32px]">Please contact support</p>
       </div>
     </div>
