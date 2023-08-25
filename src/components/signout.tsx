@@ -26,8 +26,8 @@ export const SignOut = () => {
 
   const handleSignOut = async () => {
     await signOut({
-      redirect: true,
       callbackUrl: '/auth/login',
+      redirect: true,
     })
   }
   return (

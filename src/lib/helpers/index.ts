@@ -1,6 +1,9 @@
+import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+
+const employeesBaseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/employees`
 
 
 export const calculateUsersStatus = (users: any) => {
@@ -147,12 +150,27 @@ export const calculateWidthTailwindClass = (inputNumber: number) => {
   return closestClass;
 }
 
+
+export const getRedirectUrl = (role: any) => {
+  const urls: any = {
+    Admin: `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/company/dashboard`,
+    "Super Admin": `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/admin`,
+    Standard: `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/employee/rewards`
+  }
+  return urls[role]
+}
+
 export const checkAuth = async () => {
   const session: any = await getServerSession();
-  if (session?.user === "authenticated") {
-    redirect("employee/rewards")
+
+  if (session?.user) {
+    const employees = await axios.get(`${employeesBaseUrl}/email/${session.user.email}`)
+    const employee = employees.data[0]
+    if (employee?.status === 'Deactivated') return redirect("auth/login")
+    const redirectUrl = `${getRedirectUrl(employee?.role)}?acc=${employee.id}`
+    return redirect(redirectUrl)
   } else {
-    redirect("auth/login")
+    return redirect("auth/login")
   }
 }
 
