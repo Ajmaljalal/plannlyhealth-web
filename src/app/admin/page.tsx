@@ -4,12 +4,10 @@ import { getServerSession } from 'next-auth'
 import React from 'react'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import { redirect } from 'next/navigation'
-import { checkAuth } from '@/lib/helpers'
 
 const baseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/companies`
 
 async function AdminPanel() {
-  await checkAuth()
   const session: any = await getServerSession(authOptions)
   let companies = null
   if (session?.user) {
