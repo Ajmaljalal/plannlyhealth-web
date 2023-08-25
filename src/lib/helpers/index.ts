@@ -153,9 +153,9 @@ export const calculateWidthTailwindClass = (inputNumber: number) => {
 
 export const getRedirectUrl = (role: any) => {
   const urls: any = {
-    Admin: `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/company/dashboard`,
-    "Super Admin": `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/admin`,
-    Standard: `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/employee/rewards`
+    Admin: `/company/dashboard`,
+    "Super Admin": `/admin`,
+    Standard: `/employee/rewards`
   }
   return urls[role]
 }
@@ -166,11 +166,11 @@ export const checkAuth = async () => {
   if (session?.user) {
     const employees = await axios.get(`${employeesBaseUrl}/email/${session.user.email}`)
     const employee = employees.data[0]
-    if (employee?.status === 'Deactivated') return redirect("auth/login")
+    if (employee?.status === 'Deactivated') return redirect("/auth/login")
     const redirectUrl = `${getRedirectUrl(employee?.role)}?acc=${employee.id}`
     return redirect(redirectUrl)
   } else {
-    return redirect("auth/login")
+    return redirect("/auth/login")
   }
 }
 

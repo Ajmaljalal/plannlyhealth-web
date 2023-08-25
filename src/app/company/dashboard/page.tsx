@@ -1,6 +1,8 @@
 import DashboardContainer from '@/containers/company/dashboard';
+import { checkAuth } from '@/lib/helpers';
 
-const Dashboard = () => {
+const Dashboard = async () => {
+  await checkAuth()
   return <DashboardContainer />
 }
 
