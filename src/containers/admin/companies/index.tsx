@@ -23,12 +23,10 @@ export const CompaniesContainer = ({ companies }: any) => {
     const filteredCompanies = companies?.filter((company: any) => {
       return company.name.toLowerCase().includes(value.toLowerCase()) || company.support_email.toLowerCase().includes(value.toLowerCase())
     }) || null
-    console.log('filteredCompanies', filteredCompanies)
     setSortedCompanies(filteredCompanies)
   }
 
   const onRegisterNewCompany = () => {
-    console.log('register new company')
     router.push('/onboarding/company')
   }
 

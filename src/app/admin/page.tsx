@@ -4,11 +4,19 @@ import { getServerSession } from 'next-auth'
 import React from 'react'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import { redirect } from 'next/navigation'
+import { employeesBaseUrl } from '@/lib/helpers'
 
 const baseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/companies`
 
 async function AdminPanel() {
   const session: any = await getServerSession(authOptions)
+
+  const employees = await axios.get(`${employeesBaseUrl}/email/${session.user.email}`)
+  const employee = employees.data[0]
+  if (employee.role !== 'Super Admin') {
+    return redirect('/')
+  }
+
   let companies = null
   if (session?.user) {
     try {

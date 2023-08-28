@@ -3,7 +3,7 @@ import CryptoJS from 'crypto-js';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
-const employeesBaseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/employees`
+export const employeesBaseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/employees`
 
 
 export const calculateUsersStatus = (users: any) => {
