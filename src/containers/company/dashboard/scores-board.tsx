@@ -1,6 +1,6 @@
 import { icons } from "@/lib/icons";
 import Image from "next/image";
-import CircularProgressBar from "./error-risk-chart";
+import CircularProgressBar from "./health-resilience-index";
 
 const data = [
   {
@@ -29,7 +29,7 @@ const ScoresBoard = () => {
   return (
     <div className="flex justify-end items-center bg-basic_grey_5 w-full h-[100px] px-[55px] pl-[240px] rounded-[32px] mt-[50px] mb-[70px] relative" >
       <div className="w-[150px] h-[150px] absolute left-[-20px] top-[-50%]">
-        <CircularProgressBar value={80} colors={['#FDE7EE', '#FDE7EE']} />
+        <CircularProgressBar value={45} colors={['#FDE7EE', '#FDE7EE']} />
       </div>
       <div className="flex justify-between items-center flex-1">
         {data.map((item, index) => {
