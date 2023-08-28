@@ -54,12 +54,12 @@ const BenefitsContainer = () => {
       isActive: activeTab === 'voluntary',
       onClick: () => handleTabClick('voluntary')
     },
-    {
-      text: 'Recommended',
-      count: recommendedBenefits?.length || 0,
-      isActive: activeTab === 'recommended',
-      onClick: () => handleTabClick('recommended'),
-    },
+    // {
+    //   text: 'Recommended',
+    //   count: recommendedBenefits?.length || 0,
+    //   isActive: activeTab === 'recommended',
+    //   onClick: () => handleTabClick('recommended'),
+    // },
     {
       text: 'Archived',
       count: archivedBenefits?.length || 0,
