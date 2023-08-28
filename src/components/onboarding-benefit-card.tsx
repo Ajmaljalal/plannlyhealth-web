@@ -44,7 +44,7 @@ const BenefitCard = ({ benefit }: any) => {
 
   return (
     <div className={style}>
-      <Image src='/illustrations/test-benefit.png' width={105} height={105} alt={""} style={{ borderRadius: '24px', height: '105px' }} />
+      <Image src={icons.benefitsPlacholder} width={90} height={90} alt={""} style={{ borderRadius: '12px', height: '90px' }} className="bg-brand_voilet_lighter/[0.2] p-4" />
       <div className="w-full">
         <h4>{benefit.title}</h4>
         <p className="mt-[4px] mb-[24px]">{benefit.description}</p>
