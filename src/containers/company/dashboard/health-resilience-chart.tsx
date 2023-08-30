@@ -11,20 +11,20 @@ function CircularProgressBar({ value, colors }: any) {
   // change the fill color based on the value, if it is it is less than 25 it is green, between 25 and 50 it is yellow, and above 50 it is red
   let fillColor = '';
   if (value > 50) {
-    fillColor = '#FDE7EE';
+    fillColor = '#E0F4E7';
   } else if (value >= 25 && value <= 50) {
     fillColor = '#FFF2D8';
   } else {
-    fillColor = '#E0F4E7';
+    fillColor = '#FDE7EE';
   }
 
   let strokeColor = '';
   if (value > 50) {
-    strokeColor = '#FE3E51';
+    strokeColor = '#42C76F';
   } else if (value >= 25 && value <= 50) {
     strokeColor = '#FFB92E';
   } else {
-    strokeColor = '#42C76F';
+    strokeColor = '#FE3E51';
   }
 
 
@@ -43,8 +43,8 @@ function CircularProgressBar({ value, colors }: any) {
         strokeLinecap='round'
       />
       <text x="50%" y="45%" textAnchor="middle" fill="black" dy=".3em" fontSize="6" fontWeight='bold'>{value}%</text>
-      <text x="50%" y="60%" textAnchor="middle" fill="black" dy=".3em" fontSize="2.5" letterSpacing={0.1} color='#5D5574'>Risk of Human</text>
-      <text x="50%" y="70%" textAnchor="middle" fill="black" dy=".3em" fontSize="2.5" letterSpacing={0.1} color='#5D5574'>Errors</text>
+      <text x="50%" y="60%" textAnchor="middle" fill="black" dy=".3em" fontSize="2.5" letterSpacing={0.1} color='#5D5574'>Health & Resilience</text>
+      <text x="50%" y="70%" textAnchor="middle" fill="black" dy=".3em" fontSize="2.5" letterSpacing={0.1} color='#5D5574'>Index</text>
     </svg>
   );
 }
