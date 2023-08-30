@@ -17,7 +17,6 @@ const reportTypes = [
   { value: 'burnout_report', label: 'Burnout Report' },
   { value: 'benefit_utilization_report', label: 'Benefit Utilization Report' },
   { value: 'feedback_report', label: 'Feedback Report' },
-  { value: 'human_error_report', label: 'Human Error Report' },
 ];
 
 const departments = [
@@ -36,13 +35,15 @@ const reports = [
     date: '2023-10-01',
     department: 'Emergency Department',
     type: 'Stress Level Report'
-  }, {
+  },
+  {
     tite: 'Workload Report',
     description: 'This report shows the workload of employees in the company',
     date: '2022-02-01',
     department: 'Emergency Department',
     type: 'Workload Report'
-  }, {
+  },
+  {
     tite: 'Life Events Report',
     description: 'This report shows the life events of employees in the company',
     date: '2021-03-01',
@@ -54,25 +55,21 @@ const reports = [
     date: '2021-04-01',
     department: 'Emergency Department',
     type: 'Burnout Report'
-  }, {
+  },
+  {
     tite: 'Benefit Utilization Report',
     description: 'This report shows the benefit utilization of employees in the company',
     date: '2021-06-01',
     department: 'Emergency Department',
     type: 'Benefit Utilization Report'
-  }, {
+  },
+  {
     tite: 'Feedback Report',
     description: 'This report shows the feedback of employees in the company',
     date: '2021-06-21',
     department: 'Emergency Department',
     type: 'Feedback Report'
-  }, {
-    tite: 'Human Error Report',
-    description: 'This report shows the human error of employees in the company',
-    date: '2020-1-12',
-    department: 'Emergency Department',
-    type: 'Human Error Report'
-  }
+  },
 
 ]
 
@@ -110,7 +107,7 @@ const ReportsContainer = () => {
     if (!reports.length) return renderNullState()
     const rowStyle = 'cursor-pointer border-t hover:bg-transparent h-[60px] text-small text-basic_grey_1'
     return (
-      <Table className='overflow-scroll mt-[48px]'>
+      <Table className='mt-[48px]'>
         <TableHead headers={tableHeaders} />
         <tbody>
           {reports.map((report, index) => (
@@ -146,15 +143,16 @@ const ReportsContainer = () => {
             placeholder='Type'
             className="flex-1 max-w-[250px]"
           />
-          <Input type="date" name={""} value={""} className="flex-1 max-w-[250px] cursor-pointer" inputClassName="bg-basic_white h-[42px] mb-[2px]" />
-          <Dropdown
+          <Input type="month" name={"start"} value={""} className="flex-1 max-w-[250px] cursor-pointer" inputClassName="bg-basic_white h-[42px] mb-[2px]" />
+          <Input type="month" name={"end"} value={""} className="flex-1 max-w-[250px] cursor-pointer" inputClassName="bg-basic_white h-[42px] mb-[2px]" />
+          {/* <Dropdown
             value={department}
             options={departments}
             onChange={handleDepartmentChange}
             isSearchable={true}
             placeholder='Department'
             className="flex-1 max-w-[250px]"
-          />
+          /> */}
         </div>
         <Button text="Generate Report" isPrimary className="w-[250px]" />
       </div>

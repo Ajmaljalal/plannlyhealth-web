@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import ReportsContainer from "@/containers/company/reports/page";
+import ReportsContainer from "@/containers/company/reports";
 import { employeesBaseUrl } from "@/lib/helpers";
 import axios from "axios";
 import { getServerSession } from "next-auth";

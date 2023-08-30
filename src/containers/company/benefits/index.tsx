@@ -130,7 +130,7 @@ const BenefitsContainer = () => {
     } else {
       return (
         <div className="w-full h-full flex flex-col items-center justify-center m-auto mt-[200px]">
-          <Hero image="/icons/benefits/benefits-null.svg" title="Upload your benefits guide" description="Upload a PDF file of your benefits or start adding manually" />
+          <Hero image="/icons/benefits/benefits-null.svg" title="Upload your benefits guide" description="Upload a PDF file or start adding manually" />
           <div className="flex gap-4">
             <FileUpload
               onChange={(file) => handleUploadBenefit(file[0])}

@@ -109,12 +109,12 @@ const BenefitCard = ({ benefit }: any) => {
           <div className="flex gap-4">
             <Button icon={archiveBtnIcon} className={archiveBtnStyle} isSmallBtn text={archiveBtnText} onClick={benefit.archived ? restoreBenefit : archiveBenefit} />
             {benefit.is_active && !benefit.archived ? <Button className={addBtnStyle} text={addBtnText} isPrimary isSmallBtn icon={addBtnIcon} /> : null}
-            {renderIntegrationsButton()}
+            {/* {renderIntegrationsButton()} */}
           </div>
         </div>
 
       </div>
-      <IntegrationsModal isOpen={isIntegrationsModalOpen} onClose={toggleIntegrationsModal} benefit={benefit} onAddIntegration={addIntegrationToBenefit} />
+      {/* <IntegrationsModal isOpen={isIntegrationsModalOpen} onClose={toggleIntegrationsModal} benefit={benefit} onAddIntegration={addIntegrationToBenefit} /> */}
       <BenefitDetailsModal isOpen={isBenefitDetailsModalOpen} onClose={toggleBenefitDetailsModal} benefit={benefit} />
     </div>
   )
