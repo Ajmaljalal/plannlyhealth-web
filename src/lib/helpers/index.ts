@@ -153,16 +153,15 @@ export const calculateWidthTailwindClass = (inputNumber: number) => {
 
 export const getRedirectUrl = (role: any) => {
   const urls: any = {
-    Admin: `/company/dashboard`,
+    "Admin": `/company/dashboard`,
     "Super Admin": `/admin`,
-    Standard: `/employee/rewards`
+    "Standard": `/employee/rewards`
   }
   return urls[role]
 }
 
 export const checkAuth = async () => {
   const session: any = await getServerSession();
-
   if (session?.user) {
     const employees = await axios.get(`${employeesBaseUrl}/email/${session.user.email}`)
     const employee = employees.data[0]

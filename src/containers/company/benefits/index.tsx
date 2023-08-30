@@ -40,10 +40,12 @@ const BenefitsContainer = () => {
 
   useEffect(() => {
     if (!company.id) {
-      getCompany('01b9c104-1aff-45fa-82dc-1c647ebb12d6').then((company) => {
+      getCompany('01b9c104-1aff-45fa-82dc-1c647ebb12d6').then((companyData) => {
         dispatch(setCompanyDetails(company))
-        getBenefits(company.id)
+        getBenefits(companyData.id)
       })
+    } else {
+      getBenefits(company.id)
     }
   }, [])
 

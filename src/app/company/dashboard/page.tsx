@@ -10,7 +10,7 @@ const Dashboard = async () => {
 
   const employees = await axios.get(`${employeesBaseUrl}/email/${session.user.email}`)
   const employee = employees.data[0]
-  if (employee.role !== 'admin') {
+  if (employee.role === 'Standard') {
     return redirect('/')
   }
   return <DashboardContainer />
