@@ -10,7 +10,7 @@ import { currentStepSelector } from "@/store/company";
 const stepContent: any = {
   1: <CompanyDetails />,
   2: <BenefitsMap />,
-  3: <Integrations />,
+  // 3: <Integrations />,
   4: <EmployeesList />,
 }
 

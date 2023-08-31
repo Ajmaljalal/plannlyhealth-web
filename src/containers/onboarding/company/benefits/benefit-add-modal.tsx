@@ -31,8 +31,6 @@ export const BenefitAddModal = ({ isOpen, onClose, onSave }: { isOpen: boolean, 
   const handleSave = () => {
     if (!currentBenefit.title || !currentBenefit.description || !currentBenefit.eligibility || !currentBenefit.how_to_enroll || !currentBenefit.how_to_enroll_link) return
     if (!company) return
-    currentBenefit.company_id = company.id
-    console.log('current benefit: ', currentBenefit)
     onSave(currentBenefit)
     setCurrentBenefit({})
     onClose()

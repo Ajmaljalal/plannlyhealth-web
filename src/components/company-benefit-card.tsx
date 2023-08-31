@@ -27,8 +27,8 @@ const BenefitCard = ({ benefit }: any) => {
     dispatch(removeIntegration(benefit))
   }
 
-  const setBenenfitToActive = async () => {
-    const updatedBenefit = { ...benefit, is_active: true }
+  const activateBenefit = async () => {
+    const updatedBenefit = { ...benefit, is_active: !benefit.is_active }
     const result = await axios.put(`${baseUrl}/${benefit.id}`, updatedBenefit)
     const newBenefit = result.data
     dispatch(toggleBenefitActivation(newBenefit))
@@ -66,7 +66,7 @@ const BenefitCard = ({ benefit }: any) => {
   const addBtnStyle = benefit.is_active ? 'bg-system_success' : ''
   const addBtnIcon = benefit.is_active ? icons.checkWhite : icons.addLight
   const integrationIcon = benefit.integration ? icons.checkWhite : icons.addLight
-  const addBtnText = benefit.is_active ? 'Active' : 'Activate'
+  const addBtnText = benefit.is_active ? 'Deactivate' : 'Activate'
   const integrationBtnText = benefit.integration ? 'Update Integration' : 'Add Integration'
   const eligibilityIcon = benefit.is_active ? icons.howTo : icons.howToLight
   const howToEnrollIcon = benefit.is_active ? icons.question : icons.questionLight
@@ -78,7 +78,7 @@ const BenefitCard = ({ benefit }: any) => {
 
   const renderIntegrationsButton = () => {
     if (!benefit.is_active && !benefit.archived) {
-      return <Button className={`text-basic_white h-[32px] text-small ${addBtnStyle}`} text='Add' isSmallBtn isPrimary icon={addBtnIcon} onClick={setBenenfitToActive} />
+      return <Button className={`text-basic_white h-[32px] text-small ${addBtnStyle}`} text='Add' isSmallBtn isPrimary icon={addBtnIcon} onClick={activateBenefit} />
     } else if (benefit.is_active && !benefit.archived) {
       return <Button className={`text-basic_white h-[32px] text-small ${integrationsBtnStyle}`} text={integrationBtnText} isSmallBtn isPrimary icon={integrationIcon} onClick={toggleIntegrationsModal} />
     }
@@ -108,7 +108,7 @@ const BenefitCard = ({ benefit }: any) => {
           </div>
           <div className="flex gap-4">
             <Button icon={archiveBtnIcon} className={archiveBtnStyle} isSmallBtn text={archiveBtnText} onClick={benefit.archived ? restoreBenefit : archiveBenefit} />
-            {benefit.is_active && !benefit.archived ? <Button className={addBtnStyle} text={addBtnText} isPrimary isSmallBtn icon={addBtnIcon} /> : null}
+            {!benefit.archived ? <Button className={addBtnStyle} text={addBtnText} isPrimary isSmallBtn icon={addBtnIcon} onClick={activateBenefit} /> : null}
             {/* {renderIntegrationsButton()} */}
           </div>
         </div>

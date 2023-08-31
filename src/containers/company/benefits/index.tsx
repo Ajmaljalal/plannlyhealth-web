@@ -55,10 +55,11 @@ const BenefitsContainer = () => {
   }
 
   const handleAddBenefit = async (newBenefit: any) => {
-    newBenefit = activeTab === 'primary' ? { ...newBenefit, is_primary: true } : { ...newBenefit, is_primary: false }
+    newBenefit = activeTab === 'primary' ? { ...newBenefit, is_primary: true, company_id: company.id } : { ...newBenefit, is_primary: false, company_id: company.id }
     await axios.post(baseUrl, newBenefit);
-    await axios.get(`${baseUrl}/company/${company.id}`)
-    dispatch(setBenefits([...allBenefits, newBenefit]))
+    const benefitsData = await axios.get(`${baseUrl}/company/${company.id}`)
+    const newBenefits = benefitsData.data
+    dispatch(setBenefits([...newBenefits]))
   }
 
   const handleUploadBenefit = (file: any) => {

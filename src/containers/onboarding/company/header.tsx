@@ -62,13 +62,13 @@ const HorizontalLine = () => {
 
 const OnboardingHeader = ({ }) => {
   return (
-    <div className="w-full lg:max-w-[1440px] flex justify-between items-center">
+    <div className="w-full lg:max-w-[1440px] flex justify-between items-center px-[6px]">
       <OnboardingHeaderStep step={1} />
       <HorizontalLine />
       <OnboardingHeaderStep step={2} />
       <HorizontalLine />
-      <OnboardingHeaderStep step={3} />
-      <HorizontalLine />
+      {/* <OnboardingHeaderStep step={3} /> */}
+      {/* <HorizontalLine /> */}
       <OnboardingHeaderStep step={4} />
     </div>
   );
