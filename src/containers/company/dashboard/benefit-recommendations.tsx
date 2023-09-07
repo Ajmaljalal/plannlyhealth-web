@@ -3,17 +3,17 @@ import Tile from "@/components/tile";
 
 const data = [
   {
-    title: 'Suicide Hotline',
+    title: 'Emergency Department',
     percentage: 75,
     color: 'bg-brand_voilet'
   },
   {
-    title: 'Mental Health Benefits',
+    title: 'Surgical Services',
     percentage: 68,
     color: 'bg-basic_black'
   },
   {
-    title: 'Employee Assistance Program',
+    title: 'ICU Department',
     percentage: 50,
     color: 'bg-basic_yellow'
   }
@@ -29,7 +29,7 @@ const BenefitRecommendations = () => {
 
   return (
     <Tile>
-      <h3 className="font-medium mb-[30px]">Benefit Recommendations</h3>
+      <h3 className="font-medium mb-[30px]">By Departments</h3>
       {renderRecommendations()}
     </Tile>
   );

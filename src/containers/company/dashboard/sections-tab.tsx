@@ -8,27 +8,27 @@ import BenefitEnrollmentProgress from "./benefit-enrollment";
 
 const tabs = [
   {
-    title: 'Assessment Completion',
-    count: 80,
+    title: 'Resource Defiefency Responses',
+    count: 455,
     isPercentage: true,
-    previous_count: 90
+    previous_count: 400
 
   },
   {
-    title: 'Total Life Events',
-    count: 941,
+    title: 'Hight Workload Responses',
+    count: 441,
     isPercentage: false,
-    previous_count: 874
+    previous_count: 474
   },
   {
-    title: 'Total Special Enrollments',
+    title: 'Chronic Stress Responses',
     count: 344,
     isPercentage: false,
     growth: 15,
-    previous_count: 300
+    previous_count: 350
   },
   {
-    title: 'Benefit Utilization',
+    title: 'Attrition Responses',
     count: 44,
     isPercentage: true,
     previous_count: 39
@@ -36,19 +36,19 @@ const tabs = [
 ]
 
 const tabContent: any = {
-  'Benefit Utilization': <>
+  'Attrition Responses': <>
     <BenefitUtilization />
     <BenefitRecommendations />
   </>,
-  'Assessment Completion': <></>,
-  'Total Life Events': <></>,
-  'Total Special Enrollments': <BenefitEnrollmentProgress />
+  'Resource Defiefency Responses': <></>,
+  'Hight Workload Responses': <></>,
+  'Chronic Stress Responses': <BenefitEnrollmentProgress />
 
 
 }
 
 const SectionsTab = () => {
-  const [activeTab, setActiveTab] = useState('Benefit Utilization');
+  const [activeTab, setActiveTab] = useState('Attrition Responses');
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -56,7 +56,7 @@ const SectionsTab = () => {
 
   const renderTabs = () => {
     return tabs.map((tab, index) => {
-      const percentage = tab.isPercentage ? '%' : '';
+      const percentage = tab.isPercentage ? '' : '';
       const isGrowing = tab.previous_count ? tab.count > tab.previous_count : false;
       let growthPercentage: number = tab.previous_count ? (tab.count - tab.previous_count) / tab.previous_count * 100 : 0;
       growthPercentage = Math.abs(growthPercentage);

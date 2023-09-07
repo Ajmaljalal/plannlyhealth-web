@@ -16,17 +16,17 @@ const onboardingSteps: any = {
     title: "Company",
     step: 1,
   },
+  // 2: {
+  //   title: "Benefits",
+  //   step: 2,
+  // },
+  // 3: {
+  //   title: "Integrations",
+  //   step: 3,
+  // },
   2: {
-    title: "Benefits",
-    step: 2,
-  },
-  3: {
-    title: "Integrations",
-    step: 3,
-  },
-  4: {
     title: "Employees",
-    step: 4,
+    step: 2,
   },
 }
 
@@ -65,11 +65,11 @@ const OnboardingHeader = ({ }) => {
     <div className="w-full lg:max-w-[1440px] flex justify-between items-center">
       <OnboardingHeaderStep step={1} />
       <HorizontalLine />
+      {/* <OnboardingHeaderStep step={2} /> */}
+      {/* <HorizontalLine /> */}
+      {/* <OnboardingHeaderStep step={3} /> */}
+      <HorizontalLine />
       <OnboardingHeaderStep step={2} />
-      <HorizontalLine />
-      <OnboardingHeaderStep step={3} />
-      <HorizontalLine />
-      <OnboardingHeaderStep step={4} />
     </div>
   );
 }

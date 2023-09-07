@@ -5,27 +5,27 @@ const containerStyle = 'flex flex-col flex-1 rounded-[32px] bg-basic_grey_5 px-[
 
 const tableData = [
   {
-    name: 'Jame Maddox',
-    qualifiedLifeEvent: 'Child Birth',
+    name: 'Emergency Department',
+    qualifiedLifeEvent: 'Registered Nurses',
     enrollmentProgress: 56,
     deadline: '2023-12-01'
   },
   {
-    name: 'Amy Townsend',
-    qualifiedLifeEvent: 'Coverage Loss',
-    enrollmentProgress: 76,
+    name: 'Emergency Department',
+    qualifiedLifeEvent: 'Physicians',
+    enrollmentProgress: 45,
     deadline: '2023-10-01'
   },
   {
-    name: 'Willian Ivy',
-    qualifiedLifeEvent: 'Adoption',
-    enrollmentProgress: 32,
+    name: 'ICU Department',
+    qualifiedLifeEvent: 'Registered Nurses',
+    enrollmentProgress: 40,
     deadline: '2023-11-01'
   },
   {
-    name: 'Sillia Maddox',
-    qualifiedLifeEvent: 'Marriage',
-    enrollmentProgress: 40,
+    name: 'ICU Department',
+    qualifiedLifeEvent: 'Physicians',
+    enrollmentProgress: 32,
     deadline: '2023-05-01'
   }
 ];
@@ -35,8 +35,8 @@ const BenefitEnrollmentProgress = () => {
   const renderTableData = () => {
     return tableData.map((data, index) => {
       const progress = calculateWidthTailwindClass(data.enrollmentProgress);
-      const progressStyle = `inline-flex w-[400px] h-[12px] rounded-[12px] bg-system_success/[0.22]`;
-      const progressInnerStyle = `inline-block h-[12px] rounded-[10px] ${progress} bg-system_success`;
+      const progressStyle = `inline-flex w-[600px] h-[12px] rounded-[12px] bg-basic_grey_3/[0.22]`;
+      const progressInnerStyle = `inline-block h-[12px] rounded-[10px] ${progress} bg-system_error`;
       return (
         <tr className="border-none py-[12px] text-[14px] font-medium hover:bg-basic_grey_5" key={index}>
           <td className="p-0">{data.name}</td>
@@ -47,7 +47,7 @@ const BenefitEnrollmentProgress = () => {
               <span className={progressInnerStyle} />
             </span>
           </td>
-          <td className="p-0 w-[200px]">{formatDate(data.deadline)}</td>
+          {/* <td className="p-0 w-[200px]">{formatDate(data.deadline)}</td> */}
         </tr>
       )
     })
@@ -56,15 +56,15 @@ const BenefitEnrollmentProgress = () => {
 
   return (
     <div className={containerStyle}>
-      <h3 className="font-medium mb-[40px]">Benefits Enrollment Progress</h3>
+      {/* <h3 className="font-medium mb-[40px]">Benefits Enrollment Progress</h3> */}
       <div className="overflow-x-auto">
         <table className="w-full table-auto">
           <thead>
             <tr>
-              <th className="w-1/4 p-0">Name</th>
-              <th className="w-1/4 p-0">Qualified Life Event</th>
-              <th className="w-2/5 p-0">Enrollment progress</th>
-              <th className="w-[200px] p-0">Deadline</th>
+              <th className="w-1/4 p-0">Departments</th>
+              <th className="w-1/4 p-0">Profession</th>
+              {/* <th className="w-2/5 p-0">Enrollment progress</th> */}
+              {/* <th className="w-[200px] p-0">Deadline</th> */}
             </tr>
           </thead>
           <tbody>

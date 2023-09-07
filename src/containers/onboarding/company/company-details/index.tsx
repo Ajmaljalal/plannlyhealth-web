@@ -9,14 +9,14 @@ import { setCompanyDetails, setStep } from "@/store/company";
 const CompanyDetails = () => {
   const dispatch = useDispatch();
   const [company, setCompany] = useState<any>({
-    name: 'Saint Francis Hospital',
+    name: 'Grand Mental Health',
     ein: '23d4f5g6h7j8k9l0',
     company_size: '10000',
     sic_code: '232df342',
-    website: 'https://www.saintfrancis.com/',
+    website: 'https://www.grandmh.com/',
     entity_type: 'Hostipal',
-    address: '6161 S Yale Ave, Tulsa, OK 74136',
-    nature_of_business: 'Patient care',
+    address: '1214 S Baltimore Ave, Tulsa OK 74119',
+    nature_of_business: 'Mental Health',
     onlyCompanyDomain: false
   });
 
