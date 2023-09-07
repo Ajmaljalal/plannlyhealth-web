@@ -25,12 +25,12 @@ const Profile = () => {
         <Image src={icons.editPencil} width={20} height={20} alt='' className='cursor-pointer' onClick={toggleEdit} />
       </div>
       <div className='flex w-full gap-4 flex-wrap'>
-        <Input label='First Name' name='first_name' placeholder='First Name' value='Ajmal jalal' className={inputStyle} disabled={!isEditing} />
-        <Input label='Last Name' name='last_name' placeholder='Last Name' value={''} className={inputStyle} disabled={!isEditing} />
-        <Input label='Email' name='email' placeholder='Email' value={''} className={inputStyle} disabled={!isEditing} />
-        <Input label='Phone' name='phone' placeholder='Phone' value={''} className={inputStyle} disabled={!isEditing} />
-        <Input label='Job Title' name='job_title' placeholder='Job Title' value={''} className={inputStyle} disabled={!isEditing} />
-        <Input label='Address' name='address' placeholder='Address' value={''} className={inputStyle} disabled={!isEditing} />
+        <Input label='First Name' name='first_name' placeholder='First Name' value='Ajmal' className={inputStyle} disabled={!isEditing} />
+        <Input label='Last Name' name='last_name' placeholder='Last Name' value={'Jalal'} className={inputStyle} disabled={!isEditing} />
+        <Input label='Email' name='email' placeholder='Email' value={'test@plann.ly'} className={inputStyle} disabled={!isEditing} />
+        <Input label='Phone' name='phone' placeholder='Phone' value={'9164356118'} className={inputStyle} disabled={!isEditing} />
+        <Input label='Job Title' name='job_title' placeholder='Job Title' value={'CTO'} className={inputStyle} disabled={!isEditing} />
+        <Input label='Address' name='address' placeholder='Address' value={'Test Adress, CA, 98345'} className={inputStyle} disabled={!isEditing} />
       </div>
       <div className='flex w-full justify-end mr-[5px]'>
         <Button text='Save' className='mt-[48px] w-[100px] slef-end' disabled={!isEditing} isSmallBtn isPrimary onClick={handleProfileSave} />
