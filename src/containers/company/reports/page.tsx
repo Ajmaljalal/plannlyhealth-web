@@ -125,9 +125,9 @@ const ReportsContainer = () => {
               <td className="">{formatDate(report.date)}</td>
               <td className="">
                 <div className="flex items-center justify-end">
-                  <Button text="View" className="mr-[16px]" isSmallBtn />
-                  <Button text='Copy Link' className='mr-[16px]' isSmallBtn />
-                  <Button text="Download PDF" className="mr-[16px]" isSmallBtn isPrimary />
+                  <Button text="View" className="mr-[16px]" isSmallBtn disabled={report.type !== 'Burnout Report'} />
+                  <Button text='Copy Link' className='mr-[16px]' isSmallBtn disabled={report.type !== 'Burnout Report'} />
+                  <Button text="Download PDF" className="mr-[16px]" isSmallBtn isPrimary disabled={report.type !== 'Burnout Report'} />
                 </div>
               </td>
             </tr>
