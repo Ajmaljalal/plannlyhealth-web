@@ -9,7 +9,17 @@ import { useState } from "react"
 const inputStyle = 'max-w-[340px] min-w-[335px]'
 
 const Company = () => {
-  const company = useSelector(companyDetailsSelector)
+  const company = {
+    name: 'Grand Mental Health',
+    ein: '23d4f5g6h7j8k9l0',
+    company_size: '10000',
+    sic_code: '232df342',
+    website: 'https://www.grandmh.com/',
+    entity_type: 'Hostipal',
+    address: '1214 S Baltimore Ave, Tulsa OK 74119',
+    nature_of_business: 'Mental Health',
+    onlyCompanyDomain: false
+  }
   const [companyState, setCompanyState] = useState<any>(company)
   const dispatch = useDispatch()
 
@@ -31,7 +41,6 @@ const Company = () => {
     dispatch(setCompanyDetails(companyState));
   };
 
-  console.log('companyState', companyState)
   return (
     <form className='max-w-[692px] mt-[56px] flex gap-12 flex-wrap' onChange={handleChange} onSubmit={handleSave}>
       <div className='flex w-full gap-4 flex-wrap'>

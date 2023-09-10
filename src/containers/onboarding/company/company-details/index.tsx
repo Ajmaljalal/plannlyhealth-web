@@ -21,6 +21,9 @@ const CompanyDetails = () => {
     address: '',
     restrict_signup_to_domain_only: false,
     integrations: null,
+    benefits: null,
+    employees: null,
+    onlyCompanyDomain: false
   });
 
   const handleCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {

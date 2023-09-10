@@ -7,35 +7,37 @@ const BenefitUtilization = () => {
   return (
     <div className={containerStyle}>
       <div className="flex flex-col gap-2">
-        <h3 className="font-medium mb-[30px]">Benefit Utilization</h3>
+        <h3 className="font-medium mb-[30px]">By Job Functions</h3>
         <p className={legenStyle}>
           <ColoredDot className="bg-system_success" />
-          Mental Health Benefits - 25%
+          Physicians - 25%
         </p>
         <p className={legenStyle}>
           <ColoredDot className="bg-basic_black" />
-          Employee Assistance Program (EAP) - 20%
+          Registered Nurses - 20%
         </p>
         <p className={legenStyle}>
           <ColoredDot className="bg-basic_orange" />
-          Dental Insurance - 15%
+          Technicians - 15%
         </p>
         <p className={legenStyle}>
           <ColoredDot className="bg-basic_yellow" />
-          PTO Benefits - 10%
+          Support Staff - 10%
         </p>
         <p className={legenStyle}>
           <ColoredDot className="bg-brand_voilet" />
-          Suicide Hotline - 30%
+          Others - 30%
         </p>
       </div>
       <div className="w-[224px] h-[224px]">
         <DonutChart segments={[
-          { value: 25, title: 'Mental Health Benefits', color: '#42C76F' },
-          { value: 20, title: 'AEP', color: '#160523' },
-          { value: 15, title: 'Dental Insurance', color: '#FF9139' },
-          { value: 10, title: 'PTO Benefits', color: '#FFB92E' },
-          { value: 30, title: 'Suicide Hotline', color: '#5F369D' },
+          {
+            value: 25, title: 'Physicians', color: '#42C76F'
+          },
+          { value: 20, title: 'Registered Nurses', color: '#160523' },
+          { value: 15, title: 'Technicians', color: '#FF9139' },
+          { value: 10, title: 'Support Staff', color: '#FFB92E' },
+          { value: 30, title: 'Others', color: '#5F369D' },
         ]} />
       </div>
     </div>

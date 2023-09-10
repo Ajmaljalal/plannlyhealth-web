@@ -6,8 +6,9 @@ const DashboardContainer = () => {
 
   return (
     <div className="flex flex-col">
-      <h2 className='font-normal'>Workforce Insight</h2>
+      <h2 className='font-normal'>Workforce Risks Insights</h2>
       <ScoreBoard />
+      <h2 className='font-normal my-4'>Assessments Participation</h2>
       <SectionsTab />
     </div>
 

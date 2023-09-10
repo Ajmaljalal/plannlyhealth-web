@@ -17,6 +17,7 @@ const reportTypes = [
   { value: 'burnout_report', label: 'Burnout Report' },
   { value: 'benefit_utilization_report', label: 'Benefit Utilization Report' },
   { value: 'feedback_report', label: 'Feedback Report' },
+  // { value: 'human_error_report', label: 'Human Error Report' },
 ];
 
 const departments = [
@@ -29,6 +30,13 @@ const departments = [
 ];
 
 const reports = [
+  {
+    tite: 'Burnout Report',
+    description: 'This report shows the burnout of employees in the company',
+    date: '2021-04-01',
+    department: 'Emergency Department',
+    type: 'Burnout Report'
+  },
   {
     tite: 'Stress Level Report',
     description: 'This report shows the stress levels of employees in the company',
@@ -49,12 +57,6 @@ const reports = [
     date: '2021-03-01',
     department: 'Emergency Department',
     type: 'Life Events Report'
-  }, {
-    tite: 'Burnout Report',
-    description: 'This report shows the burnout of employees in the company',
-    date: '2021-04-01',
-    department: 'Emergency Department',
-    type: 'Burnout Report'
   },
   {
     tite: 'Benefit Utilization Report',
@@ -64,13 +66,19 @@ const reports = [
     type: 'Benefit Utilization Report'
   },
   {
-    tite: 'Feedback Report',
+    tite: "Employees's Feedback Report",
     description: 'This report shows the feedback of employees in the company',
     date: '2021-06-21',
     department: 'Emergency Department',
     type: 'Feedback Report'
   },
-
+  // {
+  //   tite: 'Human Error Report',
+  //   description: 'This report shows the human error of employees in the company',
+  //   date: '2020-1-12',
+  //   department: 'Emergency Department',
+  //   type: 'Human Error Report'
+  // }
 ]
 
 
@@ -117,9 +125,9 @@ const ReportsContainer = () => {
               <td className="">{formatDate(report.date)}</td>
               <td className="">
                 <div className="flex items-center justify-end">
-                  <Button text="View" className="mr-[16px]" isSmallBtn />
-                  <Button text='Copy Link' className='mr-[16px]' isSmallBtn />
-                  <Button text="Download PDF" className="mr-[16px]" isSmallBtn isPrimary />
+                  <Button text="View" className="mr-[16px]" isSmallBtn disabled={report.type !== 'Burnout Report'} />
+                  <Button text='Copy Link' className='mr-[16px]' isSmallBtn disabled={report.type !== 'Burnout Report'} />
+                  <Button text="Download PDF" className="mr-[16px]" isSmallBtn isPrimary disabled={report.type !== 'Burnout Report'} />
                 </div>
               </td>
             </tr>

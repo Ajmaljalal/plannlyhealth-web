@@ -23,11 +23,9 @@ const BenefitCard = ({ benefit }: any) => {
   const enrollBtnStyle = benefit.enrolled ? 'bg-system_success_light' : ''
 
   const images: any = {
-    'Health Insurance': '/illustrations/insurance.svg',
-    'Dental Insurance': '/illustrations/dental.svg',
-    'Vision Insurance': '/illustrations/insurance.svg',
-    'Retirement Plans': '/illustrations/retirement.svg',
-    'Development & Training': '/illustrations/development.svg',
+    'Medical Plan': '/illustrations/dental.svg',
+    'Vision Plan': '/illustrations/dental.svg',
+    'Dental Plan': '/illustrations/dental.svg',
   }
 
   return (
@@ -37,9 +35,10 @@ const BenefitCard = ({ benefit }: any) => {
         <div className="flex items-center justify-between">
           <h4>{currentBenefit.title}</h4>
           {currentBenefit.enrolled ? <span className="text-basic_white text-[12px] bg-system_success px-[12px] py-[3px] rounded-[16px]">Enrolled</span> :
-            <p className=" text-[12px] px-[10px] py-[3px] rounded-[16px] border border-system_success text-system_success rounded-[16px] bg-system_success_light">
-              Recommended
-            </p>
+            // <p className=" text-[12px] px-[10px] py-[3px] rounded-[16px] border border-system_success text-system_success rounded-[16px] bg-system_success_light">
+            //   Recommended
+            // </p>
+            null
           }
         </div>
         <p className="mt-[4px] mb-[24px] text-small">{currentBenefit.description}</p>
