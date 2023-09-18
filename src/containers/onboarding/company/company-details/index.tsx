@@ -25,7 +25,6 @@ const CompanyDetails = () => {
   const company: any = useSelector(selectCompanyDetails);
   const [companyData, setCompanyData] = useState<any>(company);
   const dispatch = useDispatch();
-  console.log('company', companyData)
 
 
 
