@@ -25,9 +25,14 @@ const CompanyDetails = () => {
   const company: any = useSelector(selectCompanyDetails);
   const [companyData, setCompanyData] = useState<any>(company);
   const dispatch = useDispatch();
+  console.log('company', companyData)
+
+
 
   useEffect(() => {
-    if (!company.id) {
+    if (company.id) {
+      setCompanyData(company);
+    } else {
       setCompanyData(DEFAULT_COMPANY_DATA);
     }
   }, [company]);
