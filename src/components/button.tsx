@@ -9,6 +9,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   isPrimary?: boolean
   isSmallBtn?: boolean
   icon?: StaticImageData,
+  isLoading?: boolean
 }
 
 const genralStyles = `
@@ -45,17 +46,19 @@ const secondary = `
     hover:bg-secondary_btn_hover
 `
 
-export const Button = ({ className, text, isPrimary, isSmallBtn, icon, ...props }: ButtonProps) => {
+export const Button = ({ className, text, isPrimary, isSmallBtn, isLoading, icon, ...props }: ButtonProps) => {
   const buttonStyles = isPrimary ? `${genralStyles} ${primary}` : `${genralStyles} ${secondary}`
   const buttonSize = isSmallBtn ? `${smallBtn}` : `${bigBtn}`
   return (
     <button
+      type='submit'
       className={`${buttonStyles} ${buttonSize} ${className} font-normal`}
       {...props}
     >
       <>
         {icon && <Image src={icon} alt={text} className='mr-[10px]' />}
-        {text}
+        {!isLoading ? text : null}
+        {isLoading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-pWhite"></div> : null}
       </>
     </button>
   )
