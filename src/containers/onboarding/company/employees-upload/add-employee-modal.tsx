@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Modal } from '@/components/modal'
 import { Input } from '@/components/input'
 import { Button } from '@/components/button'
+import { useSelector } from '@/store/store'
+import { companyDetailsSelector } from '@/store/company'
 
 
 const modalContentStyles = `
@@ -12,6 +14,7 @@ const modalContentStyles = `
 
 export const EmployeeAddModal = ({ isOpen, onClose, onSave }: { isOpen: boolean, onClose: () => void, onSave: (employee: any) => void }) => {
   const [currentEmployee, setCurrentEmployee] = useState<any>({})
+  const company: any = useSelector(companyDetailsSelector)
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target
@@ -20,7 +23,7 @@ export const EmployeeAddModal = ({ isOpen, onClose, onSave }: { isOpen: boolean,
 
   const handleSave = async () => {
     if (!currentEmployee.first_name || !currentEmployee.last_name || !currentEmployee.job_title || !currentEmployee.email || !currentEmployee.role) return
-    currentEmployee.id = Math.floor(Math.random() * 1000)
+    currentEmployee.company_id = company.id
     onSave(currentEmployee)
     setCurrentEmployee({})
     onClose()

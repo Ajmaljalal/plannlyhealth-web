@@ -13,6 +13,7 @@ import Hero from "@/containers/onboarding/company/hero";
 import { EmployeeAddModal } from "@/containers/onboarding/company/employees-upload/add-employee-modal";
 import Tabs from "@/components/tabs/tabs";
 import { useRouter } from "next/navigation";
+import { createNewUserInvite } from "@/lib/services/invite-users";
 
 const tableHeaders = ['Name', 'Job Title', 'Email', 'Role', '']
 
@@ -30,7 +31,6 @@ export const employees: any = [
     date_of_birth: "1980-05-01",
     gender: "Male",
     support_id: 101,
-    ssn: "123-45-6789",
     department: "Pediatrics",
     location: "East Wing",
     dependents: [
@@ -51,7 +51,6 @@ export const employees: any = [
     date_of_birth: "1978-08-02",
     gender: "Female",
     support_id: 102,
-    ssn: "234-56-7890",
     department: "Cardiology",
     location: "South Building",
     dependents: [
@@ -72,7 +71,6 @@ export const employees: any = [
     date_of_birth: "1975-07-15",
     gender: "Male",
     support_id: 103,
-    ssn: "345-67-8901",
     department: "Orthopedics",
     location: "West Wing",
     dependents: [
@@ -93,7 +91,6 @@ export const employees: any = [
     date_of_birth: "1985-10-10",
     gender: "Female",
     support_id: 104,
-    ssn: "456-78-9012",
     department: "Nursing",
     location: "Main Building",
     dependents: [
@@ -114,7 +111,6 @@ export const employees: any = [
     date_of_birth: "1972-02-14",
     gender: "Male",
     support_id: 105,
-    ssn: "567-89-0123",
     department: "Anesthesiology",
     location: "North Wing",
     dependents: [
@@ -135,7 +131,6 @@ export const employees: any = [
     date_of_birth: "1980-06-06",
     gender: "Female",
     support_id: 106,
-    ssn: "678-90-1234",
     department: "Radiology",
     location: "Radiology Wing",
     dependents: [
@@ -156,7 +151,6 @@ export const employees: any = [
     date_of_birth: "1976-12-12",
     gender: "Male",
     support_id: 107,
-    ssn: "789-01-2345",
     department: "Neurology",
     location: "Emergency Building",
     dependents: [
@@ -177,7 +171,6 @@ export const employees: any = [
     date_of_birth: "1982-04-04",
     gender: "Female",
     support_id: 108,
-    ssn: "890-12-3456",
     department: "Gynecology",
     location: "South Building",
     dependents: [
@@ -198,7 +191,6 @@ export const employees: any = [
     date_of_birth: "1978-08-08",
     gender: "Male",
     support_id: 109,
-    ssn: "901-23-4567",
     department: "Dentistry",
     location: "Dental Building",
     dependents: [
@@ -219,7 +211,6 @@ export const employees: any = [
     date_of_birth: "1985-10-10",
     gender: "Female",
     support_id: 110,
-    ssn: "012-34-5678",
     department: "Pharmacy",
     location: "Main Building",
     dependents: [
@@ -230,9 +221,6 @@ export const employees: any = [
   }
 
 ]
-
-
-
 
 const EmployeesListContainer = () => {
   const router = useRouter()
@@ -253,9 +241,9 @@ const EmployeesListContainer = () => {
   }
 
 
-  const handleAddEmployee = (newEmployee: any) => {
+  const handleAddEmployee = async (newEmployee: any) => {
+    await createNewUserInvite(newEmployee)
     dispatch(setEmployees([newEmployee, ...allEmployees]))
-    console.log(newEmployee)
   }
 
   const handleEditEmployee = (updatedEmployee: any) => {
@@ -362,7 +350,7 @@ const EmployeesListContainer = () => {
       return renderNullState()
     }
     return (
-      <Table className='overflow-scroll mt-[32px]'>
+      <Table className='overflow-hidden mt-[32px]'>
         <TableHead headers={tableHeaders} />
         <tbody>
           {renderEmpoyees()}
