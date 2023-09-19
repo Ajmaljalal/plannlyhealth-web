@@ -57,9 +57,8 @@ export const authOptions: any = {
     }
   ),
   callbacks: {
-    jwt: async ({ token, account, trigger, session }: any) => {
-
-      return { ...token, ...account }
+    jwt: async ({ token }: any) => {
+      return { ...token, }
     },
     session: async ({ session, token }: any) => {
       return {
