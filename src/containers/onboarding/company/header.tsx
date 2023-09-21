@@ -49,10 +49,10 @@ const HorizontalLine = () => (
 
 const OnboardingHeader = () => {
   const company = useSelector(companyDetailsSelector);
-  const isCompanyComplete = company &&
+  const isCompanyComplete: any = company &&
     Object.entries(company)
       .filter(([key]) => key !== 'restrict_signup_to_domain_only')
-      .every(([, value]) => value);
+      .every(([, value]) => value)
 
   return (
     <div className="w-full lg:max-w-[1440px] flex items-center px-[6px]">

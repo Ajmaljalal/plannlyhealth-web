@@ -15,14 +15,14 @@ const Dependent = ({ dependent, employeeId }: { dependent: any, employeeId: any 
   const dispatch = useDispatch()
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
-  const allEmployees = useSelector(employeesSelector)
+  const allEmployees: any = useSelector(employeesSelector)
 
   const toggleEditModal = () => {
     setIsEditModalOpen(!isEditModalOpen)
   }
 
   const handleEditDependent = (updatedDependent: any) => {
-    const currentEmployee: any = allEmployees.find((employee: any) => employee.id === employeeId)
+    const currentEmployee: any = allEmployees?.find((employee: any) => employee.id === employeeId)
     const updatedDependents = currentEmployee.dependents.map((dependent: any) => {
       if (dependent.id === updatedDependent.id) {
         return updatedDependent
@@ -30,7 +30,7 @@ const Dependent = ({ dependent, employeeId }: { dependent: any, employeeId: any 
       return dependent
     })
     const updatedEmployee = { ...currentEmployee, dependents: updatedDependents }
-    const updatedEmployees = allEmployees.map((employee: any) => {
+    const updatedEmployees = allEmployees?.map((employee: any) => {
       if (employee.id === updatedEmployee.id) {
         return updatedEmployee
       }
@@ -41,10 +41,10 @@ const Dependent = ({ dependent, employeeId }: { dependent: any, employeeId: any 
   }
 
   const handleDeleteDependent = () => {
-    const currentEmployee: any = allEmployees.find((employee: any) => employee.id === employeeId)
+    const currentEmployee: any = allEmployees?.find((employee: any) => employee.id === employeeId)
     const updatedDependents = currentEmployee.dependents.filter((currentDependent: any) => currentDependent.id !== dependent.id)
     const updatedEmployee = { ...currentEmployee, dependents: updatedDependents }
-    const updatedEmployees = allEmployees.map((employee: any) => {
+    const updatedEmployees = allEmployees?.map((employee: any) => {
       if (employee.id === updatedEmployee.id) {
         return updatedEmployee
       }

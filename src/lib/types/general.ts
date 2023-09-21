@@ -4,3 +4,13 @@ export type Tab = {
   onClick: () => void;
   count?: number;
 }
+
+export enum Role {
+  Admin = 'Admin',
+  Finance = 'Finance',
+  Standard = 'Standard',
+  SuperAdmin = 'Super Admin',
+  WellnessCoordinator = 'Program Coordinator',
+  CustomerSuccess = 'Customer Success',
+  ProgramAdmin = 'Program Admin',
+}

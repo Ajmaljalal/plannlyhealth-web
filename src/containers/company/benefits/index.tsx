@@ -22,11 +22,11 @@ const getCompany = async (companyId: string) => {
 
 const BenefitsContainer = () => {
   const company: any = useSelector(companyDetailsSelector)
-  const allBenefits = useSelector(benefitsSelector)
-  const primaryBenefits = allBenefits.filter((benefit: any) => benefit.is_primary && !benefit.archived)
-  const voluntaryBenefits = allBenefits.filter((benefit: any) => !benefit.is_primary && !benefit.archived)
-  const recommendedBenefits = allBenefits.filter((benefit: any) => !benefit.is_primary && !benefit.archived)
-  const archivedBenefits = allBenefits.filter((benefit: any) => benefit.archived)
+  const allBenefits: any = useSelector(benefitsSelector)
+  const primaryBenefits = allBenefits?.filter((benefit: any) => benefit.is_primary && !benefit.archived)
+  const voluntaryBenefits = allBenefits?.filter((benefit: any) => !benefit.is_primary && !benefit.archived)
+  const recommendedBenefits = allBenefits?.filter((benefit: any) => !benefit.is_primary && !benefit.archived)
+  const archivedBenefits = allBenefits?.filter((benefit: any) => benefit.archived)
   const dispatch = useDispatch()
   const [activeTab, setActiveTab] = useState('primary')
   const [isModalOpen, setIsModalOpen] = useState<any>(false)

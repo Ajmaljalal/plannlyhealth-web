@@ -4,14 +4,14 @@ import { getServerSession } from 'next-auth'
 import React from 'react'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import { redirect } from 'next/navigation'
-import { employeesBaseUrl } from '@/lib/helpers'
+import { COMAPANY_BASE_URL, GET_EMPLOYEE_BY_EMAIL } from '@/lib/helpers/api-urls'
 
 const baseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/companies`
 
 async function AdminPanel() {
   const session: any = await getServerSession(authOptions)
 
-  const employees = await axios.get(`${employeesBaseUrl}/email/${session.user.email}`)
+  const employees = await axios.get(`${GET_EMPLOYEE_BY_EMAIL}/${session.user.email}`)
   const employee = employees.data[0]
   if (employee.role !== 'Super Admin') {
     return redirect('/')
@@ -20,7 +20,7 @@ async function AdminPanel() {
   let companies = null
   if (session?.user) {
     try {
-      const companyApiCall = await axios.get(baseUrl)
+      const companyApiCall = await axios.get(COMAPANY_BASE_URL)
       companies = companyApiCall.data || null
     } catch (error) {
       console.log(error)

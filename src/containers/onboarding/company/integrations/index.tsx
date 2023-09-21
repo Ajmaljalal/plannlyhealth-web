@@ -9,11 +9,11 @@ import { benefitsSelector, setStep } from "@/store/company"
 
 const Integrations = () => {
   const dispatch = useDispatch()
-  const allBenefits = useSelector(benefitsSelector)
-  const primaryBenefits = allBenefits.filter((benefit: any) => {
+  const allBenefits: any = useSelector(benefitsSelector)
+  const primaryBenefits = allBenefits?.filter((benefit: any) => {
     return benefit.isPrimary && benefit.isActive
   })
-  const voluntaryBenefits = allBenefits.filter((benefit: any) => {
+  const voluntaryBenefits = allBenefits?.filter((benefit: any) => {
     return !benefit.isPrimary && benefit.isActive
   })
 

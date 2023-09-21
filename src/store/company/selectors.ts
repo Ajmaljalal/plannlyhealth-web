@@ -7,8 +7,8 @@ export const selectBenefits = (state: RootState) => state.company_onboarding.ben
 export const selectIntegrations = (state: RootState) => state.company_onboarding.integrations;
 export const selectEmployees = (state: RootState) => state.company_onboarding.employees;
 
-export const selectPrimaryBenefits = (state: RootState) => state.company_onboarding.benefits.filter((benefit: any) => benefit.isPrimary);
-export const selectVoluntaryBenefits = (state: RootState) => state.company_onboarding.benefits.filter((benefit: any) => !benefit.isPrimary);
+export const selectPrimaryBenefits = (state: RootState) => state.company_onboarding.benefits?.filter((benefit: any) => benefit.isPrimary);
+export const selectVoluntaryBenefits = (state: RootState) => state.company_onboarding.benefits?.filter((benefit: any) => !benefit.isPrimary);
 
 export const selectCompanyPaymentMethod = (state: RootState) => state.company_onboarding.companyPaymentMethod;
 export const selectCompanyPlan = (state: RootState) => state.company_onboarding.companyPlan;

@@ -1,4 +1,4 @@
-import { NEW_USER_INVITE } from "@/lib/helpers/db-urls";
+import { NEW_USER_INVITE } from "@/lib/helpers/api-urls";
 import axios from "axios";
 
 export const createNewUserInvite = async (user: any) => {

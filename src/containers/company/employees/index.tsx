@@ -227,9 +227,9 @@ const EmployeesListContainer = () => {
   const dispatch = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
   const [activeTab, setActiveTab] = useState('active')
-  const allEmployees = useSelector(employeesSelector)
-  const activeEmployees = allEmployees.filter((employee: any) => !employee.inactive)
-  const inactiveEmployees = allEmployees.filter((employee: any) => employee.inactive)
+  const allEmployees: any = useSelector(employeesSelector)
+  const activeEmployees = allEmployees?.filter((employee: any) => !employee.inactive)
+  const inactiveEmployees = allEmployees?.filter((employee: any) => employee.inactive)
 
   const handleTabClick = (text: string) => {
     setActiveTab(text.toLocaleLowerCase())
@@ -247,7 +247,7 @@ const EmployeesListContainer = () => {
   }
 
   const handleEditEmployee = (updatedEmployee: any) => {
-    const updatedEmployees = allEmployees.map((employee: any) => {
+    const updatedEmployees = allEmployees?.map((employee: any) => {
       if (employee.id === updatedEmployee.id) {
         return updatedEmployee
       }
@@ -257,7 +257,7 @@ const EmployeesListContainer = () => {
   }
 
   const handleDeactivateEmployee = (employeeId: number) => {
-    const updatedEmployees = allEmployees.map((employee: any) => {
+    const updatedEmployees = allEmployees?.map((employee: any) => {
       if (employee.id === employeeId) {
         const updatedEmployee = { ...employee, inactive: true }
         return updatedEmployee
@@ -270,7 +270,7 @@ const EmployeesListContainer = () => {
   }
 
   const handleActivateEmployee = (employeeId: number) => {
-    const updatedEmployees = allEmployees.map((employee: any) => {
+    const updatedEmployees = allEmployees?.map((employee: any) => {
       if (employee.id === employeeId) {
         const updatedEmployee = { ...employee, inactive: false }
         return updatedEmployee
@@ -343,10 +343,10 @@ const EmployeesListContainer = () => {
   }
 
   const renderEmployeesTable = () => {
-    if (activeTab === 'inactive' && !inactiveEmployees.length) {
+    if (activeTab === 'inactive' && !inactiveEmployees?.length) {
       return renderInactiveEmployeesNullState()
     }
-    if (activeTab === 'active' && !activeEmployees.length) {
+    if (activeTab === 'active' && !activeEmployees?.length) {
       return renderNullState()
     }
     return (
@@ -383,7 +383,7 @@ const EmployeesListContainer = () => {
 
   return (
     <div className="flex flex-col justify-between items-end w-full h-full relative overflow-hidden">
-      {allEmployees.length ? renderUsersTable() : renderNullState()}
+      {allEmployees?.length ? renderUsersTable() : renderNullState()}
       <EmployeeAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={(employee) => handleAddEmployee(employee)} />
     </div>
   )

@@ -227,9 +227,9 @@ export const testBenefits: any = [
 const BenefitsMap = () => {
   const dispatch = useDispatch()
   const company: any = useSelector(companyDetailsSelector)
-  const allBenefits = useSelector(benefitsSelector)
-  const primaryBenefits = allBenefits.filter((benefit: any) => benefit.is_primary)
-  const voluntaryBenefits = allBenefits.filter((benefit: any) => !benefit.is_primary)
+  const allBenefits: any = useSelector(benefitsSelector)
+  const primaryBenefits = allBenefits?.filter((benefit: any) => benefit.is_primary)
+  const voluntaryBenefits = allBenefits?.filter((benefit: any) => !benefit.is_primary)
 
   const [activeTab, setActiveTab] = useState<any>('primary')
   const [isModalOpen, setIsModalOpen] = useState<any>(false)

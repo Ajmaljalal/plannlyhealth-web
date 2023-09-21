@@ -5,6 +5,7 @@ import { SignOut } from '@/components/signout';
 import { Divider } from '@/components/divider';
 import { NavItem } from '@/components/left-nav/nav-item';
 import { icons } from '@/lib/icons';
+import { Header } from '@/components/header';
 
 export const metadata = {
   title: 'Plannly Health',
@@ -13,7 +14,6 @@ export const metadata = {
 
 const rootContainerStyles = `w-full h-screen p-[16px] flex bg-basic_white overflow-auto relative`
 const navContainerStyles = `sticky top-0 left-0 hidden lg:flex flex-col gap-8 min-w-[200px] h-full bg-basic_black text-basic_white px-[16px] py-[24px] rounded-[32px]`
-const headerStyles = `sticky top-[-16px] right-0 flex justify-end items-center gap-4 h-[65px] mt-[-16px] bg-basic_white`
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 
@@ -31,13 +31,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
       <div className='w-full'>
-        <div className={headerStyles}>
-          <Image src={icons.notifications} alt='plannly logo' width={32} height={32} />
-          {/* <Image src={icons.lightMode} alt='plannly logo' width={32} height={32} /> */}
-          <div className='flex justify-center items-center w-[32px] h-[32px] rounded-[50%] bg-purple big-text text-basic_white'>
-            A
-          </div>
-        </div>
+        <Header />
         <div className='pb-[32px] lg:p-[32px] lg:pt-[0px] max-w-[1440px] h-fit mx-auto'>
           {children}
         </div>

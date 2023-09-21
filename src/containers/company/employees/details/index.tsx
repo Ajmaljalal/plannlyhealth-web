@@ -18,8 +18,8 @@ const EmployeeDetailsContainer = () => {
   const pathname = usePathname()
   const router = useRouter()
   const id = pathname.split('/')[3]
-  const employees = useSelector(employeesSelector)
-  const employee: any = employees.find((employee: any) => employee.id.toString() === id)
+  const employees: any = useSelector(employeesSelector)
+  const employee: any = employees?.find((employee: any) => employee.id.toString() === id)
 
   if (!employee) {
     return (
@@ -40,7 +40,7 @@ const EmployeeDetailsContainer = () => {
   const handleSaveDependent = (updatedDependent: any) => {
     const updatedDependents = employee.dependents ? [...employee.dependents, updatedDependent] : [updatedDependent]
     const updatedEmployee = { ...employee, dependents: updatedDependents }
-    const updatedEmployees = employees.map((employee: any) => {
+    const updatedEmployees = employees?.map((employee: any) => {
       if (employee.id === updatedEmployee.id) {
         return updatedEmployee
       }

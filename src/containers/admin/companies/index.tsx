@@ -16,7 +16,7 @@ const rowStyle = 'table-row border-t'
 export const CompaniesContainer = ({ companies }: any) => {
   const router = useRouter()
   const dispatch = useDispatch()
-  const [sorteCompanies, setSortedCompanies] = useState(companies)
+  const [sortedCompanies, setSortedCompanies] = useState(companies)
 
   const handleOnSearch = (e: any) => {
     const value = e.target.value
@@ -32,11 +32,11 @@ export const CompaniesContainer = ({ companies }: any) => {
 
   const onGotoCompanyDashboard = (company: any) => {
     dispatch(setCompanyDetails(company))
-    router.push('/company/dashboard?company_id=' + company.id)
+    router.push('/company/dashboard?org_id=' + company.id)
   }
 
   const renderCompanies = () => {
-    return sorteCompanies?.map((company: any) => {
+    return sortedCompanies?.map((company: any) => {
       return (
         <tr key={company.id} className={rowStyle}>
           <td className='pl-[32px] w-1/3'>{company.name}</td>
@@ -56,7 +56,7 @@ export const CompaniesContainer = ({ companies }: any) => {
   }
 
   const renerTable = () => {
-    if (!sorteCompanies?.length) return (
+    if (!sortedCompanies?.length) return (
       <div className='flex flex-col items-center justify-center gap-4 mt-[100px]'>
         <Image src='/illustrations/company-details-illustration.svg' width={200} height={200} alt='no data icon' />
         <p className='text-center'>No hospital found!</p>

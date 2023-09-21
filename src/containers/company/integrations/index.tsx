@@ -15,16 +15,16 @@ import ComingSoon from "@/components/coming-soon";
 const IntegrationsContainer = () => {
   const [activeTab, setActiveTab] = useState('all')
   const dispatch = useDispatch()
-  const allIntegrations = useSelector(integrationsSelector)
-  const HRISIntegrations = allIntegrations.filter((i: any) => i.category.includes('HRIS'))
-  const benAdminIntegrations = allIntegrations.filter((i: any) => i.category.includes('Ben Admin'))
+  const allIntegrations: any = useSelector(integrationsSelector)
+  const HRISIntegrations = allIntegrations?.filter((i: any) => i.category.includes('HRIS'))
+  const benAdminIntegrations = allIntegrations?.filter((i: any) => i.category.includes('Ben Admin'))
 
 
 
 
 
   useEffect(() => {
-    if (allIntegrations.length > 0) return
+    if (allIntegrations?.length > 0) return
     dispatch(addIntegrations(integrations))
   }, [])
 

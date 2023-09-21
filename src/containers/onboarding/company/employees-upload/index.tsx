@@ -234,7 +234,7 @@ const EmployeesList = () => {
   const router = useRouter()
   const dispatch = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
-  const selectedEmployees = useSelector(employeesSelector)
+  const selectedEmployees: any = useSelector(employeesSelector)
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -243,11 +243,10 @@ const EmployeesList = () => {
 
   const handleAddEmployee = (newEmployee: any) => {
     dispatch(setEmployees([newEmployee, ...selectedEmployees]))
-    console.log(newEmployee)
   }
 
   const handleEditEmployee = (updatedEmployee: any) => {
-    const updatedEmployees = selectedEmployees.map((employee: any) => {
+    const updatedEmployees = selectedEmployees?.map((employee: any) => {
       if (employee.id === updatedEmployee.id) {
         return updatedEmployee
       }

@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch } from "@/store/store";
 import useSWR from 'swr';
+import { COMAPANY_BASE_URL } from "@/lib/helpers/api-urls";
 
 const stepContent: Record<number, JSX.Element> = {
   1: <CompanyDetails />,
@@ -22,9 +23,9 @@ const Oboarding = () => {
   const dispatch = useDispatch();
   const currentStep = useSelector(currentStepSelector);
   const params = useSearchParams();
-  const companyId = params.get('company_id');
+  const companyId = params.get('org_id');
 
-  const { data: company, error, isLoading } = useSWR(companyId ? `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/companies/${companyId}` : null, fetcher);
+  const { data: company, error, isLoading } = useSWR(companyId ? `${COMAPANY_BASE_URL}/${companyId}` : null, fetcher);
 
   useEffect(() => {
     if (company) {

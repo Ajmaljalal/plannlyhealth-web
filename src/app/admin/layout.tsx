@@ -2,7 +2,6 @@ import Image from 'next/image';
 import logo from '../../../public/logos/logo-white-full-v2.svg'
 import { icons } from '@/lib/icons';
 import { getServerSession } from 'next-auth';
-import { checkAuth } from '@/lib/helpers';
 
 export const metadata = {
   title: 'Plannly Health',

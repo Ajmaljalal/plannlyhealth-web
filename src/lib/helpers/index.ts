@@ -1,7 +1,5 @@
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
 
 export const employeesBaseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/employees`
 
@@ -72,17 +70,6 @@ export const sampleCSVContent = [{
   email: "test@test.com",
 }]
 
-export const benefitPrograms = [
-  { value: 'Health & Wellness', label: 'Health & Wellness' },
-  { value: 'Family Care', label: 'Family Care' },
-  { value: 'Food & Groceries', label: 'Food & Groceries' },
-  { value: 'Recognition & Anniversaries', label: 'Recognition & Anniversaries' },
-  { value: 'Give/Donation', label: 'Give/Donation' },
-  { value: 'Student Loans', label: 'Student Loans' },
-  { value: 'Work From Home', label: 'Work From Home' },
-  { value: 'Learning & Development', label: 'Learning & Development' },
-  { value: 'Commuter & Transportation', label: 'Commuter & Transportation' },
-];
 
 export const setSessionIdToCookie = (sessionId: string) => {
   const expirationDate = new Date();
@@ -158,19 +145,6 @@ export const getRedirectUrl = (role: any) => {
     "Standard": `/employee/rewards`
   }
   return urls[role]
-}
-
-export const checkAuth = async () => {
-  const session: any = await getServerSession();
-  if (session?.user) {
-    const employees = await axios.get(`${employeesBaseUrl}/email/${session.user.email}`)
-    const employee = employees.data[0]
-    if (employee?.status === 'Deactivated') return redirect("/auth/login")
-    const redirectUrl = `${getRedirectUrl(employee?.role)}?acc=${employee.id}`
-    return redirect(redirectUrl)
-  } else {
-    return redirect("/auth/login")
-  }
 }
 
 export const isObjectsEqual = (obj1: any, obj2: any) => {
