@@ -29,7 +29,7 @@ const CompanyDetails = () => {
 
 
   useEffect(() => {
-    if (company.id) {
+    if (company?.id) {
       setCompanyData(company);
     } else {
       setCompanyData(DEFAULT_COMPANY_DATA);
@@ -49,7 +49,7 @@ const CompanyDetails = () => {
   };
 
   const isFormValid = () => {
-    return !Object.entries(companyData).some(([key, value]) => {
+    return companyData && !Object.entries(companyData).some(([key, value]) => {
       if (key === 'restrict_signup_to_domain_only') return false; // ignore this field
       return !value?.toString().trim();
     });
@@ -58,7 +58,7 @@ const CompanyDetails = () => {
   const handleContinue = async (e: any) => {
     e.preventDefault();
     if (company && isObjectsEqual(company, companyData)) {
-      navigate(`/onboarding/company?company_id=${company.id}`)
+      navigate(`/onboarding/company?org_id=${company.id}`)
       dispatch(setStep(2));
       return
     }
@@ -69,7 +69,7 @@ const CompanyDetails = () => {
       try {
         const { data: newCompany } = await axios.post(baseUrl, companyData);
         dispatch(setCompanyDetails(newCompany));
-        navigate(`/onboarding/company?company_id=${newCompany.id}`);
+        navigate(`/onboarding/company?org_id=${newCompany.id}`);
         dispatch(setStep(2));
       } catch (error) {
         console.error("Failed to submit company data:", error);
@@ -95,6 +95,7 @@ const CompanyDetails = () => {
         <CheckBox label="Limit sign-up to only the employees with the company domain" name="restrict_signup_to_domain_only" value={companyData?.restrict_signup_to_domain_only} checked={companyData?.restrict_signup_to_domain_only} onChange={handleCheckBoxChange} />
         <Button className="w-[340px] mx-auto mt-[24px]" text="Continue" isPrimary disabled={isBtnDisabled} isLoading={isLoading} />
       </form>
+      <Button className="w-[340px] mx-auto mt-[24px]" text="Cancel" onClick={() => navigate('/admin')} />
     </>
   );
 }

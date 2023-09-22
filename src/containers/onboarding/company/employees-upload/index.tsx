@@ -9,9 +9,9 @@ import { TableHead } from "@/components/table/table-head";
 import Employee from "./employee-row";
 import { EmployeeAddModal } from "./add-employee-modal";
 import { useDispatch } from "react-redux";
-import { employeesSelector, setEmployees } from "@/store/company";
+import { employeesSelector, setCompanyDetails, setEmployees } from "@/store/company";
 import { useSelector } from "@/store/store";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export const employees: any = [
   {
@@ -232,9 +232,12 @@ const tableHeaders = ['Name', 'Job Title', 'Email', 'Role', '']
 
 const EmployeesList = () => {
   const router = useRouter()
+  const params = useSearchParams()
   const dispatch = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
   const selectedEmployees: any = useSelector(employeesSelector)
+
+  const companyIdFromParams = params.get('org_id')
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -266,7 +269,11 @@ const EmployeesList = () => {
   }
 
   const handleMoveToNextStep = () => {
-    router.push('/company/dashboard')
+    router.push(`/company/dashboard?org_id=${companyIdFromParams}`)
+  }
+
+  const handleSkip = () => {
+    router.push(`/company/dashboard?org_id=${companyIdFromParams}`)
   }
 
   const renderEmpoyees = () => {
@@ -313,6 +320,7 @@ const EmployeesList = () => {
           />
           <Button className="w-[200px]" text="Add Employee" icon={icons.add} onClick={toggleModal} />
         </div>
+        < Button className="w-[420px] mt-4" text="Skip" onClick={handleSkip} />
       </div>
     )
   }

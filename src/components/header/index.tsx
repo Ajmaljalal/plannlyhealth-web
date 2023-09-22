@@ -67,10 +67,15 @@ export const Header: React.FC = () => {
     }
   }, [user, companyIdFromParams]);
 
+  const handleBackButtonClick = () => {
+    dispatch(setCompanyDetails(null));
+    router.push(ADMIN_BACK_URL);
+  }
+
   return (
     <div className={HEADER_STYLES}>
       {isSuperAdmin && (
-        <div className={BACK_BUTTON_STYLES} onClick={() => router.push(ADMIN_BACK_URL)}>
+        <div className={BACK_BUTTON_STYLES} onClick={handleBackButtonClick}>
           <Image src={icons.linkIcon} alt='link' width={20} height={20} />
           <div className='text-small text-basic_grey mt-0.3'>Back to Admin Dashboard</div>
         </div>
