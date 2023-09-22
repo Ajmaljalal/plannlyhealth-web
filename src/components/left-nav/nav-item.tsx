@@ -38,11 +38,12 @@ const navItemStyles = `
 export const NavItem = ({ text, href, icon, iconLight }: NavItemProps) => {
   const pathname = usePathname()
   const params = useSearchParams()
-  const company_id = params.get('company_id')
+  const company_id = params.get('org_id')
+  const isActive = pathname?.includes(href)
   if (company_id) {
-    href = href + '?company_id=' + company_id
+    href = href + '?org_id=' + company_id
   }
-  const isActive = pathname === href
+
   const currentIcon = isActive ? iconLight : icon
 
   return (
