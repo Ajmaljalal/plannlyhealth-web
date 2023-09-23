@@ -10,7 +10,7 @@ import { employeesSelector, setEmployees } from "@/store/company";
 import { useSelector } from "@/store/store";
 import Employee from "@/containers/onboarding/company/employees-upload/employee-row";
 import Hero from "@/containers/onboarding/company/hero";
-import { EmployeeAddModal } from "@/containers/onboarding/company/employees-upload/add-employee-modal";
+import { EmployeeAddModal } from "@/components/add-employee-modal";
 import Tabs from "@/components/tabs/tabs";
 import { useRouter } from "next/navigation";
 import { createNewUserInvite } from "@/lib/services/invite-users";
@@ -227,7 +227,7 @@ const EmployeesListContainer = () => {
   const dispatch = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
   const [activeTab, setActiveTab] = useState('active')
-  const allEmployees: any = useSelector(employeesSelector)
+  const allEmployees: any = useSelector(employeesSelector) || []
   const activeEmployees = allEmployees?.filter((employee: any) => !employee.inactive)
   const inactiveEmployees = allEmployees?.filter((employee: any) => employee.inactive)
 
@@ -235,11 +235,9 @@ const EmployeesListContainer = () => {
     setActiveTab(text.toLocaleLowerCase())
   }
 
-
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
   }
-
 
   const handleAddEmployee = async (newEmployee: any) => {
     await createNewUserInvite(newEmployee)
@@ -294,6 +292,12 @@ const EmployeesListContainer = () => {
       onClick: () => handleTabClick('active')
     },
     {
+      text: 'Invited',
+      count: activeEmployees?.length || 0,
+      isActive: activeTab === 'invited',
+      onClick: () => handleTabClick('invited')
+    },
+    {
       text: 'Inactive',
       count: inactiveEmployees?.length || 0,
       isActive: activeTab === 'inactive',
@@ -305,7 +309,7 @@ const EmployeesListContainer = () => {
 
   const renderNullState = () => {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center">
+      <div className="w-fit h-fit flex flex-col items-center justify-center mt-[130px]">
         <Hero image="/illustrations/employee-upload.svg" title="Upload a list of your employees" description="Select a CSV file of your employees info" />
         <div className="flex gap-4">
           <FileUpload
@@ -382,7 +386,7 @@ const EmployeesListContainer = () => {
   }
 
   return (
-    <div className="flex flex-col justify-between items-end w-full h-full relative overflow-hidden">
+    <div className="flex flex-col justify-between items-center w-full relative overflow-hidden">
       {allEmployees?.length ? renderUsersTable() : renderNullState()}
       <EmployeeAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={(employee) => handleAddEmployee(employee)} />
     </div>

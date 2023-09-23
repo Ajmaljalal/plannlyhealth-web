@@ -1,6 +1,6 @@
 import { icons } from "@/lib/icons";
 import Image from "next/image";
-import { EmployeeEditModal } from "./edit-employee-modal";
+import { EmployeeEditModal } from "../../../../components/edit-employee-modal";
 import { useState } from "react";
 import { Button } from "@/components/button";
 

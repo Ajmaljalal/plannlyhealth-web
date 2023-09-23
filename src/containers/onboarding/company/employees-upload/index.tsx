@@ -7,11 +7,12 @@ import { useState } from "react";
 import { Table } from "@/components/table/table";
 import { TableHead } from "@/components/table/table-head";
 import Employee from "./employee-row";
-import { EmployeeAddModal } from "./add-employee-modal";
+import { EmployeeAddModal } from "../../../../components/add-employee-modal";
 import { useDispatch } from "react-redux";
-import { employeesSelector, setCompanyDetails, setEmployees } from "@/store/company";
+import { employeesSelector, setEmployees } from "@/store/company";
 import { useSelector } from "@/store/store";
 import { useRouter, useSearchParams } from "next/navigation";
+import { createNewUserInvite } from "@/lib/services/invite-users";
 
 export const employees: any = [
   {
@@ -235,7 +236,7 @@ const EmployeesList = () => {
   const params = useSearchParams()
   const dispatch = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
-  const selectedEmployees: any = useSelector(employeesSelector)
+  const selectedEmployees: any = useSelector(employeesSelector) || []
 
   const companyIdFromParams = params.get('org_id')
 
@@ -244,7 +245,8 @@ const EmployeesList = () => {
   }
 
 
-  const handleAddEmployee = (newEmployee: any) => {
+  const handleAddEmployee = async (newEmployee: any) => {
+    await createNewUserInvite(newEmployee)
     dispatch(setEmployees([newEmployee, ...selectedEmployees]))
   }
 
@@ -297,7 +299,7 @@ const EmployeesList = () => {
             />
           </div>
         </div>
-        <Table className='overflow-scroll mt-[16px]'>
+        <Table className='overflow-hidden mt-[16px]'>
           <TableHead headers={tableHeaders} />
           <tbody>
             {renderEmpoyees()}
