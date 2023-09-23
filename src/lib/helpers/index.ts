@@ -1,26 +1,8 @@
-import axios from 'axios';
 import CryptoJS from 'crypto-js';
 
-export const employeesBaseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/employees`
 
 
-export const calculateUsersStatus = (users: any) => {
-  let active = 0
-  let deactivated = 0
-  let invited = 0
-  users && users.forEach((user: any) => {
-    if (user.status === 'Active') {
-      active += 1
-    }
-    if (user.status === 'Deactivated') {
-      deactivated += 1
-    }
-    if (user.status === 'Invited') {
-      invited += 1
-    }
-  })
-  return { active, deactivated, invited }
-}
+export const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 export const getFormattedDate = (date: string) => {
   const dateObj = new Date(date)

@@ -20,3 +20,12 @@ export const getEmployeeByEmail = async (email: string) => {
     return error;
   }
 }
+
+export const getEmployeesByCompanyId = async (companyId: string) => {
+  try {
+    const employees = await axios.get(`${EMPLOYEE_BASE_URL}/company/${companyId}`)
+    return employees.data
+  } catch (error) {
+    return error;
+  }
+}

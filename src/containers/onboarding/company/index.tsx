@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useDispatch } from "@/store/store";
 import useSWR from 'swr';
 import { COMAPANY_BASE_URL } from "@/lib/helpers/api-urls";
+import { fetcher } from "@/lib/helpers";
 
 const stepContent: Record<number, JSX.Element> = {
   1: <CompanyDetails />,
@@ -17,9 +18,8 @@ const stepContent: Record<number, JSX.Element> = {
 };
 
 // Define the fetcher function using axios or the default fetch API.
-const fetcher = (url: string) => fetch(url).then(res => res.json());
 
-const Oboarding = () => {
+const Onboarding = () => {
   const dispatch = useDispatch();
   const currentStep = useSelector(currentStepSelector);
   const params = useSearchParams();
@@ -32,10 +32,7 @@ const Oboarding = () => {
       dispatch(setCompanyDetails(company));
       dispatch(setStep(2));
     }
-    if (error) {
-      console.error("Failed to fetch company data:", error);
-    }
-  }, [company, error]);
+  }, [company]);
 
   return (
     <>
@@ -47,5 +44,5 @@ const Oboarding = () => {
   );
 }
 
-export default Oboarding;
+export default Onboarding;
 

@@ -6,6 +6,7 @@ export const DELETE_NEW_USER_BY_ID = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}
 
 export const EMPLOYEE_BASE_URL = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/employees`;
 export const GET_EMPLOYEE_BY_EMAIL = `${EMPLOYEE_BASE_URL}/email`;
+export const GET_EMPLOYEE_BY_COMPANY = `${EMPLOYEE_BASE_URL}/company`;
 
 
 export const COMAPANY_BASE_URL = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/companies`;

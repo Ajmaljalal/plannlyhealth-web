@@ -2,11 +2,11 @@
 import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
 import { FileUpload } from "@/components/file-upload";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Table } from "@/components/table/table";
 import { TableHead } from "@/components/table/table-head";
 import { useDispatch } from "react-redux";
-import { employeesSelector, setEmployees } from "@/store/company";
+import { employeesSelector, selectCompanyDetails, setEmployees } from "@/store/company";
 import { useSelector } from "@/store/store";
 import Employee from "@/containers/onboarding/company/employees-upload/employee-row";
 import Hero from "@/containers/onboarding/company/hero";
@@ -14,6 +14,9 @@ import { EmployeeAddModal } from "@/components/add-employee-modal";
 import Tabs from "@/components/tabs/tabs";
 import { useRouter } from "next/navigation";
 import { createNewUserInvite } from "@/lib/services/invite-users";
+import useSWR from "swr";
+import { GET_EMPLOYEE_BY_COMPANY, GET_NEW_USERS_BY_COMPANY } from "@/lib/helpers/api-urls";
+import { fetcher } from "@/lib/helpers";
 
 const tableHeaders = ['Name', 'Job Title', 'Email', 'Role', '']
 
@@ -228,8 +231,23 @@ const EmployeesListContainer = () => {
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
   const [activeTab, setActiveTab] = useState('active')
   const allEmployees: any = useSelector(employeesSelector) || []
+  const company: any = useSelector(selectCompanyDetails)
   const activeEmployees = allEmployees?.filter((employee: any) => !employee.inactive)
   const inactiveEmployees = allEmployees?.filter((employee: any) => employee.inactive)
+  const invitedEmployees = allEmployees?.filter((employee: any) => employee.invited)
+  const companyId = company?.id
+  const { data: employees, error, isLoading } = useSWR(companyId ? `${GET_EMPLOYEE_BY_COMPANY}/${companyId}` : null, fetcher);
+  const { data: invitedUsers } = useSWR(companyId ? `${GET_NEW_USERS_BY_COMPANY}/${companyId}` : null, fetcher);
+
+
+  useEffect(() => {
+    if (employees) {
+      dispatch(setEmployees(employees));
+    }
+    if (invitedUsers) {
+      dispatch(setEmployees(invitedUsers));
+    }
+  }, [invitedUsers]);
 
   const handleTabClick = (text: string) => {
     setActiveTab(text.toLocaleLowerCase())
@@ -293,7 +311,7 @@ const EmployeesListContainer = () => {
     },
     {
       text: 'Invited',
-      count: activeEmployees?.length || 0,
+      count: invitedEmployees?.length || 0,
       isActive: activeTab === 'invited',
       onClick: () => handleTabClick('invited')
     },
@@ -384,6 +402,12 @@ const EmployeesListContainer = () => {
       </div>
     )
   }
+
+  if (isLoading) return (
+    <div className="w-full h-full flex flex-col items-center justify-center mt-[200px]">
+      <Hero image="/illustrations/employee-upload.svg" title="Loading..." description="Please wait while we fetch your employees" />
+    </div>
+  )
 
   return (
     <div className="flex flex-col justify-between items-center w-full relative overflow-hidden">
