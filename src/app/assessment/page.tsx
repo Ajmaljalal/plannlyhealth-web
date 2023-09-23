@@ -1,4 +1,4 @@
-import AssessmentContainer from '@/containers/assessment'
+import AssessmentContainer from '@/containers/employee/assessment'
 import React from 'react'
 
 function Surveys() {

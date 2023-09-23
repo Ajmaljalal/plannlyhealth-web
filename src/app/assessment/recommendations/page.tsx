@@ -1,4 +1,4 @@
-import RecommendationsContainer from '@/containers/assessment/recommendations'
+import RecommendationsContainer from '@/containers/employee/assessment/recommendations'
 import React from 'react'
 
 function Recommendations() {
