@@ -5,7 +5,7 @@ import axios from "axios";
 import { Configuration, RedirectRequest } from "@azure/msal-browser";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { getEmployeeByEmail } from "../user";
+import { getEmployeeByEmail } from "../employee";
 
 const API_URL = `${process.env.NEXT_PUBLIC_PLANNLY_API_DEV}`;
 
