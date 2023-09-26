@@ -1,86 +1,116 @@
 'use client';
-import { employeesSelector, setEmployees } from "@/store/company";
+import { currentEmployeeSelector, setCurrentEmployee } from "@/store/company";
 import { useDispatch, useSelector } from "@/store/store";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from 'next/image'
 import { icons } from "@/lib/icons";
-import Tabs from "@/components/tabs/tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EmployeeDetails from "./employee-details";
-import EmployeesDependents from "./employee-dependents";
-import { Button } from "@/components/button";
-import { DependentAddModal } from "./add-dependent-modal";
+import { selectUserProfile } from "@/store/user";
+import { Role, Status } from "@/lib/types/general";
+import { getEmployeeById } from "@/lib/services/employee";
+import { getNewUserById } from "@/lib/services/invite-users";
 
 const EmployeeDetailsContainer = () => {
   const dispatch = useDispatch()
-  const [activeTab, setActiveTab] = useState('details')
-  const [isModalOpen, setIsModalOpen] = useState<any>(false)
+  const [isLoading, setIsLoading] = useState(true)
   const pathname = usePathname()
+  const params = useSearchParams()
   const router = useRouter()
   const id = pathname.split('/')[3]
-  const employees: any = useSelector(employeesSelector)
-  const employee: any = employees?.find((employee: any) => employee.id.toString() === id)
+  const status = params.get('status')
+  const user = useSelector(selectUserProfile)
+  const employee: any = useSelector(currentEmployeeSelector)
+  const isAdmin = user?.role === Role.Admin || user?.role === Role.SuperAdmin
+  const shouldFetchEmployees = isAdmin && !employee && id
 
-  if (!employee) {
+  const getCurrentEmployee = () => {
+    const getEmplloyee = status !== Status.Invited ? getEmployeeById(id) : getNewUserById(id)
+    getEmplloyee.then((employeeData) => {
+      const employeeFromDb = employeeData || null
+      dispatch(setCurrentEmployee(employeeFromDb))
+    }).catch((err) => {
+      console.log(err)
+    }).finally(() => {
+      setIsLoading(false)
+    })
+  }
+
+  useEffect(() => {
+    if (shouldFetchEmployees) {
+      getCurrentEmployee()
+      if (employee) {
+        setIsLoading(false)
+      }
+    }
+  }, [shouldFetchEmployees])
+
+  if (isLoading && !employee) {
     return (
       <div>
-        <h2 className="font-normal">Employee not found</h2>
+        <h2 className="font-normal">loading...</h2>
       </div>
     )
   }
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen)
+  if (!employee) {
+    return (
+      <div>
+        <h2 className="font-normal">Employee not found!</h2>
+      </div>
+    )
   }
 
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab)
-  }
+  // const toggleModal = () => {
+  //   setIsModalOpen(!isModalOpen)
+  // }
 
-  const handleSaveDependent = (updatedDependent: any) => {
-    const updatedDependents = employee.dependents ? [...employee.dependents, updatedDependent] : [updatedDependent]
-    const updatedEmployee = { ...employee, dependents: updatedDependents }
-    const updatedEmployees = employees?.map((employee: any) => {
-      if (employee.id === updatedEmployee.id) {
-        return updatedEmployee
-      }
-      return employee
-    })
-    dispatch(setEmployees(updatedEmployees))
-    toggleModal()
-  }
+  // const handleTabClick = (tab: string) => {
+  //   setActiveTab(tab)
+  // }
 
-  const tabs = [
-    {
-      text: 'Details',
-      onClick: () => handleTabClick('details'),
-      isActive: activeTab === 'details'
-    },
-    {
-      text: 'Dependents',
-      onClick: () => handleTabClick('dependents'),
-      isActive: activeTab === 'dependents'
-    }
-  ]
+  // const handleSaveDependent = (updatedDependent: any) => {
+  //   const updatedDependents = employee.dependents ? [...employee.dependents, updatedDependent] : [updatedDependent]
+  //   const updatedEmployee = { ...employee, dependents: updatedDependents }
+  //   const updatedEmployees = employees?.map((employee: any) => {
+  //     if (employee.id === updatedEmployee.id) {
+  //       return updatedEmployee
+  //     }
+  //     return employee
+  //   })
+  //   dispatch(setEmployees(updatedEmployees))
+  //   toggleModal()
+  // }
 
-  const dependents = employee?.dependents || []
+  // const tabs = [
+  //   {
+  //     text: 'Details',
+  //     onClick: () => handleTabClick('details'),
+  //     isActive: activeTab === 'details'
+  //   },
+  //   {
+  //     text: 'Dependents',
+  //     onClick: () => handleTabClick('dependents'),
+  //     isActive: activeTab === 'dependents'
+  //   }
+  // ]
 
-  const tabContent = activeTab === 'details' ? <EmployeeDetails employee={employee} /> : <EmployeesDependents employeeId={employee.id} dependents={dependents} />
+  // const dependents = employee?.dependents || []
 
 
   return (
-    <div className="">
+    <>
       <div className="flex gap-4 items-center mb-[20px]">
         <Image src={icons.arrowBackBg} alt="avatar" width={32} height={32} onClick={() => router.back()} className="cursor-pointer" />
         <h2 className="font-normal">{employee?.first_name} {employee?.last_name}</h2>
       </div>
-      <div className="flex items-center justify-between">
-        <Tabs tabs={tabs} />
-        <Button className="" text="Add Dependent" icon={icons.addLight} isPrimary isSmallBtn onClick={toggleModal} />
-      </div>
-      {tabContent}
-      <DependentAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={handleSaveDependent} />
-    </div>
+      {/* <div className="flex items-center justify-between">
+          <Tabs tabs={tabs} />
+          <Button className="" text="Add Dependent" icon={icons.addLight} isPrimary isSmallBtn onClick={toggleModal} />
+        </div> */}
+      <EmployeeDetails employee={employee} />
+      {/* <DependentAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={handleSaveDependent} /> */}
+    </>
 
   );
 }

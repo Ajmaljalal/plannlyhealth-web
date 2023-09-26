@@ -14,3 +14,9 @@ export enum Role {
   CustomerSuccess = 'Customer Success',
   ProgramAdmin = 'Program Admin',
 }
+
+export enum Status {
+  Active = 'Active',
+  Inactive = 'Inactive',
+  Invited = 'Invited',
+}

@@ -11,10 +11,11 @@ import {
   addIntegrations,
   setUserProfile,
   setCompanyPlan,
-  setCompanyPaymentMethod
+  setCompanyPaymentMethod,
+  setCurrentEmployee
 } from './actions';
 
-type CompanyOnboardingState = {
+type CompanyState = {
   currentStep: number;
   companyDetails: {} | null;
   benefits: [] | null;
@@ -23,9 +24,10 @@ type CompanyOnboardingState = {
   userProfile: {} | null;
   companyPlan: {} | null;
   companyPaymentMethod: {} | null;
+  currentEmployee: {} | null;
 };
 
-const initialState: CompanyOnboardingState = {
+const initialState: CompanyState = {
   currentStep: 1,
   companyDetails: null,
   benefits: null,
@@ -33,10 +35,11 @@ const initialState: CompanyOnboardingState = {
   employees: null,
   userProfile: null,
   companyPlan: null,
-  companyPaymentMethod: null
+  companyPaymentMethod: null,
+  currentEmployee: null
 };
 
-export const companyOnboardingReducer = createReducer(initialState, builder => {
+export const companyReducer = createReducer(initialState, builder => {
   builder
     .addCase(setStep, (state, action) => {
       state.currentStep = action.payload;
@@ -97,5 +100,8 @@ export const companyOnboardingReducer = createReducer(initialState, builder => {
     })
     .addCase(setCompanyPlan, (state, action) => {
       state.companyPlan = action.payload;
+    })
+    .addCase(setCurrentEmployee, (state, action) => {
+      state.currentEmployee = action.payload;
     });
 });

@@ -3,14 +3,14 @@ import {
   useDispatch as useDispatchBase,
   useSelector as useSelectorBase,
 } from 'react-redux';
-import { companyOnboardingReducer } from './company';
+import { companyReducer } from './company';
 import { userReducer } from './user';
 
 
 // Creates a store and includes all the slices as reducers.
 export const store = configureStore({
   reducer: {
-    company_onboarding: companyOnboardingReducer,
+    company: companyReducer,
     user: userReducer,
   },
   devTools: process.env.NODE_ENV === 'development' ? true : false,
