@@ -74,7 +74,7 @@ const roleColors: RoleColors = {
 
 
 
-const rowStyle = 'cursor-pointer border-t border-pLight hover:bg-transparent h-[60px] text-small text-basic_grey_1'
+const rowStyle = 'cursor-pointer border-t border-pLight hover:bg-transparent h-[50px] text-small text-basic_grey_1'
 const Employee: FC<EmployeeProps> = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmployee, onClick }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const userName = `${employee.first_name || ''} ${employee.last_name || ''}`.trim();
@@ -124,6 +124,7 @@ const Employee: FC<EmployeeProps> = ({ employee, onUpdateEmployee, onDeleteEmplo
           {employee.role}
         </span>
       </td>
+      <td className='' onClick={onClick}>{employee.status}</td>
       {
         <td className='w-[100%] h-[100%] flex items-center justify-end gap-2 self-auto pr-[32px] pt-[15px]'>
           {renderActionBtns()}

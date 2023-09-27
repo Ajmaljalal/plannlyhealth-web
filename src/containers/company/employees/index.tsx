@@ -16,7 +16,7 @@ import { createNewUserInvite } from "@/lib/services/invite-users";
 import { GET_EMPLOYEE_BY_COMPANY, GET_NEW_USERS_BY_COMPANY } from "@/lib/helpers/api-urls";
 
 import { Status } from "@/lib/types/general";
-import { employeesSelector, selectCompanyDetails, setEmployees } from "@/store/company";
+import { employeesSelector, selectCompanyDetails, setCurrentEmployee, setEmployees } from "@/store/company";
 import { Table } from "@/components/table/table";
 import { TableHead } from "@/components/table/table-head";
 import { useRouter } from "next/navigation";
@@ -83,6 +83,12 @@ const EmployeesListContainer = () => {
     dispatch(setEmployees(employeesFromAPI));
   }
 
+  const handleRowClick = (employee: any) => {
+    dispatch(setCurrentEmployee(employee))
+    router.push(`/company/employees/${employee.id}?status=${employee.status}&org_id=${employee.company_id}`);
+  }
+
+
   // Render methods
   const renderEmpoyees = () => {
     const currentEmployees = getCurrentEmployees();
@@ -93,7 +99,7 @@ const EmployeesListContainer = () => {
         onUpdateEmployee={updatedEmployee => handleEmployeeUpdate(updatedEmployee, (a: any, b: any) => ({ ...b, ...a }))}
         onDeleteEmployee={employeeId => handleEmployeeUpdate({ id: employeeId }, () => ({ ...employee, status: Status.Inactive }))}
         onActivateEmployee={employeeId => handleEmployeeUpdate({ id: employeeId }, () => ({ ...employee, status: Status.Active }))}
-        onClick={() => router.push(`/company/employees/${employee.id}?org_id=${employee.company_id}&status=${employee.status}`)}
+        onClick={() => handleRowClick(employee)}
       />
     ));
   }
@@ -113,7 +119,7 @@ const EmployeesListContainer = () => {
 
     return (
       <Table className='overflow-hidden mt-[32px]'>
-        <TableHead headers={['Name', 'Job Title', 'Email', 'Role', '']} />
+        <TableHead headers={['Name', 'Job Title', 'Email', 'Role', 'Status', '']} />
         <tbody>
           {renderEmpoyees()}
         </tbody>

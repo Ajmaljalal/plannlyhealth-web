@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { icons } from '@/lib/icons';
-import { companyDetailsSelector, setCompanyDetails } from '@/store/company';
+import { companyDetailsSelector, setCompanyDetails, setEmployees } from '@/store/company';
 import { useDispatch, useSelector } from '@/store/store';
 import { setUser, userProfileSelector } from '@/store/user';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -68,8 +68,9 @@ export const Header: React.FC = () => {
   }, [user, companyIdFromParams]);
 
   const handleBackButtonClick = () => {
-    dispatch(setCompanyDetails(null));
     router.push(ADMIN_BACK_URL);
+    dispatch(setCompanyDetails(null));
+    dispatch(setEmployees(null));
   }
 
   return (
