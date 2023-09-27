@@ -3,7 +3,7 @@ import Image from "next/image";
 import { EmployeeEditModal } from "../../../../components/edit-employee-modal";
 import { Button } from "@/components/button";
 import { icons } from "@/lib/icons";
-import { Status } from "@/lib/types/general";
+import { Employee, Status } from "@/lib/types/employee";
 
 
 type RoleColors = {
@@ -13,22 +13,13 @@ type RoleColors = {
   }
 }
 
-type EmployeeType = {
-  id: number;
-  first_name?: string;
-  last_name?: string;
-  job_title?: string;
-  email: string;
-  role: string;
-  status?: string;
-}
 
 type EmployeeProps = {
   onClick?: () => void;
-  employee: EmployeeType;
-  onUpdateEmployee: (updatedEmployee: EmployeeType) => void;
-  onDeleteEmployee: (id: number) => void;
-  onActivateEmployee?: (id: number) => void;
+  employee: Employee;
+  onUpdateEmployee: (updatedEmployee: Employee) => void;
+  onDeleteEmployee: (updatedEmployee: Employee) => void;
+  onActivateEmployee?: (updatedEmployee: Employee) => void;
 }
 
 const roleIcons: Record<any, string> = {
@@ -91,11 +82,11 @@ const Employee: FC<EmployeeProps> = ({ employee, onUpdateEmployee, onDeleteEmplo
   }
 
   const handleDeleteEmployee = () => {
-    onDeleteEmployee(employee.id)
+    onDeleteEmployee(employee)
   }
 
   const handleActivateEmployee = () => {
-    onActivateEmployee && onActivateEmployee(employee.id)
+    onActivateEmployee && onActivateEmployee(employee)
   }
 
   const renderActionBtns = () => {
@@ -106,7 +97,11 @@ const Employee: FC<EmployeeProps> = ({ employee, onUpdateEmployee, onDeleteEmplo
     } else {
       return (
         <>
-          <Image src={icons.edit} width={30} height={30} alt="edit icon" className="cursor-pointer" onClick={toggleEditModal} />
+          {
+            employee.status !== Status.Invited ?
+              <Image src={icons.edit} width={30} height={30} alt="edit icon" className="cursor-pointer" onClick={toggleEditModal} />
+              : null
+          }
           <Image src={icons.delete} width={30} height={30} alt="edit icon" className="cursor-pointer" onClick={handleDeleteEmployee} />
         </>
       )

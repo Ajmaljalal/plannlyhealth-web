@@ -8,8 +8,8 @@ import { setUser, userProfileSelector } from '@/store/user';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { getCompanyById } from '@/lib/services/company';
-import { Role } from '@/lib/types/general';
 import { getEmployeeByEmail } from '@/lib/services/employee';
+import { Role } from '@/lib/types/employee';
 
 const HEADER_STYLES = `sticky top-[-16px] right-0 flex justify-end items-center gap-4 h-[65px] mt-[-16px] bg-basic_white`;
 const BACK_BUTTON_STYLES = `flex items-center gap-2 mr-10 border border-brand_voilet_light px-2

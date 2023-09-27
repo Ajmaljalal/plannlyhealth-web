@@ -7,9 +7,9 @@ import { icons } from "@/lib/icons";
 import { useEffect, useState } from "react";
 import EmployeeDetails from "./employee-details";
 import { selectUserProfile } from "@/store/user";
-import { Role, Status } from "@/lib/types/general";
 import { getEmployeeById } from "@/lib/services/employee";
 import { getNewUserById } from "@/lib/services/invite-users";
+import { Role, Status } from "@/lib/types/employee";
 
 const EmployeeDetailsContainer = () => {
   const dispatch = useDispatch()

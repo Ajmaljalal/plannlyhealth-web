@@ -29,3 +29,12 @@ export const getEmployeesByCompanyId = async (companyId: string) => {
     return error;
   }
 }
+
+export const updateEmployee = async (employee: any) => {
+  try {
+    const updatedEmployee = await axios.put(`${EMPLOYEE_BASE_URL}/${employee.id}`, employee)
+    return updatedEmployee.data
+  } catch (error) {
+    return error;
+  }
+}

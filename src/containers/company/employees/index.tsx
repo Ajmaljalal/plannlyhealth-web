@@ -15,11 +15,12 @@ import { fetcher } from "@/lib/helpers";
 import { createNewUserInvite } from "@/lib/services/invite-users";
 import { GET_EMPLOYEE_BY_COMPANY, GET_NEW_USERS_BY_COMPANY } from "@/lib/helpers/api-urls";
 
-import { Status } from "@/lib/types/general";
 import { employeesSelector, selectCompanyDetails, setCurrentEmployee, setEmployees } from "@/store/company";
 import { Table } from "@/components/table/table";
 import { TableHead } from "@/components/table/table-head";
 import { useRouter } from "next/navigation";
+import { updateEmployee } from "@/lib/services/employee";
+import { Status } from "@/lib/types/employee";
 
 const EmployeesListContainer = () => {
   const router = useRouter();
@@ -70,9 +71,10 @@ const EmployeesListContainer = () => {
     dispatch(setEmployees([newEmployee, ...allEmployees]));
   }
 
-  const handleEmployeeUpdate = (updatedEmployee: any, action: any) => {
+  const handleUpdateEmployee = async (updatedEmployee: any) => {
+    const updateEmployeInDb = await updateEmployee(updatedEmployee)
     const updatedEmployees = allEmployees.map((employee: any) => {
-      if (employee.id === updatedEmployee.id) return action(updatedEmployee, employee);
+      if (employee.id === updateEmployeInDb.id) return updateEmployeInDb;
       return employee;
     });
     dispatch(setEmployees(updatedEmployees));
@@ -96,9 +98,9 @@ const EmployeesListContainer = () => {
       <Employee
         key={employee.id}
         employee={employee}
-        onUpdateEmployee={updatedEmployee => handleEmployeeUpdate(updatedEmployee, (a: any, b: any) => ({ ...b, ...a }))}
-        onDeleteEmployee={employeeId => handleEmployeeUpdate({ id: employeeId }, () => ({ ...employee, status: Status.Inactive }))}
-        onActivateEmployee={employeeId => handleEmployeeUpdate({ id: employeeId }, () => ({ ...employee, status: Status.Active }))}
+        onUpdateEmployee={updatedEmployee => handleUpdateEmployee(updatedEmployee)}
+        onDeleteEmployee={updatedEmployee => handleUpdateEmployee({ ...updatedEmployee, status: Status.Inactive })}
+        onActivateEmployee={updatedEmployee => handleUpdateEmployee({ ...updatedEmployee, status: Status.Active })}
         onClick={() => handleRowClick(employee)}
       />
     ));
