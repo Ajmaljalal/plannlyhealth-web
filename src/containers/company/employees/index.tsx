@@ -81,7 +81,6 @@ const EmployeesListContainer = () => {
   };
 
   const handleUploadEmployees = (file: any) => {
-    console.log(file);
     dispatch(setEmployees(employeesFromAPI));
   }
 
@@ -168,7 +167,7 @@ const EmployeesListContainer = () => {
             />
           </div>
         </div>
-        {renderEmployeesTable()}
+        {allEmployees.length ? renderEmployeesTable() : getNullState()}
       </div>
     );
   }
@@ -183,7 +182,7 @@ const EmployeesListContainer = () => {
 
   return (
     <div className="flex flex-col justify-between items-center w-full relative overflow-hidden">
-      {allEmployees.length ? renderContent() : getNullState()}
+      {renderContent()}
       <EmployeeAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={handleAddEmployee} />
     </div>
   );
