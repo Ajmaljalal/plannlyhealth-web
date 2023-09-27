@@ -1,10 +1,37 @@
-import { icons } from "@/lib/icons";
+import { FC, useState } from "react";
 import Image from "next/image";
 import { EmployeeEditModal } from "../../../../components/edit-employee-modal";
-import { useState } from "react";
 import { Button } from "@/components/button";
+import { icons } from "@/lib/icons";
+import { Status } from "@/lib/types/general";
 
-const roleIcons: any = {
+
+type RoleColors = {
+  [key in string]: {
+    bg: string,
+    text: string
+  }
+}
+
+type EmployeeType = {
+  id: number;
+  first_name?: string;
+  last_name?: string;
+  job_title?: string;
+  email: string;
+  role: string;
+  status?: string;
+}
+
+type EmployeeProps = {
+  onClick?: () => void;
+  employee: EmployeeType;
+  onUpdateEmployee: (updatedEmployee: EmployeeType) => void;
+  onDeleteEmployee: (id: number) => void;
+  onActivateEmployee?: (id: number) => void;
+}
+
+const roleIcons: Record<any, string> = {
   admin: icons.admin,
   'super admin': icons.superAdmin,
   owner: icons.owner,
@@ -13,7 +40,8 @@ const roleIcons: any = {
   finance: icons.finance,
   standard: icons.standard,
 }
-const roleColors: any = {
+
+const roleColors: RoleColors = {
   admin: {
     bg: 'bg-pink_light',
     text: 'text-pink',
@@ -47,11 +75,11 @@ const roleColors: any = {
 
 
 const rowStyle = 'cursor-pointer border-t border-pLight hover:bg-transparent h-[60px] text-small text-basic_grey_1'
-const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmployee, onClick }: { onClick?: () => void, employee: any, onUpdateEmployee: (updatedEmployee: any) => void, onDeleteEmployee: (id: any) => void, onActivateEmployee?: (id: any) => void }) => {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-  const userName = employee.first_name + ' ' + employee.last_name
+const Employee: FC<EmployeeProps> = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmployee, onClick }) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const userName = `${employee.first_name || ''} ${employee.last_name || ''}`.trim();
   const roleStyle = roleColors[employee.role.toLowerCase()]
-  const roleClass = `${roleStyle.bg} ${roleStyle.text} px-[12px] py-[4px] rounded-[24px] flex items-center w-fit h-[32px] text-small`
+  const roleClass = `${roleStyle?.bg} ${roleStyle?.text} px-[12px] py-[4px] rounded-[24px] flex items-center w-fit h-[32px] text-small`
 
   const toggleEditModal = () => {
     setIsEditModalOpen(!isEditModalOpen)
@@ -71,7 +99,7 @@ const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmpl
   }
 
   const renderActionBtns = () => {
-    if (employee.inactive) {
+    if (employee.status === Status.Inactive) {
       return (
         <Button text="Activate" isSmallBtn isPrimary icon={icons.addLight} onClick={handleActivateEmployee} />
       )

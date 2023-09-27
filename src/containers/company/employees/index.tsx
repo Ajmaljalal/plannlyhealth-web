@@ -1,182 +1,150 @@
 'use client';
-import { Button } from "@/components/button";
-import { icons } from "@/lib/icons";
-import { FileUpload } from "@/components/file-upload";
 import { useEffect, useState } from "react";
-import { Table } from "@/components/table/table";
-import { TableHead } from "@/components/table/table-head";
-import { useDispatch } from "react-redux";
-import { employeesSelector, selectCompanyDetails, setEmployees } from "@/store/company";
-import { useSelector } from "@/store/store";
+import useSWR from "swr";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Button } from "@/components/button";
+import { FileUpload } from "@/components/file-upload";
 import Employee from "@/containers/onboarding/company/employees-upload/employee-row";
 import Hero from "@/containers/onboarding/company/hero";
 import { EmployeeAddModal } from "@/components/add-employee-modal";
 import Tabs from "@/components/tabs/tabs";
-import { useRouter } from "next/navigation";
-import { createNewUserInvite } from "@/lib/services/invite-users";
-import useSWR from "swr";
-import { GET_EMPLOYEE_BY_COMPANY, GET_NEW_USERS_BY_COMPANY } from "@/lib/helpers/api-urls";
-import { fetcher } from "@/lib/helpers";
-import { Status } from "@/lib/types/general";
 
-const tableHeaders = ['Name', 'Job Title', 'Email', 'Role', '']
+import { icons } from "@/lib/icons";
+import { fetcher } from "@/lib/helpers";
+import { createNewUserInvite } from "@/lib/services/invite-users";
+import { GET_EMPLOYEE_BY_COMPANY, GET_NEW_USERS_BY_COMPANY } from "@/lib/helpers/api-urls";
+
+import { Status } from "@/lib/types/general";
+import { employeesSelector, selectCompanyDetails, setEmployees } from "@/store/company";
+import { Table } from "@/components/table/table";
+import { TableHead } from "@/components/table/table-head";
+import { useRouter } from "next/navigation";
 
 const EmployeesListContainer = () => {
-  const router = useRouter()
-  const dispatch = useDispatch()
-  const [isLoading, setIsLoading] = useState(true)
-  const [isModalOpen, setIsModalOpen] = useState<any>(false)
-  const [activeTab, setActiveTab] = useState('active')
-  const allEmployees: any = useSelector(employeesSelector) || []
-  const company: any = useSelector(selectCompanyDetails)
-  const activeEmployees = allEmployees?.filter((employee: any) => employee.status === Status.Active)
-  const inactiveEmployees = allEmployees?.filter((employee: any) => employee.status === Status.Inactive)
-  const invitedEmployees = allEmployees?.filter((employee: any) => employee.status === Status.Invited)
-  const companyId = company?.id
-  const { data: employees } = useSWR(companyId ? `${GET_EMPLOYEE_BY_COMPANY}/${companyId}` : null, fetcher);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const company: any = useSelector(selectCompanyDetails);
+  const allEmployees = useSelector(employeesSelector) || [];
+  const companyId = company?.id;
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('active');
+
+  const { data: employeesFromAPI } = useSWR(companyId ? `${GET_EMPLOYEE_BY_COMPANY}/${companyId}` : null, fetcher);
   const { data: invitedUsers } = useSWR(companyId ? `${GET_NEW_USERS_BY_COMPANY}/${companyId}` : null, fetcher);
 
+  const activeEmployees = allEmployees.filter((employee: any) => employee.status === Status.Active);
+  const inactiveEmployees = allEmployees.filter((employee: any) => employee.status === Status.Inactive);
+  const invitedEmployees = allEmployees.filter((employee: any) => employee.status === Status.Invited);
+
+  // Create a set of existing employee IDs for quick lookup
+  const employeeIdsSet = new Set(allEmployees.map((employee: any) => employee.id));
 
   useEffect(() => {
-    if (employees) {
-      dispatch(setEmployees([...employees, ...allEmployees]));
-    }
-    if (invitedUsers) {
-      dispatch(setEmployees([...invitedUsers, ...allEmployees]));
-    }
-    setIsLoading(false)
-  }, [invitedUsers, employees]);
 
-  const handleTabClick = (text: string) => {
-    setActiveTab(text.toLocaleLowerCase())
-  }
+    // filter out employees that are already in the store
+    const filterNewEmployees = (source: any[]) => source.filter(emp => !employeeIdsSet.has(emp.id));
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen)
-  }
+    // Filter employeesFromAPI and invitedUsers
+    const newEmployeesFromAPI: any = employeesFromAPI ? filterNewEmployees(employeesFromAPI) : [];
+    const newInvitedUsers: any = invitedUsers ? filterNewEmployees(invitedUsers) : [];
+
+    // Only update the store if there are new employees
+    if (newEmployeesFromAPI.length > 0 || newInvitedUsers.length > 0) {
+      // Here we're creating a new array only if necessary
+      dispatch(setEmployees(allEmployees.concat(newEmployeesFromAPI, newInvitedUsers)));
+    }
+
+    setIsLoading(false);
+  }, [invitedUsers, employeesFromAPI]);
+
+
+  // Handlers
+  const handleTabClick = (tab: string) => setActiveTab(tab.toLowerCase());
+  const toggleModal = () => setIsModalOpen(prevState => !prevState);
 
   const handleAddEmployee = async (newEmployee: any) => {
-    await createNewUserInvite(newEmployee)
-    dispatch(setEmployees([newEmployee, ...allEmployees]))
+    await createNewUserInvite(newEmployee);
+    dispatch(setEmployees([newEmployee, ...allEmployees]));
   }
 
-  const handleEditEmployee = (updatedEmployee: any) => {
-    const updatedEmployees = allEmployees?.map((employee: any) => {
-      if (employee.id === updatedEmployee.id) {
-        return updatedEmployee
-      }
-      return employee
-    })
-    dispatch(setEmployees(updatedEmployees))
-  }
-
-  const handleDeactivateEmployee = (employeeId: number) => {
-    const updatedEmployees = allEmployees?.map((employee: any) => {
-      if (employee.id === employeeId) {
-        const updatedEmployee = { ...employee, inactive: true }
-        return updatedEmployee
-      } else {
-        return employee
-      }
-    })
-
-    dispatch(setEmployees(updatedEmployees))
-  }
-
-  const handleActivateEmployee = (employeeId: number) => {
-    const updatedEmployees = allEmployees?.map((employee: any) => {
-      if (employee.id === employeeId) {
-        const updatedEmployee = { ...employee, inactive: false }
-        return updatedEmployee
-      } else {
-        return employee
-      }
-    })
-    dispatch(setEmployees(updatedEmployees))
-  }
+  const handleEmployeeUpdate = (updatedEmployee: any, action: any) => {
+    const updatedEmployees = allEmployees.map((employee: any) => {
+      if (employee.id === updatedEmployee.id) return action(updatedEmployee, employee);
+      return employee;
+    });
+    dispatch(setEmployees(updatedEmployees));
+  };
 
   const handleUploadEmployees = (file: any) => {
-    console.log(file)
-    dispatch(setEmployees(employees))
+    console.log(file);
+    dispatch(setEmployees(employeesFromAPI));
   }
 
-  const tabs = [
-    {
-      text: 'Active',
-      count: activeEmployees?.length || 0,
-      isActive: activeTab === 'active',
-      onClick: () => handleTabClick('active')
-    },
-    {
-      text: 'Invited',
-      count: invitedEmployees?.length || 0,
-      isActive: activeTab === 'invited',
-      onClick: () => handleTabClick('invited')
-    },
-    {
-      text: 'Inactive',
-      count: inactiveEmployees?.length || 0,
-      isActive: activeTab === 'inactive',
-      onClick: () => handleTabClick('inactive')
-
-    }
-  ]
-
-  const renderInactiveEmployeesNullState = () => {
-    return (
-      <div className="w-full h-full flex flex-col items-center justify-center mt-[200px]">
-        <Hero image="/illustrations/employee-upload.svg" title="No Inactive Employees" description="You have no inactive employees" />
-      </div>
-    )
-  }
-
-  const renderGeneralNullState = () => {
-    const text = !activeEmployees?.length && activeTab === 'active' ? 'No active employees, please add employees now' : 'No invited employees, please invite employees now'
-    return (
-      <div className="w-full h-full flex flex-col items-center justify-center mt-[200px]">
-        <Hero image="/illustrations/employee-upload.svg" title="No Employees" description={text} />
-      </div>
-    )
-  }
-
+  // Render methods
   const renderEmpoyees = () => {
-    const employees = activeTab === 'active' ? activeEmployees : activeTab === 'inactive' ? inactiveEmployees : invitedEmployees
-
-    return employees?.map((employee: any) => {
-      return <Employee
+    const currentEmployees = getCurrentEmployees();
+    return currentEmployees.map((employee: any) => (
+      <Employee
         key={employee.id}
         employee={employee}
-        onUpdateEmployee={handleEditEmployee}
-        onDeleteEmployee={handleDeactivateEmployee}
-        onActivateEmployee={handleActivateEmployee}
+        onUpdateEmployee={updatedEmployee => handleEmployeeUpdate(updatedEmployee, (a: any, b: any) => ({ ...b, ...a }))}
+        onDeleteEmployee={employeeId => handleEmployeeUpdate({ id: employeeId }, () => ({ ...employee, status: Status.Inactive }))}
+        onActivateEmployee={employeeId => handleEmployeeUpdate({ id: employeeId }, () => ({ ...employee, status: Status.Active }))}
         onClick={() => router.push(`/company/employees/${employee.id}?org_id=${employee.company_id}&status=${employee.status}`)}
       />
-    })
+    ));
+  }
+
+  const getCurrentEmployees = () => {
+    switch (activeTab) {
+      case 'active': return activeEmployees;
+      case 'inactive': return inactiveEmployees;
+      case 'invited': return invitedEmployees;
+      default: return [];
+    }
   }
 
   const renderEmployeesTable = () => {
-    if (activeTab === 'inactive' && !inactiveEmployees?.length) {
-      return renderInactiveEmployeesNullState()
-    }
-    if (activeTab === 'active' && !activeEmployees?.length) {
-      return renderGeneralNullState()
-    }
+    const currentEmployees = getCurrentEmployees();
+    if (!currentEmployees.length) return getNullState();
 
-    if (activeTab === 'invited' && !invitedEmployees?.length) {
-      return renderGeneralNullState()
-    }
     return (
       <Table className='overflow-hidden mt-[32px]'>
-        <TableHead headers={tableHeaders} />
+        <TableHead headers={['Name', 'Job Title', 'Email', 'Role', '']} />
         <tbody>
           {renderEmpoyees()}
         </tbody>
       </Table>
+    );
+  }
+
+  const getNullState = () => {
+    const image = "/illustrations/employee-upload.svg";
+    if (activeTab === 'inactive') {
+      return (
+        <div className="mt-[150px]">
+          <Hero image={image} title="No Inactive Employees" description="You have no inactive employees" />
+        </div>
+      )
+    }
+    const description = activeTab === 'active' ? 'No active employees, please add employees now' : 'No invited employees, please invite employees now';
+    return (
+      <div className="mt-[150px]">
+        <Hero image={image} title="No Employees" description={description} />
+      </div>
     )
   }
 
-
   const renderContent = () => {
+    const tabs = [
+      { text: 'Active', count: activeEmployees.length, isActive: activeTab === 'active', onClick: () => handleTabClick('active') },
+      { text: 'Invited', count: invitedEmployees.length, isActive: activeTab === 'invited', onClick: () => handleTabClick('invited') },
+      { text: 'Inactive', count: inactiveEmployees.length, isActive: activeTab === 'inactive', onClick: () => handleTabClick('inactive') }
+    ];
+
     return (
       <div className="flex flex-col items-strech w-full">
         <h2 className="font-normal mb-[20px]">Employees</h2>
@@ -194,21 +162,23 @@ const EmployeesListContainer = () => {
         </div>
         {renderEmployeesTable()}
       </div>
+    );
+  }
+
+  if (isLoading && !allEmployees.length) {
+    return (
+      <div className="mt-[150px]">
+        <Hero image="/illustrations/employee-upload.svg" title="Loading..." description="Please wait while we fetch your employees" />
+      </div>
     )
   }
 
-  if (isLoading && !allEmployees?.length) return (
-    <div className="w-full h-full flex flex-col items-center justify-center mt-[200px]">
-      <Hero image="/illustrations/employee-upload.svg" title="Loading..." description="Please wait while we fetch your employees" />
-    </div>
-  )
-
   return (
     <div className="flex flex-col justify-between items-center w-full relative overflow-hidden">
-      {allEmployees?.length ? renderContent() : renderGeneralNullState()}
-      <EmployeeAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={(employee) => handleAddEmployee(employee)} />
+      {allEmployees.length ? renderContent() : getNullState()}
+      <EmployeeAddModal isOpen={isModalOpen} onClose={toggleModal} onSave={handleAddEmployee} />
     </div>
-  )
+  );
 }
 
 export default EmployeesListContainer;
