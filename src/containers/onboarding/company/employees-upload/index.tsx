@@ -13,6 +13,7 @@ import { employeesSelector, setEmployees } from "@/store/company";
 import { useSelector } from "@/store/store";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createNewUserInvite } from "@/lib/services/invite-users";
+import { updateEmployee } from "@/lib/services/employee";
 
 export const employees: any = [
   {
@@ -250,10 +251,11 @@ const EmployeesList = () => {
     dispatch(setEmployees([newEmployee, ...selectedEmployees]))
   }
 
-  const handleEditEmployee = (updatedEmployee: any) => {
+  const handleEditEmployee = async (updatedEmployee: any) => {
+    const updatedEmployeeFromDb = await updateEmployee(updatedEmployee)
     const updatedEmployees = selectedEmployees?.map((employee: any) => {
-      if (employee.id === updatedEmployee.id) {
-        return updatedEmployee
+      if (employee.id === updatedEmployeeFromDb.id) {
+        return updatedEmployeeFromDb
       }
       return employee
     })
@@ -280,7 +282,11 @@ const EmployeesList = () => {
 
   const renderEmpoyees = () => {
     return selectedEmployees?.map((employee: any) => {
-      return <Employee key={employee.id} employee={employee} onUpdateEmployee={handleEditEmployee} onDeleteEmployee={handleDeleteEmployee} />
+      return <Employee
+        key={employee.id}
+        employee={employee}
+        onUpdateEmployee={handleEditEmployee}
+        onDeleteEmployee={handleEditEmployee} />
     })
   }
 
@@ -313,7 +319,7 @@ const EmployeesList = () => {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center">
         <Hero image="/illustrations/employee-upload.svg" title="Upload a list of your employees" description="Select a CSV file of your employees info" />
-        <div className="flex gap-4">
+        <div className="flex gap-4 mt-[16px]">
           <FileUpload
             onChange={(file) => handleUploadEmployees(file[0])}
             acceptedFileTypes='.csv'

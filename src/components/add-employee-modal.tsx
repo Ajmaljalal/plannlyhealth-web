@@ -4,6 +4,7 @@ import { Input } from '@/components/input'
 import { Button } from '@/components/button'
 import { useSelector } from '@/store/store'
 import { companyDetailsSelector } from '@/store/company'
+import { Status } from '@/lib/types/employee'
 
 
 const modalContentStyles = `
@@ -24,6 +25,7 @@ export const EmployeeAddModal = ({ isOpen, onClose, onSave }: { isOpen: boolean,
   const handleSave = async () => {
     if (!currentEmployee.first_name || !currentEmployee.last_name || !currentEmployee.job_title || !currentEmployee.email || !currentEmployee.role) return
     currentEmployee.company_id = company.id
+    currentEmployee.status = Status.Invited
     onSave(currentEmployee)
     setCurrentEmployee({})
     onClose()
