@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js';
+import { Employee } from '../types/employee';
 
 
 
@@ -148,5 +149,36 @@ export const isObjectsEqual = (obj1: any, obj2: any) => {
   }
 
   return true;
+}
+
+export function generateRandomEmployee(id: number): Employee {
+  const firstNames = ["John", "Jane", "Sam", "Sara", "Tom"]; // Add more names as needed
+  const lastNames = ["Doe", "Smith", "Brown", "Taylor", "Jones"]; // Add more names as needed
+
+  const randomPick = (arr: string[]): string => arr[Math.floor(Math.random() * arr.length)];
+
+  return {
+    id: id.toString(),
+    first_name: randomPick(firstNames),
+    last_name: randomPick(lastNames),
+    email: "ajmal@plann.ly",
+    phone: `123-456-${id.toString().padStart(4, '0')}`,
+    photo: 'https://i.pravatar.cc/300?img=3',
+    marital_status: Math.random() > 0.5 ? "married" : "single",
+    birthday: `198${Math.floor(Math.random() * 10)}-01-01`,
+    gender: Math.random() > 0.5 ? "male" : "female",
+    job_title: "Developer",
+    department: "IT",
+    company_id: "2b1a967e-2132-4826-a829-843882016b8c",
+    role: Math.random() > 0.5 ? "Admin" : "Standard",
+    status: "Invited",
+    address: {
+      country: "USA",
+      street: `${id} Elm Street`,
+      city: "Anytown",
+      state: "CA",
+      zip: `900${Math.floor(Math.random() * 10)}`
+    }
+  };
 }
 

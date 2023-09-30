@@ -4,11 +4,13 @@ export type Employee = {
   last_name: string;
   email: string;
   phone: string;
+  photo: string;
   marital_status: string;
-  date_of_birth: string;
+  birthday: string;
   gender: string;
   job_title: string;
   department: string;
+  company_id: string;
   role: string;
   status: string;
   address: {

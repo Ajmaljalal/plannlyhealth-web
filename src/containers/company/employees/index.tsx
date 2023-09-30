@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/button";
@@ -12,7 +12,7 @@ import Tabs from "@/components/tabs/tabs";
 
 import { icons } from "@/lib/icons";
 import { fetcher } from "@/lib/helpers";
-import { createNewUserInvite } from "@/lib/services/invite-users";
+import { createBulkNewUserInvite, createNewUserInvite } from "@/lib/services/invite-users";
 import { GET_EMPLOYEE_BY_COMPANY, GET_NEW_USERS_BY_COMPANY } from "@/lib/helpers/api-urls";
 
 import { employeesSelector, selectCompanyDetails, setCurrentEmployee, setEmployees } from "@/store/company";
@@ -21,6 +21,9 @@ import { TableHead } from "@/components/table/table-head";
 import { useRouter } from "next/navigation";
 import { updateEmployee } from "@/lib/services/employee";
 import { Status } from "@/lib/types/employee";
+import { csvToObject } from "@/lib/helpers/csv-helpers";
+
+// const employees: Employee[] = Array.from({ length: 20 }, (_, i) => generateRandomEmployee(i + 1));
 
 const EmployeesListContainer = () => {
   const router = useRouter();
@@ -80,7 +83,10 @@ const EmployeesListContainer = () => {
     dispatch(setEmployees(updatedEmployees));
   };
 
-  const handleUploadEmployees = (file: any) => {
+  const handleUploadEmployees = async (file: any) => {
+    const usersFromFile = await csvToObject(file)
+    const newUsers = await createBulkNewUserInvite(usersFromFile, companyId)
+    mutate(`${GET_NEW_USERS_BY_COMPANY}/${companyId}`);
     dispatch(setEmployees(employeesFromAPI));
   }
 

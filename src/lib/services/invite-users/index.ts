@@ -18,3 +18,12 @@ export const getNewUserById = async (userId: string) => {
     return error;
   }
 }
+
+export const createBulkNewUserInvite = async (users: any, companyId: string) => {
+  try {
+    const result = await axios.post(`${NEW_USER_BASE_URL}/bulk-invite/${companyId}`, users);
+    return result.data;
+  } catch (error) {
+    return error;
+  }
+}
