@@ -71,7 +71,7 @@ const EmployeesListContainer = () => {
 
   const handleAddEmployee = async (newEmployee: any) => {
     await createNewUserInvite(newEmployee);
-    dispatch(setEmployees([newEmployee, ...allEmployees]));
+    mutate(`${GET_NEW_USERS_BY_COMPANY}/${companyId}`);
   }
 
   const handleUpdateEmployee = async (updatedEmployee: any) => {
@@ -87,7 +87,6 @@ const EmployeesListContainer = () => {
     const usersFromFile = await csvToObject(file)
     const newUsers = await createBulkNewUserInvite(usersFromFile, companyId)
     mutate(`${GET_NEW_USERS_BY_COMPANY}/${companyId}`);
-    dispatch(setEmployees(employeesFromAPI));
   }
 
   const handleRowClick = (employee: any) => {

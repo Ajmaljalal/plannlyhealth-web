@@ -59,7 +59,7 @@ const EmployeeDetails = ({ employee }: any) => {
           <Input name='email' label="Email" value={employeeDetails?.email} className="flex-1 max-w-[340px] min-w-[300px]" />
           <Input name='phone' label="Phone" value={employeeDetails?.phone} className="flex-1 max-w-[340px] min-w-[300px]" />
           <Input name='marital_status' label="Marital Status" value={employeeDetails?.marital_status} className="flex-1 max-w-[340px] min-w-[300px]" />
-          <Input name='date_of_birth' label="Date of Birth" value={employeeDetails?.date_of_birth} className="flex-1 max-w-[340px] min-w-[300px]" />
+          <Input name='date_of_birth' label="Date of Birth" value={employeeDetails?.birthday} className="flex-1 max-w-[340px] min-w-[300px]" />
           <Input name='gender' label="Gender" value={employeeDetails?.gender} className="flex-1 max-w-[340px] min-w-[300px]" />
         </div>
       </div>
