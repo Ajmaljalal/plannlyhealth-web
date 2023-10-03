@@ -2,6 +2,15 @@
 import { EMPLOYEE_BASE_URL, GET_EMPLOYEE_BY_EMAIL } from "@/lib/helpers/api-urls";
 import axios from "axios";
 
+export const createEmployee = async (employee: any) => {
+  try {
+    const result = await axios.post(`${EMPLOYEE_BASE_URL}`, employee);
+    return result.data;
+  } catch (error) {
+    return error;
+  }
+}
+
 export const getEmployeeById = async (employeeId: string) => {
   try {
     const result = await axios.get(`${EMPLOYEE_BASE_URL}/${employeeId}`,);

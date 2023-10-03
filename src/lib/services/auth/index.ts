@@ -6,6 +6,7 @@ import { Configuration, RedirectRequest } from "@azure/msal-browser";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { getEmployeeByEmail } from "../employee";
+import { Status } from "@/lib/types/employee";
 
 const API_URL = `${process.env.NEXT_PUBLIC_PLANNLY_API_DEV}`;
 
@@ -14,8 +15,8 @@ export const checkAuth = async () => {
   const session: any = await getServerSession();
   if (session?.user) {
     const employee: any = await getEmployeeByEmail(session?.user?.email)
-    if (employee?.status === 'Deactivated') return redirect("/auth/login?error=true")
-    const redirectUrl = `${getRedirectUrl(employee?.role)}?acc_id=${employee?.id}`
+    if (employee?.status === Status.Inactive) return redirect("/auth/login?error=true")
+    const redirectUrl = `${getRedirectUrl(employee?.role)}`
     return redirect(redirectUrl)
   } else {
     return redirect("/auth/login")

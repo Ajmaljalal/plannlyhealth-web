@@ -19,6 +19,15 @@ export const getNewUserById = async (userId: string) => {
   }
 }
 
+export const getNewUserByEmail = async (email: string) => {
+  try {
+    const result = await axios.get(`${NEW_USER_BASE_URL}/email/${email}`,);
+    return result.data;
+  } catch (error) {
+    return error;
+  }
+}
+
 export const createBulkNewUserInvite = async (users: any, companyId: string) => {
   try {
     const result = await axios.post(`${NEW_USER_BASE_URL}/bulk-invite/${companyId}`, users);
