@@ -15,7 +15,7 @@ export const checkAuth = async () => {
   const session: any = await getServerSession();
   if (session?.user) {
     const employee: any = await getEmployeeByEmail(session?.user?.email)
-    if (employee?.status === Status.Inactive) return redirect("/auth/login?error=true")
+    if (!employee || employee?.status === Status.Inactive) return redirect("/auth/login")
     const redirectUrl = `${getRedirectUrl(employee?.role)}`
     return redirect(redirectUrl)
   } else {

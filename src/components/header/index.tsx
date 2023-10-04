@@ -16,10 +16,10 @@ const BACK_BUTTON_STYLES = `flex items-center gap-2 mr-10 border border-brand_vo
 py-1 rounded-[8px] text-brand_voilet text-small cursor-pointer hover:bg-brand_voilet hover:text-basic_white shadow-md`;
 
 export const Header: React.FC = () => {
+  const { data: userSession } = useSession();
   const router = useRouter();
   const company = useSelector(companyDetailsSelector);
   const user = useSelector(userProfileSelector);
-  const { data: userSession } = useSession();
   const dispatch = useDispatch();
   const params = useSearchParams();
   const companyIdFromParams = params.get('org_id');
@@ -36,8 +36,8 @@ export const Header: React.FC = () => {
     try {
       const fetchedUser = await getEmployeeByEmail(userSession?.user?.email as string);
       dispatch(setUser(fetchedUser));
-      if (fetchedUser?.role !== Role.SuperAdmin) {
-        router.push(`/company/dashboard`);
+      if (fetchedUser?.role === Role.Standard) {
+        router.push(`/employee/rewards`);
       }
     } catch (error) {
       console.error("Failed to fetch user data:", error);
