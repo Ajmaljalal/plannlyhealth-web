@@ -27,7 +27,7 @@ export const SignOut = () => {
   const handleSignOut = async () => {
     const result: any = await signOut()
     if (!result?.message) {
-      router.push('/login')
+      router.push('/auth/login')
     } else {
       return
     }
