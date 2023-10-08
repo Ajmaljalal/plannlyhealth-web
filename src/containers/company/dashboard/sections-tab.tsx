@@ -8,14 +8,14 @@ import BenefitEnrollmentProgress from "./benefit-enrollment";
 
 const tabs = [
   {
-    title: 'Resource Defiefency Responses',
+    title: 'Resource Deficiency Responses',
     count: 455,
     isPercentage: true,
     previous_count: 400
 
   },
   {
-    title: 'Hight Workload Responses',
+    title: 'High Workload Responses',
     count: 441,
     isPercentage: false,
     previous_count: 474
@@ -40,8 +40,8 @@ const tabContent: any = {
     <BenefitUtilization />
     <BenefitRecommendations />
   </>,
-  'Resource Defiefency Responses': <></>,
-  'Hight Workload Responses': <></>,
+  'Resource Deficiency Responses': <></>,
+  'High Workload Responses': <></>,
   'Chronic Stress Responses': <BenefitEnrollmentProgress />
 
 

@@ -4,7 +4,7 @@ import CircularProgressBar from "./health-resilience-index";
 
 const data = [
   {
-    name: 'Resources Defieciency',
+    name: 'Resources Deficiency',
     percentage: 24,
     icon: icons.stressLight
   },
