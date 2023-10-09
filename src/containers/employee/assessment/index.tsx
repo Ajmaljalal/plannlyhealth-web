@@ -151,11 +151,11 @@ function AssessmentContainer() {
       <div className='w-full bg-basic_grey_4 h-[12px] rounded-[8px] max-w-[1440px] mx-auto'>
         <div className={progressStyle}>
           <div className='w-[8px] h-[8px] bg-basic_white rounded-full mr-[2px] relative'>
-            <div className='rounded-full mr-[2px] absolute top-4 right-[-15px]'>{progress}%</div>
+            <div className='rounded-full mr-[2px] lg:mr-[0px] absolute top-4 right-[-15px]'>{progress}%</div>
           </div>
         </div>
       </div>
-      <div className='max-w-[1040px] mx-auto h-full flex flex-col'>
+      <div className='max-w-[1040px] mx-auto h-full flex flex-col mt-[20px]'>
         <div className='flex flex-col items-start gap-4 mt-[40px] lg:mt-[150px]'>
           <h4 className='flex gap-2 items-start font-normal md:font-bold'>
             <Image src={icons.arrowBackBg} width={32} height={32} alt='arrow back' onClick={handlePreviousQuestion} className='cursor-pointer' />
