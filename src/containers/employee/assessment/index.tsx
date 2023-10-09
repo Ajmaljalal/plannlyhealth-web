@@ -64,7 +64,7 @@ const questions = [
   {
     id: 7,
     question: 'How often do you engage in relaxation techniques or mindfulness practices?',
-    options: ['Daily', 'Several times a week', 'Once a week', 'Never'],
+    options: ['Daily', 'Several times a week and alla the time and if I want daily and in the night and again in the morning and again in the evning', 'Once a week', 'Never'],
     icons: null,
     answer: null
   },
@@ -164,17 +164,17 @@ function AssessmentContainer() {
           <div className='flex gap-4 flex-wrap mt-[24px] lg:mt-[40px] justify-center w-full'>
             {
               currentQuestion.options.map((option, index) => {
-                const icon = currentQuestion.icons ? currentQuestion.icons[option] : icons.hDotsPurple
-                const iconItem = icon ? <Image src={icon} width={32} height={32} alt='icon' /> : <h3>{index + 1}</h3>
+                const icon = currentQuestion.icons ? currentQuestion.icons[option] : null
+                const iconItem = icon ? <Image src={icon} width={24} height={24} alt='icon' /> : <h3 className='text-brand_voilet_light'>{index + 1}</h3>
                 const isSelected = currentQuestion.answer === option
                 const selectedItemClass = isSelected ? 'bg-basic_white border border-brand_voilet border-2' : ''
-                const style = `gap-4 flex lg:flex-col items-center justify-centerflex-1 p-[24px] bg-basic_grey_4 rounded-[32px] max-w-[335px] min-w-[335px] lg:min-w-[237px] h-fit lg:h-[220px] cursor-pointer ${selectedItemClass}`
+                const style = `gap-6 flex lg:flex-col items-center justify-centerflex-1 px-[14px] py-[12px] bg-basic_grey_4 rounded-[32px] max-w-[335px] min-w-[335px] lg:min-w-[237px] h-fit lg:h-[220px] cursor-pointer ${selectedItemClass}`
                 return (
                   <div key={index} onClick={() => handleUpdateQuestion(option)} className={style}>
-                    <div className='flex items-center justify-center gap-2 min-w-[78px] min-h-[78px] bg-basic_white shadow-xl border border-basic_grey_4/[0.25] rounded-full'>
+                    <div className='flex items-center justify-center gap-2 min-w-[65px] min-h-[65px] bg-basic_white shadow-md border border-basic_grey_4/[0.25] rounded-full'>
                       {iconItem}
                     </div>
-                    <p className='text-[18px]'>{option}</p>
+                    <p className='text-[16px] text-brand_blue_voilet'>{option}</p>
                   </div>
                 )
               })
