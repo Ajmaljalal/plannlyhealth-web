@@ -117,84 +117,6 @@ const newQuestions: Question[] = [
 ]
 
 
-const questions = [
-  {
-    id: 1,
-    question: 'Rate your overall health?',
-    options: ['Great', 'Good', 'Fair', 'Poor'],
-    icons: null,
-    answer: null,
-  },
-  {
-    id: 2,
-    question: 'How stressed are you?',
-    options: ['High', 'Moderate', 'Low'],
-    icons: null,
-    answer: null
-  },
-  {
-    id: 3,
-    question: 'Was there a birth or adoption of a child in your family?',
-    options: ['Yes, child birth', 'yes, adoption', 'No'],
-    icons: {
-      'Yes, child birth': icons.childBirth || 10,
-      'yes, adoption': icons.childAdoption || 8,
-      'No': icons.heartPurple || 1
-    },
-    answer: null
-  },
-  {
-    id: 4,
-    question: 'How well do you manage your work-life balance?',
-    options: ['Very well', 'Well', 'Not well', 'Poorly'],
-    icons: null,
-    answer: null
-  },
-  {
-    id: 5,
-    question: 'Are you experiencing difficulty sleeping?',
-    options: ['Yes', 'No'],
-    icons: null,
-    answer: null
-  },
-  {
-    id: 6,
-    question: 'Do you feel emotionally drained at the end of your workday?',
-    options: ['Yes', 'No'],
-    icons: null,
-    answer: null
-  },
-  {
-    id: 7,
-    question: 'How often do you engage in relaxation techniques or mindfulness practices?',
-    options: ['Daily', 'Several times a week and alla the time and if I want daily and in the night and again in the morning and again in the evning', 'Once a week', 'Never'],
-    icons: null,
-    answer: null
-  },
-  {
-    id: 8,
-    question: 'Have you experienced any physical symptoms related to stress (e.g., headaches, muscle tension)?',
-    options: ['Yes', 'No'],
-    icons: null,
-    answer: null
-  },
-  {
-    id: 9,
-    question: 'Do you feel supported by your colleagues and supervisors?',
-    options: ['Strongly supported', 'Supported', 'Not supported', 'Strongly not supported'],
-    icons: null,
-    answer: null
-  },
-  {
-    id: 10,
-    question: 'How often do you take breaks during work hours?',
-    options: ['Frequently', 'Sometimes', 'Rarely', 'Never'],
-    icons: null,
-    answer: null
-  }
-];
-
-
 function AssessmentContainer() {
   const router = useRouter()
   const [allQuestions, setAllQuestions] = React.useState<Question[]>(newQuestions)
@@ -244,13 +166,13 @@ function AssessmentContainer() {
   const nextButtonText = currentQuestion.id === allQuestions.length ? 'Submit' : 'Next'
 
   // calcuate progress based on current question in percentage
-  const progress = (currentQuestion.id / allQuestions.length) * 100
+  const progress = Math.round((currentQuestion.id / allQuestions.length) * 100)
   const progressLength = calculateWidthTailwindClass(progress)
   const progressStyle = `flex items-center justify-end h-[12px] rounded-[8px] bg-gradient-to-r from-[#C301EE] via-[#DE1FA4] to-[#FF9539] ${progressLength} transition-all`
 
 
   return (
-    <div className='p-[20px] pb-[64px] lg:p-[40px]'>
+    <div className='p-[20px] pb-0 lg:p-[40px] relative h-screen overflow-auto'>
       <div className='w-full bg-basic_grey_4 h-[12px] rounded-[8px] max-w-[1440px] mx-auto'>
         <div className={progressStyle}>
           <div className='w-[8px] h-[8px] bg-basic_white rounded-full mr-[2px] relative'>
@@ -258,13 +180,13 @@ function AssessmentContainer() {
           </div>
         </div>
       </div>
-      <div className='max-w-[1040px] mx-auto flex flex-col mt-[20px]'>
+      <div className='max-w-[1040px] mx-auto flex flex-col mt-[20px] h-fit'>
         <div className='flex flex-col items-start gap-4 mt-[40px] lg:mt-[150px]'>
           <h4 className='flex gap-2 items-start font-normal md:font-bold'>
             <Image src={icons.arrowBackBg} width={32} height={32} alt='arrow back' onClick={handlePreviousQuestion} className='cursor-pointer' />
             {currentQuestion.question}
           </h4>
-          <div className='flex gap-4 flex-wrap mt-[24px] lg:mt-[40px] justify-center w-full'>
+          <div className='flex gap-4 flex-wrap lg:mt-[40px] justify-center w-full'>
             {
               currentQuestion.options.map((option, index) => {
                 const icon = currentQuestion.icons ? currentQuestion.icons[option] : null
@@ -284,10 +206,10 @@ function AssessmentContainer() {
             }
           </div>
         </div>
-        <div className='w-full flex justify-center gap-4 mt-[54px]'>
-          <Button text='Save for later' className='w-[150px]' />
-          <Button onClick={handleNextQuestion} text={nextButtonText} isPrimary className='w-[150px]' />
-        </div>
+      </div>
+      <div className='w-full flex justify-center gap-4 sticky bottom-[0px] py-[12px] bg-basic_grey_5 mt-[20px] lg:mt-[64px]'>
+        <Button text='Save for later' className='w-[150px]' />
+        <Button onClick={handleNextQuestion} text={nextButtonText} isPrimary className='w-[150px]' />
       </div>
     </div>
   )
