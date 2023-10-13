@@ -161,7 +161,7 @@ export function generateRandomEmployee(id: number): Employee {
     id: id.toString(),
     first_name: randomPick(firstNames),
     last_name: randomPick(lastNames),
-    email: "ajmal@plann.ly",
+    email: 'ajmal@plann.ly',
     phone: `123-456-${id.toString().padStart(4, '0')}`,
     photo: 'https://i.pravatar.cc/300?img=3',
     marital_status: Math.random() > 0.5 ? "married" : "single",
