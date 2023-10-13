@@ -152,7 +152,7 @@ export const checkAuth = async () => {
   if (session?.user === "authenticated") {
     redirect("employee/rewards")
   } else {
-    redirect('auth/login')
+    redirect("auth/login")
   }
 }
 
