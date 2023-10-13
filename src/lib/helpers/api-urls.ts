@@ -1,4 +1,9 @@
 export const NEW_USER_BASE_URL = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/new-users`;
+export const ASSESSMENTS_BASE_URL = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/assessments`;
+
+
+
+
 export const NEW_USER_INVITE = `${NEW_USER_BASE_URL}/invite`;
 export const GET_NEW_USER_BY_EMAIL = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/new-users/email`;
 export const GET_NEW_USERS_BY_COMPANY = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/new-users/company`;
@@ -11,3 +16,5 @@ export const GET_EMPLOYEE_BY_COMPANY = `${EMPLOYEE_BASE_URL}/company`;
 
 
 export const COMAPANY_BASE_URL = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/companies`;
+
+export const START_BASELINE_ASSESSMENT = `${ASSESSMENTS_BASE_URL}/baseline`;

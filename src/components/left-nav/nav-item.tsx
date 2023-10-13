@@ -1,8 +1,8 @@
 'use client'
+import React from 'react'
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation';
-import React from 'react'
 
 interface NavItemProps {
   text: string;
