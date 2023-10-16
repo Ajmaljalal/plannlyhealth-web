@@ -18,7 +18,6 @@ export default withAuth(
   async function middleware(req) {
     const { token } = req.nextauth
     console.log('email: ', token?.email)
-    console
     const employeeAccount = await fetch(`${employeesBaseUrl}/email/${token?.email}`, {
       method: "GET",
     })
