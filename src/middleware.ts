@@ -26,7 +26,11 @@ export default withAuth(
       NextResponse.redirect(`${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/auth/login`)
     } else {
       const redirectUrl = `${getRedirectUrl(employee?.role)}?acc=${employee.id}`
-      NextResponse.redirect(redirectUrl)
+      if (redirectUrl) {
+        NextResponse.redirect(redirectUrl)
+      } else {
+        NextResponse.redirect(`${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/auth/login`)
+      }
     }
   },
 
