@@ -1,6 +1,6 @@
 
-import { EMPLOYEE_BASE_URL, GET_EMPLOYEE_BY_EMAIL } from "@/lib/helpers/api-urls";
 import axios from "axios";
+import { EMPLOYEE_BASE_URL, GET_EMPLOYEE_BY_EMAIL } from "@/lib/helpers/api-urls";
 
 export const createEmployee = async (employee: any) => {
   try {
