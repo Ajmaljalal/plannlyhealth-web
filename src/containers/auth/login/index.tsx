@@ -24,7 +24,7 @@ const LoginContainer = () => {
       const user = await signIn('email', {
         email,
         redirect: false,
-        callbackUrl: '/',
+        callbackUrl: "/",
       });
 
       if (user?.error) {
