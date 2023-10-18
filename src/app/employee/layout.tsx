@@ -5,6 +5,7 @@ import { SignOut } from '@/components/signout';
 import { icons } from '@/lib/icons';
 import AssessmentAlertModal from '@/components/assessment/assessment-alert-modal';
 import MobileNav from '@/containers/employee/left-nav/mobile';
+import { Header } from '@/components/header';
 
 export const metadata = {
   title: 'Plannly Health',
@@ -31,15 +32,10 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
     )
   }
 
-  const renderHeader = () => {
+  const renderContent = () => {
     return (
       <div className='w-full'>
-        <div className={headerStyles}>
-          <Image src={icons.notifications} alt='plannly logo' width={32} height={32} />
-          <div className='flex justify-center items-center w-[32px] h-[32px] rounded-[50%] bg-purple big-text text-basic_white'>
-            A
-          </div>
-        </div>
+        <Header />
         <div className='pb-[32px] lg:p-[32px] lg:pt-[0px] max-w-[1440px] h-fit mx-auto mt-[55px] pb-[80px]'>
           {children}
         </div>
@@ -50,7 +46,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={rootContainerStyles}>
       {renderSideNav()}
-      {renderHeader()}
+      {renderContent()}
       <MobileNav />
       <AssessmentAlertModal />
     </div>

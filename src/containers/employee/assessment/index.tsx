@@ -124,7 +124,6 @@ function AssessmentContainer() {
         <div className='flex gap-4 flex-wrap lg:mt-[40px] justify-center w-full'>
           {
             currentQuestion?.options?.map((option, index) => {
-              console.log(currentQuestion.selected_option, option)
               return <Option key={index} currentQuestion={currentQuestion} option={option} index={index} handleUpdateQuestion={handleUpdateQuestion} />
             })
           }

@@ -268,7 +268,6 @@ const EmployeesList = () => {
   }
 
   const handleUploadEmployees = (file: any) => {
-    console.log(file)
     dispatch(setEmployees(employees))
   }
 

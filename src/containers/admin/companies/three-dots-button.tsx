@@ -37,7 +37,6 @@ export const ThreeDotsButton = ({ company }: ThreeDotsButtonProps) => {
   }
 
   const handleAccessChange = () => {
-    console.log('change company access', company)
     // TODO: Add delete user functionality
     toggleConfirmationModal()
   }

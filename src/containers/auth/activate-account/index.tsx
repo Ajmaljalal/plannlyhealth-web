@@ -6,7 +6,6 @@ function ActivateAccountContainer() {
   const domain = headersList.get('host')
   const protocol = headersList.get('x-forwarded-proto')
 
-  console.log('Headers: ', domain, protocol)
   return (
     <div>ActivateAccount</div>
   )

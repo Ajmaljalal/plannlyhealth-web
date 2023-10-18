@@ -1,6 +1,5 @@
 import axios from "axios";
 import { ASSESSMENTS_BASE_URL, START_BASELINE_ASSESSMENT } from "@/lib/helpers/api-urls";
-import { Question } from "@/lib/types/assessments";
 
 export const startBaselineAssessment = async () => {
   try {

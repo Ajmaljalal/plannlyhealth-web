@@ -248,7 +248,6 @@ const BenefitsMap = () => {
   }
 
   const handleUploadBenefit = (file: any) => {
-    console.log(file)
     dispatch(setBenefits([...allBenefits, ...testBenefits]))
   }
 

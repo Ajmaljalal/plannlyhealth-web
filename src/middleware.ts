@@ -17,7 +17,6 @@ export default withAuth(
   // `withAuth` augments your `Request` with the user's token.
   async function middleware(req) {
     const { token } = req.nextauth
-    console.log('email: ', token?.email)
     const employeeAccount = await fetch(`${employeesBaseUrl}/email/${token?.email}`, {
       method: "GET",
     })
@@ -27,7 +26,6 @@ export default withAuth(
       NextResponse.redirect(`${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/auth/login`)
     } else {
       const redirectUrl = `${getRedirectUrl(employee?.role)}?acc=${employee.id}`
-      console.log('redirectUrl: ', redirectUrl)
       if (redirectUrl) {
         NextResponse.redirect(redirectUrl)
       } else {
