@@ -3,18 +3,29 @@ import { Button } from '@/components/button'
 import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { icons } from '@/lib/icons'
-import { calculateWidthTailwindClass } from '@/lib/helpers'
+import { calculateWidthTailwindClass, get_month_year } from '@/lib/helpers'
 import { useRouter } from 'next/navigation'
 import { createAssessment, startBaselineAssessment } from '@/lib/services/assessments'
 import { Question } from '@/lib/types/assessments'
 import { Option } from './option'
+import { useDispatch, useSelector } from '@/store/store'
+import { setUser, userProfileSelector } from '@/store/user'
+import { useSession } from 'next-auth/react'
+import { getEmployeeByEmail } from '@/lib/services/employee'
+
+
+const inProgressAssessmentId = `in-progress-${get_month_year()}`
 
 
 function AssessmentContainer() {
+  const { data: userSession } = useSession();
   const router = useRouter()
+  const dispatch = useDispatch();
+  const user: any = useSelector(userProfileSelector)
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [allQuestions, setAllQuestions] = React.useState<Question[]>([])
   const [currentQuestion, setCurrentQuestion] = React.useState<Question>(allQuestions[0])
+
 
   const getQuestions = async () => {
     const questions = await startBaselineAssessment()
@@ -22,8 +33,23 @@ function AssessmentContainer() {
     setCurrentQuestion(questions[0])
   }
 
+  const fetchUserData = async () => {
+    if (!userSession || user) return;
+
+    try {
+      const fetchedUser = await getEmployeeByEmail(userSession?.user?.email as string);
+      dispatch(setUser(fetchedUser));
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+    }
+  };
+
   useEffect(() => {
-    const progress = localStorage.getItem("user_id_month")
+    fetchUserData();
+  }, [userSession]);
+
+  useEffect(() => {
+    const progress = localStorage.getItem(inProgressAssessmentId)
     if (progress) {
       const questions = JSON.parse(progress).progress
       // got to the last answered question
@@ -33,7 +59,7 @@ function AssessmentContainer() {
     } else {
       getQuestions()
     }
-  }, [])
+  }, [user])
 
   const handleUpdateQuestion = (option: any) => {
     currentQuestion.selected_option = currentQuestion?.selected_option === option ? null : option;
@@ -48,7 +74,7 @@ function AssessmentContainer() {
     if (!currentQuestion?.selected_option || currentQuestion?.id === allQuestions?.length) return;
 
     const json = JSON.stringify({ progress: allQuestions });
-    localStorage.setItem("user_id_month", json)
+    localStorage.setItem(inProgressAssessmentId, json)
 
     setTimeout(handleNextQuestion, 500);
   };
@@ -67,17 +93,18 @@ function AssessmentContainer() {
   }
 
   const handleSubmit = async () => {
+    if (!user?.id) return
     setIsLoading(true)
     const assessment = {
       type: 'onboarding',
       answers: allQuestions,
-      user_id: '1',
-      company_id: '1',
+      user_id: user.id,
+      company_id: user.company_id,
       is_completed: true
     }
     try {
       await createAssessment(assessment)
-      localStorage.removeItem("user_id_month")
+      localStorage.removeItem(inProgressAssessmentId)
       router.push('/assessment/congratulations')
     } catch (error) {
       console.log(error)
