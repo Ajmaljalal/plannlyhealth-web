@@ -1,10 +1,10 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { icons } from '@/lib/icons';
 import { companyDetailsSelector, setCompanyDetails, setEmployees } from '@/store/company';
 import { useDispatch, useSelector } from '@/store/store';
-import { setUser, userProfileSelector } from '@/store/user';
+import { setAssessmentProgress, setUser, userAssessmentProgressSelector, userProfileSelector } from '@/store/user';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { getCompanyById } from '@/lib/services/company';
@@ -20,6 +20,7 @@ export const Header: React.FC = () => {
   const router = useRouter();
   const company = useSelector(companyDetailsSelector);
   const user = useSelector(userProfileSelector);
+  const assessmentProgress = useSelector(userAssessmentProgressSelector);
   const dispatch = useDispatch();
   const params = useSearchParams();
   const pathname = usePathname()
@@ -71,16 +72,32 @@ export const Header: React.FC = () => {
     }
   }, [user, companyIdFromParams]);
 
+  useEffect(() => {
+    if (!isSuperAdmin) {
+      const assessmentProgress = window.localStorage.getItem(`assessment_${user?.id}_postponed`);
+      console.log('assessmentProgress', assessmentProgress)
+      if (assessmentProgress === 'true') {
+        dispatch(setAssessmentProgress(true))
+      }
+    }
+  }, [user])
+
   const routeBackToSuperAdminView = () => {
     router.push(SUPER_ADMIN_BACK_URL);
     dispatch(setCompanyDetails(null));
     dispatch(setEmployees(null));
   }
 
-
-
   return (
     <div className={HEADER_STYLES}>
+      {
+        assessmentProgress && isEmployeeVeiw && (
+          <div onClick={() => router.push('/assessment')} className='flex items-center gap-2 border border-basic_orange px-4
+          py-1 rounded-[8px] text-small cursor-pointer bg-system_error/[0.1]'>
+            <div className='text-small text-system_error mt-0.3'>One due assessment!</div>
+          </div>
+        )
+      }
       {isSuperAdmin && (
         <div className={BACK_BUTTON_STYLES} onClick={routeBackToSuperAdminView}>
           <Image src={icons.linkIcon} alt='link' width={20} height={20} />
@@ -94,7 +111,7 @@ export const Header: React.FC = () => {
         </div>
       )}
       {isAdmin && isEmployeeVeiw && (
-        <div className={BACK_BUTTON_STYLES} onClick={() => router.push(ADMIN_BACK_URL)}>
+        <div className={`${BACK_BUTTON_STYLES} hidden lg:flex`} onClick={() => router.push(ADMIN_BACK_URL)}>
           <Image src={icons.linkIcon} alt='link' width={20} height={20} />
           <div className='text-small text-basic_grey mt-0.3'>Admin View</div>
         </div>

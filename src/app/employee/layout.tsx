@@ -2,7 +2,6 @@ import Image from 'next/image';
 import logo from '../../../public/logos/plannly-logo-white-horizontal.png'
 import WebNav from '@/containers/employee/left-nav/web';
 import { SignOut } from '@/components/signout';
-import { icons } from '@/lib/icons';
 import AssessmentAlertModal from '@/components/assessment/assessment-alert-modal';
 import MobileNav from '@/containers/employee/left-nav/mobile';
 import { Header } from '@/components/header';
@@ -14,7 +13,6 @@ export const metadata = {
 
 const rootContainerStyles = `w-full min-w-[320px] h-screen p-[16px] flex bg-basic_white overflow-auto`
 const navContainerStyles = `z-50 sticky top-0 left-0 hidden lg:flex flex-col gap-8 min-w-[200px] h-full bg-basic_black text-basic_white px-[16px] py-[24px] rounded-[32px]`
-const headerStyles = `w-full pr-[16px] absolute top-0 right-0 flex justify-end items-center gap-4 h-[50px] lg:h-[65px] bg-basic_white`
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 
