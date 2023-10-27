@@ -5,22 +5,27 @@ import { Button } from '../button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from '@/store/store';
-import { setAssessmentProgress, userProfileSelector } from '@/store/user';
+import { setAssessmentPostponed, userAssessmentProgressSelector, userProfileSelector } from '@/store/user';
+import { get_month_year } from '@/lib/helpers';
 
 
-export default function AssessmentAlertModal() {
+const OboardingAssessmentAlertModal = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const user = useSelector(userProfileSelector)
+  const userAseessmentPostponed = useSelector(userAssessmentProgressSelector)
   const dispatch = useDispatch()
   const router = useRouter()
 
   useEffect(() => {
-    if (user?.onboarding_assessment_completed) return
     const timer = setTimeout(() => {
-      setIsOpen(true)
+      if (user?.onboarding_assessment_completed || userAseessmentPostponed) {
+        return false
+      } else {
+        setIsOpen(true)
+      }
     }, 10000)
     return () => clearTimeout(timer)
-  }, [user])
+  }, [user, userAseessmentPostponed])
 
   const handleStart = async () => {
     setIsOpen(false)
@@ -28,8 +33,8 @@ export default function AssessmentAlertModal() {
   }
 
   const toggleModal = () => {
-    window.localStorage.setItem(`assessment_${user.id}_postponed`, 'true')
-    dispatch(setAssessmentProgress(true))
+    window.localStorage.setItem(`assessment-postponded-${get_month_year()}`, 'true')
+    dispatch(setAssessmentPostponed(true))
     setIsOpen(!isOpen)
   }
 
@@ -38,9 +43,11 @@ export default function AssessmentAlertModal() {
     <Modal isOpen={isOpen} onClose={toggleModal} ctaButton={ctaButton} cancelBtnText='Will do later'>
       <div className='text-center flex flex-col items-center justify-center'>
         <Image src='/illustrations/upload-benefits-illustration.svg' alt='assessment alert' width={150} height={100} />
-        <h4 className='font-normal'>Complete your Assessment</h4>
+        <h4 className='font-normal'>Complete Onboarding Assessment</h4>
         <p className='text-basic_grey_3 mt-2'>and unlock a ticket for a reward!</p>
       </div>
     </Modal>
   );
 }
+
+export default OboardingAssessmentAlertModal

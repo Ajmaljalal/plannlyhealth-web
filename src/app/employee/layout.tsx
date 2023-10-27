@@ -2,9 +2,9 @@ import Image from 'next/image';
 import logo from '../../../public/logos/plannly-logo-white-horizontal.png'
 import WebNav from '@/containers/employee/left-nav/web';
 import { SignOut } from '@/components/signout';
-import AssessmentAlertModal from '@/components/assessment/assessment-alert-modal';
+import OboardingAssessmentAlertModal from '@/components/assessment/onboarding-assessment-alert-modal';
 import MobileNav from '@/containers/employee/left-nav/mobile';
-import { Header } from '@/components/header';
+import { Header } from '@/components/header/employee-header';
 
 export const metadata = {
   title: 'Plannly Health',
@@ -46,7 +46,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       {renderSideNav()}
       {renderContent()}
       <MobileNav />
-      <AssessmentAlertModal />
+      <OboardingAssessmentAlertModal />
     </div>
   )
 }

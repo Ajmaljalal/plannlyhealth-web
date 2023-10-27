@@ -9,7 +9,7 @@ import { createAssessment, startBaselineAssessment } from '@/lib/services/assess
 import { Question } from '@/lib/types/assessments'
 import { Option } from './option'
 import { useDispatch, useSelector } from '@/store/store'
-import { setUser, userProfileSelector } from '@/store/user'
+import { setAssessmentPostponed, setUser, userProfileSelector } from '@/store/user'
 import { useSession } from 'next-auth/react'
 import { getEmployeeByEmail } from '@/lib/services/employee'
 
@@ -105,11 +105,21 @@ function AssessmentContainer() {
     try {
       await createAssessment(assessment)
       localStorage.removeItem(inProgressAssessmentId)
+      localStorage.removeItem(`assessment-postponded-${get_month_year()}`)
+      dispatch(setAssessmentPostponed(false))
       router.push('/assessment/congratulations')
     } catch (error) {
       console.log(error)
     }
     setIsLoading(false)
+  }
+
+  const handleSaveForLater = () => {
+    const json = JSON.stringify({ progress: allQuestions });
+    localStorage.setItem(inProgressAssessmentId, json)
+    localStorage.setItem(`assessment-postponded-${get_month_year()}`, 'true')
+    dispatch(setAssessmentPostponed(true))
+    router.push('/employee/rewards')
   }
 
 
@@ -163,7 +173,11 @@ function AssessmentContainer() {
       {renderProgressBar()}
       {renderQuestion()}
       <div className='w-full flex justify-center gap-4 sticky bottom-[0px] py-[12px] bg-basic_grey_5 mt-[20px] lg:mt-[64px]'>
-        <Button text='Save for later' className='w-[150px]' />
+        <Button
+          onClick={handleSaveForLater}
+          text='Save for later'
+          className='w-[150px]'
+        />
         <Button
           onClick={nextButtonOnClick}
           text={nextButtonText}

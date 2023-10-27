@@ -1,15 +1,16 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, } from 'react';
 import Image from 'next/image';
 import { icons } from '@/lib/icons';
-import { companyDetailsSelector, setCompanyDetails, setEmployees } from '@/store/company';
+import { companyDetailsSelector, setCompanyDetails } from '@/store/company';
 import { useDispatch, useSelector } from '@/store/store';
-import { setAssessmentProgress, setUser, userAssessmentProgressSelector, userProfileSelector } from '@/store/user';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { setAssessmentPostponed, setUser, userAssessmentProgressSelector, userProfileSelector } from '@/store/user';
+import { usePathname, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { getCompanyById } from '@/lib/services/company';
 import { getEmployeeByEmail } from '@/lib/services/employee';
 import { Role } from '@/lib/types/employee';
+import { get_month_year } from '@/lib/helpers';
 
 const HEADER_STYLES = `sticky top-[-16px] right-0 flex justify-end items-center gap-4 h-[65px] mt-[-16px] bg-basic_white z-[100]`;
 const BACK_BUTTON_STYLES = `flex items-center gap-2 mr-10 border border-brand_voilet_light px-2
@@ -22,16 +23,11 @@ export const Header: React.FC = () => {
   const user = useSelector(userProfileSelector);
   const assessmentProgress = useSelector(userAssessmentProgressSelector);
   const dispatch = useDispatch();
-  const params = useSearchParams();
   const pathname = usePathname()
-  const companyIdFromParams = params.get('org_id');
 
-  const isSuperAdmin = user?.role === Role.SuperAdmin;
   const isAdmin = user?.role === Role.Admin;
-  const isEmployeeVeiw = pathname?.includes('employee') && isAdmin
+  const isEmployeeVeiw = pathname?.includes('employee')
 
-  const SUPER_ADMIN_BACK_URL = '/admin';
-  const EMPLOYEE_BACK_URL = '/employee/rewards';
   const ADMIN_BACK_URL = `/company/dashboard`;
 
 
@@ -65,52 +61,29 @@ export const Header: React.FC = () => {
   }, [userSession]);
 
   useEffect(() => {
-    if (isSuperAdmin && !company && companyIdFromParams) {
-      fetchCompanyData(companyIdFromParams);
-    } else if (user) {
-      fetchCompanyData(user.company_id);
-    }
-  }, [user, companyIdFromParams]);
+    if (!user) return;
+    fetchCompanyData(user.company_id);
+  }, [user]);
+
 
   useEffect(() => {
-    if (!isSuperAdmin) {
-      const assessmentProgress = window.localStorage.getItem(`assessment_${user?.id}_postponed`);
-      console.log('assessmentProgress', assessmentProgress)
-      if (assessmentProgress === 'true') {
-        dispatch(setAssessmentProgress(true))
-      }
+    const assessmentProgress = window.localStorage.getItem(`assessment-postponded-${get_month_year()}`);
+    if (assessmentProgress === 'true') {
+      dispatch(setAssessmentPostponed(true))
     }
   }, [user])
-
-  const routeBackToSuperAdminView = () => {
-    router.push(SUPER_ADMIN_BACK_URL);
-    dispatch(setCompanyDetails(null));
-    dispatch(setEmployees(null));
-  }
 
   return (
     <div className={HEADER_STYLES}>
       {
         assessmentProgress && isEmployeeVeiw && (
-          <div onClick={() => router.push('/assessment')} className='flex items-center gap-2 border border-basic_orange px-4
+          <div onClick={() => router.push('/assessment')} className='flex items-center gap-2 border border-basic_orange px-2
           py-1 rounded-[8px] text-small cursor-pointer bg-system_error/[0.1]'>
-            <div className='text-small text-system_error mt-0.3'>One due assessment!</div>
+            <div className='text-small text-system_error mt-0.3'>Complete Your Assessment!</div>
           </div>
         )
       }
-      {isSuperAdmin && (
-        <div className={BACK_BUTTON_STYLES} onClick={routeBackToSuperAdminView}>
-          <Image src={icons.linkIcon} alt='link' width={20} height={20} />
-          <div className='text-small text-basic_grey mt-0.3'>Back to Admin Dashboard</div>
-        </div>
-      )}
-      {!isSuperAdmin && isAdmin && !isEmployeeVeiw && (
-        <div className={BACK_BUTTON_STYLES} onClick={() => router.push(EMPLOYEE_BACK_URL)}>
-          <Image src={icons.linkIcon} alt='link' width={20} height={20} />
-          <div className='text-small text-basic_grey mt-0.3'>Employee View</div>
-        </div>
-      )}
-      {isAdmin && isEmployeeVeiw && (
+      {isEmployeeVeiw && isAdmin && (
         <div className={`${BACK_BUTTON_STYLES} hidden lg:flex`} onClick={() => router.push(ADMIN_BACK_URL)}>
           <Image src={icons.linkIcon} alt='link' width={20} height={20} />
           <div className='text-small text-basic_grey mt-0.3'>Admin View</div>

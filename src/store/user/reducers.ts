@@ -1,18 +1,18 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
   setUser,
-  setAssessmentProgress
+  setAssessmentPostponed
 } from './actions';
 
 type UserState = {
   profile: any
-  assessmentProgress: boolean
+  isAssessmentPostponed: boolean
 
 };
 
 const initialState: UserState = {
   profile: null,
-  assessmentProgress: false
+  isAssessmentPostponed: false
 };
 
 export const userReducer = createReducer(initialState, builder => {
@@ -20,7 +20,7 @@ export const userReducer = createReducer(initialState, builder => {
     .addCase(setUser, (state, action) => {
       state.profile = action.payload;
     })
-    .addCase(setAssessmentProgress, (state, action) => {
-      state.assessmentProgress = action.payload;
+    .addCase(setAssessmentPostponed, (state, action) => {
+      state.isAssessmentPostponed = action.payload;
     })
 });

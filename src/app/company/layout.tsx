@@ -5,7 +5,7 @@ import { SignOut } from '@/components/signout';
 import { Divider } from '@/components/divider';
 import { NavItem } from '@/components/left-nav/nav-item';
 import { icons } from '@/lib/icons';
-import { Header } from '@/components/header';
+import { Header } from '@/components/header/company-header';
 
 export const metadata = {
   title: 'Plannly Health',
