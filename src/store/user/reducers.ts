@@ -1,18 +1,21 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
   setUser,
-  setAssessmentPostponed
+  setAssessmentPostponed,
+  setAsssessmentsTracker
 } from './actions';
 
 type UserState = {
   profile: any
   isAssessmentPostponed: boolean
+  assessmentsTracker: any
 
 };
 
 const initialState: UserState = {
   profile: null,
-  isAssessmentPostponed: false
+  isAssessmentPostponed: false,
+  assessmentsTracker: null
 };
 
 export const userReducer = createReducer(initialState, builder => {
@@ -22,5 +25,8 @@ export const userReducer = createReducer(initialState, builder => {
     })
     .addCase(setAssessmentPostponed, (state, action) => {
       state.isAssessmentPostponed = action.payload;
+    })
+    .addCase(setAsssessmentsTracker, (state, action) => {
+      state.assessmentsTracker = action.payload;
     })
 });

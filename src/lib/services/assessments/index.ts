@@ -28,9 +28,19 @@ export const createAssessment = async (assessment: any) => {
   }
 }
 
-export const createAssessmentProgress = async (user: any) => {
+export const createAssessmentsProgressTracker = async (user: any) => {
   try {
     const result = await axios.post(`${ASSESSMENTS_BASE_URL}/progress`, user);
+    return result.data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export const getAssessmentsProgressTracker = async (userId: string) => {
+  if (!userId) return;
+  try {
+    const result = await axios.get(`${ASSESSMENTS_BASE_URL}/progress/${userId}`);
     return result.data;
   } catch (error) {
     return error;

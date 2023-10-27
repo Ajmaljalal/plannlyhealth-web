@@ -2,15 +2,25 @@
 import React, { useEffect, } from 'react';
 import Image from 'next/image';
 import { icons } from '@/lib/icons';
-import { companyDetailsSelector, setCompanyDetails } from '@/store/company';
+import {
+  companyDetailsSelector,
+  setCompanyDetails
+} from '@/store/company';
 import { useDispatch, useSelector } from '@/store/store';
-import { setAssessmentPostponed, setUser, userAssessmentProgressSelector, userProfileSelector } from '@/store/user';
+import {
+  setAssessmentPostponed,
+  setAsssessmentsTracker,
+  setUser,
+  userAssessmentProgressSelector,
+  userProfileSelector
+} from '@/store/user';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { getCompanyById } from '@/lib/services/company';
 import { getEmployeeByEmail } from '@/lib/services/employee';
 import { Role } from '@/lib/types/employee';
 import { get_month_year } from '@/lib/helpers';
+import { getAssessmentsProgressTracker } from '@/lib/services/assessments';
 
 const HEADER_STYLES = `sticky top-[-16px] right-0 flex justify-end items-center gap-4 h-[65px] mt-[-16px] bg-basic_white z-[100]`;
 const BACK_BUTTON_STYLES = `flex items-center gap-2 mr-10 border border-brand_voilet_light px-2
@@ -33,7 +43,6 @@ export const Header: React.FC = () => {
 
   const fetchUserData = async () => {
     if (!userSession || user) return;
-
     try {
       const fetchedUser = await getEmployeeByEmail(userSession?.user?.email as string);
       dispatch(setUser(fetchedUser));
@@ -45,9 +54,18 @@ export const Header: React.FC = () => {
     }
   };
 
+  const fetchAssessmentsTracker = async () => {
+    if (!user) return;
+    try {
+      const assessmentProgress = await getAssessmentsProgressTracker(user.id);
+      dispatch(setAsssessmentsTracker(assessmentProgress));
+    } catch (error) {
+      console.error("Failed to fetch assessments tracker:", error);
+    }
+  }
+
   const fetchCompanyData = async (companyId: string) => {
     if (company) return;
-
     try {
       const fetchedCompany = await getCompanyById(companyId);
       dispatch(setCompanyDetails(fetchedCompany));
@@ -62,12 +80,16 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     if (!user) return;
+    fetchAssessmentsTracker();
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) return;
     fetchCompanyData(user.company_id);
   }, [user]);
 
-
   useEffect(() => {
-    const assessmentProgress = window.localStorage.getItem(`assessment-postponded-${get_month_year()}`);
+    const assessmentProgress = localStorage.getItem(`assessment-postponded-${get_month_year()}`);
     if (assessmentProgress === 'true') {
       dispatch(setAssessmentPostponed(true))
     }

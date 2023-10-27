@@ -5,6 +5,7 @@ import { SignOut } from '@/components/signout';
 import OboardingAssessmentAlertModal from '@/components/assessment/onboarding-assessment-alert-modal';
 import MobileNav from '@/containers/employee/left-nav/mobile';
 import { Header } from '@/components/header/employee-header';
+import MonthlyAssessmentAlertModal from '@/components/assessment/monthly-assessment-alert-modal';
 
 export const metadata = {
   title: 'Plannly Health',
@@ -47,6 +48,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       {renderContent()}
       <MobileNav />
       <OboardingAssessmentAlertModal />
+      <MonthlyAssessmentAlertModal />
     </div>
   )
 }

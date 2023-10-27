@@ -2,10 +2,22 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { icons } from '@/lib/icons';
-import { companyDetailsSelector, setCompanyDetails, setEmployees } from '@/store/company';
+import {
+  companyDetailsSelector,
+  setCompanyDetails,
+  setEmployees
+} from '@/store/company';
 import { useDispatch, useSelector } from '@/store/store';
-import { setAssessmentPostponed, setUser, userProfileSelector } from '@/store/user';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import {
+  setAssessmentPostponed,
+  setUser,
+  userProfileSelector
+} from '@/store/user';
+import {
+  usePathname,
+  useRouter,
+  useSearchParams
+} from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { getCompanyById } from '@/lib/services/company';
 import { getEmployeeByEmail } from '@/lib/services/employee';
