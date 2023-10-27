@@ -24,11 +24,14 @@ const ActivateAccount = async () => {
     user.status = 'Active';
 
     const employee = await getEmployeeByEmail(email);
+
     if (!employee) {
       await createEmployee(user);
-      await deleteNewUser(user.id);
-      success = true;
     }
+
+    await deleteNewUser(user.id);
+    success = true;
+
   } catch (error) {
     success = false;
     return <div>Oops! something went wrong, contact support.</div>;

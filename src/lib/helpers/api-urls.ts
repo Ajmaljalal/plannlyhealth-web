@@ -18,3 +18,4 @@ export const GET_EMPLOYEE_BY_COMPANY = `${EMPLOYEE_BASE_URL}/company`;
 export const COMAPANY_BASE_URL = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/companies`;
 
 export const START_BASELINE_ASSESSMENT = `${ASSESSMENTS_BASE_URL}/baseline`;
+export const START_MONTHLY_ASSESSMENT = `${ASSESSMENTS_BASE_URL}/monthly`;
