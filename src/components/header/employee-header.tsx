@@ -91,7 +91,7 @@ export const Header: React.FC = () => {
       )}
       <Image src={icons.notifications} alt='notifications' width={32} height={32} />
       <div className='flex justify-center items-center w-[32px] h-[32px] rounded-[50%] bg-purple big-text text-basic_white'>
-        {user?.email?.charAt(0)?.toUpperCase()}
+        {user?.first_name?.charAt(0)?.toUpperCase()}
       </div>
     </div>
   );
