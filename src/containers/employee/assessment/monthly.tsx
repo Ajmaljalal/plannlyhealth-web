@@ -97,10 +97,15 @@ function AssessmentContainer() {
     setIsLoading(true)
     const assessment = {
       type: 'monthly',
-      answers: allQuestions,
       user_id: user.id,
+      user_job_title: user.job_title,
+      user_department: user.department,
+      user_birthday: user.birthday,
+      user_marital_status: user.marital_status,
+      user_gender: user.gender,
       company_id: user.company_id,
-      is_completed: true
+      is_completed: true,
+      answers: allQuestions,
     }
     try {
       await createAssessment(assessment)
