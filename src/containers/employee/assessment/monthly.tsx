@@ -96,7 +96,7 @@ function AssessmentContainer() {
     if (!user?.id) return
     setIsLoading(true)
     const assessment = {
-      type: 'onboarding',
+      type: 'monthly',
       answers: allQuestions,
       user_id: user.id,
       company_id: user.company_id,

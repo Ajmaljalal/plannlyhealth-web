@@ -12,26 +12,26 @@ import { get_month_year } from '@/lib/helpers';
 const MonthlyAssessmentAlertModal = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const user = useSelector(userProfileSelector)
-  const assessmentsTracer = useSelector(assessmentsTrackerSelector)
+  const assessmentsTracker = useSelector(assessmentsTrackerSelector)
   const userAseessmentPostponed = useSelector(userAssessmentProgressSelector)
   const dispatch = useDispatch()
   const router = useRouter()
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (assessmentsTracer?.monthly_assessments.completed || userAseessmentPostponed) {
+      if (assessmentsTracker?.monthly_assessment_completed || userAseessmentPostponed) {
         return false // if assessment is completed or postponed, don't show the modal
       } else {
         setIsOpen(true)
       }
     }, 10000)
     return () => clearTimeout(timer)
-  }, [user, userAseessmentPostponed, assessmentsTracer])
+  }, [user, userAseessmentPostponed, assessmentsTracker])
 
 
   const handleStart = async () => {
     setIsOpen(false)
-    router.push('/assessment')
+    router.push('/assessment/monthly')
   }
 
   const toggleModal = () => {

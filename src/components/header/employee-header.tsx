@@ -8,6 +8,7 @@ import {
 } from '@/store/company';
 import { useDispatch, useSelector } from '@/store/store';
 import {
+  assessmentsTrackerSelector,
   setAssessmentPostponed,
   setAsssessmentsTracker,
   setUser,
@@ -31,6 +32,7 @@ export const Header: React.FC = () => {
   const router = useRouter();
   const company = useSelector(companyDetailsSelector);
   const user = useSelector(userProfileSelector);
+  const assessmentsTracker = useSelector(assessmentsTrackerSelector);
   const assessmentProgress = useSelector(userAssessmentProgressSelector);
   const dispatch = useDispatch();
   const pathname = usePathname()
@@ -95,11 +97,13 @@ export const Header: React.FC = () => {
     }
   }, [user])
 
+  const assessmentPostponedAlertLink = assessmentsTracker?.onboarding_assessment_completed ? '/assessment/monthly' : '/assessment/onboarding';
+
   return (
     <div className={HEADER_STYLES}>
       {
         assessmentProgress && isEmployeeVeiw && (
-          <div onClick={() => router.push('/assessment')} className='flex items-center gap-2 border border-basic_orange px-2
+          <div onClick={() => router.push(assessmentPostponedAlertLink)} className='flex items-center gap-2 border border-basic_orange px-2
           py-1 rounded-[8px] text-small cursor-pointer bg-system_error/[0.1]'>
             <div className='text-small text-system_error mt-0.3'>Complete Your Assessment!</div>
           </div>

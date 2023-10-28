@@ -12,25 +12,25 @@ import { get_month_year } from '@/lib/helpers';
 const OboardingAssessmentAlertModal = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const user = useSelector(userProfileSelector)
-  const assessmentsTracer = useSelector(assessmentsTrackerSelector)
+  const assessmentsTracker = useSelector(assessmentsTrackerSelector)
   const userAseessmentPostponed = useSelector(userAssessmentProgressSelector)
   const dispatch = useDispatch()
   const router = useRouter()
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (assessmentsTracer?.onboarding_assessment_completed || userAseessmentPostponed) {
+      if (assessmentsTracker?.onboarding_assessment_completed || userAseessmentPostponed) {
         return false // if assessment is completed or postponed, don't show the modal
       } else {
         setIsOpen(true)
       }
     }, 10000)
     return () => clearTimeout(timer)
-  }, [user, userAseessmentPostponed])
+  }, [user, userAseessmentPostponed, assessmentsTracker])
 
   const handleStart = async () => {
     setIsOpen(false)
-    router.push('/assessment')
+    router.push('/assessment/onboarding')
   }
 
   const toggleModal = () => {
