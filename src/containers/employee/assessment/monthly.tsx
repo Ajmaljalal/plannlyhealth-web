@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { icons } from '@/lib/icons'
 import { calculateWidthTailwindClass, get_month_year } from '@/lib/helpers'
 import { useRouter } from 'next/navigation'
-import { createAssessment, startBaselineAssessment } from '@/lib/services/assessments'
+import { createAssessment, startMonthlyAssessment } from '@/lib/services/assessments'
 import { Question } from '@/lib/types/assessments'
 import { Option } from './option'
 import { useDispatch, useSelector } from '@/store/store'
@@ -28,7 +28,7 @@ function AssessmentContainer() {
 
 
   const getQuestions = async () => {
-    const questions = await startBaselineAssessment()
+    const questions = await startMonthlyAssessment('burnout')
     setAllQuestions(questions)
     setCurrentQuestion(questions[0])
   }
