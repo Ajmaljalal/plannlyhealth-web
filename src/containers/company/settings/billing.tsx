@@ -88,7 +88,7 @@ const Billing = () => {
     <>
       <div className='max-w-[1200px] mt-[56px] flex gap-12 flex-wrap'>
         {plansData.map((plan: any, index: number) => {
-          const isCurrentPlan = plan.title === currentPlan.title;
+          const isCurrentPlan = plan?.title === currentPlan?.title;
           const activeplanClass = isCurrentPlan ? 'bg-gradient-to-br from-brand_dark_blue to-brand_voilet_lighter text-basic_white' : '';
           const planItemClass = `h-[220px] flex-1 max-w-[600px] min-w-[530px] gap-4 rounded-[32px] bg-brand_voilet_hue text-basic_grey_1 px-[32px] py-[24px] cursor-pointer ${activeplanClass}`;
           const titleColor = isCurrentPlan ? 'text-basic_grey_3' : 'text-brand_blue_voilet';
