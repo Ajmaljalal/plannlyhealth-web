@@ -85,7 +85,7 @@ const EmployeesListContainer = () => {
 
   const handleUploadEmployees = async (file: any) => {
     const usersFromFile = await csvToObject(file)
-    const newUsers = await createBulkNewUserInvite(usersFromFile, companyId)
+    await createBulkNewUserInvite(usersFromFile, companyId)
     mutate(`${GET_NEW_USERS_BY_COMPANY}/${companyId}`);
   }
 
