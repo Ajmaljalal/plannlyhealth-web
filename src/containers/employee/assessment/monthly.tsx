@@ -28,9 +28,9 @@ function AssessmentContainer() {
 
 
   const getQuestions = async () => {
-    const questions = await startMonthlyAssessment('burnout')
-    setAllQuestions(questions)
-    setCurrentQuestion(questions[0])
+    const questions = user && await startMonthlyAssessment(user.id)
+    questions && setAllQuestions(questions)
+    questions && setCurrentQuestion(questions[0])
   }
 
   const fetchUserData = async () => {

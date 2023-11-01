@@ -10,9 +10,9 @@ export const startBaselineAssessment = async () => {
   }
 }
 
-export const startMonthlyAssessment = async (type: string) => {
+export const startMonthlyAssessment = async (userId: string) => {
   try {
-    const result = await axios.get(`${START_MONTHLY_ASSESSMENT}/${type}`);
+    const result = await axios.get(`${START_MONTHLY_ASSESSMENT}/${userId}`);
     return result.data;
   } catch (error) {
     return error;
