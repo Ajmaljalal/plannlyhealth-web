@@ -1,9 +1,7 @@
-import React from 'react'
+import AssessmentsContainer from "@/containers/company/assessments";
 
 const Assessments = () => {
-    return (
-        <div>Assessments</div>
-    )
+  return <AssessmentsContainer />;
 }
 
-export default Assessments
+export default Assessments;

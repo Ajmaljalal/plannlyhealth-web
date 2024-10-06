@@ -2,6 +2,8 @@
 import { icons } from '@/lib/icons'
 import Image, { StaticImageData } from 'next/image'
 import { ChangeEvent, useState } from 'react'
+
+// Declare the InputProps interface
 interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
   className?: string
   inputClassName?: string
@@ -16,84 +18,53 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
   pattern?: string
 }
 
-const labelBaseStyles = `
-    bg-pWhite 
-    text-[12px]
-    text-extrabold
-    px-2 
-    absolute 
-    left-4 
-    z-10
-    -top-[9px] 
-`
-
-const labelDisabledStyles = `
-    text-pLightGray
-`
-
-const labelNoFocusStyles = `
-    text-pDarkGray
-`
-const labelOnFocusStyles = `
-    text-pDark
-`
+const baseLabelStyles = 'text-small text-extrabold px-4 text-basic_grey_3'
+const disabledLabelStyles = 'text-basic_grey_2'
+const onFocusLabelStyles = 'text-pDark'
+const onBlurLabelStyles = 'text-pDarkGray'
 
 export const Input = ({
   className,
   inputClassName,
-  type,
+  type = 'text',
   icon,
   name,
-  error,
-  required,
+  error = '',
+  required = false,
   label,
-  disabled,
+  disabled = false,
   onChange,
   value,
   pattern,
   ...props
 }: InputProps) => {
-  const [inputValue, setInputValue] = useState<string | number>(value)
-  const [focused, setFocused] = useState<boolean>(false)
-  const [inputError, setError] = useState<string>(error || '')
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
+  const [inputValue, setInputValue] = useState(value)
+  const [focused, setFocused] = useState(false)
+  const [inputError, setInputError] = useState(error)
+  const [passwordVisible, setPasswordVisible] = useState(false)
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
-    onChange && onChange(e)
+    if (onChange) onChange(e)
   }
 
-  const handleFocus = () => {
-    setFocused(true)
-  }
-  const handleBlur = () => {
+  const handleInputFocus = () => setFocused(true)
+
+  const handleInputBlur = () => {
     setFocused(false)
     setPasswordVisible(false)
-    if ((required && !value)) {
-      setError(`${label} is required`)
-      return
-    }
-    if (value && type === 'email' && !value.toString().includes('@')) {
-      setError('Please enter a valid email')
-      return
-    }
-    setError('')
+    setInputError(required && !value ? `${label} is required` : '')
+    setInputError(value && type === 'email' && !value.toString().includes('@') ? 'Please enter a valid email' : '')
   }
 
-  const handlePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible)
-  }
+  const handlePasswordVisibility = () => setPasswordVisible(!passwordVisible)
 
-  const labelStyles = focused ? labelOnFocusStyles : labelNoFocusStyles
-  const passwordHidSeeIcon = passwordVisible ? icons.see : icons.hide
+  const labelStyles = `${baseLabelStyles} ${focused ? onFocusLabelStyles : onBlurLabelStyles} ${required ? 'required' : ''} ${disabled ? disabledLabelStyles : ''}`
+  const passwordHidSeeIcon = passwordVisible ? icons.hide : icons.see
+
   return (
-    <div className={`relative ${className}`} >
-      {label && <label
-        htmlFor={name}
-        className={`${labelBaseStyles} ${labelStyles} ${required && 'required'} ${disabled && labelDisabledStyles}`}
-      >
-        {label}
-      </label>}
+    <div className={`relative items-center h-fitt ${className}`}>
+      {label && <label htmlFor={name} className={labelStyles}>{label}</label>}
       <input
         value={inputValue}
         id={name}
@@ -102,18 +73,18 @@ export const Input = ({
         disabled={disabled}
         type={passwordVisible ? 'text' : type}
         pattern={pattern}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={handleChange}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        onChange={handleInputChange}
         className={inputClassName}
         {...props}
       />
-      {icon && <Image
+      {(icon || type === 'password') && <Image
         src={type === 'password' ? passwordHidSeeIcon : icon}
         alt='upload'
         width='24'
         height='24'
-        className='absolute right-4 top-3 cursor-pointer z-10'
+        className='absolute right-4 top-[37px] cursor-pointer z-10'
         onClick={handlePasswordVisibility}
       />}
       {inputError && <p className='text-pDarkPink text-[10px] text-bold-700 absolute left-1'>{inputError}</p>}

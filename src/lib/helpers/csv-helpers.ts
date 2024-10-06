@@ -1,3 +1,4 @@
+const Papa = require('papaparse');
 
 export const convertToCsv = (objects: any) => {
   const header = Object.keys(objects[0]).join(',');
@@ -24,39 +25,31 @@ interface CSVRow {
 
 export const csvToObject = (file: File): Promise<Array<CSVRow>> => {
   return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-
-    fileReader.onload = function () {
-      const rows: Array<CSVRow> = [];
-      const fileContents = fileReader.result as string;
-      const lines = fileContents.split('\n');
-      const headers = lines[0].trim().split(',');
-
-      for (let i = 1; i < lines.length; i++) {
-        if (lines[i].trim() === '') continue; // skip empty lines
-
-        const fields = lines[i].trim().split(',');
-
-        if (fields.length !== headers.length) {
-          reject(new Error(`Invalid CSV format on line ${i + 1}`));
+    Papa.parse(file, {
+      complete: (result: any) => {
+        if (result.errors.length) {
+          reject(new Error(`CSV parsing error: ${result.errors[0].message}`));
+          return;
         }
 
-        const row: CSVRow = {};
+        const rows: Array<CSVRow> = result.data.map((rowArray: string[]) => {
+          const row: CSVRow = {};
+          const headers = result.data[0] as string[];
+          for (let j = 0; j < headers.length; j++) {
+            row[headers[j].toLowerCase()] = rowArray[j];
+          }
+          return row;
+        });
 
-        for (let j = 0; j < headers.length; j++) {
-          row[headers[j]] = fields[j];
-        }
+        // Remove the header row
+        rows.shift();
 
-        rows.push(row);
-      }
-
-      resolve(rows);
-    };
-
-    fileReader.onerror = function () {
-      reject(fileReader.error);
-    };
-
-    fileReader.readAsText(file);
+        resolve(rows);
+      },
+      error: (error: any) => {
+        reject(error);
+      },
+      skipEmptyLines: true
+    });
   });
 }

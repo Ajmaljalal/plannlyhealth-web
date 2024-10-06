@@ -14,16 +14,7 @@ interface InputProps extends React.HTMLAttributes<HTMLTextAreaElement> {
   value: string | number
 }
 
-const labelBaseStyles = `
-    bg-pWhite 
-    text-[12px]
-    text-extrabold
-    px-2 
-    absolute 
-    left-4 
-    z-10
-    -top-[9px] 
-`
+const labelBaseStyles = `text-small text-extrabold px-4 text-basic_grey_3`
 
 const labelDisabledStyles = `
     text-pLightGray
@@ -94,6 +85,8 @@ export const TextArea = ({
         onBlur={handleBlur}
         className={inputClassName}
         onChange={handleChange}
+        rows={5}
+        style={{ height: 'fit-content' }}
         {...props}
       />
       {inputError && <p className='text-pDarkPink text-[10px] text-bold-700 absolute left-1'>{inputError}</p>}

@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-    images: {
+  images: {
     minimumCacheTTL: 10000,
   },
 }

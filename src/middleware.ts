@@ -1,42 +1,90 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { withAuth } from "next-auth/middleware"
+import { NextResponse } from "next/server"
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  return NextResponse.redirect(new URL('/login', request.url))
+const employeesBaseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/employees`
+
+const getRedirectUrl = (role: any) => {
+  const urls: any = {
+    Admin: `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/company/dashboard`,
+    "Super Admin": `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/admin`,
+    Standard: `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/employee/rewards`
+  }
+  return urls[role]
 }
 
-// See "Matching Paths" below to learn more
-export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    //   '/all-claims',
-    //   '/all-transactions',
-    //   '/assessments',
-    //   '/back-office',
-    //   '/bank-account',
-    //   '/benefit-programs',
-    //   '/card-categories',
-    //   '/companies',
-    //   '/dashboard',
-    //   '/notifications',
-    //   '/payouts',
-    //   '/settings',
-    //   '/subscription',
-    //   '/users',
-    //   '/forgot-password',
-    //   '/marketplace',
-    //   '/my-account',
-    //   '/my-benefits',
-    //   '/my-cards',
-    //   '/my-claims',
-    //   '/wellness-policy',
-    //   '/home',
-  ],
-}
+
+export default withAuth(
+  // `withAuth` augments your `Request` with the user's token.
+  async function middleware(req) {
+    const { token } = req.nextauth
+    const employeeAccount = await fetch(`${employeesBaseUrl}/email/${token?.email}`, {
+      method: "GET",
+    })
+    const employees = await employeeAccount.json()
+    const employee = employees?.[0]
+    if (!employee) {
+      NextResponse.redirect(`${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/auth/login`)
+    } else {
+      const redirectUrl = `${getRedirectUrl(employee?.role)}?acc=${employee.id}`
+      if (redirectUrl) {
+        NextResponse.redirect(redirectUrl)
+      } else {
+        console.log('No Redirect Url')
+        NextResponse.redirect(`${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/auth/login`)
+      }
+    }
+  },
+
+  {
+    callbacks: {
+      authorized: async ({ token }) => !!token,
+    },
+  }
+
+)
+
+export const config = { matcher: ["/admin", "/company/:path*", "/employee/:path*"] }
+
+
+
+// import { withAuth } from "next-auth/middleware"
+// import { NextResponse } from "next/server"
+
+// const employeesBaseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/employees`
+
+// const getRedirectUrl = (role: any) => {
+//   const urls: any = {
+//     Admin: `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/company/dashboard`,
+//     "Super Admin": `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/admin`,
+//     Standard: `${process.env.NEXT_PUBLIC_PLANNLY_WEB_URL}/employee/rewards`
+//   }
+//   return urls[role]
+// }
+
+
+// export default withAuth(
+//   // `withAuth` augments your `Request` with the user's token.
+//   async function middleware(req) {
+//     const { token } = req.nextauth
+//     const employeeAccount = await fetch(`${employeesBaseUrl}/email/${token?.email}`, {
+//       method: "GET",
+//     })
+//     const employees = await employeeAccount.json()
+//     const employee = employees?.[0]
+//     if (!employee) {
+//       return NextResponse.rewrite(
+//         new URL(`/auth/login?error='We could not find your account'`, req.url)
+//       )
+//     } else {
+//       const redirectUrl = `${getRedirectUrl(employee?.role)}?acc=${employee.id}`
+//       return NextResponse.rewrite(redirectUrl)
+//     }
+//   },
+//   {
+//     callbacks: {
+//       authorized: async ({ token }) => !!token,
+//     },
+//   }
+// )
+
+// export const config = { matcher: ["/admin", "/company/:path*", "/employee/:path*"] }

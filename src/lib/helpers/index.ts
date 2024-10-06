@@ -1,50 +1,21 @@
 import CryptoJS from 'crypto-js';
-export const calculateApprovedAndRequestedClaims = (claims: any) => {
-  let approved = 0
-  let requested = 0
-  claims.forEach((claim: any) => {
-    if (claim.status === 'Approved') {
-      approved += claim.reimbursed
-    }
-    if (claim.status === 'Requested') {
-      requested += claim.requested
-    }
-  })
-  return { approved, requested }
-}
 
-export const calculatePayouts = (payouts: any) => {
-  let approved = 0
-  let notYetProcessed = 0
-  payouts.forEach((payout: any) => {
-    approved += payout.approvedAmount
-    notYetProcessed += payout.notYetProcessedAmount
-  })
 
-  return { approved, notYetProcessed }
-}
 
-export const calculateUsersStatus = (users: any) => {
-  let active = 0
-  let deactivated = 0
-  let invited = 0
-  users && users.forEach((user: any) => {
-    if (user.status === 'Active') {
-      active += 1
-    }
-    if (user.status === 'Deactivated') {
-      deactivated += 1
-    }
-    if (user.status === 'Invited') {
-      invited += 1
-    }
-  })
-  return { active, deactivated, invited }
-}
+export const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 export const getFormattedDate = (date: string) => {
   const dateObj = new Date(date)
-  return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}`
+  return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}` // returns 7/13/2023
+}
+
+export const formatDate = (dateString: string) => {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  return `${day} ${month}, ${year}`; // returns 13 Jul, 2023
 }
 
 export const formatAmount = (amount: number) => {
@@ -81,17 +52,6 @@ export const sampleCSVContent = [{
   email: "test@test.com",
 }]
 
-export const benefitPrograms = [
-  { value: 'Health & Wellness', label: 'Health & Wellness' },
-  { value: 'Family Care', label: 'Family Care' },
-  { value: 'Food & Groceries', label: 'Food & Groceries' },
-  { value: 'Recognition & Anniversaries', label: 'Recognition & Anniversaries' },
-  { value: 'Give/Donation', label: 'Give/Donation' },
-  { value: 'Student Loans', label: 'Student Loans' },
-  { value: 'Work From Home', label: 'Work From Home' },
-  { value: 'Learning & Development', label: 'Learning & Development' },
-  { value: 'Commuter & Transportation', label: 'Commuter & Transportation' },
-];
 
 export const setSessionIdToCookie = (sessionId: string) => {
   const expirationDate = new Date();
@@ -120,3 +80,81 @@ export const decryptData = (data: string) => {
   const decryptedData = CryptoJS.AES.decrypt(data, process.env.NEXT_PUBLIC_PLANNLY_ENCRYPT_KEY as string).toString(CryptoJS.enc.Utf8);
   return JSON.parse(decryptedData);
 }
+
+export const calculateWidthTailwindClass = (inputNumber: number) => {
+  let widthClasses: any = {
+    'w-1/2': 50,
+    'w-1/3': 33.333333,
+    'w-2/3': 66.666667,
+    'w-1/4': 25,
+    'w-2/4': 50,
+    'w-3/4': 75,
+    'w-1/5': 20,
+    'w-2/5': 40,
+    'w-3/5': 60,
+    'w-4/5': 80,
+    'w-1/6': 16.666667,
+    'w-2/6': 33.333333,
+    'w-3/6': 50,
+    'w-4/6': 66.666667,
+    'w-5/6': 83.333333,
+    'w-1/12': 8.333333,
+    'w-2/12': 16.666667,
+    'w-3/12': 25,
+    'w-4/12': 33.333333,
+    'w-5/12': 41.666667,
+    'w-6/12': 50,
+    'w-7/12': 58.333333,
+    'w-8/12': 66.666667,
+    'w-9/12': 75,
+    'w-10/12': 83.333333,
+    'w-11/12': 91.666667,
+    'w-full': 100
+  };
+
+  let closestClass = Object.keys(widthClasses).reduce((prev, curr) =>
+    Math.abs(widthClasses[curr] - inputNumber) < Math.abs(widthClasses[prev] - inputNumber) ? curr : prev
+  );
+
+  return closestClass;
+}
+
+
+export const getRedirectUrl = (role: any) => {
+  const urls: any = {
+    "Admin": `/company/dashboard`,
+    "Super Admin": `/admin`,
+    "Standard": `/employee/rewards`
+  }
+  return urls[role]
+}
+
+export const isObjectsEqual = (obj1: any, obj2: any) => {
+  // Get the keys for each object
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  // Check if both objects have the same number of keys
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  // Iterate over the keys of the first object and check if 
+  // each key-value pair in obj1 matches that in obj2
+  for (let key of keys1) {
+    if (obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+export const get_month_year = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  return `${month}/${year}`;
+}
+
