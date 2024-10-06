@@ -1,5 +1,5 @@
 'use client'
-import LoginContainer from '@/containers/auth/login'
+import LoginContainer from '@/containers/auth/login/index'
 
 import React from 'react'
 
