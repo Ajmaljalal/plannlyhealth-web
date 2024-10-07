@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/button";
 import { useDispatch, useSelector } from "@/store/store";
 import { addIntegrations, integrationsSelector } from "@/store/company";
+import ComingSoon from "@/components/coming-soon";
 
 
 
@@ -14,16 +15,16 @@ import { addIntegrations, integrationsSelector } from "@/store/company";
 const IntegrationsContainer = () => {
   const [activeTab, setActiveTab] = useState('all')
   const dispatch = useDispatch()
-  const allIntegrations = useSelector(integrationsSelector)
-  const HRISIntegrations = allIntegrations.filter((i: any) => i.category.includes('HRIS'))
-  const benAdminIntegrations = allIntegrations.filter((i: any) => i.category.includes('Ben Admin'))
+  const allIntegrations: any = useSelector(integrationsSelector)
+  const HRISIntegrations = allIntegrations?.filter((i: any) => i.category.includes('HRIS'))
+  const benAdminIntegrations = allIntegrations?.filter((i: any) => i.category.includes('Ben Admin'))
 
 
 
 
 
   useEffect(() => {
-    if (allIntegrations.length > 0) return
+    if (allIntegrations?.length > 0) return
     dispatch(addIntegrations(integrations))
   }, [])
 
@@ -94,10 +95,12 @@ const IntegrationsContainer = () => {
   return (
     <div>
       <h2 className="font-normal mb-[20px]">Integrations</h2>
-      <Tabs tabs={tabs} />
-      <div className='my-[32px] flex gap-6 flex-wrap'>
+      {/* <Tabs tabs={tabs} /> */}
+      {/* <div className='my-[32px] flex gap-6 flex-wrap'>
         {renderIntegrations()}
-      </div>
+      </div> */}
+      {/* Render coming soon */}
+      <ComingSoon />
     </div>
   );
 }

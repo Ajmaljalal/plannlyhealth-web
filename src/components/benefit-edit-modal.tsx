@@ -3,6 +3,12 @@ import { Modal } from '@/components/modal'
 import { Input } from '@/components/input'
 import { Button } from '@/components/button'
 import { TextArea } from '@/components/textarea'
+import axios from 'axios'
+import { useDispatch } from '@/store/store'
+import { updateBenefit } from '@/store/company'
+
+
+const baseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/benefits`
 
 
 const modalContentStyles = `
@@ -12,6 +18,7 @@ const modalContentStyles = `
 `
 
 export const BenefitDetailsModal = ({ isOpen, onClose, benefit }: { isOpen: boolean, onClose: () => void, benefit: any }) => {
+  const dispatch = useDispatch()
   const [currentBenefit, setCurrentBenefit] = useState<any>(benefit)
 
   const handleInputChange = (e: any) => {
@@ -20,6 +27,9 @@ export const BenefitDetailsModal = ({ isOpen, onClose, benefit }: { isOpen: bool
   }
 
   const handleSave = async () => {
+    const result = await axios.put(`${baseUrl}/${benefit.id}`, currentBenefit)
+    const newBenefit = result.data
+    dispatch(updateBenefit(newBenefit))
     onClose()
   }
 
@@ -27,7 +37,7 @@ export const BenefitDetailsModal = ({ isOpen, onClose, benefit }: { isOpen: bool
     onClose()
   }
 
-  const ctaButton = <Button text='Save' isPrimary className='w-[160px]' onClick={handleSave} />
+  const ctaButton = <Button text='Save' isPrimary className='w-full md:w-[160px]' onClick={handleSave} />
 
   return (
     <Modal isOpen={isOpen} onClose={handleCancel} ctaButton={ctaButton}>
@@ -40,9 +50,9 @@ export const BenefitDetailsModal = ({ isOpen, onClose, benefit }: { isOpen: bool
           onChange={handleInputChange}
         />
         <Input
-          name="howToEnrollLink"
+          name="how_to_enroll_link"
           label="Link"
-          value={currentBenefit.howToEnrollLink}
+          value={currentBenefit.how_to_enroll_link}
           placeholder='Link'
           onChange={handleInputChange}
         />
@@ -61,15 +71,12 @@ export const BenefitDetailsModal = ({ isOpen, onClose, benefit }: { isOpen: bool
           onChange={handleInputChange}
         />
         <TextArea
-          name="howToEnroll"
+          name="how_to_enroll"
           label="How to Enroll"
-          value={currentBenefit.howToEnroll}
+          value={currentBenefit.how_to_enroll}
           placeholder='How to Enroll'
           onChange={handleInputChange}
         />
-
-        <div>
-        </div>
       </div>
     </Modal>
   );

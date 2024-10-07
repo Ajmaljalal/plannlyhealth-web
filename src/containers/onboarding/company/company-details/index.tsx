@@ -2,65 +2,100 @@ import { Input } from "@/components/input";
 import Hero from "../hero";
 import { CheckBox } from "@/components/checkbox";
 import { Button } from "@/components/button";
-import { useState } from "react";
-import { useDispatch } from "@/store/store";
-import { setCompanyDetails, setStep } from "@/store/company";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "@/store/store";
+import { selectCompanyDetails, setCompanyDetails, setStep } from "@/store/company";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { isObjectsEqual } from "@/lib/helpers";
+
+const DEFAULT_COMPANY_DATA = {
+  name: '',
+  company_size: '',
+  website: '',
+  support_email: '',
+  address: '',
+  entity_type: 'hospital',
+  restrict_signup_to_domain_only: false
+};
 
 const CompanyDetails = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { push: navigate } = useRouter();
+  const company: any = useSelector(selectCompanyDetails);
+  const [companyData, setCompanyData] = useState<any>(company);
   const dispatch = useDispatch();
-  const [company, setCompany] = useState<any>({
-    name: 'Grand Mental Health',
-    ein: '23d4f5g6h7j8k9l0',
-    company_size: '10000',
-    sic_code: '232df342',
-    website: 'https://www.grandmh.com/',
-    entity_type: 'Hostipal',
-    address: '1214 S Baltimore Ave, Tulsa OK 74119',
-    nature_of_business: 'Mental Health',
-    onlyCompanyDomain: false
-  });
 
-  const handleCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setCompany({ ...company, [name]: checked });
-  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+
+  useEffect(() => {
+    if (company?.id) {
+      setCompanyData(company);
+    } else {
+      setCompanyData(DEFAULT_COMPANY_DATA);
+    }
+  }, [company]);
+
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
-    if (name === 'onlyCompanyDomain') return;
-    setCompany({ ...company, [name]: value });
+    if (name !== 'restrict_signup_to_domain_only') {
+      setCompanyData((prev: any) => ({ ...prev, [name]: value }));
+    }
   };
 
-  const handleContinue = (e: any) => {
+  const handleCheckBoxChange = (e: any) => {
+    const { name, checked } = e.target;
+    setCompanyData((prev: any) => ({ ...prev, [name]: checked }));
+  };
+
+  const isFormValid = () => {
+    return companyData && !Object.entries(companyData).some(([key, value]) => {
+      if (key === 'restrict_signup_to_domain_only') return false; // ignore this field
+      return !value?.toString().trim();
+    });
+  };
+
+  const handleContinue = async (e: any) => {
     e.preventDefault();
-    dispatch(setStep(2));
-    dispatch(setCompanyDetails(company));
+    if (company && isObjectsEqual(company, companyData)) {
+      navigate(`/onboarding/company?org_id=${company.id}`)
+      dispatch(setStep(2));
+      return
+    }
+    setIsLoading(true);
+
+    if (isFormValid()) {
+      const baseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/companies`;
+      try {
+        const { data: newCompany } = await axios.post(baseUrl, companyData);
+        dispatch(setCompanyDetails(newCompany));
+        navigate(`/onboarding/company?org_id=${newCompany.id}`);
+        dispatch(setStep(2));
+      } catch (error) {
+        console.error("Failed to submit company data:", error);
+      }
+    }
+
+    setIsLoading(false);
   };
 
-  const isBtnDisabled = company.name === '' ||
-    company.ein === '' ||
-    company.company_size === '' ||
-    company.sic_code === '' ||
-    company.website === '' ||
-    company.entity_type === '' ||
-    company.address === '' ||
-    company.nature_of_business === '';
+  const isBtnDisabled = !isFormValid();
+
 
   return (
     <>
-      <Hero image="/illustrations/company-details-illustration.svg" title="Glad to see you here!" description="Please provide the following details about your company" />
+      <Hero image="/illustrations/company-details-illustration.svg" title="Glad to see you here!" description="Please provide the following details about your hospital" />
       <form className="w-[720px] flex justify-between gap-4 flex-wrap" onChange={handleChange} onSubmit={handleContinue}>
-        <Input label="Company name" placeholder="company name" name='name' value={company.name} className="w-[340px]" />
-        <Input label="Federal Tax Identification(EIN)" placeholder="Federal Tax Identification (EIN)" type="password" name='ein' value={company.ein} className="w-[340px]" />
-        <Input label="Company Size" placeholder="Company Size" name="company_size" value={company.company_size} className="w-[340px]" />
-        <Input label="SIC Code" placeholder="SIC Code" type='password' name="sic_code" value={company.sic_code} className="w-[340px]" />
-        <Input label="Website" placeholder="Website" name="website" value={company.website} className="w-[340px]" />
-        <Input label="Entity type" placeholder="Entity type" name="entity_type" value={company.entity_type} className="w-[340px]" />
-        <Input label="Address" placeholder="Address" name="address" value={company.address} className="w-[340px]" />
-        <Input label="Nature of business" placeholder="Nature of business" name="nature_of_business" value={company.nature_of_business} className="w-[340px]" />
-        <CheckBox label="Limit sign-up to only the employees with the company domain" name="onlyCompanyDomain" value={company.onlyCompanyDomain} checked={company.onlyCompanyDomain} onChange={handleCheckBoxChange} />
-        <Button className="w-[340px] mx-auto mt-[24px]" text="Continue" isPrimary disabled={isBtnDisabled} />
+        <Input label="Company name" placeholder="Company name" name='name' value={companyData?.name} className="w-[340px]" />
+        <Input label="Company Size" placeholder="Company Size" name="company_size" value={companyData?.company_size} className="w-[340px]" />
+        <Input label="Support Email" placeholder="Support Email" name="support_email" value={companyData?.support_email} className="w-[340px]" />
+        <Input label="Website" placeholder="Website" name="website" value={companyData?.website} className="w-[340px]" />
+        <Input label="Entity type" placeholder="Entity type" name="entity_type" value={companyData?.entity_type} className="w-[340px]" />
+        <Input label="Address" placeholder="Address" name="address" value={companyData?.address} className="w-[340px]" />
+        <CheckBox label="Limit sign-up to only the employees with the company domain" name="restrict_signup_to_domain_only" value={companyData?.restrict_signup_to_domain_only} checked={companyData?.restrict_signup_to_domain_only} onChange={handleCheckBoxChange} />
+        <Button className="w-[340px] mx-auto mt-[24px]" text="Continue" isPrimary disabled={isBtnDisabled} isLoading={isLoading} />
       </form>
+      <Button className="w-[340px] mx-auto mt-[24px]" text="Cancel" onClick={() => navigate('/admin')} />
     </>
   );
 }

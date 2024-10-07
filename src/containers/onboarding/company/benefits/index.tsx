@@ -4,10 +4,14 @@ import { icons } from "@/lib/icons";
 import { FileUpload } from "@/components/file-upload";
 import { useState } from "react";
 import TabButton from "../../../../components/tabs/tab-button";
-import BenefitCard from "../../../../components/onboarding-benefit-card";
+// import BenefitCard from "../../../../components/onboarding-benefit-card";
 import { BenefitAddModal } from "./benefit-add-modal";
 import { useDispatch, useSelector } from "@/store/store";
-import { benefitsSelector, setBenefits, setStep } from "@/store/company";
+import { benefitsSelector, companyDetailsSelector, setBenefits, setStep } from "@/store/company";
+import axios from "axios";
+import BenefitCard from "@/components/company-benefit-card";
+
+const baseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/benefits`
 
 export const testBenefits: any = [
   {
@@ -222,9 +226,10 @@ export const testBenefits: any = [
 
 const BenefitsMap = () => {
   const dispatch = useDispatch()
-  const allBenefits = useSelector(benefitsSelector)
-  const primaryBenefits = allBenefits.filter((benefit: any) => benefit.isPrimary)
-  const voluntaryBenefits = allBenefits.filter((benefit: any) => !benefit.isPrimary)
+  const company: any = useSelector(companyDetailsSelector)
+  const allBenefits: any = useSelector(benefitsSelector)
+  const primaryBenefits = allBenefits?.filter((benefit: any) => benefit.is_primary)
+  const voluntaryBenefits = allBenefits?.filter((benefit: any) => !benefit.is_primary)
 
   const [activeTab, setActiveTab] = useState<any>('primary')
   const [isModalOpen, setIsModalOpen] = useState<any>(false)
@@ -234,13 +239,15 @@ const BenefitsMap = () => {
   }
 
 
-  const handleAddBenefit = (newBenefit: any) => {
-    newBenefit = activeTab === 'primary' ? { ...newBenefit, isPrimary: true } : { ...newBenefit, isPrimary: false }
-    dispatch(setBenefits([...allBenefits, newBenefit]))
+  const handleAddBenefit = async (newBenefit: any) => {
+    newBenefit = activeTab === 'primary' ? { ...newBenefit, is_primary: true, company_id: company.id } : { ...newBenefit, is_primary: false, company_id: company.id }
+    await axios.post(baseUrl, newBenefit);
+    const benefitsData = await axios.get(`${baseUrl}/company/${company.id}`)
+    const newBenefits = benefitsData.data
+    dispatch(setBenefits([...newBenefits]))
   }
 
   const handleUploadBenefit = (file: any) => {
-    console.log(file)
     dispatch(setBenefits([...allBenefits, ...testBenefits]))
   }
 
@@ -249,7 +256,7 @@ const BenefitsMap = () => {
 
   const renderBenefits = () => {
     return (
-      <div className="flex flex-col items-strech gap-4 w-full pt-[50px]">
+      <div className="flex flex-col items-strech gap-4 w-full pt-[50px] overflow-scroll px-[6px]">
         <h2>Add Benefits to Proceed</h2>
         <div className="flex justify-between items-center">
           <div className="flex justify-center items-center min-h-[40px] max-h-[40px] border border-2 border-basic_grey_10 bg-basic_white rounded-[24px] w-fit px-[2px]">
@@ -258,7 +265,7 @@ const BenefitsMap = () => {
           </div>
           <Button className="max-h-[40px]" text={addBenefitBtnText} isPrimary icon={icons.addLight} onClick={toggleModal} />
         </div>
-        <div className="mt-[32px] pb-[300px] flex flex-wrap justify-between max-h-[60%] max-w-[1440px] overflow-x-scroll">
+        <div className="mt-[32px] pb-[150px] flex flex-col gap-4">
           {
             benefits.map((benefit: any) => {
               return <BenefitCard key={benefit.title} benefit={benefit} />
@@ -288,7 +295,7 @@ const BenefitsMap = () => {
 
 
   return (
-    <div className="flex flex-col justify-between items-end w-full h-full relative overflow-hidden">
+    <div className="flex flex-col justify-between items-end w-full h-full relative">
       {allBenefits.length ? renderBenefits() : renderNullState()}
       {
         benefits.length ? <div className="absolute bottom-0 bg-basic_grey_5 w-full h-[100px] flex justify-end">

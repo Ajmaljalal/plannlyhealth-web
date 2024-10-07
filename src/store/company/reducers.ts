@@ -11,32 +11,35 @@ import {
   addIntegrations,
   setUserProfile,
   setCompanyPlan,
-  setCompanyPaymentMethod
+  setCompanyPaymentMethod,
+  setCurrentEmployee
 } from './actions';
 
-type CompanyOnboardingState = {
+type CompanyState = {
   currentStep: number;
-  companyDetails: {};
-  benefits: [];
-  integrations: [];
-  employees: [];
-  userProfile: {};
-  companyPlan: {};
-  companyPaymentMethod: {};
+  companyDetails: {} | null;
+  benefits: [] | null;
+  integrations: [] | null;
+  employees: [] | null;
+  userProfile: {} | null;
+  companyPlan: {} | null;
+  companyPaymentMethod: {} | null;
+  currentEmployee: {} | null;
 };
 
-const initialState: CompanyOnboardingState = {
+const initialState: CompanyState = {
   currentStep: 1,
-  companyDetails: {},
-  benefits: [],
-  integrations: [],
-  employees: [],
-  userProfile: {},
-  companyPlan: {},
-  companyPaymentMethod: {}
+  companyDetails: null,
+  benefits: null,
+  integrations: null,
+  employees: null,
+  userProfile: null,
+  companyPlan: null,
+  companyPaymentMethod: null,
+  currentEmployee: null
 };
 
-export const companyOnboardingReducer = createReducer(initialState, builder => {
+export const companyReducer = createReducer(initialState, builder => {
   builder
     .addCase(setStep, (state, action) => {
       state.currentStep = action.payload;
@@ -48,17 +51,17 @@ export const companyOnboardingReducer = createReducer(initialState, builder => {
       state.benefits = action.payload;
     })
     .addCase(toggleBenefitActivation, (state, action) => {
-      const updatedBenefits: any = state.benefits.map((benefit: any) => {
-        if (benefit.title === action.payload.title) {
-          benefit.isActive = action.payload.isActive;
+      const updatedBenefits: any = state.benefits?.map((benefit: any) => {
+        if (benefit.id === action.payload.id) {
+          benefit.is_active = action.payload.is_active;
         }
         return benefit;
       });
       state.benefits = updatedBenefits;
     })
     .addCase(setIntegration, (state, action) => {
-      const updatedBenefits: any = state.benefits.map((benefit: any) => {
-        if (benefit.title === action.payload.title) {
+      const updatedBenefits: any = state.benefits?.map((benefit: any) => {
+        if (benefit.id === action.payload.id) {
           benefit = action.payload;
         }
         return benefit;
@@ -66,8 +69,8 @@ export const companyOnboardingReducer = createReducer(initialState, builder => {
       state.benefits = updatedBenefits;
     })
     .addCase(removeIntegration, (state, action) => {
-      const updatedBenefits: any = state.benefits.map((benefit: any) => {
-        if (benefit.title === action.payload.title) {
+      const updatedBenefits: any = state.benefits?.map((benefit: any) => {
+        if (benefit.id === action.payload.id) {
           benefit.integration = null;
         }
         return benefit;
@@ -75,8 +78,8 @@ export const companyOnboardingReducer = createReducer(initialState, builder => {
       state.benefits = updatedBenefits;
     })
     .addCase(updateBenefit, (state, action) => {
-      const updatedBenefits: any = state.benefits.map((benefit: any) => {
-        if (benefit.title === action.payload.title) {
+      const updatedBenefits: any = state.benefits?.map((benefit: any) => {
+        if (benefit.id === action.payload.id) {
           benefit = action.payload;
         }
         return benefit;
@@ -97,5 +100,8 @@ export const companyOnboardingReducer = createReducer(initialState, builder => {
     })
     .addCase(setCompanyPlan, (state, action) => {
       state.companyPlan = action.payload;
+    })
+    .addCase(setCurrentEmployee, (state, action) => {
+      state.currentEmployee = action.payload;
     });
 });

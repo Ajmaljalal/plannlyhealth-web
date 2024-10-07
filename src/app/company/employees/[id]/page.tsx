@@ -1,5 +1,5 @@
 
-import EmployeeDetailsContainer from "@/containers/company/employees/details";
+import EmployeeDetailsContainer from "@/containers/company/employees/employee-details";
 
 const EmployeeDetails = () => {
   return <EmployeeDetailsContainer />

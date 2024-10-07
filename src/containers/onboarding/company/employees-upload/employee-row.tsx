@@ -1,10 +1,28 @@
-import { icons } from "@/lib/icons";
+import { FC, useState } from "react";
 import Image from "next/image";
-import { EmployeeEditModal } from "./edit-employee-modal";
-import { useState } from "react";
+import { EmployeeEditModal } from "../../../../components/edit-employee-modal";
 import { Button } from "@/components/button";
+import { icons } from "@/lib/icons";
+import { Employee, Status } from "@/lib/types/employee";
 
-const roleIcons: any = {
+
+type RoleColors = {
+  [key in string]: {
+    bg: string,
+    text: string
+  }
+}
+
+
+type EmployeeProps = {
+  onClick?: () => void;
+  employee: Employee;
+  onUpdateEmployee: (updatedEmployee: Employee) => void;
+  onDeleteEmployee: (updatedEmployee: Employee) => void;
+  onActivateEmployee?: (updatedEmployee: Employee) => void;
+}
+
+const roleIcons: Record<any, string> = {
   admin: icons.admin,
   'super admin': icons.superAdmin,
   owner: icons.owner,
@@ -13,7 +31,8 @@ const roleIcons: any = {
   finance: icons.finance,
   standard: icons.standard,
 }
-const roleColors: any = {
+
+const roleColors: RoleColors = {
   admin: {
     bg: 'bg-pink_light',
     text: 'text-pink',
@@ -46,12 +65,12 @@ const roleColors: any = {
 
 
 
-const rowStyle = 'cursor-pointer border-t border-pLight hover:bg-transparent h-[60px] text-small text-basic_grey_1'
-const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmployee, onClick }: { onClick?: () => void, employee: any, onUpdateEmployee: (updatedEmployee: any) => void, onDeleteEmployee: (id: any) => void, onActivateEmployee?: (id: any) => void }) => {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-  const userName = employee.first_name + ' ' + employee.last_name
-  const roleStyle = roleColors[employee.role.toLowerCase()]
-  const roleClass = `${roleStyle.bg} ${roleStyle.text} px-[12px] py-[4px] rounded-[24px] flex items-center w-fit h-[32px] text-small`
+const rowStyle = 'cursor-pointer border-t border-pLight hover:bg-transparent h-[50px] text-small text-basic_grey_1'
+const Employee: FC<EmployeeProps> = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmployee, onClick }) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const userName = `${employee?.first_name || ''} ${employee?.last_name || ''}`.trim();
+  const roleStyle = roleColors[employee?.role?.toLowerCase()]
+  const roleClass = `${roleStyle?.bg} ${roleStyle?.text} px-[12px] py-[4px] rounded-[24px] flex items-center w-fit h-[32px] text-small`
 
   const toggleEditModal = () => {
     setIsEditModalOpen(!isEditModalOpen)
@@ -63,22 +82,26 @@ const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmpl
   }
 
   const handleDeleteEmployee = () => {
-    onDeleteEmployee(employee.id)
+    onDeleteEmployee(employee)
   }
 
   const handleActivateEmployee = () => {
-    onActivateEmployee && onActivateEmployee(employee.id)
+    onActivateEmployee && onActivateEmployee(employee)
   }
 
   const renderActionBtns = () => {
-    if (employee.inactive) {
+    if (employee?.status === Status.Inactive) {
       return (
         <Button text="Activate" isSmallBtn isPrimary icon={icons.addLight} onClick={handleActivateEmployee} />
       )
     } else {
       return (
         <>
-          <Image src={icons.edit} width={30} height={30} alt="edit icon" className="cursor-pointer" onClick={toggleEditModal} />
+          {
+            employee?.status !== Status.Invited ?
+              <Image src={icons.edit} width={30} height={30} alt="edit icon" className="cursor-pointer" onClick={toggleEditModal} />
+              : null
+          }
           <Image src={icons.delete} width={30} height={30} alt="edit icon" className="cursor-pointer" onClick={handleDeleteEmployee} />
         </>
       )
@@ -88,20 +111,22 @@ const Employee = ({ employee, onUpdateEmployee, onDeleteEmployee, onActivateEmpl
   return (
     <tr key={employee.id} className={rowStyle}>
       <td className="pl-[32px]" onClick={onClick}>{userName}</td>
-      <td className='' onClick={onClick}>{employee.job_title}</td>
-      <td className='' onClick={onClick}>{employee.email}</td>
+      <td className='' onClick={onClick}>{employee?.job_title}</td>
+      <td className='' onClick={onClick}>{employee?.email}</td>
       <td className="" onClick={onClick}>
         <span className={roleClass}>
-          <Image src={roleIcons[employee.role.toLowerCase()]} width={24} height={24} alt="admin icon" className="inline-block mr-[5px]" />
+
+          {employee?.role && <Image src={roleIcons[employee?.role?.toLowerCase()]} width={24} height={24} alt="role icon" className="inline-block mr-[5px]" />}
           {employee.role}
         </span>
       </td>
+      <td className='' onClick={onClick}>{employee?.status}</td>
       {
-        <td className='w-[100%] h-[100%] flex items-center justify-end gap-2 self-auto pr-[32px] pt-[15px]'>
-          {renderActionBtns()}
-        </td>
+        // <td className='w-[100%] h-[100%] flex items-center justify-end gap-2 self-auto pr-[32px] pt-[15px]'>
+        //   {renderActionBtns()}
+        // </td>
       }
-      <EmployeeEditModal isOpen={isEditModalOpen} employee={employee} onClose={toggleEditModal} onSave={handleUpdateEmployee} />
+      {/* <EmployeeEditModal isOpen={isEditModalOpen} employee={employee} onClose={toggleEditModal} onSave={handleUpdateEmployee} /> */}
     </tr>
   );
 }

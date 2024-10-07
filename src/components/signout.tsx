@@ -1,8 +1,8 @@
 'use client'
 import { icons } from '@/lib/icons'
-import { signOut } from '@/lib/services/auth'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { signOut } from 'next-auth/react'
 
 const signOutBtnStyles = `
     flex

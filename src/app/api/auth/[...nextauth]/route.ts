@@ -4,6 +4,8 @@ import GoogleProvider from "next-auth/providers/google"
 import { DynamoDB, DynamoDBClientConfig } from "@aws-sdk/client-dynamodb"
 import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb"
 import { DynamoDBAdapter } from "@auth/dynamodb-adapter"
+import Email from "next-auth/providers/email"
+import { getEmployeeByEmail } from "@/lib/services/employee"
 
 
 const config: DynamoDBClientConfig = {
@@ -22,9 +24,20 @@ const client = DynamoDBDocument.from(new DynamoDB(config), {
   },
 });
 
-const authOptions: any = {
+export const authOptions: any = {
   // Configure one or more authentication providers
   providers: [
+    Email({
+      server: {
+        host: process.env.NEXT_AUTH_SMTP_HOST,
+        port: Number(process.env.NEXT_AUTH_SMTP_PORT),
+        auth: {
+          user: process.env.NEXT_AUTH_SMTP_USER,
+          pass: process.env.NEXT_AUTH_SMTP_PASSWORD,
+        },
+      },
+      from: process.env.NEXT_AUTH_EMAIL_FROM,
+    }),
     GoogleProvider({
       clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET as string,
@@ -57,9 +70,16 @@ const authOptions: any = {
     }
   ),
   callbacks: {
-    jwt: async ({ token, account, trigger, session }: any) => {
-
-      return { ...token, ...account }
+    async signIn({ user, account, email }: any, profile: any) {
+      const employeeAccount = await getEmployeeByEmail(user?.email)
+      if (employeeAccount) {
+        return true;
+      } else {
+        return false
+      }
+    },
+    jwt: async ({ token }: any) => {
+      return { ...token, }
     },
     session: async ({ session, token }: any) => {
       return {
@@ -76,6 +96,9 @@ const authOptions: any = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
     updateAge: 24 * 60 * 60, // 24 hours
   },
+  pages: {
+    signIn: '/auth/login'
+  }
 }
 
 const handler = NextAuth(authOptions)

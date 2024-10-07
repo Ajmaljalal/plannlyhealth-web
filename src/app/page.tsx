@@ -1,7 +1,6 @@
-
-import { checkAuth } from "@/lib/helpers";
+import { checkAuth } from "@/lib/services/auth";
 
 
 export default async function Home() {
-  await checkAuth()
+  return await checkAuth()
 }

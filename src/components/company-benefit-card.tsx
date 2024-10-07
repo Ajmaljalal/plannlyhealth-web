@@ -8,6 +8,9 @@ import { useDispatch } from "@/store/store";
 import { removeIntegration, setIntegration, toggleBenefitActivation, updateBenefit } from "@/store/company";
 import { FlatIconButton } from "./flat-icon-button";
 import { BenefitDetailsModal } from "./benefit-edit-modal";
+import axios from "axios";
+
+const baseUrl = `${process.env.NEXT_PUBLIC_PLANNLY_API_URL}/benefits`
 
 const BenefitCard = ({ benefit }: any) => {
   const dispatch = useDispatch()
@@ -24,19 +27,25 @@ const BenefitCard = ({ benefit }: any) => {
     dispatch(removeIntegration(benefit))
   }
 
-  const setBenenfitToActive = () => {
-    const updatedBenefit = { ...benefit, isActive: !benefit.isActive }
-    dispatch(toggleBenefitActivation(updatedBenefit))
+  const activateBenefit = async () => {
+    const updatedBenefit = { ...benefit, is_active: !benefit.is_active }
+    const result = await axios.put(`${baseUrl}/${benefit.id}`, updatedBenefit)
+    const newBenefit = result.data
+    dispatch(toggleBenefitActivation(newBenefit))
   }
 
-  const archiveBenefit = () => {
+  const archiveBenefit = async () => {
     const updatedBenefit = { ...benefit, archived: true }
-    dispatch(updateBenefit(updatedBenefit))
+    const result = await axios.put(`${baseUrl}/${benefit.id}`, updatedBenefit)
+    const newBenefit = result.data
+    dispatch(updateBenefit(newBenefit))
   }
 
-  const restoreBenefit = () => {
+  const restoreBenefit = async () => {
     const updatedBenefit = { ...benefit, archived: false }
-    dispatch(updateBenefit(updatedBenefit))
+    const result = await axios.put(`${baseUrl}/${benefit.id}`, updatedBenefit)
+    const newBenefit = result.data
+    dispatch(updateBenefit(newBenefit))
   }
 
   const toggleIntegrationsModal = () => {
@@ -48,29 +57,29 @@ const BenefitCard = ({ benefit }: any) => {
   }
 
   const generalStyle = `flex gap-4 w-full min-h-[160px] border-2 rounded-[32px] p-[16px]`
-  const bgColor = benefit.isActive ? 'bg-basic_grey_4' : 'transparent'
-  const borderColor = benefit.isActive ? 'bg_basic_grey_4 border-basic_grey_4' : 'border-basic_grey_4'
-  const textColor = benefit.isActive ? 'text-basic_black' : 'text-basic_grey_2'
-  const borderStyle = benefit.isActive ? '' : 'border-2 border-dashed'
+  const bgColor = benefit.is_active ? 'bg-basic_grey_4' : 'transparent'
+  const borderColor = benefit.is_active ? 'bg_basic_grey_4 border-basic_grey_4' : 'border-basic_grey_4'
+  const textColor = benefit.is_active ? 'text-basic_black' : 'text-basic_grey_2'
+  const borderStyle = benefit.is_active ? '' : 'border-2 border-dashed'
   const style = `${generalStyle} ${bgColor} ${borderColor} ${textColor} ${borderStyle}`
   const integrationsBtnStyle = benefit.integration ? 'bg-system_success' : ''
-  const addBtnStyle = benefit.isActive ? 'bg-system_success' : ''
-  const addBtnIcon = benefit.isActive ? icons.checkWhite : icons.addLight
+  const addBtnStyle = benefit.is_active ? 'bg-system_success' : ''
+  const addBtnIcon = benefit.is_active ? icons.checkWhite : icons.addLight
   const integrationIcon = benefit.integration ? icons.checkWhite : icons.addLight
-  const addBtnText = benefit.isActive ? 'Added' : 'Add'
+  const addBtnText = benefit.is_active ? 'Deactivate' : 'Activate'
   const integrationBtnText = benefit.integration ? 'Update Integration' : 'Add Integration'
-  const eligibilityIcon = benefit.isActive ? icons.howTo : icons.howToLight
-  const howToEnrollIcon = benefit.isActive ? icons.question : icons.questionLight
-  const detailsIcon = benefit.isActive ? icons.details : icons.detailsLight
+  const eligibilityIcon = benefit.is_active ? icons.howTo : icons.howToLight
+  const howToEnrollIcon = benefit.is_active ? icons.question : icons.questionLight
+  const detailsIcon = benefit.is_active ? icons.details : icons.detailsLight
   const archiveBtnText = benefit.archived ? 'Restore' : 'Archive'
   const archiveBtnIcon = benefit.archived ? icons.addLight : icons.deleteFlat
   const archiveBtnStyle = benefit.archived ? 'bg-system_success text-basic_white' : 'bg-system_error/[0.09] text-system_error'
 
 
   const renderIntegrationsButton = () => {
-    if (!benefit.isActive && !benefit.archived) {
-      return <Button className={`text-basic_white h-[32px] text-small ${addBtnStyle}`} text='Add' isSmallBtn isPrimary icon={addBtnIcon} onClick={setBenenfitToActive} />
-    } else if (benefit.isActive && !benefit.archived) {
+    if (!benefit.is_active && !benefit.archived) {
+      return <Button className={`text-basic_white h-[32px] text-small ${addBtnStyle}`} text='Add' isSmallBtn isPrimary icon={addBtnIcon} onClick={activateBenefit} />
+    } else if (benefit.is_active && !benefit.archived) {
       return <Button className={`text-basic_white h-[32px] text-small ${integrationsBtnStyle}`} text={integrationBtnText} isSmallBtn isPrimary icon={integrationIcon} onClick={toggleIntegrationsModal} />
     }
   }
@@ -93,19 +102,19 @@ const BenefitCard = ({ benefit }: any) => {
         <p className="mt-[4px] mb-[24px]">{benefit.description}</p>
         <div className="flex items-center justify-between gap-4">
           <div className="flex gap-6 mr-[16px]">
-            <FlatIconButton icon={eligibilityIcon} text="Eligibility" onClick={toggleBenefitDetailsModal} />
-            <FlatIconButton icon={howToEnrollIcon} text="How to Enroll" onClick={toggleBenefitDetailsModal} />
+            {/* <FlatIconButton icon={eligibilityIcon} text="Eligibility" onClick={toggleBenefitDetailsModal} />
+            <FlatIconButton icon={howToEnrollIcon} text="How to Enroll" onClick={toggleBenefitDetailsModal} /> */}
             <FlatIconButton icon={detailsIcon} text="Details" onClick={toggleBenefitDetailsModal} />
           </div>
           <div className="flex gap-4">
             <Button icon={archiveBtnIcon} className={archiveBtnStyle} isSmallBtn text={archiveBtnText} onClick={benefit.archived ? restoreBenefit : archiveBenefit} />
-            {benefit.isActive && !benefit.archived ? <Button className={addBtnStyle} text={addBtnText} isPrimary isSmallBtn icon={addBtnIcon} /> : null}
-            {renderIntegrationsButton()}
+            {!benefit.archived ? <Button className={addBtnStyle} text={addBtnText} isPrimary isSmallBtn icon={addBtnIcon} onClick={activateBenefit} /> : null}
+            {/* {renderIntegrationsButton()} */}
           </div>
         </div>
 
       </div>
-      <IntegrationsModal isOpen={isIntegrationsModalOpen} onClose={toggleIntegrationsModal} benefit={benefit} onAddIntegration={addIntegrationToBenefit} />
+      {/* <IntegrationsModal isOpen={isIntegrationsModalOpen} onClose={toggleIntegrationsModal} benefit={benefit} onAddIntegration={addIntegrationToBenefit} /> */}
       <BenefitDetailsModal isOpen={isBenefitDetailsModalOpen} onClose={toggleBenefitDetailsModal} benefit={benefit} />
     </div>
   )

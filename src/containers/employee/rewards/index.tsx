@@ -50,11 +50,12 @@ const userTickets = {
 
 
 function RewardsContainer() {
+
   const renderLotteryOptions = () => {
     return (
       <div>
         <div className='flex flex-col items-center md:items-start'>
-          <h2 className='font-normal mb-[20px]'>Available Rewards</h2>
+          <h3 className='font-normal mb-[20px] text-basic_grey_3'>All Available Rewards</h3>
         </div>
         <div className='flex flex-wrap gap-4'>
           {
@@ -81,16 +82,11 @@ function RewardsContainer() {
   }
   return (
     <div className='flex flex-col gap-12'>
-      <div className=''>
-        <div className='flex flex-col items-center md:items-start'>
-          <h2 className='font-normal mb-[20px]'>Your Tickets</h2>
-        </div>
-        <div className='flex flex-col items-center gap-4 p-[16px] rounded-[32px] bg-basic_grey_5'>
-          <Image src={icons.ticketCircle} width={70} height={0} className='min-w-[70px] ' alt='options' />
-          <div className='flex flex-col justify-center'>
-            <h3 className='font-normal text-center'>You have <span className='font-bold mx-[10px] text-[38px]'>{userTickets.totalTickets}</span>{userTickets.title}</h3>
-            <p className='text-small text-center text-basic_grey_1'>{userTickets.description}</p>
-          </div>
+      <div className='flex flex-col items-center gap-4 p-[16px] rounded-[32px] bg-basic_grey_5'>
+        <Image src={icons.ticketCircle} width={70} height={0} className='min-w-[70px] ' alt='options' />
+        <div className='flex flex-col justify-center'>
+          <h3 className='font-normal text-center'>You have <span className='font-bold mx-[10px] text-[38px]'>{userTickets.totalTickets}</span>{userTickets.title}</h3>
+          <p className='text-small text-center text-basic_grey_1'>{userTickets.description}</p>
         </div>
       </div>
       {renderLotteryOptions()}

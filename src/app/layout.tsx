@@ -10,7 +10,7 @@ const lato = Lato({
 })
 
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <html lang="en">
@@ -27,4 +27,4 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default RootLayout
+export default Layout

@@ -1,25 +1,8 @@
 import CryptoJS from 'crypto-js';
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
 
 
-export const calculateUsersStatus = (users: any) => {
-  let active = 0
-  let deactivated = 0
-  let invited = 0
-  users && users.forEach((user: any) => {
-    if (user.status === 'Active') {
-      active += 1
-    }
-    if (user.status === 'Deactivated') {
-      deactivated += 1
-    }
-    if (user.status === 'Invited') {
-      invited += 1
-    }
-  })
-  return { active, deactivated, invited }
-}
+
+export const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 export const getFormattedDate = (date: string) => {
   const dateObj = new Date(date)
@@ -136,12 +119,42 @@ export const calculateWidthTailwindClass = (inputNumber: number) => {
   return closestClass;
 }
 
-export const checkAuth = async () => {
-  const session: any = await getServerSession();
-  if (session?.user === "authenticated") {
-    redirect("employee/rewards")
-  } else {
-    redirect("auth/login")
+
+export const getRedirectUrl = (role: any) => {
+  const urls: any = {
+    "Admin": `/company/dashboard`,
+    "Super Admin": `/admin`,
+    "Standard": `/employee/rewards`
   }
+  return urls[role]
+}
+
+export const isObjectsEqual = (obj1: any, obj2: any) => {
+  // Get the keys for each object
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  // Check if both objects have the same number of keys
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  // Iterate over the keys of the first object and check if 
+  // each key-value pair in obj1 matches that in obj2
+  for (let key of keys1) {
+    if (obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+export const get_month_year = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  return `${month}/${year}`;
 }
 
