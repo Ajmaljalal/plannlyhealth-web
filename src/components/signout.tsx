@@ -25,10 +25,12 @@ export const SignOut = () => {
   const router = useRouter()
 
   const handleSignOut = async () => {
-    await signOut({
-      callbackUrl: '/auth/login',
-      redirect: true,
-    })
+    const result: any = await signOut()
+    if (!result?.message) {
+      router.push('/auth/login')
+    } else {
+      return
+    }
   }
   return (
     <p className={`${signOutBtnStyles}`} onClick={handleSignOut}>
